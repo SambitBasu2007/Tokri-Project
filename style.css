@@ -1674,4 +1674,8 @@ body {
   .btn-primary {
     display: none;
   }
+
+   #checkoutBtn {
+    display: block;
+  }
 }
