@@ -50,8 +50,17 @@ const STORES = [
   { id: 'swiggy', name: 'Swiggy Instamart', dot: 'swiggy', delivery: '15 min' },
   { id: 'bigbasket', name: 'BigBasket', dot: 'bigbasket', delivery: '30 min' },
   { id: 'jiomart', name: 'JioMart', dot: 'jiomart', delivery: '60 min' },
-  { id: 'dunzo', name: 'Dunzo Daily', dot: 'dunzo', delivery: '20 min' },
+  { id: 'flipkart', name: 'Flipkart Minutes', dot: 'flipkart', delivery: '20 min' },
 ];
+
+const STORE_SEARCH_URLS = {
+  blinkit: 'https://blinkit.com/s/?q=',
+  zepto: 'https://www.zeptonow.com/search?query=',
+  swiggy: 'https://www.swiggy.com/instamart/search?custom_back=true&query=',
+  bigbasket: 'https://www.bigbasket.com/ps/?q=',
+  jiomart: 'https://www.jiomart.com/search?q=',
+  flipkart: 'https://www.flipkart.com/search?q=',
+};
 
 
 
@@ -75,109 +84,109 @@ const STORES = [
 const PRODUCTS = [
   {
     id: 1, name: 'Amul Toned Milk', weight: '1 L Pouch', emoji: '🥛', category: 'dairy',
-    prices: { blinkit: 32, zepto: 31, swiggy: 33, bigbasket: 30, jiomart: 29, dunzo: 33 },
+    prices: { blinkit: 32, zepto: 31, swiggy: 33, bigbasket: 30, jiomart: 29, flipkart: 33 },
     mrp: 34,
   },
 
   {
     id: 2, name: 'Aashirvaad Whole Wheat Atta', weight: '5 kg', emoji: '🌾', category: 'atta',
-    prices: { blinkit: 265, zepto: 272, swiggy: 269, bigbasket: 259, jiomart: 255, dunzo: null },
+    prices: { blinkit: 265, zepto: 272, swiggy: 269, bigbasket: 259, jiomart: 255, flipkart: null },
     mrp: 290,
   },
 
   {
     id: 3, name: 'Fortune Sunflower Oil', weight: '1 L', emoji: '🫒', category: 'oil',
-    prices: { blinkit: 139, zepto: 142, swiggy: 135, bigbasket: 138, jiomart: 140, dunzo: 145 },
+    prices: { blinkit: 139, zepto: 142, swiggy: 135, bigbasket: 138, jiomart: 140, flipkart: 145 },
     mrp: 155,
   },
 
   {
     id: 4, name: 'Shimla Apples', weight: '1 kg (4-5 pcs)', emoji: '🍎', category: 'fruits',
-    prices: { blinkit: 165, zepto: 159, swiggy: 170, bigbasket: 155, jiomart: 162, dunzo: 168 },
+    prices: { blinkit: 165, zepto: 159, swiggy: 170, bigbasket: 155, jiomart: 162, flipkart: 168 },
     mrp: 180,
   },
 
   {
     id: 5, name: 'Haldiram\'s Aloo Bhujia', weight: '200 g', emoji: '🍿', category: 'snacks',
-    prices: { blinkit: 55, zepto: 50, swiggy: 56, bigbasket: 52, jiomart: 53, dunzo: 54 },
+    prices: { blinkit: 55, zepto: 50, swiggy: 56, bigbasket: 52, jiomart: 53, flipkart: 54 },
     mrp: 60,
   },
 
   {
     id: 6, name: 'Coca-Cola', weight: '750 ml Bottle', emoji: '🥤', category: 'beverages',
-    prices: { blinkit: 38, zepto: 40, swiggy: 38, bigbasket: 35, jiomart: 36, dunzo: 39 },
+    prices: { blinkit: 38, zepto: 40, swiggy: 38, bigbasket: 35, jiomart: 36, flipkart: 39 },
     mrp: 42,
   },
 
   {
     id: 7, name: 'Fresh Spinach (Palak)', weight: '250 g', emoji: '🥬', category: 'vegetables',
-    prices: { blinkit: 18, zepto: 20, swiggy: 24, bigbasket: 22, jiomart: 25, dunzo: null },
+    prices: { blinkit: 18, zepto: 20, swiggy: 24, bigbasket: 22, jiomart: 25, flipkart: null },
     mrp: 30,
   },
 
   {
     id: 8, name: 'Amul Butter', weight: '500 g Carton', emoji: '🧈', category: 'dairy',
-    prices: { blinkit: 270, zepto: 275, swiggy: 268, bigbasket: 265, jiomart: 262, dunzo: 278 },
+    prices: { blinkit: 270, zepto: 275, swiggy: 268, bigbasket: 265, jiomart: 262, flipkart: 278 },
     mrp: 285,
   },
 
   {
     id: 9, name: 'Maggi 2-Minute Noodles', weight: 'Family Pack (8×70g)', emoji: '🍜', category: 'snacks',
-    prices: { blinkit: 90, zepto: 99, swiggy: 95, bigbasket: 92, jiomart: 96, dunzo: 98 },
+    prices: { blinkit: 90, zepto: 99, swiggy: 95, bigbasket: 92, jiomart: 96, flipkart: 98 },
     mrp: 112,
   },
 
   {
     id: 10, name: 'Dettol Liquid Handwash', weight: '900 ml Refill', emoji: '🧴', category: 'personal',
-    prices: { blinkit: 95, zepto: 105, swiggy: 102, bigbasket: 99, jiomart: 97, dunzo: null },
+    prices: { blinkit: 95, zepto: 105, swiggy: 102, bigbasket: 99, jiomart: 97, flipkart: null },
     mrp: 120,
   },
 
   {
     id: 11, name: 'Harpic Power Plus', weight: '1 L', emoji: '🧹', category: 'cleaning',
-    prices: { blinkit: 115, zepto: 118, swiggy: 120, bigbasket: 110, jiomart: 108, dunzo: 122 },
+    prices: { blinkit: 115, zepto: 118, swiggy: 120, bigbasket: 110, jiomart: 108, flipkart: 122 },
     mrp: 130,
   },
 
   {
     id: 12, name: 'India Gate Basmati Rice', weight: '5 kg', emoji: '🍚', category: 'atta',
-    prices: { blinkit: 450, zepto: 465, swiggy: 435, bigbasket: 455, jiomart: 440, dunzo: 470 },
+    prices: { blinkit: 450, zepto: 465, swiggy: 435, bigbasket: 455, jiomart: 440, flipkart: 470 },
     mrp: 499,
   },
 
   {
     id: 13, name: 'Fresh Bananas (Cavendish)', weight: '1 Dozen', emoji: '🍌', category: 'fruits',
-    prices: { blinkit: 45, zepto: 42, swiggy: 48, bigbasket: 40, jiomart: 44, dunzo: 46 },
+    prices: { blinkit: 45, zepto: 42, swiggy: 48, bigbasket: 40, jiomart: 44, flipkart: 46 },
     mrp: 55,
   },
 
   {
     id: 14, name: 'Amul Paneer', weight: '200 g Block', emoji: '🧀', category: 'dairy',
-    prices: { blinkit: 90, zepto: 88, swiggy: 92, bigbasket: 85, jiomart: 87, dunzo: 95 },
+    prices: { blinkit: 90, zepto: 88, swiggy: 92, bigbasket: 85, jiomart: 87, flipkart: 95 },
     mrp: 100,
   },
 
   {
     id: 15, name: 'Tropicana Orange Juice', weight: '1 L Tetra Pack', emoji: '🧃', category: 'beverages',
-    prices: { blinkit: 99, zepto: 90, swiggy: 102, bigbasket: 95, jiomart: 92, dunzo: null },
+    prices: { blinkit: 99, zepto: 90, swiggy: 102, bigbasket: 95, jiomart: 92, flipkart: null },
     mrp: 110,
   },
 
   {
     id: 16, name: 'Fresh Tomatoes', weight: '1 kg', emoji: '🍅', category: 'vegetables',
-    prices: { blinkit: 28, zepto: 25, swiggy: 30, bigbasket: 22, jiomart: 26, dunzo: 32 },
+    prices: { blinkit: 28, zepto: 25, swiggy: 30, bigbasket: 22, jiomart: 26, flipkart: 32 },
     mrp: 40,
   },
 
   {
     id: 17, name: 'Lay\'s Classic Salted', weight: 'Party Pack 190 g', emoji: '🥔', category: 'snacks',
-    prices: { blinkit: 70, zepto: 72, swiggy: 78, bigbasket: 75, jiomart: 73, dunzo: 76 },
+    prices: { blinkit: 70, zepto: 72, swiggy: 78, bigbasket: 75, jiomart: 73, flipkart: 76 },
     mrp: 85,
   },
 
   {
     id: 18, name: 'Surf Excel Matic Liquid', weight: '1 L Front Load', emoji: '🫧', category: 'cleaning',
-    prices: { blinkit: 210, zepto: 215, swiggy: 220, bigbasket: 199, jiomart: 205, dunzo: 225 },
+    prices: { blinkit: 210, zepto: 215, swiggy: 220, bigbasket: 199, jiomart: 205, flipkart: 225 },
     mrp: 240,
   },
 ];
@@ -200,6 +209,9 @@ const PRODUCTS = [
 //
 let cart = [];
 let activeCategory = 'all';
+// Stores the chosen store for each product before it is added to the cart.
+// Products default to their cheapest available store until the shopper changes it.
+let productSelections = {};
 
 
 
@@ -267,6 +279,44 @@ function getStoreDelivery(id) {
   return STORES.find(s => s.id === id)?.delivery ?? '';
 }
 
+function getProductStoreUrl(product, storeId) {
+  const query = `${product.name} ${product.weight}`;
+  return `${STORE_SEARCH_URLS[storeId]}${encodeURIComponent(query)}`;
+}
+
+function getAvailableStores(product) {
+  return STORES.filter(store => product.prices[store.id] !== null);
+}
+
+function getSelectedStore(product) {
+  return productSelections[product.id] ?? getBestPrice(product.prices).store;
+}
+
+function getSelectedPrice(product) {
+  return product.prices[getSelectedStore(product)];
+}
+
+function renderStorePicker(product, selectedStore, context) {
+  const best = getBestPrice(product.prices);
+  const options = getAvailableStores(product).map(store => `
+    <button class="store-picker-option${store.id === selectedStore ? ' selected' : ''}"
+      type="button" data-store-option data-product-id="${product.id}" data-store-id="${store.id}" data-context="${context}">
+      <span class="store-picker-option-store">
+        <span class="store-dot store-dot--${store.dot}"></span>${store.name}
+        ${store.id === best.store ? '<span class="store-picker-best-tag">Best</span>' : ''}
+      </span>
+      <span class="store-picker-option-price">₹${product.prices[store.id]}${store.id === selectedStore ? ' ✓' : ''}</span>
+    </button>`).join('');
+
+  return `
+    <div class="store-picker-wrap">
+      <button class="store-picker-btn" type="button" data-store-picker-toggle aria-label="Choose store" aria-expanded="false">⋯</button>
+      <div class="store-picker-menu${context === 'cart' ? ' store-picker-menu--cart' : ''}" role="menu">
+        ${options}
+      </div>
+    </div>`;
+}
+
 
 
 
@@ -291,6 +341,8 @@ function renderProductCard(product) {
 
   // Find the cheapest store and its price for this product
   const best = getBestPrice(product.prices);
+  const selectedStore = getSelectedStore(product);
+  const selectedPrice = getSelectedPrice(product);
 
   // Calculate how much the user saves compared to MRP
   const saving = product.mrp - best.price;
@@ -311,12 +363,13 @@ function renderProductCard(product) {
 
     // Is this the store with the best (lowest) price?
     const isBest = store.id === best.store;
+    const isSelected = store.id === selectedStore;
 
     if (price === null) {
       // Product is unavailable at this store — show "Unavailable" text
       priceRowsHTML += `
         <div class="price-row">
-          <span class="price-store"><span class="store-dot store-dot--${store.dot}"></span>${store.name}</span>
+          <span class="price-store"><a class="price-store-link" href="${getProductStoreUrl(product, store.id)}" target="_blank" rel="noopener noreferrer" aria-label="Search ${product.name} on ${store.name}" title="Open ${store.name}">↗</a><span class="store-dot store-dot--${store.dot}"></span>${store.name}</span>
           <span class="price-unavailable">Unavailable</span>
         </div>`;
     } else {
@@ -325,8 +378,8 @@ function renderProductCard(product) {
       //    to highlight the cheapest row with a green background.
       //  - Similarly (isBest ? ' best-price' : '') colors the price text green.
       priceRowsHTML += `
-        <div class="price-row${isBest ? ' best' : ''}">
-          <span class="price-store"><span class="store-dot store-dot--${store.dot}"></span>${store.name}</span>
+        <div class="price-row${isBest ? ' best' : ''}${isSelected ? ' selected' : ''}">
+          <span class="price-store"><a class="price-store-link" href="${getProductStoreUrl(product, store.id)}" target="_blank" rel="noopener noreferrer" aria-label="Search ${product.name} on ${store.name}" title="Open ${store.name}">↗</a><span class="store-dot store-dot--${store.dot}"></span>${store.name}</span>
           <span class="price-delivery">${store.delivery}</span>
           <span class="price-amount${isBest ? ' best-price' : ''}">₹${price}</span>
         </div>`;
@@ -352,9 +405,10 @@ function renderProductCard(product) {
       </div>
       <div class="price-rows">${priceRowsHTML}</div>
       <div class="product-card-actions">
-        <button class="btn-add-best${inCart ? ' added' : ''}" data-id="${product.id}" onclick="toggleCartItem(${product.id})">
-          ${inCart ? '✓ Added' : '⚡ Add Best Price'}
+        <button class="btn-add-best${inCart ? ' added' : ''}" type="button" data-cart-toggle data-id="${product.id}">
+          ${inCart ? '✓ Added' : `Add · ${getStoreName(selectedStore)} ₹${selectedPrice}`}
         </button>
+        ${renderStorePicker(product, selectedStore, 'product')}
       </div>
     </div>`;
 }
@@ -424,7 +478,7 @@ function filterProducts() {
   //  .trim() removes whitespace from both ends: "  milk  " → "milk"
   //  .toLowerCase() converts to lowercase for case-insensitive matching.
   //  .includes(q) checks if the string contains the search query as a substring.
-  const q = document.getElementById('searchInput').value.trim().toLowerCase();
+  const q = getSearchQuery();
   if (q) {
     filtered = filtered.filter(p =>
       p.name.toLowerCase().includes(q) ||
@@ -526,7 +580,18 @@ document.querySelectorAll('.category-pill').forEach(pill => {
 //  (on every keystroke, paste, etc.). We call filterProducts()
 //  to re-render the grid with matching results in real-time.
 //
-document.getElementById('searchInput').addEventListener('input', filterProducts);
+function getSearchQuery() {
+  return document.getElementById('searchInput').value.trim().toLowerCase();
+}
+
+document.querySelectorAll('.search-input').forEach(input => {
+  input.addEventListener('input', event => {
+    document.querySelectorAll('.search-input').forEach(otherInput => {
+      if (otherInput !== event.target) otherInput.value = event.target.value;
+    });
+    filterProducts();
+  });
+});
 
 
 
@@ -563,7 +628,7 @@ document.getElementById('sortSelect').addEventListener('change', filterProducts)
 //    - If not found, we ADD a new cart item object with the best price info.
 //    - Then we update the cart UI and re-render product grid (to toggle button states).
 //
-function toggleCartItem(id) {
+function toggleCartItemLegacy(id) {
   const idx = cart.findIndex(c => c.id === id);
   if (idx > -1) {
     cart.splice(idx, 1);
@@ -574,8 +639,8 @@ function toggleCartItem(id) {
       id: product.id,
       name: product.name,
       emoji: product.emoji,
-      bestStore: best.store,
-      bestPrice: best.price,
+      selectedStore: best.store,
+      selectedPrice: best.price,
       mrp: product.mrp,
     });
   }
@@ -593,7 +658,7 @@ function toggleCartItem(id) {
 //  .filter() creates a NEW array excluding the item with the matching id.
 //  This effectively "removes" the item by replacing the cart with a filtered copy.
 //
-function removeCartItem(id) {
+function removeCartItemLegacy(id) {
   cart = cart.filter(c => c.id !== id);
   updateCartUI();
   filterProducts();
@@ -615,7 +680,7 @@ function removeCartItem(id) {
 //      The second argument (0) is the starting value of the accumulator.
 //    - Template literals for building cart item HTML with ${} interpolation.
 //
-function updateCartUI() {
+function updateCartUILegacy() {
 
   // Update the badge count number on the cart icon in the header
   document.getElementById('cartCount').textContent = cart.length;
@@ -647,9 +712,9 @@ function updateCartUI() {
       <span class="cart-item-emoji">${item.emoji}</span>
       <div class="cart-item-info">
         <div class="cart-item-name">${item.name}</div>
-        <div class="cart-item-store">via ${getStoreName(item.bestStore)} · ${getStoreDelivery(item.bestStore)}</div>
+        <div class="cart-item-store">via ${getStoreName(item.selectedStore)} · ${getStoreDelivery(item.selectedStore)}</div>
       </div>
-      <span class="cart-item-price">₹${item.bestPrice}</span>
+      <span class="cart-item-price">₹${item.selectedPrice}</span>
       <button class="cart-item-remove" onclick="removeCartItem(${item.id})" title="Remove">&times;</button>
     </div>
   `).join('');
@@ -659,7 +724,7 @@ function updateCartUI() {
   //  (s, i) => s + i.mrp  means: for each item "i", add its mrp to the running sum "s"
   //  Starting sum is 0.
   const mrpTotal = cart.reduce((s, i) => s + i.mrp, 0);
-  const bestTotal = cart.reduce((s, i) => s + i.bestPrice, 0);
+  const bestTotal = cart.reduce((s, i) => s + i.selectedPrice, 0);
   const savings = mrpTotal - bestTotal;
 
 
@@ -675,6 +740,156 @@ function updateCartUI() {
 
 
 
+
+function closeStorePickers() {
+  document.querySelectorAll('.store-picker-menu.open').forEach(menu => menu.classList.remove('open'));
+  document.querySelectorAll('[data-store-picker-toggle][aria-expanded="true"]')
+    .forEach(button => button.setAttribute('aria-expanded', 'false'));
+}
+
+function toggleStorePicker(button) {
+  const menu = button.parentElement.querySelector('.store-picker-menu');
+  const willOpen = !menu.classList.contains('open');
+  closeStorePickers();
+  if (willOpen) {
+    menu.classList.add('open');
+    button.setAttribute('aria-expanded', 'true');
+  }
+}
+
+function setProductStore(productId, storeId) {
+  const product = PRODUCTS.find(item => item.id === Number(productId));
+  if (!product || product.prices[storeId] === null || product.prices[storeId] === undefined) return;
+
+  productSelections[product.id] = storeId;
+  const cartItem = cart.find(item => item.id === product.id);
+  if (cartItem) {
+    cartItem.selectedStore = storeId;
+    cartItem.selectedPrice = product.prices[storeId];
+    updateCartUI();
+  }
+  filterProducts();
+}
+
+function toggleCartItem(id) {
+  const idx = cart.findIndex(item => item.id === id);
+  if (idx > -1) {
+    cart.splice(idx, 1);
+  } else {
+    const product = PRODUCTS.find(item => item.id === id);
+    const selectedStore = getSelectedStore(product);
+    cart.push({
+      id: product.id,
+      name: product.name,
+      emoji: product.emoji,
+      mrp: product.mrp,
+      selectedStore,
+      selectedPrice: product.prices[selectedStore],
+    });
+  }
+  updateCartUI();
+  filterProducts();
+}
+
+function removeCartItem(id) {
+  cart = cart.filter(item => item.id !== Number(id));
+  updateCartUI();
+  filterProducts();
+}
+
+function renderCartItem(item) {
+  const product = PRODUCTS.find(productItem => productItem.id === item.id);
+  return `
+    <div class="cart-item">
+      <span class="cart-item-emoji">${item.emoji}</span>
+      <div class="cart-item-info">
+        <div class="cart-item-name">${item.name}</div>
+        <div class="cart-item-store">${getStoreDelivery(item.selectedStore)} delivery</div>
+      </div>
+      <span class="cart-item-price">₹${item.selectedPrice}</span>
+      ${renderStorePicker(product, item.selectedStore, 'cart')}
+      <button class="cart-item-remove" type="button" data-cart-remove data-id="${item.id}" title="Remove" aria-label="Remove ${item.name}">&times;</button>
+    </div>`;
+}
+
+function updateCartUI() {
+  document.getElementById('cartCount').textContent = cart.length;
+  const body = document.getElementById('cartBody');
+  const footer = document.getElementById('cartFooter');
+
+  if (!cart.length) {
+    body.innerHTML = `<div class="cart-empty">
+      <span class="cart-empty-icon">🛒</span>
+      <p>Your cart is empty</p>
+      <span class="cart-empty-hint">Add items from the comparison table to start saving</span>
+    </div>`;
+    footer.style.display = 'none';
+    return;
+  }
+
+  body.innerHTML = STORES.map(store => {
+    const items = cart.filter(item => item.selectedStore === store.id);
+    if (!items.length) return '';
+    const subtotal = items.reduce((sum, item) => sum + item.selectedPrice, 0);
+    return `<section class="cart-store-group">
+      <div class="cart-store-header">
+        <span class="store-dot store-dot--${store.dot}"></span>
+        <span class="cart-store-name">${store.name}</span>
+        <span class="cart-store-delivery">${store.delivery}</span>
+        <span class="cart-store-count">${items.length} ${items.length === 1 ? 'item' : 'items'}</span>
+        <span class="cart-store-subtotal">₹${subtotal}</span>
+      </div>
+      <div class="cart-store-items">${items.map(renderCartItem).join('')}</div>
+    </section>`;
+  }).join('');
+
+  const mrpTotal = cart.reduce((sum, item) => sum + item.mrp, 0);
+  const cartTotal = cart.reduce((sum, item) => sum + item.selectedPrice, 0);
+  const savings = mrpTotal - cartTotal;
+  document.getElementById('cartItemCount').textContent = cart.length;
+  document.getElementById('cartMrpTotal').textContent = `₹${mrpTotal}`;
+  document.getElementById('cartSavings').textContent = `– ₹${savings}`;
+  document.getElementById('cartTotal').textContent = `₹${cartTotal}`;
+  footer.style.display = 'block';
+}
+
+document.getElementById('productGrid').addEventListener('click', event => {
+  const storeOption = event.target.closest('[data-store-option]');
+  if (storeOption) {
+    event.stopPropagation();
+    setProductStore(storeOption.dataset.productId, storeOption.dataset.storeId);
+    return;
+  }
+  const pickerButton = event.target.closest('[data-store-picker-toggle]');
+  if (pickerButton) {
+    event.stopPropagation();
+    toggleStorePicker(pickerButton);
+    return;
+  }
+  const cartButton = event.target.closest('[data-cart-toggle]');
+  if (cartButton) toggleCartItem(Number(cartButton.dataset.id));
+});
+
+document.getElementById('cartBody').addEventListener('click', event => {
+  const storeOption = event.target.closest('[data-store-option]');
+  if (storeOption) {
+    event.stopPropagation();
+    setProductStore(storeOption.dataset.productId, storeOption.dataset.storeId);
+    return;
+  }
+  const pickerButton = event.target.closest('[data-store-picker-toggle]');
+  if (pickerButton) {
+    event.stopPropagation();
+    toggleStorePicker(pickerButton);
+    return;
+  }
+  const removeButton = event.target.closest('[data-cart-remove]');
+  if (removeButton) removeCartItem(removeButton.dataset.id);
+});
+
+document.addEventListener('click', event => {
+  if (!event.target.closest('.store-picker-wrap')) closeStorePickers();
+});
 
 // ============================================================
 //  SECTION 12: CART PANEL SLIDE-IN / SLIDE-OUT
@@ -761,39 +976,13 @@ themeToggle.addEventListener('click', () => {
 //      Used here to deduplicate store names — if multiple items come
 //      from the same store, it only appears once.
 //    - [...new Set(...)]: The spread operator converts the Set back into an array.
-//    - cart.map(c => getStoreName(c.bestStore)): Extracts the store name for each cart item.
+//    - cart.map(c => getStoreName(c.selectedStore)): Extracts the store name for each cart item.
 //    - .join('\n'): Joins array elements with newline characters for the alert message.
 //
 document.getElementById('checkoutBtn').addEventListener('click', () => {
   alert('🎉 This is a concept demo!\n\nIn the real app, your cart would be split across:\n' +
-    [...new Set(cart.map(c => getStoreName(c.bestStore)))].map(s => '  • ' + s).join('\n') +
-    '\n\nfor the best possible total price.');
-});
-
-
-
-
-// ============================================================
-//  SECTION 15: KEYBOARD SHORTCUT (⌘K / Ctrl+K)
-// ============================================================
-//
-//  PURPOSE: Pressing Ctrl+K (Windows/Linux) or Cmd+K (Mac) focuses
-//           the search bar instantly — a common UX pattern in modern web apps.
-//
-//  HOW IT WORKS:
-//    - 'keydown' event fires when any key is pressed.
-//    - e.metaKey is true when the ⌘ (Command) key is held (Mac).
-//    - e.ctrlKey is true when the Ctrl key is held (Windows/Linux).
-//    - e.key === 'k' checks if the "K" key was the one pressed.
-//    - e.preventDefault() stops the browser's default action for that
-//      key combination (e.g., Chrome normally opens the address bar on Ctrl+K).
-//    - .focus() programmatically gives keyboard focus to the search input.
-//
-document.addEventListener('keydown', (e) => {
-  if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-    e.preventDefault();
-    document.getElementById('searchInput').focus();
-  }
+    [...new Set(cart.map(c => getStoreName(c.selectedStore)))].map(s => '  • ' + s).join('\n') +
+    '\n\nbased on the stores you selected.');
 });
 
 

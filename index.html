@@ -84,7 +84,7 @@
             </a>
 
 
-            <!-- Global Search Bar with Keyboard Shortcut Indicator -->
+            <!-- Global Search Bar -->
             <div class="search-container">
                 <div class="search-wrapper">
                     <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -94,7 +94,6 @@
                     </svg>
                     <input type="text" class="search-input" id="searchInput"
                         placeholder="Search groceries, fruits, snacks..." autocomplete="off">
-                    <span class="search-shortcut">⌘K</span>
                 </div>
             </div>
 
@@ -139,24 +138,27 @@
                 <!-- Action Call to Actions 
                 <a href="#compare" class="btn btn-ghost">Explore</a>
                 -->
-                <a href="#compare" class="btn btn-primary temp-btn">Compare Now</a>
+                <a href="#compare" class="btn btn-primary">Compare Now</a>
             </div>
-
-
-            <!-- Mobile Drawer Toggle Button 
-            <button class="icon-btn mobile-toggle" id="mobileMenu">
-                <svg viewBox="0 0 24 24">
-                    <line x1="3" y1="12" x2="21" y2="12" />
-                    <line x1="3" y1="6" x2="21" y2="6" />
-                    <line x1="3" y1="18" x2="21" y2="18" />
-                </svg>
-            </button>
-             -->
 
         </div>
     </header>
 
 
+    <!-- Mobile Search Strip (Blinkit-style, below header on small screens) -->
+    <div class="mobile-search-strip" id="mobileSearchStrip">
+        <div class="mobile-search-inner">
+            <div class="search-wrapper mobile-search-wrapper">
+                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input type="text" class="search-input" id="mobileSearchInput"
+                    placeholder="Search groceries, fruits, snacks..." autocomplete="off">
+            </div>
+        </div>
+    </div>
 
 
     <!-- ====================================================================
@@ -177,7 +179,7 @@
             <span class="hero-chip">🇮🇳 India's Smartest Grocery Companion</span>
             <h1 class="hero-title">One Search.<br><span class="hero-highlight">Six Stores.</span><br>Best Price.</h1>
             <p class="hero-subtitle">
-                Stop tab-hopping between Blinkit, Zepto, Swiggy Instamart, BigBasket, JioMart &amp; Dunzo.
+                Stop tab-hopping between Blinkit, Zepto, Swiggy Instamart, BigBasket, JioMart &amp; Flipkart Minutes.
                 Tokri compares every item in real-time so you always get the cheapest cart — effortlessly.
             </p>
 
@@ -195,7 +197,7 @@
                     <span class="store-chip store-chip--swiggy">🟠 Swiggy Instamart</span>
                     <span class="store-chip store-chip--bigbasket">🟢 BigBasket</span>
                     <span class="store-chip store-chip--jiomart">🔵 JioMart</span>
-                    <span class="store-chip store-chip--dunzo">🔴 Dunzo Daily</span>
+                    <span class="store-chip store-chip--flipkart">🔵 Flipkart Minutes</span>
                 </div>
             </div>
         </div>
@@ -303,11 +305,11 @@
                 <span id="cartSavings">₹0</span>
             </div>
             <div class="cart-summary-row cart-total">
-                <span>Best Price Total</span>
+                <span>Cart Total</span>
                 <span id="cartTotal">₹0</span>
             </div>
             <button class="btn btn-primary btn-block" id="checkoutBtn">Proceed to Checkout</button>
-            <p class="cart-note">Items will be split across stores for best price</p>
+            <p class="cart-note">Items are organized by your selected store</p>
         </div>
     </aside>
 
@@ -332,7 +334,7 @@
                     <div class="step-icon">🔍</div>
                     <h3 class="step-title">Search Any Item</h3>
                     <p class="step-desc">Type any product — we fetch prices from Blinkit, Zepto, Swiggy Instamart,
-                        BigBasket, JioMart &amp; Dunzo instantly.</p>
+                        BigBasket, JioMart &amp; Flipkart Minutes instantly.</p>
                 </div>
 
                 <div class="step-card">
@@ -438,7 +440,7 @@
                     <a href="#" class="footer-link">Swiggy Instamart</a>
                     <a href="#" class="footer-link">BigBasket</a>
                     <a href="#" class="footer-link">JioMart</a>
-                    <a href="#" class="footer-link">Dunzo Daily</a>
+                    <a href="#" class="footer-link">Flipkart Minutes</a>
                 </div>
 
                 <div class="footer-col">
