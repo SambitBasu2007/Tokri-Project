@@ -119,7 +119,7 @@ const PRODUCTS = [
   },
 
   {
-    id: 7, name: 'Fresh Spinach (Palak)', weight: '250 g', emoji: '🥬', category: 'vegetables',
+    id: 7, name: 'Spinach (Palak)', weight: '250 g', emoji: '🥬', category: 'vegetables',
     prices: { blinkit: 18, zepto: 20, swiggy: 24, bigbasket: 22, jiomart: 25, flipkart: null },
     mrp: 30,
   },
@@ -155,7 +155,7 @@ const PRODUCTS = [
   },
 
   {
-    id: 13, name: 'Fresh Bananas (Cavendish)', weight: '1 Dozen', emoji: '🍌', category: 'fruits',
+    id: 13, name: 'Bananas', weight: '1 Dozen', emoji: '🍌', category: 'fruits',
     prices: { blinkit: 45, zepto: 42, swiggy: 48, bigbasket: 40, jiomart: 44, flipkart: 46 },
     mrp: 55,
   },
@@ -173,7 +173,7 @@ const PRODUCTS = [
   },
 
   {
-    id: 16, name: 'Fresh Tomatoes', weight: '1 kg', emoji: '🍅', category: 'vegetables',
+    id: 16, name: 'Tomatoes', weight: '1 kg', emoji: '🍅', category: 'vegetables',
     prices: { blinkit: 28, zepto: 25, swiggy: 30, bigbasket: 22, jiomart: 26, flipkart: 32 },
     mrp: 40,
   },
@@ -979,15 +979,18 @@ themeToggle.addEventListener('click', () => {
 //    - cart.map(c => getStoreName(c.selectedStore)): Extracts the store name for each cart item.
 //    - .join('\n'): Joins array elements with newline characters for the alert message.
 //
-// ============================================================
-//  SECTION 14: CHECKOUT BUTTON
-// ============================================================
+// ----------------------------------------------------------
+//  MODIFIED: Checkout now redirects to checkout.html
+//  Original behavior was a demo alert().
+//  This handler CANNOT be moved to a separate file because it
+//  depends on the `cart` array and `PRODUCTS` array defined above.
+// ----------------------------------------------------------
 document.getElementById('checkoutBtn').addEventListener('click', () => {
   if (cart.length === 0) {
     alert('Your cart is empty! Add some items first.');
     return;
   }
-  // Save cart with all needed fields for checkout
+  // Save cart with full product data needed for checkout store picker
   const checkoutCart = cart.map(item => {
     const product = PRODUCTS.find(p => p.id === item.id);
     return {
@@ -998,7 +1001,8 @@ document.getElementById('checkoutBtn').addEventListener('click', () => {
       selectedStore: item.selectedStore,
       selectedPrice: item.selectedPrice,
       mrp: item.mrp,
-      qty: 1
+      qty: item.qty || 1,
+      prices: product?.prices || {}  // Needed for store picker on checkout
     };
   });
   localStorage.setItem('tokri_cart', JSON.stringify(checkoutCart));
@@ -1008,7 +1012,6 @@ document.getElementById('checkoutBtn').addEventListener('click', () => {
 
 
 
-// ============================================================
 //  SECTION 16: INITIALIZATION
 // ============================================================
 //
