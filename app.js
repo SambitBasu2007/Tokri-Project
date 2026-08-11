@@ -979,10 +979,30 @@ themeToggle.addEventListener('click', () => {
 //    - cart.map(c => getStoreName(c.selectedStore)): Extracts the store name for each cart item.
 //    - .join('\n'): Joins array elements with newline characters for the alert message.
 //
+// ============================================================
+//  SECTION 14: CHECKOUT BUTTON
+// ============================================================
 document.getElementById('checkoutBtn').addEventListener('click', () => {
-  alert('🎉 This is a concept demo!\n\nIn the real app, your cart would be split across:\n' +
-    [...new Set(cart.map(c => getStoreName(c.selectedStore)))].map(s => '  • ' + s).join('\n') +
-    '\n\nbased on the stores you selected.');
+  if (cart.length === 0) {
+    alert('Your cart is empty! Add some items first.');
+    return;
+  }
+  // Save cart with all needed fields for checkout
+  const checkoutCart = cart.map(item => {
+    const product = PRODUCTS.find(p => p.id === item.id);
+    return {
+      id: item.id,
+      name: item.name,
+      emoji: item.emoji,
+      weight: product?.weight || '',
+      selectedStore: item.selectedStore,
+      selectedPrice: item.selectedPrice,
+      mrp: item.mrp,
+      qty: 1
+    };
+  });
+  localStorage.setItem('tokri_cart', JSON.stringify(checkoutCart));
+  window.location.href = 'checkout.html';
 });
 
 

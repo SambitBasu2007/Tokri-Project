@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout | Tokri – Compare</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .checkout-topbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: var(--bg-surface);
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .checkout-topbar .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 14px 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .checkout-title {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            letter-spacing: -0.3px;
+        }
+
+        .checkout-main {
+            padding: 28px 0 120px;
+            background: var(--bg-primary);
+            min-height: 100vh;
+        }
+
+        .checkout-container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .checkout-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .checkout-card-title {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #1c1c1c;
+            margin-bottom: 20px;
+            letter-spacing: -0.3px;
+        }
+
+        .checkout-delivery-strip {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .delivery-strip-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-full);
+            padding: 8px 16px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .delivery-strip-store {
+            color: #1c1c1c;
+            font-weight: 700;
+        }
+
+        .delivery-strip-eta {
+            color: #0c831f;
+            font-weight: 700;
+            font-size: 0.8rem;
+        }
+
+        .checkout-address-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 20px 24px;
+        }
+
+        .checkout-address-icon {
+            width: 24px;
+            height: 24px;
+            color: #0c831f;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .checkout-address-text {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            min-width: 0;
+        }
+
+        .checkout-address-label {
+            font-weight: 700;
+            color: #1c1c1c;
+            font-size: 0.95rem;
+        }
+
+        .checkout-address-detail {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        .checkout-address-change {
+            background: none;
+            border: none;
+            color: #0c831f;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            padding: 6px 10px;
+            border-radius: var(--radius-sm);
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+
+        .checkout-address-change:hover {
+            background: #e8f5e9;
+        }
+
+        .checkout-store-group {
+            background: var(--bg-input);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            margin-bottom: 16px;
+            overflow: hidden;
+        }
+
+        .checkout-store-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .checkout-store-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 16px;
+            background: #ffffff;
+            border-bottom: 1px solid var(--border-color);
+            flex-wrap: wrap;
+        }
+
+        .checkout-store-name {
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: #1c1c1c;
+        }
+
+        .checkout-store-count {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-left: auto;
+            font-weight: 600;
+        }
+
+        .checkout-store-subtotal {
+            font-weight: 800;
+            font-size: 0.9rem;
+            color: #0c831f;
+            margin-left: 8px;
+        }
+
+        .checkout-store-items {
+            padding: 4px 16px;
+        }
+
+        .checkout-item-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .checkout-item-row:last-child {
+            border-bottom: none;
+        }
+
+        .checkout-item-emoji {
+            font-size: 1.6rem;
+            width: 36px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .checkout-item-info {
+            flex: 1;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .checkout-item-name {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #1c1c1c;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .checkout-item-weight {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .checkout-item-qty {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            background: #ffffff;
+            flex-shrink: 0;
+        }
+
+        .qty-btn {
+            width: 32px;
+            height: 32px;
+            border: none;
+            background: #ffffff;
+            color: var(--text-secondary);
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            user-select: none;
+        }
+
+        .qty-btn:hover {
+            background: var(--bg-input);
+            color: #0c831f;
+        }
+
+        .qty-btn:active {
+            transform: scale(0.95);
+        }
+
+        .qty-value {
+            width: 32px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: #1c1c1c;
+            border-left: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+            padding: 7px 0;
+        }
+
+        .checkout-item-price {
+            font-weight: 800;
+            font-size: 0.9rem;
+            color: #1c1c1c;
+            min-width: 52px;
+            text-align: right;
+            flex-shrink: 0;
+        }
+
+        .checkout-item-remove {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: var(--text-muted);
+            transition: var(--transition);
+            padding: 4px;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-left: 2px;
+        }
+
+        .checkout-item-remove:hover {
+            color: #ef4444;
+            background: rgba(239, 68, 68, 0.1);
+        }
+
+        .bill-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            gap: 12px;
+        }
+
+        .bill-row--discount {
+            color: #0c831f;
+        }
+
+        .bill-apply-coupon {
+            background: none;
+            border: none;
+            color: #0c831f;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            padding: 4px 10px;
+            border-radius: var(--radius-sm);
+            transition: var(--transition);
+        }
+
+        .bill-apply-coupon:hover {
+            background: #e8f5e9;
+        }
+
+        .bill-row-note {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .bill-divider {
+            height: 1px;
+            background: var(--border-color);
+            margin: 12px 0;
+        }
+
+        .bill-row--total {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: #1c1c1c;
+            padding-top: 4px;
+        }
+
+        .payment-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .payment-pill {
+            flex: 1;
+            min-width: 140px;
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 12px 16px;
+            border-radius: var(--radius-full);
+            font-family: inherit;
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .payment-pill:hover {
+            border-color: #0c831f;
+            color: #0c831f;
+        }
+
+        .payment-pill.active {
+            background: #0c831f;
+            color: #ffffff;
+            border-color: #0c831f;
+            box-shadow: 0 2px 6px rgba(12, 131, 31, 0.2);
+        }
+
+        .checkout-action-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #ffffff;
+            border-top: 1px solid var(--border-color);
+            padding: 16px 24px;
+            padding-bottom: calc(16px + env(safe-area-inset-bottom));
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            z-index: 1000;
+            box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.06);
+        }
+
+        .checkout-action-total {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .checkout-action-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .checkout-action-amount {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #1c1c1c;
+            letter-spacing: -0.5px;
+        }
+
+        .checkout-empty-state {
+            text-align: center;
+            padding: 64px 24px;
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .checkout-empty-icon {
+            font-size: 4rem;
+            margin-bottom: 16px;
+            opacity: 0.6;
+        }
+
+        .checkout-empty-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #1c1c1c;
+            margin-bottom: 8px;
+        }
+
+        .checkout-empty-desc {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 24px;
+        }
+
+        .checkout-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 3000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        .checkout-modal-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .checkout-modal {
+            background: #ffffff;
+            border-radius: 16px;
+            width: 100%;
+            max-width: 420px;
+            padding: 24px;
+            box-shadow: var(--shadow-lg);
+            transform: translateY(10px);
+            transition: transform 0.2s ease;
+        }
+
+        .checkout-modal-overlay.open .checkout-modal {
+            transform: translateY(0);
+        }
+
+        .checkout-modal-title {
+            font-size: 1.1rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+            color: #1c1c1c;
+        }
+
+        .checkout-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            font-family: inherit;
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+            transition: var(--transition);
+            background: var(--bg-input);
+            color: var(--text-primary);
+        }
+
+        .checkout-input:focus {
+            outline: none;
+            border-color: #0c831f;
+            box-shadow: 0 0 0 3px rgba(12, 131, 31, 0.1);
+            background: #ffffff;
+        }
+
+        .checkout-modal-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            margin-top: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .checkout-container {
+                padding: 0 16px;
+                gap: 16px;
+            }
+
+            .checkout-card {
+                padding: 20px;
+                border-radius: 12px;
+            }
+
+            .checkout-action-bar {
+                padding: 12px 16px;
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .checkout-action-total {
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+                width: 100%;
+            }
+
+            .checkout-action-amount {
+                font-size: 1.25rem;
+            }
+
+            .checkout-action-bar .btn-lg {
+                width: 100%;
+            }
+
+            .checkout-item-row {
+                gap: 8px;
+                flex-wrap: wrap;
+            }
+
+            .checkout-item-info {
+                min-width: 120px;
+                order: 2;
+                flex: 1 1 60%;
+            }
+
+            .checkout-item-emoji {
+                order: 1;
+            }
+
+            .checkout-item-qty {
+                order: 4;
+            }
+
+            .checkout-item-price {
+                order: 3;
+                margin-left: auto;
+            }
+
+            .checkout-item-remove {
+                order: 5;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .checkout-topbar .header-container {
+                padding: 12px 16px;
+            }
+
+            .checkout-title {
+                font-size: 1.1rem;
+            }
+
+            .payment-pill {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="checkout-topbar">
+        <div class="header-container">
+            <a href="index.html" class="icon-btn" id="checkoutBack" title="Back to cart">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+            </a>
+            <h1 class="checkout-title">Checkout</h1>
+        </div>
+    </header>
+    <main class="checkout-main">
+        <div class="section-container checkout-container">
+            <section class="checkout-delivery-strip" id="checkoutDeliveryStrip"></section>
+            <section class="checkout-card checkout-address-card" id="checkoutAddress"></section>
+            <section class="checkout-card checkout-order-summary" id="checkoutOrderSummary">
+                <h2 class="checkout-card-title">Order Summary</h2>
+            </section>
+            <section class="checkout-card checkout-bill-details" id="checkoutBillDetails">
+                <h2 class="checkout-card-title">Bill Details</h2>
+            </section>
+            <section class="checkout-card checkout-payment" id="checkoutPayment">
+                <h2 class="checkout-card-title">Payment Method</h2>
+            </section>
+        </div>
+    </main>
+    <footer class="checkout-action-bar" id="checkoutActionBar">
+        <div class="checkout-action-total"><span class="checkout-action-label">To Pay</span><span
+                class="checkout-action-amount" id="checkoutActionAmount">₹0</span></div>
+        <button class="btn btn-primary btn-lg" id="placeOrderBtn">Place Order</button>
+    </footer>
+    <div class="checkout-modal-overlay" id="checkoutModal">
+        <div class="checkout-modal" id="checkoutModalContent"></div>
+    </div>
+
+    <script>
+        const STORE_CONFIG = {
+            blinkit: { name: 'Blinkit', dot: 'blinkit', delivery: '10 min', feeThreshold: 199, fee: 25 },
+            zepto: { name: 'Zepto', dot: 'zepto', delivery: '10 min', feeThreshold: 199, fee: 25 },
+            swiggy: { name: 'Swiggy Instamart', dot: 'swiggy', delivery: '15 min', feeThreshold: 199, fee: 25 },
+            bigbasket: { name: 'BigBasket', dot: 'bigbasket', delivery: '30 min', feeThreshold: 399, fee: 35 },
+            jiomart: { name: 'JioMart', dot: 'jiomart', delivery: '60 min', feeThreshold: 399, fee: 35 },
+            flipkart: { name: 'Flipkart Minutes', dot: 'flipkart', delivery: '20 min', feeThreshold: 199, fee: 25 },
+        };
+
+        let cart = [];
+        let address = { label: 'Home', detail: '123, Example Street, Borivali, Mumbai – 400091' };
+        let paymentMethod = 'upi';
+        let appliedCoupon = null;
+
+        const formatPrice = (n) => '₹' + Math.round(n);
+        const getQty = (item) => item.qty || 1;
+
+        function loadCart() {
+            try {
+                const saved = localStorage.getItem('tokri_cart');
+                if (saved) cart = JSON.parse(saved);
+            } catch (e) { console.error('Failed to load cart', e); }
+
+            if (!cart || cart.length === 0) {
+                showEmptyState();
+            } else {
+                cart.forEach(item => { if (!item.qty) item.qty = 1; });
+                renderCheckout();
+            }
+        }
+
+        function saveCart() {
+            localStorage.setItem('tokri_cart', JSON.stringify(cart));
+        }
+
+        function showEmptyState() {
+            const container = document.querySelector('.checkout-container');
+            ['checkoutDeliveryStrip', 'checkoutAddress', 'checkoutOrderSummary', 'checkoutBillDetails', 'checkoutPayment'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.style.display = 'none';
+            });
+            document.getElementById('checkoutActionBar').style.display = 'none';
+            const div = document.createElement('div');
+            div.className = 'checkout-empty-state';
+            div.innerHTML = `<div class="checkout-empty-icon">🛒</div><div class="checkout-empty-title">Your cart is empty</div><div class="checkout-empty-desc">Add items from the comparison table to start saving</div><a href="index.html" class="btn btn-primary">Start Shopping</a>`;
+            container.appendChild(div);
+        }
+
+        function calculateTotals() {
+            let itemTotal = 0;
+            const storeSubtotals = {};
+            cart.forEach(item => {
+                const q = getQty(item);
+                itemTotal += item.selectedPrice * q;
+                storeSubtotals[item.selectedStore] = (storeSubtotals[item.selectedStore] || 0) + item.selectedPrice * q;
+            });
+            let deliveryTotal = 0;
+            Object.entries(storeSubtotals).forEach(([storeId, sub]) => {
+                const cfg = STORE_CONFIG[storeId];
+                if (cfg && sub < cfg.feeThreshold) deliveryTotal += cfg.fee;
+            });
+            let couponDiscount = 0;
+            if (appliedCoupon) {
+                if (appliedCoupon.code === 'WELCOME10') couponDiscount = Math.min(itemTotal * 0.10, 50);
+                else if (appliedCoupon.code === 'SAVE20') couponDiscount = Math.min(itemTotal * 0.20, 100);
+                else if (appliedCoupon.code === 'FREEDEL') couponDiscount = deliveryTotal;
+                else if (appliedCoupon.code === 'SCAMTOKRI') couponDiscount = Math.min(itemTotal * 1 + deliveryTotal, 500000000000000);
+                else if (appliedCoupon.code === 'KRISH') couponDiscount = Math.min(itemTotal * 1 + deliveryTotal, 500000000000);
+                else if (appliedCoupon.code === 'DWAYNE') couponDiscount = Math.min(itemTotal * 10 + deliveryTotal, 500000000000);
+                else if (appliedCoupon.code === 'STUART') couponDiscount = Math.min(itemTotal * 10 + deliveryTotal, 500000000000);
+                else if (appliedCoupon.code === 'KRISHLIKESDATASTRUCTURES') couponDiscount = Math.min(itemTotal * -10034600 + deliveryTotal, 500000000000);
+            }
+            const grandTotal = itemTotal + deliveryTotal - couponDiscount;
+            return { itemTotal, deliveryTotal, couponDiscount, grandTotal, storeSubtotals };
+        }
+
+        function renderDeliveryStrip() {
+            const storeIds = [...new Set(cart.map(c => c.selectedStore))];
+            const strip = document.getElementById('checkoutDeliveryStrip');
+            strip.innerHTML = storeIds.map(id => {
+                const s = STORE_CONFIG[id];
+                if (!s) return '';
+                return `<div class="delivery-strip-item"><span class="store-dot store-dot--${s.dot}"></span><span class="delivery-strip-store">${s.name}</span><span class="delivery-strip-eta">Arriving in ${s.delivery}</span></div>`;
+            }).join('');
+        }
+
+        function renderAddress() {
+            document.getElementById('checkoutAddress').innerHTML = `
+        <svg class="checkout-address-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" /><circle cx="12" cy="10" r="3" /></svg>
+        <div class="checkout-address-text"><span class="checkout-address-label">Delivering to ${address.label}</span><span class="checkout-address-detail">${address.detail}</span></div>
+        <button class="checkout-address-change" onclick="openAddressModal()">Change</button>`;
+        }
+
+        function renderOrderSummary() {
+            const { storeSubtotals } = calculateTotals();
+            const container = document.getElementById('checkoutOrderSummary');
+            const storeIds = [...new Set(cart.map(c => c.selectedStore))];
+            let html = '<h2 class="checkout-card-title">Order Summary</h2>';
+            storeIds.forEach(id => {
+                const cfg = STORE_CONFIG[id];
+                if (!cfg) return;
+                const items = cart.filter(c => c.selectedStore === id);
+                const count = items.reduce((sum, it) => sum + getQty(it), 0);
+                const sub = storeSubtotals[id] || 0;
+                html += `<div class="checkout-store-group"><div class="checkout-store-header"><span class="store-dot store-dot--${cfg.dot}"></span><span class="checkout-store-name">${cfg.name}</span><span class="checkout-store-count">${count} ${count === 1 ? 'item' : 'items'}</span><span class="checkout-store-subtotal">${formatPrice(sub)}</span></div><div class="checkout-store-items">${items.map(item => `<div class="checkout-item-row" data-id="${item.id}"><span class="checkout-item-emoji">${item.emoji}</span><div class="checkout-item-info"><span class="checkout-item-name">${item.name}</span>${item.weight ? `<span class="checkout-item-weight">${item.weight}</span>` : ''}</div><div class="checkout-item-qty"><button class="qty-btn" onclick="updateQty(${item.id}, -1)" aria-label="Decrease quantity">−</button><span class="qty-value">${getQty(item)}</span><button class="qty-btn" onclick="updateQty(${item.id}, 1)" aria-label="Increase quantity">+</button></div><span class="checkout-item-price">${formatPrice(item.selectedPrice * getQty(item))}</span><button class="checkout-item-remove" onclick="removeItem(${item.id})" title="Remove">&times;</button></div>`).join('')}</div></div>`;
+            });
+            container.innerHTML = html;
+        }
+
+        function renderBillDetails() {
+            const { itemTotal, deliveryTotal, couponDiscount, grandTotal, storeSubtotals } = calculateTotals();
+            let deliveryHtml = '';
+            Object.entries(storeSubtotals).forEach(([storeId, sub]) => {
+                const cfg = STORE_CONFIG[storeId];
+                if (!cfg) return;
+                const isFree = sub >= cfg.feeThreshold;
+                deliveryHtml += `<div class="bill-row"><span>${cfg.name} Delivery Fee</span><span>${isFree ? '₹0' : formatPrice(cfg.fee)} ${isFree ? '<span class="bill-row-note">(Free — min. order met)</span>' : ''}</span></div>`;
+            });
+            const couponLine = appliedCoupon ? `<span style="color:#0c831f;font-weight:700;">– ${formatPrice(couponDiscount)}</span>` : `<button class="bill-apply-coupon" onclick="openCouponModal()">Apply Coupon</button>`;
+            const couponLabel = appliedCoupon ? `Coupon Discount <span style="color:var(--text-muted);font-weight:500;">(${appliedCoupon.code})</span> <button class="bill-apply-coupon" onclick="removeCoupon()" style="margin-left:6px;font-size:0.75rem;color:#ef4444;">Remove</button>` : 'Coupon Discount';
+            document.getElementById('checkoutBillDetails').innerHTML = `<h2 class="checkout-card-title">Bill Details</h2><div class="bill-row"><span>Item Total</span><span>${formatPrice(itemTotal)}</span></div>${deliveryHtml}<div class="bill-row bill-row--discount"><span>${couponLabel}</span>${couponLine}</div><div class="bill-divider"></div><div class="bill-row bill-row--total"><span>To Pay</span><span id="checkoutGrandTotal">${formatPrice(grandTotal)}</span></div>`;
+            document.getElementById('checkoutActionAmount').textContent = formatPrice(grandTotal);
+        }
+
+        function renderPayment() {
+            const methods = [{ id: 'upi', label: '📱 UPI' }, { id: 'card', label: '💳 Card' }, { id: 'cod', label: '💵 Cash on Delivery' }];
+            document.getElementById('checkoutPayment').innerHTML = `<h2 class="checkout-card-title">Payment Method</h2><div class="payment-options">${methods.map(m => `<button class="payment-pill ${paymentMethod === m.id ? 'active' : ''}" onclick="setPayment('${m.id}')" type="button">${m.label}</button>`).join('')}</div>`;
+        }
+
+        function renderCheckout() {
+            renderDeliveryStrip();
+            renderAddress();
+            renderOrderSummary();
+            renderBillDetails();
+            renderPayment();
+        }
+
+        function updateQty(id, delta) {
+            const item = cart.find(c => c.id === id);
+            if (!item) return;
+            item.qty = getQty(item) + delta;
+            if (item.qty < 1) item.qty = 1;
+            saveCart();
+            renderCheckout();
+        }
+
+        function removeItem(id) {
+            cart = cart.filter(c => c.id !== id);
+            saveCart();
+            if (cart.length === 0) window.location.reload();
+            else renderCheckout();
+        }
+
+        function setPayment(method) {
+            paymentMethod = method;
+            renderPayment();
+        }
+
+        function openModal(contentHtml) {
+            document.getElementById('checkoutModalContent').innerHTML = contentHtml;
+            document.getElementById('checkoutModal').classList.add('open');
+        }
+
+        function closeModal() {
+            document.getElementById('checkoutModal').classList.remove('open');
+        }
+
+        function openAddressModal() {
+            openModal(`<div class="checkout-modal-title">Change Delivery Address</div><input type="text" class="checkout-input" id="addressLabelInput" value="${address.label}" placeholder="Label (e.g. Home, Office)"><input type="text" class="checkout-input" id="addressDetailInput" value="${address.detail}" placeholder="Full address"><div class="checkout-modal-actions"><button class="btn btn-ghost" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="saveAddress()">Save Address</button></div>`);
+        }
+
+        function saveAddress() {
+            const label = document.getElementById('addressLabelInput').value.trim();
+            const detail = document.getElementById('addressDetailInput').value.trim();
+            if (label && detail) { address = { label, detail }; renderAddress(); closeModal(); }
+        }
+
+        function openCouponModal() {
+            openModal(`<div class="checkout-modal-title">Apply Coupon</div><input type="text" class="checkout-input" id="couponInput" placeholder="Enter coupon code"><div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:16px;line-height:1.5;">Try: <b>WELCOME10</b> (10% off up to ₹50) · <b>SAVE20</b> (20% off up to ₹100) · <b>FREEDEL</b> (Free delivery)</div><div class="checkout-modal-actions"><button class="btn btn-ghost" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="applyCoupon()">Apply</button></div>`);
+            setTimeout(() => document.getElementById('couponInput')?.focus(), 50);
+        }
+
+        function applyCoupon() {
+            const raw = document.getElementById('couponInput').value.trim().toUpperCase();
+            const valid = ['WELCOME10', 'SAVE20', 'FREEDEL', 'SCAMTOKRI', 'KRISH', 'DWAYNE', 'STUART', 'KRISHLIKESDATASTRUCTURES'];
+            if (valid.includes(raw)) { appliedCoupon = { code: raw }; renderBillDetails(); closeModal(); }
+            else alert('Invalid coupon code. Try WELCOME10, SAVE20, FREEDEL, SCAMTOKRI, KRISH, DWAYNE, or STUART.');
+        }
+
+        function removeCoupon() {
+            appliedCoupon = null;
+            renderBillDetails();
+        }
+
+        function placeOrder() {
+            if (cart.length === 0) return;
+            const { grandTotal } = calculateTotals();
+            const storeNames = [...new Set(cart.map(c => STORE_CONFIG[c.selectedStore]?.name).filter(Boolean))];
+            const btn = document.getElementById('placeOrderBtn');
+            const original = btn.textContent;
+            btn.textContent = 'Placing Order…';
+            btn.disabled = true;
+            setTimeout(() => {
+                alert(`🎉 Order Placed Successfully!\n\nTotal: ${formatPrice(grandTotal)}\nPayment: We stole ${paymentMethod.toUpperCase()} from your bank account because this website is a scam!!!!\nStores: ${storeNames.join(', ')}\n\nThank you for shopping with Tokri!`);
+                cart = [];
+                saveCart();
+                window.location.href = 'index.html';
+            }, 1400);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadCart();
+            document.getElementById('placeOrderBtn').addEventListener('click', placeOrder);
+            document.getElementById('checkoutModal').addEventListener('click', (e) => { if (e.target === document.getElementById('checkoutModal')) closeModal(); });
+            document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+        });
+    </script>
+</body>
+
+</html>
