@@ -527,7 +527,7 @@ function placeOrder() {
     setTimeout(() => {
         alert(
             `🎉 Order Placed Successfully!\n\n` +
-            `Total: YOU HAVE BEEN SCAMMED ${formatPrice(grandTotal)}\n HAHAHAHAAAHH` +
+            `Total: YOU HAVE BEEN SCAMMED ${formatPrice(grandTotal)} HAHAHAHAAAHH\n` +
             `Payment: ${paymentMethod.toUpperCase()}\n` +
             `Stores: ${storeNames.join(', ')}\n\n` +
             `Thank you for shopping with Tokri!`
