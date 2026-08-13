@@ -54,6 +54,10 @@
 
     <!-- Main CSS Stylesheet Link -->
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:,">
+
+
+
 </head>
 
 <body>
@@ -480,6 +484,73 @@
 
     <!-- Main JavaScript File -->
     <script type="module" src="app.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- STEP 2 TEST — REMOVE AFTER CONFIRMING CONNECTION -->
+    <div id="supabase-test"
+        style="position:fixed;bottom:10px;right:10px;z-index:9999;background:#ff4444;color:white;padding:10px 15px;border-radius:8px;font-family:monospace;font-size:12px;box-shadow:0 4px 12px rgba(0,0,0,0.3);">
+        <button id="test-supabase-btn"
+            style="background:white;color:#ff4444;border:none;padding:6px 12px;border-radius:4px;cursor:pointer;font-weight:bold;">
+            🧪 Test Supabase
+        </button>
+        <div id="test-result" style="margin-top:8px;display:none;"></div>
+    </div>
+
+    <script type="module">
+        import { supabase } from './shared/supabase.js';
+
+        document.getElementById('test-supabase-btn').addEventListener('click', async () => {
+            const resultDiv = document.getElementById('test-result');
+            resultDiv.style.display = 'block';
+            resultDiv.textContent = 'Testing...';
+
+            try {
+                const start = performance.now();
+                const { data, error, count } = await supabase
+                    .from('communities')
+                    .select('*', { count: 'exact', head: true });
+                const duration = (performance.now() - start).toFixed(1);
+
+                if (error) {
+                    resultDiv.innerHTML = '<span style="color:#ffcccc;">❌ ' + error.message + '</span>';
+                    console.error('[Supabase Test] Failed:', error);
+                } else {
+                    resultDiv.innerHTML = '<span style="color:#ccffcc;">✅ Connected! (' + duration + 'ms)</span>';
+                    console.log('[Supabase Test] Success — count:', count, 'duration:', duration + 'ms');
+                }
+            } catch (err) {
+                resultDiv.innerHTML = '<span style="color:#ffcccc;">❌ ' + err.message + '</span>';
+                console.error('[Supabase Test] Exception:', err);
+            }
+        });
+
+        // Silent auto-test on load
+        supabase.from('communities').select('*', { count: 'exact', head: true })
+            .then(({ error }) => {
+                if (error) console.warn('[Supabase] Auto-test failed:', error.message);
+                else console.log('[Supabase] Auto-test passed — connection OK');
+            });
+    </script>
+    <!-- END STEP 2 TEST -->
+
+
+
+
+
+
+
+
 
 </body>
 
