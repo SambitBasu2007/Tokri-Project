@@ -1006,7 +1006,7 @@ document.getElementById('checkoutBtn').addEventListener('click', () => {
     };
   });
   localStorage.setItem('tokri_cart', JSON.stringify(checkoutCart));
-  window.location.href = 'checkout.html';
+  window.location.href = './checkout/checkout.html';
 });
 
 

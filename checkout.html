@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout | Tokri – Compare</title>
+    <meta name="description" content="Review your smart cart, split across stores for the best price.">
+    <link rel="stylesheet" href="../main/style.css">
+    <link rel="stylesheet" href="../checkout/checkout.css">
+
+</head>
+
+<body>
+
+    <header class="checkout-topbar">
+        <div class="header-container">
+            <a href="../main/index.html" class="icon-btn" id="checkoutBack" title="Back to cart">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+            </a>
+            <h1 class="checkout-title">Checkout</h1>
+        </div>
+    </header>
+
+    <main class="checkout-main">
+        <div class="section-container checkout-container">
+            <section class="checkout-delivery-strip" id="checkoutDeliveryStrip"></section>
+            <section class="checkout-card checkout-address-card" id="checkoutAddress"></section>
+            <section class="checkout-card checkout-order-summary" id="checkoutOrderSummary">
+                <h2 class="checkout-card-title">Order Summary</h2>
+            </section>
+            <section class="checkout-card checkout-bill-details" id="checkoutBillDetails">
+                <h2 class="checkout-card-title">Bill Details</h2>
+            </section>
+            <section class="checkout-card checkout-payment" id="checkoutPayment">
+                <h2 class="checkout-card-title">Payment Method</h2>
+            </section>
+        </div>
+    </main>
+
+    <footer class="checkout-action-bar" id="checkoutActionBar">
+        <div class="checkout-action-total">
+            <span class="checkout-action-label">To Pay</span>
+            <span class="checkout-action-amount" id="checkoutActionAmount">₹0</span>
+        </div>
+        <button class="btn btn-primary btn-lg" id="placeOrderBtn">Place Order</button>
+    </footer>
+
+    <div class="checkout-modal-overlay" id="checkoutModal">
+        <div class="checkout-modal" id="checkoutModalContent"></div>
+    </div>
+
+    <script src="checkout.js"></script>
+</body>
+
+</html>
