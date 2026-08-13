@@ -1679,3 +1679,204 @@ body {
     display: block;
   }
 }
+
+#communityBtn {
+  display: block;
+}
+
+/* ====================================================================
+   SECTION 20: PROFILE SIDEBAR & COMMUNITY ENTRY
+   Mirrors cart panel slide-in mechanics exactly.
+   Reuses existing CSS custom property tokens from Section 1.
+   ==================================================================== */
+.profile-sidebar {
+  position: fixed;
+  top: 0;
+  right: -420px;
+  width: 400px;
+  max-width: 90vw;
+  height: 100vh;
+  background: var(--bg-surface);
+  border-left: 1px solid var(--border-color);
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: -4px 0 24px rgba(0, 0, 0, 0.1);
+}
+
+.profile-sidebar.open {
+  right: 0;
+}
+
+.profile-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.profile-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.profile-sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.profile-sidebar-title {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #1c1c1c;
+}
+
+.profile-close-btn {
+  background: none;
+  border: none;
+  font-size: 1.6rem;
+  cursor: pointer;
+  color: var(--text-secondary);
+  transition: var(--transition);
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.profile-close-btn:hover {
+  background: var(--bg-input);
+  color: #1c1c1c;
+}
+
+.profile-sidebar-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 24px;
+}
+
+/* Community Summary Box */
+.community-summary-box {
+  background: var(--bg-input);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.community-summary-box:hover {
+  border-color: #0c831f;
+  box-shadow: 0 2px 8px rgba(12, 131, 31, 0.1);
+}
+
+.community-summary-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
+}
+
+.community-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.community-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #1c1c1c;
+  transition: var(--transition);
+}
+
+.community-chip:hover {
+  border-color: #0c831f;
+  color: #0c831f;
+}
+
+.community-chip-more {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  padding: 6px 0;
+}
+
+.community-summary-empty {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-align: center;
+  padding: 12px 0;
+}
+
+.community-summary-loading {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-align: center;
+  padding: 12px 0;
+}
+
+/* Profile Menu */
+.profile-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.profile-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.profile-menu-item:hover {
+  background: var(--bg-input);
+  color: #0c831f;
+}
+
+.profile-menu-icon {
+  font-size: 1.2rem;
+}
+
+#communityBtn {
+  display: block;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .profile-sidebar {
+    width: 100%;
+    max-width: 100vw;
+    right: -100vw;
+  }
+
+  #communityBtn {
+    display: block;
+  }
+}

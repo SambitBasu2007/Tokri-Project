@@ -154,10 +154,14 @@
                     <span class="badge-count" id="cartCount">0</span>
                 </button>
 
-                <!-- Action Call to Actions 
-                <a href="#compare" class="btn btn-ghost">Explore</a>
-                -->
-                <a href="#compare" class="btn btn-primary">Compare Now</a>
+                <!-- Profile Button — opens profile sidebar -->
+                <button class="icon-btn" id="profileBtn" title="Your profile">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
+                        <circle cx="12" cy="7" r="4" />
+                    </svg>
+                </button>
             </div>
 
         </div>
@@ -205,6 +209,7 @@
             <div class="hero-actions">
                 <a href="#compare" class="btn btn-primary btn-lg">Start Comparing</a>
                 <a href="#how-it-works" class="btn btn-ghost btn-lg">See How It Works</a>
+                <a href="social.html" class="btn btn-ghost btn-lg" id="communityBtn">👥 Online Community</a>
             </div>
 
             <!-- Supported Store Badges -->
@@ -335,6 +340,41 @@
 
     <!-- Dark Background Overlay when Cart Drawer is Open -->
     <div class="cart-overlay" id="cartOverlay"></div>
+
+    <!-- ====================================================================
+       COMPONENT 10: PROFILE SIDEBAR (mirrors cart panel mechanics)
+       Slide-in drawer for user profile, settings, and community entry.
+       ==================================================================== -->
+    <aside class="profile-sidebar" id="profileSidebar">
+        <div class="profile-sidebar-header">
+            <h3 class="profile-sidebar-title">👤 Profile</h3>
+            <button class="profile-close-btn" id="profileClose">&times;</button>
+        </div>
+        <div class="profile-sidebar-body" id="profileSidebarBody">
+            <!-- Community Summary Box — populated by JS -->
+            <div class="community-summary-box" id="communitySummaryBox">
+                <div class="community-summary-loading">Loading communities…</div>
+            </div>
+            <!-- Additional profile menu items -->
+            <div class="profile-menu">
+                <a href="#" class="profile-menu-item">
+                    <span class="profile-menu-icon">⚙️</span>
+                    <span class="profile-menu-label">Settings</span>
+                </a>
+                <a href="#" class="profile-menu-item">
+                    <span class="profile-menu-icon">📦</span>
+                    <span class="profile-menu-label">Order History</span>
+                </a>
+                <a href="#" class="profile-menu-item">
+                    <span class="profile-menu-icon">❓</span>
+                    <span class="profile-menu-label">Help & Support</span>
+                </a>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Dark Background Overlay when Profile Sidebar is Open -->
+    <div class="profile-overlay" id="profileOverlay"></div>
 
 
 

@@ -1,3 +1,13 @@
+// Dynamic import with fallback — if Supabase CDN fails, app still works
+let supabase = null;
+
+try {
+  const module = await import('./shared/supabase.js');
+  supabase = module.supabase;
+} catch (err) {
+  console.warn('[Tokri] Supabase not available — community features disabled:', err.message);
+}
+
 // ============================================================
 //  Tokri – Compare  |  Demo App Logic
 //  All data is mock / hardcoded for concept demonstration.
@@ -1020,3 +1030,110 @@ document.getElementById('checkoutBtn').addEventListener('click', () => {
 //  the default sort (Biggest Savings) and no active filters.
 //
 filterProducts();
+
+
+
+// ============================================================
+//  SECTION 18: PROFILE SIDEBAR
+// ============================================================
+//
+//  Mirrors SECTION 12 (Cart Panel) open/close mechanics exactly.
+//  Adds a slide-in profile sidebar with community summary box.
+//
+
+function openProfileSidebar() {
+  document.getElementById('profileSidebar').classList.add('open');
+  document.getElementById('profileOverlay').classList.add('open');
+  renderCommunitySummaryBox();
+}
+
+function closeProfileSidebar() {
+  document.getElementById('profileSidebar').classList.remove('open');
+  document.getElementById('profileOverlay').classList.remove('open');
+}
+
+// Attach click handlers to profile button, close button, and overlay
+document.getElementById('profileBtn').addEventListener('click', openProfileSidebar);
+document.getElementById('profileClose').addEventListener('click', closeProfileSidebar);
+document.getElementById('profileOverlay').addEventListener('click', closeProfileSidebar);
+
+/**
+ * renderCommunitySummaryBox()
+ * Queries community_members joined to communities for the current user,
+ * renders up to 10 mini community chips, and wires click to social.html.
+ */
+async function renderCommunitySummaryBox() {
+  const box = document.getElementById('communitySummaryBox');
+  if (!box) return;
+
+  // If Supabase failed to load, show sign-in prompt
+  if (!supabase) {
+    box.innerHTML = `
+      <div class="community-summary-title">Your Communities</div>
+      <div class="community-summary-empty">
+        <a href="social.html" style="color:#0c831f;font-weight:700;text-decoration:none;">Sign in</a> to see your communities
+      </div>
+    `;
+    box.onclick = () => { window.location.href = 'social.html'; };
+    return;
+  }
+
+  // Check if user is logged in
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) {
+    box.innerHTML = `
+      <div class="community-summary-title">Your Communities</div>
+      <div class="community-summary-empty">
+        <a href="social.html" style="color:#0c831f;font-weight:700;text-decoration:none;">Sign in</a> to see your communities
+      </div>
+    `;
+    box.addEventListener('click', () => { window.location.href = 'social.html'; });
+    return;
+  }
+
+  box.innerHTML = '<div class="community-summary-loading">Loading communities…</div>';
+
+  try {
+    const { data, error } = await supabase
+      .from('community_members')
+      .select('communities(id, handle, display_name, type)')
+      .eq('user_id', user.id)
+      .limit(10);
+
+    if (error) throw error;
+
+    if (!data || data.length === 0) {
+      box.innerHTML = `
+        <div class="community-summary-title">Your Communities</div>
+        <div class="community-summary-empty">No communities yet. <a href="social.html" style="color:#0c831f;font-weight:700;text-decoration:none;">Join or create one</a></div>
+      `;
+    } else {
+      const chips = data.map(row => {
+        const c = row.communities;
+        const typeIcon = c.type === 'family' ? '👨👩👧👦' : '👥';
+        return `<span class="community-chip">${typeIcon} ${c.display_name}</span>`;
+      }).join('');
+
+      const moreText = data.length >= 10
+        ? '<div class="community-chip-more">+ more on Social page</div>'
+        : '';
+
+      box.innerHTML = `
+        <div class="community-summary-title">Your Communities</div>
+        <div class="community-chips">${chips}</div>
+        ${moreText}
+      `;
+    }
+
+    // Wire entire box click to social.html
+    box.onclick = () => { window.location.href = 'social.html'; };
+
+  } catch (err) {
+    console.error('Failed to load communities:', err);
+    box.innerHTML = `
+      <div class="community-summary-title">Your Communities</div>
+      <div class="community-summary-empty">Unable to load. <a href="social.html" style="color:#0c831f;font-weight:700;text-decoration:none;">Go to Social</a></div>
+    `;
+    box.onclick = () => { window.location.href = 'social.html'; };
+  }
+}
