@@ -1071,10 +1071,10 @@ async function renderCommunitySummaryBox() {
     box.innerHTML = `
       <div class="community-summary-title">Your Communities</div>
       <div class="community-summary-empty">
-        <a href="social.html" style="color:#0c831f;font-weight:700;text-decoration:none;">Sign in</a> to see your communities
+        <a href="./social/social.html" style="color:#0c831f;font-weight:700;text-decoration:none;">Sign in</a> to see your communities
       </div>
     `;
-    box.onclick = () => { window.location.href = 'social.html'; };
+    box.onclick = () => { window.location.href = './social/social.html'; };
     return;
   }
 
@@ -1084,10 +1084,10 @@ async function renderCommunitySummaryBox() {
     box.innerHTML = `
       <div class="community-summary-title">Your Communities</div>
       <div class="community-summary-empty">
-        <a href="social.html" style="color:#0c831f;font-weight:700;text-decoration:none;">Sign in</a> to see your communities
+        <a href="./social/social.html" style="color:#0c831f;font-weight:700;text-decoration:none;">Sign in</a> to see your communities
       </div>
     `;
-    box.addEventListener('click', () => { window.location.href = 'social.html'; });
+    box.addEventListener('click', () => { window.location.href = './social/social.html'; });
     return;
   }
 
@@ -1105,7 +1105,7 @@ async function renderCommunitySummaryBox() {
     if (!data || data.length === 0) {
       box.innerHTML = `
         <div class="community-summary-title">Your Communities</div>
-        <div class="community-summary-empty">No communities yet. <a href="social.html" style="color:#0c831f;font-weight:700;text-decoration:none;">Join or create one</a></div>
+        <div class="community-summary-empty">No communities yet. <a href="./social/social.html" style="color:#0c831f;font-weight:700;text-decoration:none;">Join or create one</a></div>
       `;
     } else {
       const chips = data.map(row => {
@@ -1126,14 +1126,14 @@ async function renderCommunitySummaryBox() {
     }
 
     // Wire entire box click to social.html
-    box.onclick = () => { window.location.href = 'social.html'; };
+    box.onclick = () => { window.location.href = './social/social.html'; };
 
   } catch (err) {
     console.error('Failed to load communities:', err);
     box.innerHTML = `
       <div class="community-summary-title">Your Communities</div>
-      <div class="community-summary-empty">Unable to load. <a href="social.html" style="color:#0c831f;font-weight:700;text-decoration:none;">Go to Social</a></div>
+      <div class="community-summary-empty">Unable to load. <a href="./social/social.html" style="color:#0c831f;font-weight:700;text-decoration:none;">Go to Social</a></div>
     `;
-    box.onclick = () => { window.location.href = 'social.html'; };
+    box.onclick = () => { window.location.href = './social/social.html'; };
   }
 }
