@@ -1,0 +1,264 @@
+<!-- ====================================================================
+     Tokri – Social  |  Communities Hub HTML Markup
+     Reuses the same design system, header, and footer from index.html.
+
+     CONCEPTS:
+       1. Tab-based navigation (Current Communities / Join a Community)
+       2. Community cards with expandable member dropdowns
+       3. Search-by-handle for joining communities
+       4. Dynamic rendering via social.js
+   ==================================================================== -->
+
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script>
+        window.__ENV__ = window.__ENV__ || {};
+        window.__ENV__.SUPABASE_URL = "%%SUPABASE_URL%%";
+        window.__ENV__.SUPABASE_ANON_KEY = "%%SUPABASE_ANON_KEY%%";
+    </script>
+
+    <title>Social | Tokri – Communities</title>
+    <meta name="description"
+        content="Join family and friends shopping communities on Tokri. Share carts, split orders, and save together.">
+
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="./social.css">
+    <link rel="icon" href="data:,">
+    <base target="_blank">
+</head>
+
+<body>
+
+    <!-- ====================================================================
+       COMPONENT 1: TOP ANNOUNCEMENT BANNER
+       ==================================================================== -->
+    <div class="top-announcement-bar">
+        <span class="badge">Social</span>
+        <p>Shop together, save together — family & friends communities</p>
+    </div>
+
+    <!-- ====================================================================
+       COMPONENT 2: STICKY HEADER & NAVIGATION
+       Reuses exact same markup as index.html for brand consistency.
+       ==================================================================== -->
+    <header class="site-header">
+        <div class="header-container">
+            <a href="../index.html" class="brand-logo">
+                <div class="logo-icon-wrapper">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0" />
+                    </svg>
+                </div>
+                <div class="brand-text">
+                    <span class="brand-name">Tokri</span>
+                    <span class="brand-tag">Compare</span>
+                </div>
+            </a>
+
+            <nav class="main-nav">
+                <a href="../index.html" class="nav-link">Home</a>
+                <a href="../index.html#compare" class="nav-link">Compare</a>
+                <a href="social.html" class="nav-link active">Social</a>
+            </nav>
+
+            <div class="header-actions">
+                <button class="icon-btn" id="themeToggle" title="Toggle light/dark mode">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+                    </svg>
+                </button>
+                <button class="icon-btn" id="cartBtn" title="View smart cart">
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="9" cy="21" r="1" />
+                        <circle cx="20" cy="21" r="1" />
+                        <path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6" />
+                    </svg>
+                    <span class="badge-count" id="cartCount">0</span>
+                </button>
+                <button class="icon-btn" id="profileBtn" title="Your profile">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
+                        <circle cx="12" cy="7" r="4" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ====================================================================
+       COMPONENT 3: SOCIAL HERO
+       ==================================================================== -->
+    <section class="hero-section social-hero">
+        <div class="hero-container">
+            <span class="hero-chip">👥 Communities</span>
+            <h1 class="hero-title">Shop With Your<br><span class="hero-highlight">People</span></h1>
+            <p class="hero-subtitle">
+                Create family or friends groups, share grocery carts, split orders across stores,
+                and track spending together. Never shop alone again.
+            </p>
+        </div>
+    </section>
+
+    <!-- ====================================================================
+       COMPONENT 4: TAB NAVIGATION
+       Two tabs: Current Communities | Join a Community
+       ==================================================================== -->
+    <section class="social-tabs-section">
+        <div class="section-container">
+            <div class="social-tabs">
+                <button class="social-tab active" data-tab="current" id="tabCurrent">
+                    🏠 Current Communities
+                </button>
+                <button class="social-tab" data-tab="join" id="tabJoin">
+                    🔍 Join a Community
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================================================================
+       COMPONENT 5: CURRENT COMMUNITIES PANEL
+       ==================================================================== -->
+    <section class="social-panel active" id="panelCurrent">
+        <div class="section-container">
+            <div class="section-header">
+                <div>
+                    <h2 class="section-title">Your Communities</h2>
+                    <p class="section-subtitle">Communities you belong to. Click any card to see members and recent
+                        activity.</p>
+                </div>
+                <button class="btn btn-primary" id="createCommunityBtn">
+                    + Create Community
+                </button>
+            </div>
+            <div class="communities-grid" id="communitiesGrid">
+                <!-- Dynamic community cards injected here -->
+                <div class="communities-loading">Loading your communities…</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================================================================
+       COMPONENT 6: JOIN A COMMUNITY PANEL
+       ==================================================================== -->
+    <section class="social-panel" id="panelJoin">
+        <div class="section-container">
+            <div class="section-header">
+                <div>
+                    <h2 class="section-title">Join a Community</h2>
+                    <p class="section-subtitle">Search by community @handle and send a join request.</p>
+                </div>
+            </div>
+
+            <div class="join-search-wrap">
+                <div class="search-wrapper join-search-wrapper">
+                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <input type="text" class="search-input" id="joinSearchInput" placeholder="Search by @handle…"
+                        autocomplete="off">
+                </div>
+            </div>
+
+            <div class="join-results" id="joinResults">
+                <div class="join-empty-hint">Type a community handle above to search</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================================================================
+       COMPONENT 7: CREATE COMMUNITY MODAL
+       ==================================================================== -->
+    <div class="social-modal-overlay" id="createModalOverlay">
+        <div class="social-modal" id="createModal">
+            <div class="social-modal-header">
+                <h3 class="social-modal-title">Create a Community</h3>
+                <button class="social-modal-close" id="createModalClose">&times;</button>
+            </div>
+            <div class="social-modal-body">
+                <label class="social-input-label">Community Name</label>
+                <input type="text" class="social-input" id="createNameInput" placeholder="e.g. Sharma Family">
+
+                <label class="social-input-label">Unique Handle</label>
+                <div class="social-input-prefix-wrap">
+                    <span class="social-input-prefix">@</span>
+                    <input type="text" class="social-input social-input--prefixed" id="createHandleInput"
+                        placeholder="sharmafamily">
+                </div>
+
+                <label class="social-input-label">Type</label>
+                <div class="social-type-pills">
+                    <button class="social-type-pill active" data-type="family" type="button">👨‍👩‍👧‍👦 Family</button>
+                    <button class="social-type-pill" data-type="friends" type="button">👥 Friends</button>
+                </div>
+            </div>
+            <div class="social-modal-footer">
+                <button class="btn btn-ghost" id="createModalCancel">Cancel</button>
+                <button class="btn btn-primary" id="createModalSubmit">Create</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ====================================================================
+       COMPONENT 8: FOOTER
+       Reuses exact same markup as index.html.
+       ==================================================================== -->
+    <footer class="site-footer">
+        <div class="section-container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="../index.html" class="brand-logo">
+                        <div class="logo-icon-wrapper">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0" />
+                            </svg>
+                        </div>
+                        <div class="brand-text">
+                            <span class="brand-name">Tokri</span>
+                            <span class="brand-tag">Compare</span>
+                        </div>
+                    </a>
+                    <p class="footer-tagline">India's smartest grocery price comparison — one search, six stores, best
+                        price.</p>
+                </div>
+                <div class="footer-col">
+                    <h4 class="footer-col-title">Stores</h4>
+                    <a href="#" class="footer-link">Blinkit</a>
+                    <a href="#" class="footer-link">Zepto</a>
+                    <a href="#" class="footer-link">Swiggy Instamart</a>
+                    <a href="#" class="footer-link">BigBasket</a>
+                    <a href="#" class="footer-link">JioMart</a>
+                    <a href="#" class="footer-link">Flipkart Minutes</a>
+                </div>
+                <div class="footer-col">
+                    <h4 class="footer-col-title">Product</h4>
+                    <a href="#" class="footer-link">How It Works</a>
+                    <a href="#" class="footer-link">Pricing</a>
+                    <a href="#" class="footer-link">FAQs</a>
+                    <a href="#" class="footer-link">Blog</a>
+                </div>
+                <div class="footer-col">
+                    <h4 class="footer-col-title">Legal</h4>
+                    <a href="#" class="footer-link">Privacy Policy</a>
+                    <a href="#" class="footer-link">Terms of Service</a>
+                    <a href="#" class="footer-link">Contact</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>&copy; 2026 Tokri Compare. Not affiliated with any listed store.</span>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="./social.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,585 @@
+/* ====================================================================
+   Tokri – Social  |  Communities Hub Styles
+   Extends the main style.css design system with social-specific
+   components: tabs, community cards, member dropdowns, join search.
+   All tokens reused from Section 1 of style.css.
+   ==================================================================== */
+
+
+/* ====================================================================
+   SECTION 1: SOCIAL HERO OVERRIDE
+   ==================================================================== */
+.social-hero {
+    padding: 48px 24px 40px;
+}
+
+
+/* ====================================================================
+   SECTION 2: TAB NAVIGATION
+   ==================================================================== */
+.social-tabs-section {
+    padding: 0 0 24px;
+    background: var(--bg-primary);
+}
+
+.social-tabs {
+    display: flex;
+    gap: 12px;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 0;
+}
+
+.social-tab {
+    flex: 1;
+    max-width: 280px;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    padding: 14px 20px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: var(--transition);
+    position: relative;
+    top: 2px;
+    white-space: nowrap;
+}
+
+.social-tab:hover {
+    color: var(--accent-primary);
+}
+
+.social-tab.active {
+    color: var(--accent-primary);
+    border-bottom-color: var(--accent-primary);
+}
+
+
+/* ====================================================================
+   SECTION 3: PANELS (show/hide)
+   ==================================================================== */
+.social-panel {
+    display: none;
+    padding: 0 0 64px;
+    background: var(--bg-primary);
+    min-height: 50vh;
+}
+
+.social-panel.active {
+    display: block;
+}
+
+
+/* ====================================================================
+   SECTION 4: COMMUNITIES GRID & CARDS
+   ==================================================================== */
+.communities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 20px;
+}
+
+.communities-loading,
+.communities-empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 48px 24px;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.community-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: var(--transition);
+    box-shadow: var(--shadow-sm);
+}
+
+.community-card:hover {
+    border-color: var(--accent-primary);
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+}
+
+.community-card-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 20px 24px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.community-card-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: var(--radius-md);
+    background: var(--bg-input);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    flex-shrink: 0;
+}
+
+.community-card-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.community-card-name {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.community-card-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.community-card-type {
+    background: #e8f5e9;
+    color: var(--accent-primary);
+    padding: 2px 10px;
+    border-radius: var(--radius-full);
+    font-weight: 700;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.community-card-handle {
+    font-family: monospace;
+    color: var(--text-muted);
+}
+
+.community-card-chevron {
+    width: 24px;
+    height: 24px;
+    color: var(--text-muted);
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+}
+
+.community-card.open .community-card-chevron {
+    transform: rotate(180deg);
+}
+
+/* Status line */
+.community-card-status {
+    padding: 0 24px 16px;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.community-card-status::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent-primary);
+    flex-shrink: 0;
+}
+
+.community-card-status--none::before {
+    background: var(--text-muted);
+}
+
+
+/* ====================================================================
+   SECTION 5: MEMBERS DROPDOWN
+   ==================================================================== */
+.community-members-dropdown {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    border-top: 1px solid transparent;
+}
+
+.community-card.open .community-members-dropdown {
+    max-height: 400px;
+    border-top-color: var(--border-color);
+}
+
+.community-members-list {
+    padding: 12px 24px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.community-member-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    border-radius: var(--radius-sm);
+    background: var(--bg-input);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.community-member-row.leader {
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+}
+
+.community-member-star {
+    color: var(--accent-primary);
+    font-size: 0.85rem;
+}
+
+.community-member-name {
+    flex: 1;
+}
+
+.community-member-role {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+
+/* ====================================================================
+   SECTION 6: JOIN TAB — SEARCH & RESULTS
+   ==================================================================== */
+.join-search-wrap {
+    max-width: 520px;
+    margin-bottom: 28px;
+}
+
+.join-search-wrapper {
+    background: var(--bg-surface);
+}
+
+.join-results {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.join-empty-hint {
+    text-align: center;
+    padding: 40px 24px;
+    color: var(--text-muted);
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.join-result-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 18px 24px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    transition: var(--transition);
+    box-shadow: var(--shadow-sm);
+}
+
+.join-result-card:hover {
+    border-color: var(--accent-primary);
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-1px);
+}
+
+.join-result-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-md);
+    background: var(--bg-input);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+}
+
+.join-result-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.join-result-name {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 2px;
+}
+
+.join-result-handle {
+    font-family: monospace;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.join-result-type {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    margin-top: 4px;
+}
+
+.join-result-actions {
+    flex-shrink: 0;
+}
+
+.btn-join {
+    padding: 8px 18px;
+    border-radius: var(--radius-sm);
+    font-family: inherit;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+    border: none;
+    background: var(--accent-primary);
+    color: #ffffff;
+}
+
+.btn-join:hover {
+    background: var(--accent-primary-hover);
+    transform: translateY(-1px);
+}
+
+.btn-join:disabled,
+.btn-join.requested {
+    background: #e8f5e9;
+    color: var(--accent-primary);
+    border: 1px solid var(--accent-primary);
+    cursor: default;
+}
+
+.btn-join.requested:hover {
+    transform: none;
+}
+
+
+/* ====================================================================
+   SECTION 7: CREATE COMMUNITY MODAL
+   ==================================================================== */
+.social-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 3000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+
+.social-modal-overlay.open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.social-modal {
+    background: var(--bg-surface);
+    border-radius: 16px;
+    width: 100%;
+    max-width: 440px;
+    box-shadow: var(--shadow-lg);
+    transform: translateY(10px);
+    transition: transform 0.2s ease;
+    overflow: hidden;
+}
+
+.social-modal-overlay.open .social-modal {
+    transform: translateY(0);
+}
+
+.social-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.social-modal-title {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--text-primary);
+}
+
+.social-modal-close {
+    background: none;
+    border: none;
+    font-size: 1.6rem;
+    cursor: pointer;
+    color: var(--text-secondary);
+    transition: var(--transition);
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.social-modal-close:hover {
+    background: var(--bg-input);
+    color: var(--text-primary);
+}
+
+.social-modal-body {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.social-input-label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.social-input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    font-family: inherit;
+    font-size: 0.9rem;
+    background: var(--bg-input);
+    color: var(--text-primary);
+    transition: var(--transition);
+}
+
+.social-input:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 3px rgba(12, 131, 31, 0.1);
+    background: var(--bg-surface);
+}
+
+.social-input-prefix-wrap {
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    background: var(--bg-input);
+    overflow: hidden;
+    transition: var(--transition);
+}
+
+.social-input-prefix-wrap:focus-within {
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 3px rgba(12, 131, 31, 0.1);
+    background: var(--bg-surface);
+}
+
+.social-input-prefix {
+    padding: 12px 0 12px 16px;
+    font-weight: 700;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.social-input--prefixed {
+    border: none;
+    box-shadow: none;
+    background: transparent;
+    padding-left: 4px;
+}
+
+.social-input--prefixed:focus {
+    box-shadow: none;
+}
+
+.social-type-pills {
+    display: flex;
+    gap: 10px;
+}
+
+.social-type-pill {
+    flex: 1;
+    padding: 10px 16px;
+    border-radius: var(--radius-full);
+    font-family: inherit;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+    border: 1px solid var(--border-color);
+    background: var(--bg-surface);
+    color: var(--text-secondary);
+}
+
+.social-type-pill:hover {
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
+}
+
+.social-type-pill.active {
+    background: var(--accent-primary);
+    color: #ffffff;
+    border-color: var(--accent-primary);
+}
+
+.social-modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 16px 24px;
+    border-top: 1px solid var(--border-color);
+}
+
+
+/* ====================================================================
+   SECTION 8: RESPONSIVE
+   ==================================================================== */
+@media (max-width: 768px) {
+    .communities-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .social-tabs {
+        gap: 0;
+    }
+
+    .social-tab {
+        font-size: 0.85rem;
+        padding: 12px 14px;
+    }
+
+    .join-result-card {
+        flex-wrap: wrap;
+    }
+
+    .join-result-actions {
+        width: 100%;
+        margin-top: 8px;
+    }
+
+    .btn-join {
+        width: 100%;
+    }
+}
