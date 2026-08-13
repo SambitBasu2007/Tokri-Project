@@ -34,8 +34,20 @@
 <html lang="en" data-theme="light">
 
 <head>
+
+
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <script>
+        window.__ENV__ = window.__ENV__ || {};
+        window.__ENV__.SUPABASE_URL = "%%SUPABASE_URL%%";
+        window.__ENV__.SUPABASE_ANON_KEY = "%%SUPABASE_ANON_KEY%%";
+    </script>
+
+
     <title>Tokri – Compare | Best Grocery Prices Across Blinkit, Zepto, Swiggy & More</title>
     <meta name="description"
         content="Compare grocery prices across Blinkit, Swiggy Instamart, Zepto, BigBasket, JioMart and more. Find the cheapest cart automatically.">
@@ -45,6 +57,9 @@
 </head>
 
 <body>
+
+
+
 
 
 
@@ -464,7 +479,7 @@
 
 
     <!-- Main JavaScript File -->
-    <script src="app.js"></script>
+    <script type="module" src="app.js"></script>
 
 </body>
 

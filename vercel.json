@@ -1,0 +1,6 @@
+{
+    "buildCommand": "sed -i 's|%%SUPABASE_URL%%|'\"$SUPABASE_URL\"'|g; s|%%SUPABASE_ANON_KEY%%|'\"$SUPABASE_ANON_KEY\"'|g' index.html checkout/checkout.html",
+    "outputDirectory": ".",
+    "installCommand": "",
+    "framework": null
+}
