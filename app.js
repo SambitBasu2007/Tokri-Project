@@ -1,5 +1,11 @@
-// Dynamic import with fallback — if Supabase CDN fails, app still works
+// Dynamic import with fallback — if Supabase CDN
+
+
+/*
+
+ fails, app still works
 let supabase = null;
+
 
 try {
   const module = await import('./shared/supabase.js');
@@ -7,6 +13,11 @@ try {
 } catch (err) {
   console.warn('[Tokri] Supabase not available — community features disabled:', err.message);
 }
+
+
+
+*/
+
 
 // ============================================================
 //  Tokri – Compare  |  Demo App Logic
