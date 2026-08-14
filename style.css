@@ -1567,6 +1567,10 @@ body {
     display: none;
   }
 
+  #authSubmitBtn {
+    display: block;
+  }
+
 
 }
 
@@ -1668,6 +1672,10 @@ body {
   .stats-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  #authSubmitBtn {
+    display: block;
+  }
 }
 
 @media (max-width: 490px) {
@@ -1681,6 +1689,10 @@ body {
 }
 
 #communityBtn {
+  display: block;
+}
+
+#authSubmitBtn {
   display: block;
 }
 
@@ -1880,7 +1892,9 @@ body {
     display: block;
   }
 
-
+  #authSubmitBtn {
+    display: block;
+  }
 
 }
 
