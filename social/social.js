@@ -413,6 +413,12 @@ document.getElementById('joinSearchInput').addEventListener('input', () => {
 // ============================================================
 async function sendJoinRequest(communityId) {
     try {
+        if (!currentUser) {
+            const { data: { user } } = await supabase.auth.getUser();
+            if (!user) { alert('Please sign in first.'); return; }
+            currentUser = user;
+        }
+
         const { error } = await supabase
             .from('join_requests')
             .insert({
@@ -472,6 +478,13 @@ async function submitCreateCommunity() {
     }
 
     try {
+        // Refresh currentUser in case they signed in after page load
+        if (!currentUser) {
+            const { data: { user } } = await supabase.auth.getUser();
+            if (!user) { alert('Please sign in first.'); return; }
+            currentUser = user;
+        }
+
         const { data, error } = await supabase
             .from('communities')
             .insert({
