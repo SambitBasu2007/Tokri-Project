@@ -2,7 +2,7 @@
 let supabase = null;
 
 try {
-  const module = await import('./shared/supabase.js');
+  const module = await import('./supabase.js');
   supabase = module.supabase;
 } catch (err) {
   console.warn('[Tokri] Supabase not available — community features disabled:', err.message);
