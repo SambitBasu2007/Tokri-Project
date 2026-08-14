@@ -117,7 +117,7 @@ function renderCommunityCard(community, members, status, pendingRequests) {
     let requestsHTML = '';
     if (isLeader && requestCount > 0) {
         requestsHTML = `<div class="community-requests"><div class="community-requests-title">🔔 ${requestCount} pending request${requestCount !== 1 ? 's' : ''}</div>` +
-            pendingRequests.map(r => `<div class="community-request-row"><span class="community-request-user">${r.user_id.slice(0, 8)}...</span><button class="btn-request-accept" onclick="acceptJoinRequest('${r.id}', '${community.id}')">Accept</button><button class="btn-request-reject" onclick="rejectJoinRequest('${r.id}', '${community.id}')">Reject</button></div>`).join('') +
+            pendingRequests.map(r => `<div class="community-request-row"><span class="community-request-user">${r.user_id.slice(0, 8)}...</span><button class="btn-request-accept" onclick="event.stopPropagation(); acceptJoinRequest('${r.id}', '${community.id}')">Accept</button><button class="btn-request-reject" onclick="event.stopPropagation(); rejectJoinRequest('${r.id}', '${community.id}')">Reject</button></div>`).join('') +
             `</div>`;
     }
 
@@ -127,7 +127,7 @@ function renderCommunityCard(community, members, status, pendingRequests) {
         const displayName = m.nickname || m.users?.full_name || 'Member';
         let actions = '';
         if (isLeader && !isLeaderRow) {
-            actions = `<button class="member-action" onclick="event.stopPropagation(); removeMember('${community.id}', '${m.user_id}')" title="Remove">✕</button><button class="member-action member-action--leader" onclick="event.stopPropagation(); transferLeadership('${community.id}', '${m.user_id}')" title="Make Leader">👑</button>`;
+            actions = `<div class="member-actions-group"><button class="member-action" onclick="event.stopPropagation(); removeMember('${community.id}', '${m.user_id}')" title="Remove">✕</button><button class="member-action member-action--leader" onclick="event.stopPropagation(); transferLeadership('${community.id}', '${m.user_id}')" title="Make Leader">👑</button></div>`;
         }
         return `<div class="community-member-row${isLeaderRow ? ' leader' : ''}"><span class="community-member-star">${isLeaderRow ? '★' : ''}</span><span class="community-member-name">${displayName}${isSelf ? ' (you)' : ''}</span>${isLeaderRow ? '<span class="community-member-role">Leader</span>' : ''}${actions}</div>`;
     }).join('');
@@ -281,13 +281,15 @@ async function searchCommunityByHandle(query) {
         const { data: communities, error } = await supabase.from('communities').select('id, handle, display_name, type, leader_id').ilike('handle', `%${query}%`).limit(20);
         if (error) throw error;
         if (!communities || communities.length === 0) { resultsContainer.innerHTML = '<div class="join-empty-hint">No communities found matching that handle</div>'; return; }
+
+        // Check membership and requests
         const { data: myMemberships } = await supabase.from('community_members').select('community_id').eq('user_id', currentUser.id);
-        const { data: myRequests } = await supabase.from('join_requests').select('community_id, status').eq('user_id', currentUser.id);
+        const { data: myRequests } = await supabase.from('join_requests').select('id, community_id, status').eq('user_id', currentUser.id);
         const memberIds = new Set((myMemberships || []).map(m => m.community_id));
-        const requestMap = new Map((myRequests || []).map(r => [r.community_id, r.status]));
+        const requestMap = new Map((myRequests || []).map(r => [r.community_id, r]));
         const atCap = userCommunityCount >= 10;
 
-        // Fetch members for all found communities in parallel
+        // Fetch members for ALL found communities (not just joined ones)
         const memberPromises = communities.map(c =>
             supabase.from('community_members').select('user_id, nickname, users(id, full_name)').eq('community_id', c.id)
         );
@@ -296,26 +298,30 @@ async function searchCommunityByHandle(query) {
         const cards = communities.map((c, i) => {
             const typeIcon = c.type === 'family' ? '👨‍👩‍👧‍👦' : '👥';
             const isMember = memberIds.has(c.id);
-            const requestStatus = requestMap.get(c.id);
+            const requestData = requestMap.get(c.id);
+            const requestStatus = requestData?.status;
             const members = memberResults[i]?.data || [];
+            const memberCount = members.length;
 
-            let actionButton;
-            if (isMember) actionButton = '<button class="btn-join" disabled>Joined</button>';
-            else if (requestStatus === 'pending') actionButton = '<button class="btn-join requested" disabled>Requested</button>';
-            else if (requestStatus === 'rejected') actionButton = '<button class="btn-join" disabled>Rejected</button>';
-            else if (atCap) actionButton = '<button class="btn-join" disabled title="You can only join 10 communities">At Limit (10)</button>';
-            else actionButton = `<button class="btn-join" onclick="sendJoinRequest('${c.id}')">Join</button>`;
-
-            // Member dropdown for joined communities
+            // FIX 1: Members dropdown for ALL communities
             let memberDropdown = '';
-            if (isMember && members.length > 0) {
+            if (memberCount > 0) {
                 const memberRows = members.map(m => {
                     const isLeader = m.user_id === c.leader_id;
                     const name = m.nickname || m.users?.full_name || 'Member';
                     return `<div class="search-member-row"><span class="search-member-star">${isLeader ? '★' : ''}</span><span class="search-member-name">${name}</span>${isLeader ? '<span class="search-member-role">Leader</span>' : ''}</div>`;
                 }).join('');
-                memberDropdown = `<div class="search-member-dropdown-wrap"><button class="search-member-dropdown-btn" onclick="event.stopPropagation(); toggleSearchMemberDropdown(this)">👥 Members (${members.length})</button><div class="search-member-dropdown"><div class="search-member-dropdown-title">Members</div>${memberRows}</div></div>`;
+                memberDropdown = `<div class="search-member-dropdown-wrap"><button class="search-member-dropdown-btn" onclick="event.stopPropagation(); toggleSearchMemberDropdown(this)">👥 ${memberCount} member${memberCount !== 1 ? 's' : ''}</button><div class="search-member-dropdown"><div class="search-member-dropdown-title">Members</div>${memberRows}</div></div>`;
+            } else {
+                memberDropdown = `<div class="search-member-dropdown-wrap"><button class="search-member-dropdown-btn" disabled>No members</button></div>`;
             }
+
+            let actionButton;
+            if (isMember) actionButton = '<button class="btn-join" disabled>Joined</button>';
+            else if (requestStatus === 'pending') actionButton = `<button class="btn-join requested" onclick="cancelJoinRequest('${requestData.id}', '${c.id}')">Cancel Request</button>`;
+            else if (requestStatus === 'rejected') actionButton = '<button class="btn-join" disabled>Rejected</button>';
+            else if (atCap) actionButton = '<button class="btn-join" disabled title="You can only join 10 communities">At Limit (10)</button>';
+            else actionButton = `<button class="btn-join" onclick="sendJoinRequest('${c.id}')">Join</button>`;
 
             return `<div class="join-result-card"><div class="join-result-icon">${typeIcon}</div><div class="join-result-info"><div class="join-result-name">${c.display_name}</div><div class="join-result-handle">@${c.handle}</div><div class="join-result-type">${c.type === 'family' ? 'Family group' : 'Friends group'}</div></div><div class="join-result-actions">${actionButton}${memberDropdown}</div></div>`;
         }).join('');
@@ -345,6 +351,18 @@ async function sendJoinRequest(communityId) {
     if (userCommunityCount >= 10) { alert('You can only join up to 10 communities.'); return; }
     try {
         if (!currentUser) { const { data: { user } } = await supabase.auth.getUser(); if (!user) { alert('Please sign in first.'); return; } currentUser = user; }
+
+        // FIX 2: Check if community has 0 members — if so, delete it as bugged
+        const { count, error: countErr } = await supabase.from('community_members').select('*', { count: 'exact', head: true }).eq('community_id', communityId);
+        if (!countErr && count === 0) {
+            // Bugged community — delete it
+            const { error: delErr } = await supabase.from('communities').delete().eq('id', communityId);
+            if (delErr) console.warn('Failed to clean bugged community:', delErr);
+            const query = getJoinSearchQuery();
+            await searchCommunityByHandle(query);
+            return;
+        }
+
         const { error } = await supabase.from('join_requests').insert({ community_id: communityId, user_id: currentUser.id, status: 'pending' });
         if (error) { if (error.code === '23505') alert('You have already requested to join this community.'); else throw error; return; }
         const query = getJoinSearchQuery();
@@ -352,6 +370,17 @@ async function sendJoinRequest(communityId) {
     } catch (err) { alert('Failed to send join request. Please try again.'); }
 }
 window.sendJoinRequest = sendJoinRequest;
+
+// FIX 3: Cancel join request
+async function cancelJoinRequest(requestId, communityId) {
+    try {
+        const { error } = await supabase.from('join_requests').delete().eq('id', requestId);
+        if (error) throw error;
+        const query = getJoinSearchQuery();
+        await searchCommunityByHandle(query);
+    } catch (err) { alert('Failed to cancel request: ' + err.message); }
+}
+window.cancelJoinRequest = cancelJoinRequest;
 
 // ============================================================
 //  CREATE COMMUNITY MODAL
