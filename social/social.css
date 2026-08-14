@@ -931,9 +931,6 @@
         align-items: center;
         gap: 10px;
         margin-top: 8px;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
     }
 
     .btn-join {
@@ -966,6 +963,10 @@
         right: 0;
         left: auto;
         min-width: 180px;
+    }
+
+    #authSubmitBtn {
+        display: block;
     }
 }
 
@@ -1010,6 +1011,10 @@
         padding: 4px 10px;
         font-size: 0.72rem;
     }
+
+    #authSubmitBtn {
+        display: block;
+    }
 }
 
 @media (max-width: 360px) {
@@ -1026,5 +1031,9 @@
         width: 34px;
         height: 34px;
         font-size: 1rem;
+    }
+
+    #authSubmitBtn {
+        display: block;
     }
 }
