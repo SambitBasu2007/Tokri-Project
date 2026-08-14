@@ -15,11 +15,11 @@ try {
 //  STATE
 // ============================================================
 let currentUser = null;
-let userCommunities = [];
 let activeTab = 'current';
 let searchDebounceTimer = null;
 let createCommunityType = 'family';
 let userCommunityCount = 0;
+let confirmCallback = null;
 
 // ============================================================
 //  AUTH
@@ -127,21 +127,68 @@ function renderCommunityCard(community, members, status, pendingRequests) {
         const displayName = m.nickname || m.users?.full_name || 'Member';
         let actions = '';
         if (isLeader && !isLeaderRow) {
-            actions = `<button class="member-action" onclick="removeMember('${community.id}', '${m.user_id}')" title="Remove">✕</button><button class="member-action member-action--leader" onclick="transferLeadership('${community.id}', '${m.user_id}')" title="Make Leader">👑</button>`;
+            actions = `<button class="member-action" onclick="event.stopPropagation(); removeMember('${community.id}', '${m.user_id}')" title="Remove">✕</button><button class="member-action member-action--leader" onclick="event.stopPropagation(); transferLeadership('${community.id}', '${m.user_id}')" title="Make Leader">👑</button>`;
         }
         return `<div class="community-member-row${isLeaderRow ? ' leader' : ''}"><span class="community-member-star">${isLeaderRow ? '★' : ''}</span><span class="community-member-name">${displayName}${isSelf ? ' (you)' : ''}</span>${isLeaderRow ? '<span class="community-member-role">Leader</span>' : ''}${actions}</div>`;
     }).join('');
 
-    const leaveBtn = `<button class="btn-leave" onclick="leaveCommunity('${community.id}')">${isLeader ? 'Leave (transfer leadership)' : 'Leave Community'}</button>`;
+    // Delete dropdown for leader only
+    const deleteDropdown = isLeader ? `
+        <div class="delete-dropdown-wrap">
+            <button class="delete-dropdown-btn" onclick="event.stopPropagation(); toggleDeleteDropdown(this)" title="More options">⋯</button>
+            <div class="delete-dropdown-menu">
+                <button class="delete-dropdown-item" onclick="event.stopPropagation(); promptDeleteCommunity('${community.id}', '${community.display_name}')">🗑️ Delete Community</button>
+            </div>
+        </div>` : '';
 
-    return `<div class="community-card" data-community-id="${community.id}"><div class="community-card-header" onclick="toggleCommunityDropdown('${community.id}')"><div class="community-card-icon">${typeIcon}</div><div class="community-card-info"><div class="community-card-name">${community.display_name}</div><div class="community-card-meta"><span class="community-card-type">${community.type}</span><span class="community-card-handle">@${community.handle}</span><span>· ${memberCount} member${memberCount !== 1 ? 's' : ''}</span>${requestCount > 0 && isLeader ? `<span class="community-card-badge">${requestCount} request${requestCount !== 1 ? 's' : ''}</span>` : ''}</span></div></div><svg class="community-card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div><div class="community-card-status${status.hasActivity ? '' : ' community-card-status--none'}">${status.text}</div><div class="community-members-dropdown" id="dropdown-${community.id}"><div class="community-members-list">${requestsHTML}${membersHTML}</div>${leaveBtn}</div></div>`;
+    return `<div class="community-card" data-community-id="${community.id}"><div class="community-card-header" onclick="toggleCommunityDropdown('${community.id}')"><div class="community-card-icon">${typeIcon}</div><div class="community-card-info"><div class="community-card-name">${community.display_name}</div><div class="community-card-meta"><span class="community-card-type">${community.type}</span><span class="community-card-handle">@${community.handle}</span><span>· ${memberCount} member${memberCount !== 1 ? 's' : ''}</span>${requestCount > 0 && isLeader ? `<span class="community-card-badge">${requestCount} request${requestCount !== 1 ? 's' : ''}</span>` : ''}</span></div></div><svg class="community-card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div><div class="community-card-status${status.hasActivity ? '' : ' community-card-status--none'}">${status.text}</div><div class="community-members-dropdown" id="dropdown-${community.id}"><div class="community-members-list">${requestsHTML}${membersHTML}</div><div class="community-actions-row"><button class="btn-leave" onclick="event.stopPropagation(); leaveCommunity('${community.id}')">${isLeader ? 'Leave (transfer leadership)' : 'Leave Community'}</button>${deleteDropdown}</div></div></div>`;
 }
 
 function toggleCommunityDropdown(communityId) {
+    closeAllDeleteDropdowns();
     const card = document.querySelector(`[data-community-id="${communityId}"]`);
     if (card) card.classList.toggle('open');
 }
 window.toggleCommunityDropdown = toggleCommunityDropdown;
+
+function toggleDeleteDropdown(btn) {
+    const menu = btn.parentElement.querySelector('.delete-dropdown-menu');
+    const willOpen = !menu.classList.contains('open');
+    closeAllDeleteDropdowns();
+    if (willOpen) menu.classList.add('open');
+}
+function closeAllDeleteDropdowns() {
+    document.querySelectorAll('.delete-dropdown-menu.open').forEach(m => m.classList.remove('open'));
+}
+window.toggleDeleteDropdown = toggleDeleteDropdown;
+
+document.addEventListener('click', (e) => {
+    if (!e.target.closest('.delete-dropdown-wrap')) closeAllDeleteDropdowns();
+});
+
+// ============================================================
+//  CONFIRMATION MODAL
+// ============================================================
+function showConfirm(title, text, onYes) {
+    confirmCallback = onYes;
+    const overlay = document.getElementById('confirmOverlay');
+    document.getElementById('confirmTitle').textContent = title;
+    document.getElementById('confirmText').textContent = text;
+    overlay.classList.add('open');
+}
+function closeConfirm() {
+    document.getElementById('confirmOverlay').classList.remove('open');
+    confirmCallback = null;
+}
+document.getElementById('confirmYes')?.addEventListener('click', () => {
+    if (confirmCallback) confirmCallback();
+    closeConfirm();
+});
+document.getElementById('confirmNo')?.addEventListener('click', closeConfirm);
+document.getElementById('confirmOverlay')?.addEventListener('click', (e) => {
+    if (e.target === document.getElementById('confirmOverlay')) closeConfirm();
+});
+window.closeConfirm = closeConfirm;
 
 // ============================================================
 //  LEADER ACTIONS
@@ -170,41 +217,56 @@ async function rejectJoinRequest(requestId, communityId) {
 window.rejectJoinRequest = rejectJoinRequest;
 
 async function removeMember(communityId, userId) {
-    if (!confirm('Remove this member from the community?')) return;
-    try {
-        const { error } = await supabase.from('community_members').delete().eq('community_id', communityId).eq('user_id', userId);
-        if (error) throw error;
-        renderCurrentCommunities();
-    } catch (err) { alert('Failed to remove member: ' + err.message); }
+    showConfirm('Remove Member', 'Remove this member from the community?', async () => {
+        try {
+            const { error } = await supabase.from('community_members').delete().eq('community_id', communityId).eq('user_id', userId);
+            if (error) throw error;
+            renderCurrentCommunities();
+        } catch (err) { alert('Failed to remove member: ' + err.message); }
+    });
 }
 window.removeMember = removeMember;
 
 async function transferLeadership(communityId, newLeaderId) {
-    if (!confirm('Transfer leadership to this member? You will no longer be the leader.')) return;
-    try {
-        const { error } = await supabase.from('communities').update({ leader_id: newLeaderId }).eq('id', communityId);
-        if (error) throw error;
-        renderCurrentCommunities();
-    } catch (err) { alert('Failed to transfer leadership: ' + err.message); }
+    showConfirm('Transfer Leadership', 'Transfer leadership to this member? You will no longer be the leader.', async () => {
+        try {
+            const { error } = await supabase.from('communities').update({ leader_id: newLeaderId }).eq('id', communityId);
+            if (error) throw error;
+            renderCurrentCommunities();
+        } catch (err) { alert('Failed to transfer leadership: ' + err.message); }
+    });
 }
 window.transferLeadership = transferLeadership;
 
 async function leaveCommunity(communityId) {
-    if (!confirm('Leave this community?')) return;
-    try {
-        const { data: community } = await supabase.from('communities').select('leader_id').eq('id', communityId).single();
-        const isLeader = community && community.leader_id === currentUser.id;
-        const { error } = await supabase.from('community_members').delete().eq('community_id', communityId).eq('user_id', currentUser.id);
-        if (error) throw error;
-        if (isLeader) {
-            const { error: rpcErr } = await supabase.rpc('reassign_random_leader', { community_id: communityId });
-            if (rpcErr) console.warn('Reassign leader RPC failed:', rpcErr);
-        }
-        await fetchUserCommunityCount();
-        renderCurrentCommunities();
-    } catch (err) { alert('Failed to leave community: ' + err.message); }
+    showConfirm('Leave Community', 'Are you sure you want to leave this community?', async () => {
+        try {
+            const { data: community } = await supabase.from('communities').select('leader_id').eq('id', communityId).single();
+            const isLeader = community && community.leader_id === currentUser.id;
+            const { error } = await supabase.from('community_members').delete().eq('community_id', communityId).eq('user_id', currentUser.id);
+            if (error) throw error;
+            if (isLeader) {
+                const { error: rpcErr } = await supabase.rpc('reassign_random_leader', { community_id: communityId });
+                if (rpcErr) console.warn('Reassign leader RPC:', rpcErr);
+            }
+            await fetchUserCommunityCount();
+            renderCurrentCommunities();
+        } catch (err) { alert('Failed to leave community: ' + err.message); }
+    });
 }
 window.leaveCommunity = leaveCommunity;
+
+async function promptDeleteCommunity(communityId, communityName) {
+    showConfirm('Delete Community', `Permanently delete "${communityName}"? This cannot be undone and the @handle will be freed.`, async () => {
+        try {
+            const { error } = await supabase.from('communities').delete().eq('id', communityId);
+            if (error) throw error;
+            await fetchUserCommunityCount();
+            renderCurrentCommunities();
+        } catch (err) { alert('Failed to delete community: ' + err.message); }
+    });
+}
+window.promptDeleteCommunity = promptDeleteCommunity;
 
 // ============================================================
 //  JOIN TAB
@@ -225,21 +287,53 @@ async function searchCommunityByHandle(query) {
         const requestMap = new Map((myRequests || []).map(r => [r.community_id, r.status]));
         const atCap = userCommunityCount >= 10;
 
-        const cards = communities.map(c => {
+        // Fetch members for all found communities in parallel
+        const memberPromises = communities.map(c =>
+            supabase.from('community_members').select('user_id, nickname, users(id, full_name)').eq('community_id', c.id)
+        );
+        const memberResults = await Promise.all(memberPromises);
+
+        const cards = communities.map((c, i) => {
             const typeIcon = c.type === 'family' ? '👨‍👩‍👧‍👦' : '👥';
             const isMember = memberIds.has(c.id);
             const requestStatus = requestMap.get(c.id);
+            const members = memberResults[i]?.data || [];
+
             let actionButton;
             if (isMember) actionButton = '<button class="btn-join" disabled>Joined</button>';
             else if (requestStatus === 'pending') actionButton = '<button class="btn-join requested" disabled>Requested</button>';
             else if (requestStatus === 'rejected') actionButton = '<button class="btn-join" disabled>Rejected</button>';
             else if (atCap) actionButton = '<button class="btn-join" disabled title="You can only join 10 communities">At Limit (10)</button>';
             else actionButton = `<button class="btn-join" onclick="sendJoinRequest('${c.id}')">Join</button>`;
-            return `<div class="join-result-card"><div class="join-result-icon">${typeIcon}</div><div class="join-result-info"><div class="join-result-name">${c.display_name}</div><div class="join-result-handle">@${c.handle}</div><div class="join-result-type">${c.type === 'family' ? 'Family group' : 'Friends group'}</div></div><div class="join-result-actions">${actionButton}</div></div>`;
+
+            // Member dropdown for joined communities
+            let memberDropdown = '';
+            if (isMember && members.length > 0) {
+                const memberRows = members.map(m => {
+                    const isLeader = m.user_id === c.leader_id;
+                    const name = m.nickname || m.users?.full_name || 'Member';
+                    return `<div class="search-member-row"><span class="search-member-star">${isLeader ? '★' : ''}</span><span class="search-member-name">${name}</span>${isLeader ? '<span class="search-member-role">Leader</span>' : ''}</div>`;
+                }).join('');
+                memberDropdown = `<div class="search-member-dropdown-wrap"><button class="search-member-dropdown-btn" onclick="event.stopPropagation(); toggleSearchMemberDropdown(this)">👥 Members (${members.length})</button><div class="search-member-dropdown"><div class="search-member-dropdown-title">Members</div>${memberRows}</div></div>`;
+            }
+
+            return `<div class="join-result-card"><div class="join-result-icon">${typeIcon}</div><div class="join-result-info"><div class="join-result-name">${c.display_name}</div><div class="join-result-handle">@${c.handle}</div><div class="join-result-type">${c.type === 'family' ? 'Family group' : 'Friends group'}</div></div><div class="join-result-actions">${actionButton}${memberDropdown}</div></div>`;
         }).join('');
         resultsContainer.innerHTML = cards;
     } catch (err) { resultsContainer.innerHTML = '<div class="join-empty-hint">Search failed. Please try again.</div>'; }
 }
+
+function toggleSearchMemberDropdown(btn) {
+    const menu = btn.parentElement.querySelector('.search-member-dropdown');
+    const willOpen = !menu.classList.contains('open');
+    document.querySelectorAll('.search-member-dropdown.open').forEach(m => m.classList.remove('open'));
+    if (willOpen) menu.classList.add('open');
+}
+window.toggleSearchMemberDropdown = toggleSearchMemberDropdown;
+
+document.addEventListener('click', (e) => {
+    if (!e.target.closest('.search-member-dropdown-wrap')) document.querySelectorAll('.search-member-dropdown.open').forEach(m => m.classList.remove('open'));
+});
 
 document.getElementById('joinSearchInput').addEventListener('input', () => {
     clearTimeout(searchDebounceTimer);
@@ -272,11 +366,7 @@ async function submitCreateCommunity() {
     if (!/^[a-z0-9_]+$/.test(handle)) { alert('Handle can only contain lowercase letters, numbers, and underscores.'); return; }
     try {
         if (!currentUser) { const { data: { user } } = await supabase.auth.getUser(); if (!user) { alert('Please sign in first.'); return; } currentUser = user; }
-        // FIX: Don't use .select().single() — the insert trigger adds the member AFTER insert,
-        // so the SELECT policy (members-only) blocks reading it back immediately.
-        const { error } = await supabase.from('communities').insert({
-            handle, display_name: name, type: createCommunityType, leader_id: currentUser.id
-        });
+        const { error } = await supabase.from('communities').insert({ handle, display_name: name, type: createCommunityType, leader_id: currentUser.id });
         if (error) { if (error.code === '23505') alert('That handle is already taken.'); else throw error; return; }
         closeCreateModal();
         await fetchUserCommunityCount();
@@ -290,7 +380,7 @@ document.getElementById('createModalCancel').addEventListener('click', closeCrea
 document.getElementById('createModalSubmit').addEventListener('click', submitCreateCommunity);
 document.querySelectorAll('.social-type-pill').forEach(pill => pill.addEventListener('click', () => { document.querySelectorAll('.social-type-pill').forEach(p => p.classList.remove('active')); pill.classList.add('active'); createCommunityType = pill.dataset.type; }));
 document.getElementById('createModalOverlay').addEventListener('click', (e) => { if (e.target === document.getElementById('createModalOverlay')) closeCreateModal(); });
-document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeCreateModal(); });
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { closeCreateModal(); closeConfirm(); } });
 window.openCreateModal = openCreateModal;
 
 // ============================================================

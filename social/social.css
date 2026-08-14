@@ -200,12 +200,12 @@
 }
 
 .community-card.open .community-members-dropdown {
-    max-height: 600px;
+    max-height: 800px;
     border-top-color: var(--border-color);
 }
 
 .community-members-list {
-    padding: 12px 24px 20px;
+    padding: 12px 24px 0;
     display: flex;
     flex-direction: column;
     gap: 8px;
@@ -331,10 +331,15 @@
     background: rgba(245, 158, 11, 0.05);
 }
 
-/* Leave button */
+/* Action buttons row (Leave + Delete dropdown) */
+.community-actions-row {
+    display: flex;
+    gap: 10px;
+    padding: 0 24px 16px;
+}
+
 .btn-leave {
-    width: calc(100% - 48px);
-    margin: 0 24px 16px;
+    flex: 1;
     padding: 10px;
     border-radius: var(--radius-sm);
     font-family: inherit;
@@ -349,6 +354,159 @@
 
 .btn-leave:hover {
     background: #fecaca;
+}
+
+/* Delete dropdown */
+.delete-dropdown-wrap {
+    position: relative;
+    flex-shrink: 0;
+}
+
+.delete-dropdown-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-color);
+    background: var(--bg-input);
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.delete-dropdown-btn:hover {
+    border-color: #ef4444;
+    color: #ef4444;
+    background: #fee2e2;
+}
+
+.delete-dropdown-menu {
+    display: none;
+    position: absolute;
+    bottom: calc(100% + 6px);
+    right: 0;
+    min-width: 180px;
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    z-index: 100;
+    overflow: hidden;
+}
+
+.delete-dropdown-menu.open {
+    display: block;
+}
+
+.delete-dropdown-item {
+    width: 100%;
+    padding: 12px 16px;
+    border: none;
+    background: none;
+    font-family: inherit;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+    text-align: left;
+    color: #dc2626;
+}
+
+.delete-dropdown-item:hover {
+    background: #fee2e2;
+}
+
+/* Confirmation modal */
+.confirm-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 4000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+
+.confirm-overlay.open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.confirm-box {
+    background: var(--bg-surface);
+    border-radius: 16px;
+    width: 100%;
+    max-width: 380px;
+    padding: 28px;
+    text-align: center;
+    box-shadow: var(--shadow-lg);
+    transform: scale(0.95);
+    transition: transform 0.2s ease;
+}
+
+.confirm-overlay.open .confirm-box {
+    transform: scale(1);
+}
+
+.confirm-title {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+}
+
+.confirm-text {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 24px;
+    line-height: 1.5;
+}
+
+.confirm-buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+.btn-confirm-yes {
+    padding: 10px 24px;
+    border-radius: var(--radius-sm);
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+    border: none;
+    background: #dc2626;
+    color: #ffffff;
+}
+
+.btn-confirm-yes:hover {
+    background: #b91c1c;
+}
+
+.btn-confirm-no {
+    padding: 10px 24px;
+    border-radius: var(--radius-sm);
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+    border: 1px solid var(--border-color);
+    background: var(--bg-surface);
+    color: var(--text-secondary);
+}
+
+.btn-confirm-no:hover {
+    background: var(--bg-input);
 }
 
 .join-search-wrap {
@@ -431,6 +589,93 @@
 
 .join-result-actions {
     flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: flex-end;
+}
+
+/* Search result member dropdown */
+.search-member-dropdown-wrap {
+    position: relative;
+}
+
+.search-member-dropdown-btn {
+    background: none;
+    border: 1px solid var(--border-color);
+    padding: 6px 14px;
+    border-radius: var(--radius-sm);
+    font-family: inherit;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.search-member-dropdown-btn:hover {
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
+}
+
+.search-member-dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    min-width: 200px;
+    max-width: 260px;
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    z-index: 100;
+    overflow: hidden;
+    padding: 12px;
+}
+
+.search-member-dropdown.open {
+    display: block;
+}
+
+.search-member-dropdown-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+}
+
+.search-member-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 0;
+    font-size: 0.85rem;
+    color: var(--text-primary);
+    font-weight: 600;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.search-member-row:last-child {
+    border-bottom: none;
+}
+
+.search-member-star {
+    color: var(--accent-primary);
+    font-size: 0.75rem;
+}
+
+.search-member-name {
+    flex: 1;
+}
+
+.search-member-role {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    font-weight: 700;
+    text-transform: uppercase;
 }
 
 .btn-join {
@@ -658,9 +903,26 @@
     .join-result-actions {
         width: 100%;
         margin-top: 8px;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
     }
 
     .btn-join {
+        width: auto;
+    }
+
+    .community-actions-row {
+        flex-direction: column;
+    }
+
+    .delete-dropdown-wrap {
+        width: 100%;
+    }
+
+    .delete-dropdown-menu {
+        right: auto;
+        left: 0;
         width: 100%;
     }
 }
