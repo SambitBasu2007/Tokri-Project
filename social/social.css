@@ -988,6 +988,10 @@
     #createCommunityBtn {
         display: block;
     }
+
+    #saveNicknameBtn {
+        display: block;
+    }
 }
 
 @media (max-width: 480px) {
@@ -1039,6 +1043,10 @@
     #createCommunityBtn {
         display: block;
     }
+
+    #saveNicknameBtn {
+        display: block;
+    }
 }
 
 @media (max-width: 360px) {
@@ -1062,6 +1070,10 @@
     }
 
     #createCommunityBtn {
+        display: block;
+    }
+
+    #saveNicknameBtn {
         display: block;
     }
 }
