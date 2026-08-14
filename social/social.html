@@ -16,11 +16,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <script>
-        window.__ENV__ = window.__ENV__ || {};
-        window.__ENV__.SUPABASE_URL = "%%SUPABASE_URL%%";
-        window.__ENV__.SUPABASE_ANON_KEY = "%%SUPABASE_ANON_KEY%%";
-    </script>
 
     <title>Social | Tokri – Communities</title>
     <meta name="description"
@@ -63,7 +58,7 @@
             <nav class="main-nav">
                 <a href="../index.html" class="nav-link">Home</a>
                 <a href="../index.html#compare" class="nav-link">Compare</a>
-                <a href="social.html" class="nav-link active">Social</a>
+                <a href="./social.html" class="nav-link active">Social</a>
             </nav>
 
             <div class="header-actions">
@@ -207,6 +202,55 @@
         </div>
     </div>
 
+
+
+
+    <!-- ====================================================================
+       COMPONENT 10: PROFILE SIDEBAR (mirrors cart panel mechanics)
+       Slide-in drawer for user profile, settings, and community entry.
+       ==================================================================== -->
+    <aside class="profile-sidebar" id="profileSidebar">
+        <div class="profile-sidebar-header">
+            <h3 class="profile-sidebar-title">👤 Profile</h3>
+            <button class="profile-close-btn" id="profileClose">&times;</button>
+        </div>
+        <div class="profile-sidebar-body" id="profileSidebarBody">
+            <!-- Auth Section — shows sign-in form or user info -->
+            <div class="profile-auth-section" id="profileAuthSection">
+                <div class="profile-auth-loading">Checking session…</div>
+            </div>
+            <!-- Community Summary Box — populated by JS -->
+            <div class="community-summary-box" id="communitySummaryBox">
+                <div class="community-summary-loading">Loading communities…</div>
+            </div>
+            <!-- Additional profile menu items -->
+            <div class="profile-menu">
+                <a href="#" class="profile-menu-item">
+                    <span class="profile-menu-icon">⚙️</span>
+                    <span class="profile-menu-label">Settings</span>
+                </a>
+                <a href="#" class="profile-menu-item">
+                    <span class="profile-menu-icon">📦</span>
+                    <span class="profile-menu-label">Order History</span>
+                </a>
+                <a href="#" class="profile-menu-item">
+                    <span class="profile-menu-icon">❓</span>
+                    <span class="profile-menu-label">Help & Support</span>
+                </a>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Dark Background Overlay when Profile Sidebar is Open -->
+    <div class="profile-overlay" id="profileOverlay"></div>
+
+
+
+
+
+
+
+
     <!-- ====================================================================
        COMPONENT 8: FOOTER
        Reuses exact same markup as index.html.
@@ -258,7 +302,23 @@
         </div>
     </footer>
 
+
+
+
+
+
+
+
+
     <script type="module" src="./social.js"></script>
+
+
+
+
+
+
+
+
 </body>
 
 </html>
