@@ -20,7 +20,7 @@ let supabase = null;
 
 // Load Supabase in background — never block script execution
 setTimeout(() => {
-    import('../shared/supabase.js')
+    import('../supabase.js')
         .then(module => { supabase = module.supabase; })
         .catch(err => { console.warn('[Social] Supabase not available:', err.message); });
 }, 0);
