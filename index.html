@@ -41,12 +41,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-    <script>
-        window.__ENV__ = window.__ENV__ || {};
-        window.__ENV__.SUPABASE_URL = "%%SUPABASE_URL%%";
-        window.__ENV__.SUPABASE_ANON_KEY = "%%SUPABASE_ANON_KEY%%";
-    </script>
-
 
     <title>Tokri – Compare | Best Grocery Prices Across Blinkit, Zepto, Swiggy & More</title>
     <meta name="description"
@@ -351,6 +345,10 @@
             <button class="profile-close-btn" id="profileClose">&times;</button>
         </div>
         <div class="profile-sidebar-body" id="profileSidebarBody">
+            <!-- Auth Section — shows sign-in form or user info -->
+            <div class="profile-auth-section" id="profileAuthSection">
+                <div class="profile-auth-loading">Checking session…</div>
+            </div>
             <!-- Community Summary Box — populated by JS -->
             <div class="community-summary-box" id="communitySummaryBox">
                 <div class="community-summary-loading">Loading communities…</div>

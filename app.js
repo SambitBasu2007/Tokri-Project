@@ -1,11 +1,5 @@
-// Dynamic import with fallback — if Supabase CDN
-
-
-/*
-
- fails, app still works
+// Dynamic import with fallback — if Supabase CDN fails, app still works
 let supabase = null;
-
 
 try {
   const module = await import('./shared/supabase.js');
@@ -13,11 +7,6 @@ try {
 } catch (err) {
   console.warn('[Tokri] Supabase not available — community features disabled:', err.message);
 }
-
-
-
-*/
-
 
 // ============================================================
 //  Tokri – Compare  |  Demo App Logic
@@ -1055,6 +1044,7 @@ filterProducts();
 function openProfileSidebar() {
   document.getElementById('profileSidebar').classList.add('open');
   document.getElementById('profileOverlay').classList.add('open');
+  renderAuthSection();
   renderCommunitySummaryBox();
 }
 
@@ -1073,32 +1063,164 @@ document.getElementById('profileOverlay').addEventListener('click', closeProfile
  * Queries community_members joined to communities for the current user,
  * renders up to 10 mini community chips, and wires click to social.html.
  */
+// ============================================================
+//  SECTION 19: AUTH SECTION (Sign In / Sign Up / User Info)
+// ============================================================
+let authMode = 'signin';
+
+async function renderAuthSection() {
+  const section = document.getElementById('profileAuthSection');
+  if (!section) return;
+
+  if (!supabase) {
+    section.innerHTML = '<div class="profile-auth-loading">Auth service unavailable</div>';
+    return;
+  }
+
+  const { data: { user } } = await supabase.auth.getUser();
+
+  if (user) {
+    const initial = user.email ? user.email[0].toUpperCase() : '?';
+    section.innerHTML = `
+      <div class="profile-auth-user">
+        <div class="profile-auth-avatar">${initial}</div>
+        <div class="profile-auth-info">
+          <div class="profile-auth-email">${user.email}</div>
+          <div class="profile-auth-status">● Signed in</div>
+        </div>
+      </div>
+      <button class="btn-signout" id="signOutBtn" type="button">Sign Out</button>
+    `;
+    document.getElementById('signOutBtn').addEventListener('click', handleSignOut);
+  } else {
+    const isSignUp = authMode === 'signup';
+    section.innerHTML = `
+      <div class="profile-auth-form">
+        <div class="profile-auth-title">${isSignUp ? 'Create Account' : 'Sign In'}</div>
+        <input type="email" class="profile-auth-input" id="authEmail" placeholder="Email address" autocomplete="email">
+        <input type="password" class="profile-auth-input" id="authPassword" placeholder="Password" autocomplete="${isSignUp ? 'new-password' : 'current-password'}">
+        <div class="profile-auth-error" id="authError"></div>
+        <div class="profile-auth-success" id="authSuccess"></div>
+        <button class="btn btn-primary btn-block" id="authSubmitBtn" type="button">${isSignUp ? 'Create Account' : 'Sign In'}</button>
+        <div class="profile-auth-toggle">
+          ${isSignUp ? 'Already have an account? <button type="button" id="authToggleBtn">Sign in</button>' : 'New here? <button type="button" id="authToggleBtn">Create account</button>'}
+        </div>
+      </div>
+    `;
+    document.getElementById('authSubmitBtn').addEventListener('click', isSignUp ? handleSignUp : handleSignIn);
+    document.getElementById('authToggleBtn').addEventListener('click', toggleAuthMode);
+  }
+}
+
+function toggleAuthMode() {
+  authMode = authMode === 'signin' ? 'signup' : 'signin';
+  renderAuthSection();
+}
+
+async function handleSignIn() {
+  const email = document.getElementById('authEmail').value.trim();
+  const password = document.getElementById('authPassword').value;
+  const errorEl = document.getElementById('authError');
+  const successEl = document.getElementById('authSuccess');
+  const btn = document.getElementById('authSubmitBtn');
+
+  errorEl.textContent = '';
+  successEl.textContent = '';
+
+  if (!email || !password) {
+    errorEl.textContent = 'Please enter both email and password.';
+    return;
+  }
+
+  btn.textContent = 'Signing in…';
+  btn.disabled = true;
+
+  try {
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    if (error) throw error;
+    successEl.textContent = 'Signed in successfully!';
+    setTimeout(() => { renderAuthSection(); renderCommunitySummaryBox(); }, 600);
+  } catch (err) {
+    errorEl.textContent = err.message || 'Sign in failed. Please try again.';
+    btn.textContent = 'Sign In';
+    btn.disabled = false;
+  }
+}
+
+async function handleSignUp() {
+  const email = document.getElementById('authEmail').value.trim();
+  const password = document.getElementById('authPassword').value;
+  const errorEl = document.getElementById('authError');
+  const successEl = document.getElementById('authSuccess');
+  const btn = document.getElementById('authSubmitBtn');
+
+  errorEl.textContent = '';
+  successEl.textContent = '';
+
+  if (!email || !password) {
+    errorEl.textContent = 'Please enter both email and password.';
+    return;
+  }
+  if (password.length < 6) {
+    errorEl.textContent = 'Password must be at least 6 characters.';
+    return;
+  }
+
+  btn.textContent = 'Creating account…';
+  btn.disabled = true;
+
+  try {
+    const { error } = await supabase.auth.signUp({
+      email, password,
+      options: { emailRedirectTo: `${window.location.origin}/index.html` }
+    });
+    if (error) throw error;
+    successEl.textContent = 'Account created! You can now sign in.';
+    setTimeout(() => { authMode = 'signin'; renderAuthSection(); }, 2000);
+  } catch (err) {
+    errorEl.textContent = err.message || 'Sign up failed. Please try again.';
+    btn.textContent = 'Create Account';
+    btn.disabled = false;
+  }
+}
+
+async function handleSignOut() {
+  try {
+    const { error } = await supabase.auth.signOut();
+    if (error) throw error;
+    renderAuthSection();
+    renderCommunitySummaryBox();
+  } catch (err) {
+    console.error('Sign out failed:', err);
+  }
+}
+
+// ============================================================
+//  SECTION 20: COMMUNITY SUMMARY BOX
+// ============================================================
 async function renderCommunitySummaryBox() {
   const box = document.getElementById('communitySummaryBox');
   if (!box) return;
 
-  // If Supabase failed to load, show sign-in prompt
   if (!supabase) {
     box.innerHTML = `
       <div class="community-summary-title">Your Communities</div>
       <div class="community-summary-empty">
-        <a href="./social/social.html" style="color:#0c831f;font-weight:700;text-decoration:none;">Sign in</a> to see your communities
+        <a href="social/social.html" style="color:#0c831f;font-weight:700;text-decoration:none;">Sign in</a> to see your communities
       </div>
     `;
-    box.onclick = () => { window.location.href = './social/social.html'; };
+    box.onclick = () => { window.location.href = 'social/social.html'; };
     return;
   }
 
-  // Check if user is logged in
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) {
     box.innerHTML = `
       <div class="community-summary-title">Your Communities</div>
       <div class="community-summary-empty">
-        <a href="./social/social.html" style="color:#0c831f;font-weight:700;text-decoration:none;">Sign in</a> to see your communities
+        <a href="#" onclick="openProfileSidebar(); return false;" style="color:#0c831f;font-weight:700;text-decoration:none;">Sign in</a> to see your communities
       </div>
     `;
-    box.addEventListener('click', () => { window.location.href = './social/social.html'; });
     return;
   }
 
@@ -1116,7 +1238,7 @@ async function renderCommunitySummaryBox() {
     if (!data || data.length === 0) {
       box.innerHTML = `
         <div class="community-summary-title">Your Communities</div>
-        <div class="community-summary-empty">No communities yet. <a href="./social/social.html" style="color:#0c831f;font-weight:700;text-decoration:none;">Join or create one</a></div>
+        <div class="community-summary-empty">No communities yet. <a href="social/social.html" style="color:#0c831f;font-weight:700;text-decoration:none;">Join or create one</a></div>
       `;
     } else {
       const chips = data.map(row => {
@@ -1125,9 +1247,7 @@ async function renderCommunitySummaryBox() {
         return `<span class="community-chip">${typeIcon} ${c.display_name}</span>`;
       }).join('');
 
-      const moreText = data.length >= 10
-        ? '<div class="community-chip-more">+ more on Social page</div>'
-        : '';
+      const moreText = data.length >= 10 ? '<div class="community-chip-more">+ more on Social page</div>' : '';
 
       box.innerHTML = `
         <div class="community-summary-title">Your Communities</div>
@@ -1135,16 +1255,14 @@ async function renderCommunitySummaryBox() {
         ${moreText}
       `;
     }
-
-    // Wire entire box click to social.html
-    box.onclick = () => { window.location.href = './social/social.html'; };
+    box.onclick = () => { window.location.href = 'social/social.html'; };
 
   } catch (err) {
     console.error('Failed to load communities:', err);
     box.innerHTML = `
       <div class="community-summary-title">Your Communities</div>
-      <div class="community-summary-empty">Unable to load. <a href="./social/social.html" style="color:#0c831f;font-weight:700;text-decoration:none;">Go to Social</a></div>
+      <div class="community-summary-empty">Unable to load. <a href="social/social.html" style="color:#0c831f;font-weight:700;text-decoration:none;">Go to Social</a></div>
     `;
-    box.onclick = () => { window.location.href = './social/social.html'; };
+    box.onclick = () => { window.location.href = 'social/social.html'; };
   }
 }
