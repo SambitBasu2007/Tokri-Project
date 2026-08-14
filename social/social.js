@@ -80,7 +80,7 @@ async function renderCurrentCommunities() {
         const cards = await Promise.all(memberships.map(async (m) => {
             const c = m.communities;
             const { data: members } = await supabase.from('community_members').select(`user_id, nickname, users(id, full_name)`).eq('community_id', c.id);
-            const { data: requests } = await supabase.from('join_requests').select('id, user_id, status').eq('community_id', c.id).eq('status', 'pending');
+            const { data: requests } = await supabase.from('join_requests').select('id, user_id, status, users:user_id(full_name)').eq('community_id', c.id).eq('status', 'pending');
             let lastOrder = null;
             try {
                 const { data: orders } = await supabase.from('order_events').select(`ordered_by, created_at, users:ordered_by(full_name)`).eq('community_id', c.id).order('created_at', { ascending: false }).limit(1);
@@ -117,7 +117,7 @@ function renderCommunityCard(community, members, status, pendingRequests) {
     let requestsHTML = '';
     if (isLeader && requestCount > 0) {
         requestsHTML = `<div class="community-requests"><div class="community-requests-title">🔔 ${requestCount} pending request${requestCount !== 1 ? 's' : ''}</div>` +
-            pendingRequests.map(r => `<div class="community-request-row"><span class="community-request-user">${r.user_id.slice(0, 8)}...</span><button class="btn-request-accept" onclick="event.stopPropagation(); acceptJoinRequest('${r.id}', '${community.id}')">Accept</button><button class="btn-request-reject" onclick="event.stopPropagation(); rejectJoinRequest('${r.id}', '${community.id}')">Reject</button></div>`).join('') +
+            pendingRequests.map(r => { const reqName = r.users?.full_name || r.user_id.slice(0, 8); return `<div class="community-request-row"><span class="community-request-user">${reqName}</span><button class="btn-request-accept" onclick="event.stopPropagation(); acceptJoinRequest('${r.id}', '${community.id}')">Accept</button><button class="btn-request-reject" onclick="event.stopPropagation(); rejectJoinRequest('${r.id}', '${community.id}')">Reject</button></div>`; }).join('') +
             `</div>`;
     }
 
@@ -312,6 +312,8 @@ async function searchCommunityByHandle(query) {
                     return `<div class="search-member-row"><span class="search-member-star">${isLeader ? '★' : ''}</span><span class="search-member-name">${name}</span>${isLeader ? '<span class="search-member-role">Leader</span>' : ''}</div>`;
                 }).join('');
                 memberDropdown = `<div class="search-member-dropdown-wrap"><button class="search-member-dropdown-btn" onclick="event.stopPropagation(); toggleSearchMemberDropdown(this)">👥 ${memberCount} member${memberCount !== 1 ? 's' : ''}</button><div class="search-member-dropdown"><div class="search-member-dropdown-title">Members</div>${memberRows}</div></div>`;
+            } else if (memberResults[i]?.error) {
+                memberDropdown = `<div class="search-member-dropdown-wrap"><button class="search-member-dropdown-btn" disabled>Members hidden</button></div>`;
             } else {
                 memberDropdown = `<div class="search-member-dropdown-wrap"><button class="search-member-dropdown-btn" disabled>No members</button></div>`;
             }
