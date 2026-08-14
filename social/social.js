@@ -15,6 +15,7 @@ try {
 //  STATE
 // ============================================================
 let currentUser = null;
+let userNickname = '';
 let activeTab = 'current';
 let searchDebounceTimer = null;
 let createCommunityType = 'family';
@@ -29,8 +30,15 @@ async function initAuth() {
     const { data: { user }, error } = await supabase.auth.getUser();
     if (error || !user) { showAuthRequired(); return false; }
     currentUser = user;
+    await fetchNickname();
     await fetchUserCommunityCount();
     return true;
+}
+
+async function fetchNickname() {
+    if (!currentUser || !supabase) return;
+    const { data, error } = await supabase.from('users').select('full_name').eq('id', currentUser.id).single();
+    if (!error && data?.full_name) userNickname = data.full_name;
 }
 
 async function fetchUserCommunityCount() {
@@ -124,12 +132,13 @@ function renderCommunityCard(community, members, status, pendingRequests) {
     const membersHTML = members.map(m => {
         const isLeaderRow = m.user_id === community.leader_id;
         const isSelf = m.user_id === currentUser.id;
-        const displayName = m.nickname || m.users?.full_name || 'Member';
+        const name = m.users?.full_name || m.nickname || 'Member';
+        const displayName = isSelf ? `${name} (you)` : name;
         let actions = '';
         if (isLeader && !isLeaderRow) {
             actions = `<div class="member-actions-group"><button class="member-action" onclick="event.stopPropagation(); removeMember('${community.id}', '${m.user_id}')" title="Remove">✕</button><button class="member-action member-action--leader" onclick="event.stopPropagation(); transferLeadership('${community.id}', '${m.user_id}')" title="Make Leader">👑</button></div>`;
         }
-        return `<div class="community-member-row${isLeaderRow ? ' leader' : ''}"><span class="community-member-star">${isLeaderRow ? '★' : ''}</span><span class="community-member-name">${displayName}${isSelf ? ' (you)' : ''}</span>${isLeaderRow ? '<span class="community-member-role">Leader</span>' : ''}${actions}</div>`;
+        return `<div class="community-member-row${isLeaderRow ? ' leader' : ''}"><span class="community-member-star">${isLeaderRow ? '★' : ''}</span><span class="community-member-name">${displayName}</span>${isLeaderRow ? '<span class="community-member-role">Leader</span>' : ''}${actions}</div>`;
     }).join('');
 
     // Delete dropdown for leader only
@@ -243,8 +252,11 @@ async function leaveCommunity(communityId) {
         try {
             const { data: community } = await supabase.from('communities').select('leader_id').eq('id', communityId).single();
             const isLeader = community && community.leader_id === currentUser.id;
+            // Delete membership
             const { error } = await supabase.from('community_members').delete().eq('community_id', communityId).eq('user_id', currentUser.id);
             if (error) throw error;
+            // Also delete any join_requests for this user+community (fixes stale request bug)
+            await supabase.from('join_requests').delete().eq('community_id', communityId).eq('user_id', currentUser.id);
             if (isLeader) {
                 const { error: rpcErr } = await supabase.rpc('reassign_random_leader', { community_id: communityId });
                 if (rpcErr) console.warn('Reassign leader RPC:', rpcErr);
@@ -308,8 +320,10 @@ async function searchCommunityByHandle(query) {
             if (memberCount > 0) {
                 const memberRows = members.map(m => {
                     const isLeader = m.user_id === c.leader_id;
-                    const name = m.nickname || m.users?.full_name || 'Member';
-                    return `<div class="search-member-row"><span class="search-member-star">${isLeader ? '★' : ''}</span><span class="search-member-name">${name}</span>${isLeader ? '<span class="search-member-role">Leader</span>' : ''}</div>`;
+                    const isSelf = m.user_id === currentUser.id;
+                    const name = m.users?.full_name || m.nickname || 'Member';
+                    const displayName = isSelf ? `${name} (you)` : name;
+                    return `<div class="search-member-row"><span class="search-member-star">${isLeader ? '★' : ''}</span><span class="search-member-name">${displayName}</span>${isLeader ? '<span class="search-member-role">Leader</span>' : ''}</div>`;
                 }).join('');
                 memberDropdown = `<div class="search-member-dropdown-wrap"><button class="search-member-dropdown-btn" onclick="event.stopPropagation(); toggleSearchMemberDropdown(this)">👥 ${memberCount} member${memberCount !== 1 ? 's' : ''}</button><div class="search-member-dropdown"><div class="search-member-dropdown-title">Members</div>${memberRows}</div></div>`;
             } else if (memberResults[i]?.error) {
@@ -354,16 +368,18 @@ async function sendJoinRequest(communityId) {
     try {
         if (!currentUser) { const { data: { user } } = await supabase.auth.getUser(); if (!user) { alert('Please sign in first.'); return; } currentUser = user; }
 
-        // FIX 2: Check if community has 0 members — if so, delete it as bugged
+        // Check if community has 0 members — if so, delete it as bugged
         const { count, error: countErr } = await supabase.from('community_members').select('*', { count: 'exact', head: true }).eq('community_id', communityId);
         if (!countErr && count === 0) {
-            // Bugged community — delete it
             const { error: delErr } = await supabase.from('communities').delete().eq('id', communityId);
             if (delErr) console.warn('Failed to clean bugged community:', delErr);
             const query = getJoinSearchQuery();
             await searchCommunityByHandle(query);
             return;
         }
+
+        // Delete any old rejected/accepted request first (allows re-requesting)
+        await supabase.from('join_requests').delete().eq('community_id', communityId).eq('user_id', currentUser.id);
 
         const { error } = await supabase.from('join_requests').insert({ community_id: communityId, user_id: currentUser.id, status: 'pending' });
         if (error) { if (error.code === '23505') alert('You have already requested to join this community.'); else throw error; return; }
@@ -458,8 +474,10 @@ async function renderAuthSection() {
     const { data: { user } } = await supabase.auth.getUser();
     if (user) {
         const initial = user.email ? user.email[0].toUpperCase() : '?';
-        section.innerHTML = `<div class="profile-auth-user"><div class="profile-auth-avatar">${initial}</div><div class="profile-auth-info"><div class="profile-auth-email">${user.email}</div><div class="profile-auth-status">● Signed in</div></div></div><button class="btn-signout" id="signOutBtn" type="button">Sign Out</button>`;
+        const displayName = userNickname || user.email.split('@')[0];
+        section.innerHTML = `<div class="profile-auth-user"><div class="profile-auth-avatar">${initial}</div><div class="profile-auth-info"><div class="profile-auth-email">${user.email}</div><div class="profile-auth-status">● Signed in as ${displayName}</div></div></div><div class="profile-nickname-section"><label class="profile-nickname-label">Your Nickname</label><input type="text" class="profile-auth-input" id="nicknameInput" value="${displayName}" placeholder="Enter your nickname" maxlength="30"><button class="btn btn-primary btn-block" id="saveNicknameBtn" type="button">Save Nickname</button><div class="profile-auth-error" id="nicknameError"></div></div><button class="btn-signout" id="signOutBtn" type="button">Sign Out</button>`;
         document.getElementById('signOutBtn').addEventListener('click', handleSignOut);
+        document.getElementById('saveNicknameBtn').addEventListener('click', saveNickname);
     } else {
         const isSignUp = authMode === 'signup';
         section.innerHTML = `<div class="profile-auth-form"><div class="profile-auth-title">${isSignUp ? 'Create Account' : 'Sign In'}</div><input type="email" class="profile-auth-input" id="authEmail" placeholder="Email address" autocomplete="email"><input type="password" class="profile-auth-input" id="authPassword" placeholder="Password" autocomplete="${isSignUp ? 'new-password' : 'current-password'}"><div class="profile-auth-error" id="authError"></div><div class="profile-auth-success" id="authSuccess"></div><button class="btn btn-primary btn-block" id="authSubmitBtn" type="button">${isSignUp ? 'Create Account' : 'Sign In'}</button><div class="profile-auth-toggle">${isSignUp ? 'Already have an account? <button type="button" id="authToggleBtn">Sign in</button>' : 'New here? <button type="button" id="authToggleBtn">Create account</button>'}</div></div>`;
@@ -467,6 +485,23 @@ async function renderAuthSection() {
         document.getElementById('authToggleBtn').addEventListener('click', toggleAuthMode);
     }
 }
+async function saveNickname() {
+    const input = document.getElementById('nicknameInput');
+    const errorEl = document.getElementById('nicknameError');
+    const btn = document.getElementById('saveNicknameBtn');
+    const name = input.value.trim();
+    if (!name) { errorEl.textContent = 'Nickname cannot be empty.'; return; }
+    errorEl.textContent = '';
+    btn.textContent = 'Saving…'; btn.disabled = true;
+    try {
+        const { error } = await supabase.from('users').update({ full_name: name }).eq('id', currentUser.id);
+        if (error) throw error;
+        userNickname = name;
+        btn.textContent = 'Saved!';
+        setTimeout(() => { btn.textContent = 'Save Nickname'; btn.disabled = false; }, 1200);
+    } catch (err) { errorEl.textContent = err.message || 'Failed to save.'; btn.textContent = 'Save Nickname'; btn.disabled = false; }
+}
+
 function toggleAuthMode() { authMode = authMode === 'signin' ? 'signup' : 'signin'; renderAuthSection(); }
 async function handleSignIn() {
     const email = document.getElementById('authEmail').value.trim();
