@@ -494,7 +494,7 @@ async function submitCreateCommunity() {
                 leader_id: currentUser.id
             })
             .select()
-            .single();
+
 
         if (error) {
             if (error.code === '23505') {
