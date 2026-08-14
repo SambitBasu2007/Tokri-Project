@@ -335,7 +335,7 @@ async function searchCommunityByHandle(query) {
             let actionButton;
             if (isMember) actionButton = '<button class="btn-join" disabled>Joined</button>';
             else if (requestStatus === 'pending') actionButton = `<button class="btn-join requested" onclick="cancelJoinRequest('${requestData.id}', '${c.id}')">Cancel Request</button>`;
-            else if (requestStatus === 'rejected') actionButton = '<button class="btn-join" disabled>Rejected</button>';
+            else if (requestStatus === 'rejected') actionButton = `<button class="btn-join" onclick="sendJoinRequest('${c.id}')">Join</button>`;
             else if (atCap) actionButton = '<button class="btn-join" disabled title="You can only join 10 communities">At Limit (10)</button>';
             else actionButton = `<button class="btn-join" onclick="sendJoinRequest('${c.id}')">Join</button>`;
 
