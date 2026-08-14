@@ -16,14 +16,26 @@
 // ============================================================
 //  SECTION 1: SUPABASE CLIENT IMPORT (with fallback)
 // ============================================================
+// let supabase = null;
+
+// // Load Supabase in background — never block script execution
+// setTimeout(() => {
+//     import('../shared/supabase.js')
+//         .then(module => { supabase = module.supabase; })
+//         .catch(err => { console.warn('[Social] Supabase not available:', err.message); });
+// }, 0);
+
+
+
 let supabase = null;
 
-// Load Supabase in background — never block script execution
-setTimeout(() => {
-    import('../supabase.js')
-        .then(module => { supabase = module.supabase; })
-        .catch(err => { console.warn('[Social] Supabase not available:', err.message); });
-}, 0);
+try {
+    const module = await import('../shared/supabase.js');
+    supabase = module.supabase;
+} catch (err) {
+    console.warn('[Social] Supabase not available:', err.message);
+}
+
 
 
 
