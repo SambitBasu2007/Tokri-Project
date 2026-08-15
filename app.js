@@ -1363,3 +1363,130 @@ async function renderCommunitySummaryBox() {
   window.addEventListener('resize', onScroll);
   updateSavings();
 })();
+
+
+
+
+
+
+
+// ============================================================
+//  SECTION 21: SHARED COMMUNITY CART INTEGRATION
+// ============================================================
+
+let communityCartModule = null;
+let userCommunities = [];
+
+(async function initCommunityCart() {
+  try {
+    const mod = await import('./shared/community-cart.js');
+    communityCartModule = mod;
+    setupCommunityCartUI();
+    await populateCommunityDropdown();
+  } catch (err) {
+    console.warn('[App] Community cart module not loaded:', err.message);
+  }
+})();
+
+function setupCommunityCartUI() {
+  const btn = document.getElementById('communityCartBtn');
+  const closeBtn = document.getElementById('sharedCartClose');
+  const overlay = document.getElementById('sharedCartOverlay');
+  const panel = document.getElementById('sharedCartPanel');
+  const dropdown = document.getElementById('sharedCartCommunityDropdown');
+
+  if (!btn || !panel) return;
+
+  btn.addEventListener('click', () => {
+    panel.classList.add('open');
+    overlay.classList.add('open');
+  });
+
+  if (closeBtn) closeBtn.addEventListener('click', closeSharedCart);
+  if (overlay) overlay.addEventListener('click', closeSharedCart);
+
+  if (dropdown) {
+    dropdown.addEventListener('change', async (e) => {
+      const communityId = e.target.value;
+      if (communityId && communityCartModule) {
+        await communityCartModule.loadSharedCart(communityId, 'sharedCartBody');
+      }
+    });
+  }
+}
+
+function closeSharedCart() {
+  document.getElementById('sharedCartPanel')?.classList.remove('open');
+  document.getElementById('sharedCartOverlay')?.classList.remove('open');
+}
+
+async function populateCommunityDropdown() {
+  const dropdown = document.getElementById('sharedCartCommunityDropdown');
+  if (!dropdown || !supabase) return;
+
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) {
+    dropdown.innerHTML = '<option value="">Sign in to see communities</option>';
+    return;
+  }
+
+  const { data, error } = await supabase
+    .from('community_members')
+    .select('communities(id, display_name)')
+    .eq('user_id', user.id);
+
+  if (error || !data || data.length === 0) {
+    dropdown.innerHTML = '<option value="">No communities yet</option>';
+    return;
+  }
+
+  userCommunities = data;
+  dropdown.innerHTML = data.map(row =>
+    `<option value="${row.communities.id}">${row.communities.display_name}</option>`
+  ).join('');
+
+  // Auto-load first community
+  if (data[0]?.communities?.id) {
+    await communityCartModule.loadSharedCart(data[0].communities.id, 'sharedCartBody');
+  }
+}
+
+// Add "Add to Community Cart" button on product cards
+// Hook into existing renderProductCard by overriding after filterProducts
+const originalRenderGrid = renderGrid;
+renderGrid = function (products) {
+  originalRenderGrid(products);
+  attachCommunityCartButtons();
+};
+
+function attachCommunityCartButtons() {
+  if (!communityCartModule || !userCommunities.length) return;
+  document.querySelectorAll('.product-card').forEach(card => {
+    const productId = Number(card.dataset.id);
+    if (card.querySelector('.btn-add-community')) return; // already added
+
+    const actions = card.querySelector('.product-card-actions');
+    if (!actions) return;
+
+    const btn = document.createElement('button');
+    btn.className = 'btn-view-all btn-add-community';
+    btn.type = 'button';
+    btn.title = 'Add to community cart';
+    btn.innerHTML = '👥';
+    btn.addEventListener('click', async (e) => {
+      e.stopPropagation();
+      const product = PRODUCTS.find(p => p.id === productId);
+      if (!product) return;
+      const selectedStore = productSelections[productId] || getBestPrice(product.prices).store;
+      const result = await communityCartModule.addToSharedCart(productId, selectedStore, 1);
+      if (result.error) {
+        alert(result.error);
+      } else {
+        // Brief visual feedback
+        btn.innerHTML = '✓';
+        setTimeout(() => btn.innerHTML = '👥', 800);
+      }
+    });
+    actions.appendChild(btn);
+  });
+}

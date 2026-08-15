@@ -148,6 +148,31 @@
                     <span class="badge-count" id="cartCount">0</span>
                 </button>
 
+
+
+
+
+
+                <!-- Community Cart Trigger Button -->
+                <button class="icon-btn community-cart-btn" id="communityCartBtn" title="View community shared cart">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"></path>
+                        <circle cx="9" cy="7" r="4"></circle>
+                        <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"></path>
+                    </svg>
+                    <span class="badge-count" id="sharedCartCount">0</span>
+                </button>
+
+
+
+
+
+
+
+
+
+
                 <!-- Profile Button — opens profile sidebar -->
                 <button class="icon-btn" id="profileBtn" title="Your profile">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -331,6 +356,58 @@
             <p class="cart-note">Items are organized by your selected store</p>
         </div>
     </aside>
+
+
+
+
+
+
+
+
+
+    <!-- ====================================================================
+       COMPONENT 6b: SHARED COMMUNITY CART PANEL
+       Slide-out drawer showing community's shared cart items.
+       ==================================================================== -->
+    <aside class="shared-cart-panel" id="sharedCartPanel">
+        <div class="shared-cart-panel-header">
+            <h3 class="shared-cart-panel-title">🧺 Community Cart</h3>
+            <button class="cart-close-btn" id="sharedCartClose">&times;</button>
+        </div>
+        <div class="shared-cart-community-select" id="sharedCartCommunitySelect">
+            <label>Select Community</label>
+            <select id="sharedCartCommunityDropdown">
+                <option value="">Loading communities…</option>
+            </select>
+        </div>
+        <div class="shared-cart-panel-body" id="sharedCartBody">
+            <div class="cart-empty">
+                <span class="cart-empty-icon">🧺</span>
+                <p>Select a community to view shared cart</p>
+            </div>
+        </div>
+    </aside>
+    <div class="shared-cart-overlay" id="sharedCartOverlay"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <!-- Dark Background Overlay when Cart Drawer is Open -->
     <div class="cart-overlay" id="cartOverlay"></div>
@@ -523,6 +600,9 @@
 
     <!-- Main JavaScript File -->
     <script type="module" src="app.js"></script>
+
+
+    <script type="module" src="./shared/community-cart.js"></script>
 
 
 
