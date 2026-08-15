@@ -229,6 +229,9 @@ function buildStatusLine(lastOrder) {
     return { text: `${lastOrder.users?.full_name || 'Someone'} ordered ${timeAgo}`, hasActivity: true };
 }
 
+
+
+
 function renderCommunityCard(community, members, status, pendingRequests) {
     const isLeader = currentUser.id === community.leader_id;
     const typeIcon = community.type === 'family' ? '👨‍👩‍👧‍👦' : '👥';
@@ -254,7 +257,6 @@ function renderCommunityCard(community, members, status, pendingRequests) {
         return `<div class="community-member-row${isLeaderRow ? ' leader' : ''}"><span class="community-member-star">${isLeaderRow ? '★' : ''}</span><span class="community-member-name">${displayName}</span>${isLeaderRow ? '<span class="community-member-role">Leader</span>' : ''}${actions}</div>`;
     }).join('');
 
-    // Delete dropdown for leader only
     const deleteDropdown = isLeader ? `
         <div class="delete-dropdown-wrap">
             <button class="delete-dropdown-btn" onclick="event.stopPropagation(); toggleDeleteDropdown(this)" title="More options">⋯</button>
@@ -263,14 +265,37 @@ function renderCommunityCard(community, members, status, pendingRequests) {
             </div>
         </div>` : '';
 
-    return `<div class="community-card" data-community-id="${community.id}"><div class="community-card-header" onclick="toggleCommunityDropdown('${community.id}')"><div class="community-card-icon">${typeIcon}</div><div class="community-card-info"><div class="community-card-name">${community.display_name}</div><div class="community-card-meta"><span class="community-card-type">${community.type}</span><span class="community-card-handle">@${community.handle}</span><span>· ${memberCount} member${memberCount !== 1 ? 's' : ''}</span>${requestCount > 0 && isLeader ? `<span class="community-card-badge">${requestCount} request${requestCount !== 1 ? 's' : ''}</span>` : ''}</span></div></div><svg class="community-card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div><div class="community-card-status${status.hasActivity ? '' : ' community-card-status--none'}">${status.text}</div><div class="community-members-dropdown" id="dropdown-${community.id}"><div class="community-members-list">${requestsHTML}${membersHTML}</div><div class="community-actions-row"><button class="btn-leave" onclick="event.stopPropagation(); leaveCommunity('${community.id}')">${isLeader ? 'Leave (transfer leadership)' : 'Leave Community'}</button>${deleteDropdown}</div></div></div>`;
+    const spendSection = `<div class="community-spend-section" id="spend-${community.id}"><div class="community-spend-empty">Loading spend history…</div></div>`;
+
+    return `<div class="community-card" data-community-id="${community.id}"><div class="community-card-header" onclick="toggleCommunityDropdown('${community.id}')"><div class="community-card-icon">${typeIcon}</div><div class="community-card-info"><div class="community-card-name">${community.display_name}</div><div class="community-card-meta"><span class="community-card-type">${community.type}</span><span class="community-card-handle">@${community.handle}</span><span>· ${memberCount} member${memberCount !== 1 ? 's' : ''}</span>${requestCount > 0 && isLeader ? `<span class="community-card-badge">${requestCount} request${requestCount !== 1 ? 's' : ''}</span>` : ''}</span></div></div><svg class="community-card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div><div class="community-card-status${status.hasActivity ? '' : ' community-card-status--none'}">${status.text}</div><div class="community-members-dropdown" id="dropdown-${community.id}"><div class="community-members-list">${requestsHTML}${membersHTML}</div>${spendSection}<div class="community-actions-row"><button class="btn-leave" onclick="event.stopPropagation(); leaveCommunity('${community.id}')">${isLeader ? 'Leave (transfer leadership)' : 'Leave Community'}</button>${deleteDropdown}</div></div></div>`;
 }
+
+
+
 
 function toggleCommunityDropdown(communityId) {
     closeAllDeleteDropdowns();
-    const card = document.querySelector(`[data-community-id="${communityId}"]`);
-    if (card) card.classList.toggle('open');
+    const clickedCard = document.querySelector(`[data-community-id="${communityId}"]`);
+    if (!clickedCard) return;
+
+    const isCurrentlyOpen = clickedCard.classList.contains('open');
+
+    // Close ALL community cards first
+    document.querySelectorAll('.community-card.open').forEach(card => {
+        card.classList.remove('open');
+    });
+
+    // Only open the clicked one if it wasn't already open
+    if (!isCurrentlyOpen) {
+        clickedCard.classList.add('open');
+        setTimeout(() => {
+            renderSpendHistory(communityId, `spend-${communityId}`);
+        }, 50);
+    }
 }
+
+
+
 window.toggleCommunityDropdown = toggleCommunityDropdown;
 
 function toggleDeleteDropdown(btn) {
@@ -663,3 +688,111 @@ async function renderCommunitySummaryBox() {
         box.onclick = () => { window.location.href = 'social.html'; };
     } catch (err) { box.innerHTML = `<div class="community-summary-title">Your Communities</div><div class="community-summary-empty">Unable to load. <a href="social/social.html" style="color:#0c831f;font-weight:700;text-decoration:none;">Go to Social</a></div>`; box.onclick = () => { window.location.href = 'social/social.html'; }; }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ============================================================
+//  SECTION: COMMUNITY MONTHLY SPEND TRACKER
+// ============================================================
+
+async function renderSpendHistory(communityId, containerId) {
+    const container = document.getElementById(containerId);
+    if (!container || !supabase) return;
+
+    container.innerHTML = '<div class="community-spend-empty">Loading spend history…</div>';
+
+    try {
+        const { data, error } = await supabase
+            .rpc('calculate_monthly_spend', { community_id: communityId });
+
+        if (error) throw error;
+
+        if (!data || data.length === 0) {
+            container.innerHTML = '<div class="community-spend-empty">No spending recorded yet</div>';
+            return;
+        }
+
+        const maxTotal = Math.max(...data.map(d => Number(d.total) || 0));
+        const overallTotal = data.reduce((s, d) => s + Number(d.total), 0);
+        const isLeader = await isCommunityLeader(communityId);
+
+        const rowsHTML = data.map(row => {
+            const total = Number(row.total) || 0;
+            const monthDate = new Date(row.month + '-01');
+            const label = monthDate.toLocaleDateString('en-IN', { month: 'long', year: 'numeric' });
+            const barWidth = maxTotal > 0 ? (total / maxTotal) * 100 : 0;
+            const deleteBtn = isLeader
+                ? `<button class="btn-delete-spend" onclick="event.stopPropagation(); deleteMonthSpend('${communityId}', '${row.month}')">Delete</button>`
+                : '';
+
+            return `
+        <div class="bill-row">
+          <span style="min-width:100px;font-weight:600;color:var(--text-primary);">${label}</span>
+          <div class="community-spend-bar">
+            <div class="community-spend-bar-fill" style="width:${barWidth}%"></div>
+          </div>
+          <span style="font-weight:700;color:#1c1c1c;min-width:60px;text-align:right;">₹${total.toLocaleString('en-IN')}</span>
+          ${deleteBtn}
+        </div>`;
+        }).join('');
+
+        container.innerHTML = `
+      <div class="community-spend-header">
+        <span class="community-spend-title">💰 Monthly Spend</span>
+        <span class="community-spend-total">Total: ₹${overallTotal.toLocaleString('en-IN')}</span>
+      </div>
+      <div class="community-spend-list">
+        ${rowsHTML}
+      </div>`;
+
+    } catch (err) {
+        container.innerHTML = `<div class="community-spend-empty">Unable to load spend data</div>`;
+        console.error('[SpendTracker] Error:', err);
+    }
+}
+
+async function isCommunityLeader(communityId) {
+    if (!supabase || !currentUser) return false;
+    const { data } = await supabase
+        .from('communities')
+        .select('leader_id')
+        .eq('id', communityId)
+        .single();
+    return data?.leader_id === currentUser.id;
+}
+
+async function deleteMonthSpend(communityId, monthKey) {
+    showConfirm('Delete Monthly Spend', `Delete all spending records for ${monthKey}?`, async () => {
+        try {
+            const startOfMonth = monthKey + '-01';
+            const endDate = new Date(new Date(startOfMonth).getFullYear(), new Date(startOfMonth).getMonth() + 1, 1);
+            const endOfMonth = endDate.toISOString().slice(0, 10);
+
+            const { error } = await supabase
+                .from('order_events')
+                .delete()
+                .eq('community_id', communityId)
+                .gte('created_at', startOfMonth)
+                .lt('created_at', endOfMonth);
+
+            if (error) throw error;
+            await renderSpendHistory(communityId, `spend-${communityId}`);
+        } catch (err) {
+            alert('Failed to delete: ' + err.message);
+        }
+    });
+}
+window.deleteMonthSpend = deleteMonthSpend;
+window.renderSpendHistory = renderSpendHistory;

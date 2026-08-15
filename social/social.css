@@ -352,6 +352,7 @@
     flex: 1;
     min-width: 0;
     padding: 12px 16px;
+    margin-top: 10px;
     border-radius: var(--radius-sm);
     font-family: inherit;
     font-size: 0.85rem;
@@ -377,6 +378,7 @@
 .delete-dropdown-btn {
     width: 44px;
     height: 44px;
+    margin-top: 10px;
     border-radius: var(--radius-sm);
     border: 1px solid var(--border-color);
     background: var(--bg-input);
@@ -1110,4 +1112,126 @@
     }
 
 
+}
+
+
+
+
+
+
+/* ============================================================
+   COMMUNITY MONTHLY SPEND TRACKER
+   ============================================================ */
+
+/* Grid: exactly 3 columns on desktop */
+.communities-grid {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+/* Spend tracker section inside community dropdown */
+.community-spend-section {
+    padding: 16px 24px 0;
+    border-top: 1px solid var(--border-color);
+    margin-top: 12px;
+}
+
+.community-spend-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.community-spend-title {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.community-spend-total {
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: var(--accent-primary);
+}
+
+.community-spend-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.community-spend-list .bill-row {
+    padding: 8px 0;
+    font-size: 0.85rem;
+}
+
+.community-spend-bar {
+    flex: 1;
+    height: 6px;
+    background: var(--bg-input);
+    border-radius: 3px;
+    overflow: hidden;
+    margin: 0 12px;
+    min-width: 40px;
+}
+
+.community-spend-bar-fill {
+    height: 100%;
+    background: var(--accent-primary);
+    border-radius: 3px;
+    transition: width 0.4s ease;
+    min-width: 2px;
+}
+
+.community-spend-empty {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    text-align: center;
+    padding: 24px 0;
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+}
+
+.btn-delete-spend {
+    background: none;
+    border: none;
+    color: #ef4444;
+    font-size: 0.75rem;
+    font-weight: 700;
+    cursor: pointer;
+    padding: 2px 8px;
+    border-radius: var(--radius-sm);
+    transition: var(--transition);
+    white-space: nowrap;
+}
+
+.btn-delete-spend:hover {
+    background: rgba(239, 68, 68, 0.1);
+}
+
+@media (max-width: 1100px) {
+    .communities-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .communities-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.community-card {
+    align-self: start;
+    display: flex;
+    flex-direction: column;
+}
+
+.community-members-dropdown {
+    flex-shrink: 0;
 }
