@@ -923,6 +923,8 @@
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
+
+
     .communities-grid {
         grid-template-columns: 1fr;
     }
@@ -992,9 +994,21 @@
     #saveNicknameBtn {
         display: block;
     }
+
+    #socialAuthSubmitBtn {
+        display: block;
+    }
+
+    #createCommunityBtn {
+        display: block;
+    }
+
+
 }
 
 @media (max-width: 480px) {
+
+
     .community-actions-row {
         gap: 6px;
         padding: 0 16px 14px;
@@ -1047,6 +1061,16 @@
     #saveNicknameBtn {
         display: block;
     }
+
+    #socialAuthSubmitBtn {
+        display: block;
+    }
+
+    #createCommunityBtn {
+        display: block;
+    }
+
+
 }
 
 @media (max-width: 360px) {
@@ -1076,4 +1100,14 @@
     #saveNicknameBtn {
         display: block;
     }
+
+    #socialAuthSubmitBtn {
+        display: block;
+    }
+
+    #createCommunityBtn {
+        display: block;
+    }
+
+
 }
