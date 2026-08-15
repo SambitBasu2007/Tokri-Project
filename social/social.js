@@ -50,12 +50,125 @@ async function fetchUserCommunityCount() {
     if (!error) userCommunityCount = count || 0;
 }
 
+
+
+
+
+
+
 function showAuthRequired() {
+    const isSignUp = authMode === 'signup';
+    const authFormHTML = `
+    <div class="profile-auth-form" style="max-width:320px;margin:0 auto;text-align:left;">
+      <div class="profile-auth-title" style="text-align:center;margin-bottom:12px;">${isSignUp ? 'Create Account' : 'Sign In'}</div>
+      <input type="email" class="profile-auth-input" id="socialAuthEmail" placeholder="Email address" autocomplete="email">
+      <input type="password" class="profile-auth-input" id="socialAuthPassword" placeholder="Password" autocomplete="${isSignUp ? 'new-password' : 'current-password'}">
+      <div class="profile-auth-error" id="socialAuthError"></div>
+      <div class="profile-auth-success" id="socialAuthSuccess"></div>
+      <button class="btn btn-primary btn-block" id="socialAuthSubmitBtn" type="button">${isSignUp ? 'Create Account' : 'Sign In'}</button>
+      <div class="profile-auth-toggle" style="text-align:center;">
+        ${isSignUp ? 'Already have an account? <button type="button" id="socialAuthToggleBtn">Sign in</button>' : 'New here? <button type="button" id="socialAuthToggleBtn">Create account</button>'}
+      </div>
+    </div>`;
+
     ['panelCurrent', 'panelJoin'].forEach(id => {
         const el = document.getElementById(id);
-        if (el) el.innerHTML = `<div class="section-container"><div class="communities-empty"><div style="font-size:3rem;margin-bottom:16px;">🔒</div><div style="font-size:1.1rem;font-weight:700;color:var(--text-primary);margin-bottom:8px;">Sign in required</div><div style="color:var(--text-secondary);margin-bottom:24px;">Please sign in to view and join communities.</div><a href="../index.html" class="btn btn-primary">Go to Home</a></div></div>`;
+        if (el) el.innerHTML = `<div class="section-container"><div class="communities-empty"><div style="font-size:3rem;margin-bottom:16px;">🔒</div><div style="font-size:1.1rem;font-weight:700;color:var(--text-primary);margin-bottom:8px;">Sign in required</div><div style="color:var(--text-secondary);margin-bottom:24px;">Please sign in to view and join communities.</div>${authFormHTML}</div></div>`;
     });
+
+    // Wire up inline auth form listeners
+    const submitBtn = document.getElementById('socialAuthSubmitBtn');
+    const toggleBtn = document.getElementById('socialAuthToggleBtn');
+    if (submitBtn) submitBtn.addEventListener('click', isSignUp ? handleSocialSignUp : handleSocialSignIn);
+    if (toggleBtn) toggleBtn.addEventListener('click', () => { authMode = authMode === 'signin' ? 'signup' : 'signin'; showAuthRequired(); });
 }
+
+
+
+
+async function handleSocialSignIn() {
+    const email = document.getElementById('socialAuthEmail').value.trim();
+    const password = document.getElementById('socialAuthPassword').value;
+    const errorEl = document.getElementById('socialAuthError');
+    const successEl = document.getElementById('socialAuthSuccess');
+    const btn = document.getElementById('socialAuthSubmitBtn');
+
+    errorEl.textContent = '';
+    successEl.textContent = '';
+
+    if (!email || !password) {
+        errorEl.textContent = 'Please enter both email and password.';
+        return;
+    }
+
+    btn.textContent = 'Signing in…';
+    btn.disabled = true;
+
+    try {
+        const { error } = await supabase.auth.signInWithPassword({ email, password });
+        if (error) throw error;
+
+        successEl.textContent = 'Signed in successfully!';
+        setTimeout(async () => {
+            const authed = await initAuth();
+            if (authed) {
+                if (activeTab === 'current') renderCurrentCommunities();
+                else switchSocialTab('join');
+            }
+        }, 600);
+    } catch (err) {
+        errorEl.textContent = err.message || 'Sign in failed. Please try again.';
+        btn.textContent = 'Sign In';
+        btn.disabled = false;
+    }
+}
+
+
+async function handleSocialSignUp() {
+    const email = document.getElementById('socialAuthEmail').value.trim();
+    const password = document.getElementById('socialAuthPassword').value;
+    const errorEl = document.getElementById('socialAuthError');
+    const successEl = document.getElementById('socialAuthSuccess');
+    const btn = document.getElementById('socialAuthSubmitBtn');
+
+    errorEl.textContent = '';
+    successEl.textContent = '';
+
+    if (!email || !password) {
+        errorEl.textContent = 'Please enter both email and password.';
+        return;
+    }
+    if (password.length < 6) {
+        errorEl.textContent = 'Password must be at least 6 characters.';
+        return;
+    }
+
+    btn.textContent = 'Creating account…';
+    btn.disabled = true;
+
+    try {
+        const { error } = await supabase.auth.signUp({
+            email,
+            password,
+            options: { emailRedirectTo: `${window.location.origin}/index.html` }
+        });
+        if (error) throw error;
+
+        successEl.textContent = 'Account created! You can now sign in.';
+        setTimeout(() => {
+            authMode = 'signin';
+            showAuthRequired();
+        }, 2000);
+    } catch (err) {
+        errorEl.textContent = err.message || 'Sign up failed. Please try again.';
+        btn.textContent = 'Create Account';
+        btn.disabled = false;
+    }
+}
+
+
+
+
 
 // ============================================================
 //  TABS
@@ -429,6 +542,11 @@ document.querySelectorAll('.social-type-pill').forEach(pill => pill.addEventList
 document.getElementById('createModalOverlay').addEventListener('click', (e) => { if (e.target === document.getElementById('createModalOverlay')) closeCreateModal(); });
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { closeCreateModal(); closeConfirm(); } });
 window.openCreateModal = openCreateModal;
+
+
+
+window.handleSocialSignIn = handleSocialSignIn;
+window.handleSocialSignUp = handleSocialSignUp;
 
 // ============================================================
 //  THEME TOGGLE
