@@ -238,7 +238,7 @@ body {
 
 /* Solid Text Color — No Gradients */
 .brand-name {
-  color: #1c1c1c;
+  color: var(--accent);
   background: none;
   -webkit-background-clip: initial;
   background-clip: initial;
@@ -1455,39 +1455,129 @@ body {
 
 /* ====================================================================
    SECTION 17: STATS BAR & SOLID GREEN NUMBERS
-   ==================================================================== */
-.stats-bar {
-  padding: 48px 0;
+   SCROLL SAVINGS — tokrifooter integration
+   Replaces old .stats-bar
+   ============================================ */
+
+.savings-scroll-section {
+  position: relative;
+  height: 300vh;
+  background: var(--bg-primary);
 }
 
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 20px;
-  background: #ffffff;
-  border: 1px solid var(--border-color);
-  border-radius: 16px;
-  padding: 36px 24px;
+.savings-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 60px;
+  overflow: hidden;
+  background: var(--bg-primary);
+}
+
+.savings-counter-wrap {
   text-align: center;
-  box-shadow: var(--shadow-sm);
+  position: relative;
 }
 
-.stat-value {
-  display: block;
-  font-size: 2rem;
+.savings-label-above {
+  font-size: clamp(0.85rem, 1.5vw, 1.1rem);
+  color: var(--text-muted) + rgba(12, 131, 31, 0.15);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-bottom: 16px;
+  opacity: 0;
+  transform: translateY(20px);
+  will-change: transform, opacity;
+}
+
+.savings-big-number {
+  font-size: clamp(5rem, 14vw, 11rem);
+  font-weight: 800;
+
+  color: #0c831f;
+  line-height: 1;
+  letter-spacing: -0.05em;
+  font-variant-numeric: tabular-nums;
+  opacity: 1;
+  transform: scale(0.85);
+  will-change: transform, opacity;
+
+
+  text-shadow: 20px 4px 24px rgba(5, 54, 13, 0.15);
+}
+
+.savings-label-below {
+  font-size: clamp(1rem, 2vw, 1.4rem);
+  font-weight: 600;
+  margin-top: 16px;
+  opacity: 0;
+  transform: translateY(15px);
+  will-change: transform, opacity;
+}
+
+.savings-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+  max-width: 900px;
+  width: 90%;
+}
+
+.savings-mini {
+  text-align: center;
+  opacity: 0;
+  transform: translateY(40px);
+  will-change: transform, opacity;
+}
+
+.savings-mini-num {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
   font-weight: 800;
   color: #0c831f;
-  background: none;
-  -webkit-background-clip: initial;
-  background-clip: initial;
-  -webkit-text-fill-color: initial;
-  margin-bottom: 4px;
+  line-height: 1.1;
 }
 
-.stat-label {
+.savings-mini-label {
   font-size: 0.85rem;
-  color: var(--text-muted);
+  color: var(--text-muted) + rgba(46, 65, 50, 0.15);
   font-weight: 600;
+  margin-top: 8px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.savings-divider {
+  width: 60px;
+  height: 3px;
+  background: var(--accent);
+  border-radius: 2px;
+  opacity: 0;
+  transform: scaleX(0);
+  will-change: transform, opacity;
+}
+
+@media (max-width: 768px) {
+  .savings-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+  }
+
+  .savings-sticky {
+    gap: 40px;
+  }
+
+  .savings-mini-num {
+    font-size: 1.6rem;
+  }
+
+  .savings-mini-label {
+    font-size: 0.75rem;
+  }
 }
 
 

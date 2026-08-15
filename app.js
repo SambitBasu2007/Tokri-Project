@@ -1266,3 +1266,100 @@ async function renderCommunitySummaryBox() {
     box.onclick = () => { window.location.href = 'social/social.html'; };
   }
 }
+
+// ============================================
+//  SCROLL SAVINGS ANIMATION
+//  (from tokrifooter.html — integrated)
+// ============================================
+
+(function () {
+  'use strict';
+
+  const clamp = (n, min, max) => Math.min(Math.max(n, min), max);
+  const lerp = (a, b, t) => a + (b - a) * t;
+  const easeOutCubic = t => 1 - Math.pow(1 - t, 3);
+  const easeOutBack = t => {
+    const c1 = 1.70158;
+    const c3 = c1 + 1;
+    return 1 + c3 * Math.pow(t - 1, 3) + c1 * Math.pow(t - 1, 2);
+  };
+
+  const section = document.getElementById('savingsSection');
+  if (!section) return; // Graceful fail if section missing
+
+  const labelAbove = document.getElementById('savingsLabelAbove');
+  const bigNumber = document.getElementById('savingsNumber');
+  const labelBelow = document.getElementById('savingsLabelBelow');
+  const divider = document.getElementById('savingsDivider');
+  const minis = [
+    document.getElementById('mini1'),
+    document.getElementById('mini2'),
+    document.getElementById('mini3'),
+    document.getElementById('mini4'),
+  ];
+
+  const TARGET_AMOUNT = 320;
+
+  function getSavingsProgress() {
+    const rect = section.getBoundingClientRect();
+    const sectionH = section.offsetHeight;
+    const viewportH = window.innerHeight;
+    const scrollable = sectionH - viewportH;
+    if (scrollable <= 0) return 0;
+    const scrolled = -rect.top;
+    return clamp(scrolled / scrollable, 0, 1);
+  }
+
+  function updateSavings() {
+    const p = getSavingsProgress();
+
+    // Phase 1: Top label (0% - 15%)
+    const labelPhase = clamp(p / 0.15, 0, 1);
+    const labelEased = easeOutCubic(labelPhase);
+    labelAbove.style.opacity = labelEased;
+    labelAbove.style.transform = `translateY(${lerp(20, 0, labelEased)}px)`;
+
+    // Phase 2: Big Number (15% - 55%)
+    const numPhase = clamp((p - 0.15) / 0.40, 0, 1);
+    const numEased = easeOutCubic(numPhase);
+    const currentAmount = Math.round(lerp(0, TARGET_AMOUNT, numEased));
+    bigNumber.textContent = `₹${currentAmount}`;
+
+    const scalePhase = clamp((p - 0.15) / 0.50, 0, 1);
+    const scaleEased = easeOutBack(clamp(scalePhase * 1.2, 0, 1));
+    bigNumber.style.transform = `scale(${lerp(0.7, 1, Math.min(scaleEased, 1))})`;
+    bigNumber.style.opacity = 1;
+
+    // Phase 3: Below label + divider (55% - 70%)
+    const metaPhase = clamp((p - 0.55) / 0.15, 0, 1);
+    const metaEased = easeOutCubic(metaPhase);
+    labelBelow.style.opacity = metaEased;
+    labelBelow.style.transform = `translateY(${lerp(15, 0, metaEased)}px)`;
+    divider.style.opacity = metaEased;
+    divider.style.transform = `scaleX(${metaEased})`;
+
+    // Phase 4: Mini stats stagger (70% - 100%)
+    minis.forEach((mini, i) => {
+      if (!mini) return;
+      const miniStart = 0.70 + (i * 0.06);
+      const miniPhase = clamp((p - miniStart) / 0.15, 0, 1);
+      const miniEased = easeOutCubic(miniPhase);
+      mini.style.opacity = miniEased;
+      mini.style.transform = `translateY(${lerp(40, 0, miniEased)}px)`;
+    });
+  }
+
+  let ticking = false;
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      updateSavings();
+      ticking = false;
+    });
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  updateSavings();
+})();
