@@ -436,6 +436,10 @@ body {
   stroke-linejoin: round;
 }
 
+#themeToggle {
+  display: none;
+}
+
 /* Cart Badge Number */
 .badge-count {
   position: absolute;
