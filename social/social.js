@@ -542,6 +542,6 @@ async function renderCommunitySummaryBox() {
         if (error) throw error;
         if (!data || data.length === 0) { box.innerHTML = `<div class="community-summary-title">Your Communities</div><div class="community-summary-empty">No communities yet. <a href="social/social.html" style="color:#0c831f;font-weight:700;text-decoration:none;">Join or create one</a></div>`; }
         else { const chips = data.map(row => { const c = row.communities; const typeIcon = c.type === 'family' ? '👨👩👧👦' : '👥'; return `<span class="community-chip">${typeIcon} ${c.display_name}</span>`; }).join(''); const moreText = data.length >= 10 ? '<div class="community-chip-more">+ more on Social page</div>' : ''; box.innerHTML = `<div class="community-summary-title">Your Communities</div><div class="community-chips">${chips}</div>${moreText}`; }
-        box.onclick = () => { window.location.href = 'social/social.html'; };
+        box.onclick = () => { window.location.href = 'social.html'; };
     } catch (err) { box.innerHTML = `<div class="community-summary-title">Your Communities</div><div class="community-summary-empty">Unable to load. <a href="social/social.html" style="color:#0c831f;font-weight:700;text-decoration:none;">Go to Social</a></div>`; box.onclick = () => { window.location.href = 'social/social.html'; }; }
 }
