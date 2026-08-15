@@ -108,7 +108,7 @@ async function handleSocialSignIn() {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
 
-        successEl.textContent = 'Signed in successfully!';
+        successEl.textContent = 'Signed in successfully! Please refresh the page';
         setTimeout(async () => {
             const authed = await initAuth();
             if (authed) {
