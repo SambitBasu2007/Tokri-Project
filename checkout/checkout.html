@@ -2,8 +2,13 @@
 <html lang="en" data-theme="light">
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+
     <title>Checkout | Tokri – Compare</title>
     <meta name="description" content="Review your smart cart, split across stores for the best price.">
     <link rel="stylesheet" href="../style.css">
@@ -23,7 +28,21 @@
                 </svg>
             </a>
             <h1 class="checkout-title">Checkout</h1>
+
+
+            <button class="icon-btn community-cart-btn" id="communityCartBtn" title="View community shared cart">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"></path>
+                    <circle cx="9" cy="7" r="4"></circle>
+                    <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"></path>
+                </svg>
+                <span class="badge-count" id="sharedCartCount">0</span>
+            </button>
         </div>
+
+
+
     </header>
 
     <main class="checkout-main">
@@ -54,7 +73,49 @@
         <div class="checkout-modal" id="checkoutModalContent"></div>
     </div>
 
+
+
+
+
+    <!-- ====================================================================
+       SHARED COMMUNITY CART PANEL (checkout page)
+       ==================================================================== -->
+    <aside class="shared-cart-panel" id="sharedCartPanel">
+        <div class="shared-cart-panel-header">
+            <h3 class="shared-cart-panel-title">🧺 Community Cart</h3>
+            <button class="cart-close-btn" id="sharedCartClose">&times;</button>
+        </div>
+        <div class="shared-cart-community-select" id="sharedCartCommunitySelect">
+            <label>Select Community</label>
+            <select id="sharedCartCommunityDropdown">
+                <option value="">Loading communities…</option>
+            </select>
+        </div>
+        <div class="shared-cart-panel-body" id="sharedCartBody">
+            <div class="cart-empty">
+                <span class="cart-empty-icon">🧺</span>
+                <p>Select a community to view shared cart</p>
+            </div>
+        </div>
+    </aside>
+    <div class="shared-cart-overlay" id="sharedCartOverlay"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
     <script src="checkout.js"></script>
+
+
+    <script type="module" src="../shared/community-cart.js"></script>
 </body>
 
 </html>

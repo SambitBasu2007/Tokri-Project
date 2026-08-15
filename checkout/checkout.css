@@ -676,6 +676,9 @@
 
 /* ---------- Responsive ---------- */
 @media (max-width: 768px) {
+
+
+
     .checkout-container {
         padding: 0 16px;
         gap: 16px;
@@ -741,6 +744,11 @@
         justify-content: flex-end;
         margin-top: 4px;
     }
+
+    #placeOrderBtn {
+        display: block;
+    }
+
 }
 
 @media (max-width: 480px) {
@@ -754,5 +762,9 @@
 
     .payment-pill {
         min-width: 100%;
+    }
+
+    #placeOrderBtn {
+        display: block;
     }
 }

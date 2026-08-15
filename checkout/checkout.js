@@ -527,7 +527,7 @@ function placeOrder() {
     setTimeout(() => {
         alert(
             `🎉 Order Placed Successfully!\n\n` +
-            `Total: YOU HAVE BEEN SCAMMED ${formatPrice(grandTotal)} HAHAHAHAAAHH\n` +
+            `Total: YOU HAVE BEEN SCAMMED ${formatPrice(grandTotal)}\n HAHAHAHAAAHH` +
             `Payment: ${paymentMethod.toUpperCase()}\n` +
             `Stores: ${storeNames.join(', ')}\n\n` +
             `Thank you for shopping with Tokri!`
@@ -550,3 +550,95 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.key === 'Escape') closeModal();
     });
 });
+
+
+
+// ============================================================
+//  SHARED COMMUNITY CART INTEGRATION (checkout page)
+// ============================================================
+
+let ccModule = null;
+let ccUserCommunities = [];
+
+(async function initCheckoutCommunityCart() {
+    try {
+        const mod = await import('../shared/community-cart.js');
+        ccModule = mod;
+        setupCheckoutCommunityCartUI();
+        await populateCheckoutCommunityDropdown();
+    } catch (err) {
+        console.warn('[Checkout] Community cart module not loaded:', err.message);
+    }
+})();
+
+function setupCheckoutCommunityCartUI() {
+    const btn = document.getElementById('communityCartBtn');
+    const closeBtn = document.getElementById('sharedCartClose');
+    const overlay = document.getElementById('sharedCartOverlay');
+    const panel = document.getElementById('sharedCartPanel');
+    const dropdown = document.getElementById('sharedCartCommunityDropdown');
+
+    if (!btn || !panel) return;
+
+    btn.addEventListener('click', () => {
+        panel.classList.add('open');
+        overlay.classList.add('open');
+    });
+
+    if (closeBtn) closeBtn.addEventListener('click', closeCheckoutSharedCart);
+    if (overlay) overlay.addEventListener('click', closeCheckoutSharedCart);
+
+    if (dropdown) {
+        dropdown.addEventListener('change', async (e) => {
+            const communityId = e.target.value;
+            if (communityId && ccModule) {
+                await ccModule.loadSharedCart(communityId, 'sharedCartBody');
+            }
+        });
+    }
+}
+
+function closeCheckoutSharedCart() {
+    document.getElementById('sharedCartPanel')?.classList.remove('open');
+    document.getElementById('sharedCartOverlay')?.classList.remove('open');
+}
+
+async function populateCheckoutCommunityDropdown() {
+    const dropdown = document.getElementById('sharedCartCommunityDropdown');
+    if (!dropdown) return;
+
+    // Try to get supabase from window or import
+    let sb = null;
+    try {
+        const mod = await import('../shared/supabase.js');
+        sb = mod.supabase;
+    } catch (e) {
+        dropdown.innerHTML = '<option value="">Auth unavailable</option>';
+        return;
+    }
+
+    const { data: { user } } = await sb.auth.getUser();
+    if (!user) {
+        dropdown.innerHTML = '<option value="">Sign in to see communities</option>';
+        return;
+    }
+
+    const { data, error } = await sb
+        .from('community_members')
+        .select('communities(id, display_name)')
+        .eq('user_id', user.id);
+
+    if (error || !data || data.length === 0) {
+        dropdown.innerHTML = '<option value="">No communities yet</option>';
+        return;
+    }
+
+    ccUserCommunities = data;
+    dropdown.innerHTML = data.map(row =>
+        `<option value="${row.communities.id}">${row.communities.display_name}</option>`
+    ).join('');
+
+    if (data[0]?.communities?.id) {
+        await ccModule.loadSharedCart(data[0].communities.id, 'sharedCartBody');
+    }
+}
