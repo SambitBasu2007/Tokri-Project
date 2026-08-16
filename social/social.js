@@ -11,6 +11,15 @@ try {
     console.warn('[Social] Supabase not available:', err.message);
 }
 
+let communityCartModule = null;
+try {
+    const mod = await import('../shared/community-cart.js');
+    communityCartModule = mod;
+} catch (err) {
+    console.warn('[Social] Community cart module not loaded:', err.message);
+}
+
+
 // ============================================================
 //  STATE
 // ============================================================
@@ -50,12 +59,6 @@ async function fetchUserCommunityCount() {
     if (!error) userCommunityCount = count || 0;
 }
 
-
-
-
-
-
-
 function showAuthRequired() {
     const isSignUp = authMode === 'signup';
     const authFormHTML = `
@@ -76,15 +79,11 @@ function showAuthRequired() {
         if (el) el.innerHTML = `<div class="section-container"><div class="communities-empty"><div style="font-size:3rem;margin-bottom:16px;">🔒</div><div style="font-size:1.1rem;font-weight:700;color:var(--text-primary);margin-bottom:8px;">Sign in required</div><div style="color:var(--text-secondary);margin-bottom:24px;">Please sign in to view and join communities.</div>${authFormHTML}</div></div>`;
     });
 
-    // Wire up inline auth form listeners
     const submitBtn = document.getElementById('socialAuthSubmitBtn');
     const toggleBtn = document.getElementById('socialAuthToggleBtn');
     if (submitBtn) submitBtn.addEventListener('click', isSignUp ? handleSocialSignUp : handleSocialSignIn);
     if (toggleBtn) toggleBtn.addEventListener('click', () => { authMode = authMode === 'signin' ? 'signup' : 'signin'; showAuthRequired(); });
 }
-
-
-
 
 async function handleSocialSignIn() {
     const email = document.getElementById('socialAuthEmail').value.trim();
@@ -122,7 +121,6 @@ async function handleSocialSignIn() {
         btn.disabled = false;
     }
 }
-
 
 async function handleSocialSignUp() {
     const email = document.getElementById('socialAuthEmail').value.trim();
@@ -165,10 +163,6 @@ async function handleSocialSignUp() {
         btn.disabled = false;
     }
 }
-
-
-
-
 
 // ============================================================
 //  TABS
@@ -229,9 +223,6 @@ function buildStatusLine(lastOrder) {
     return { text: `${lastOrder.users?.full_name || 'Someone'} ordered ${timeAgo}`, hasActivity: true };
 }
 
-
-
-
 function renderCommunityCard(community, members, status, pendingRequests) {
     const isLeader = currentUser.id === community.leader_id;
     const typeIcon = community.type === 'family' ? '👨‍👩‍👧‍👦' : '👥';
@@ -270,9 +261,6 @@ function renderCommunityCard(community, members, status, pendingRequests) {
     return `<div class="community-card" data-community-id="${community.id}"><div class="community-card-header" onclick="toggleCommunityDropdown('${community.id}')"><div class="community-card-icon">${typeIcon}</div><div class="community-card-info"><div class="community-card-name">${community.display_name}</div><div class="community-card-meta"><span class="community-card-type">${community.type}</span><span class="community-card-handle">@${community.handle}</span><span>· ${memberCount} member${memberCount !== 1 ? 's' : ''}</span>${requestCount > 0 && isLeader ? `<span class="community-card-badge">${requestCount} request${requestCount !== 1 ? 's' : ''}</span>` : ''}</span></div></div><svg class="community-card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div><div class="community-card-status${status.hasActivity ? '' : ' community-card-status--none'}">${status.text}</div><div class="community-members-dropdown" id="dropdown-${community.id}"><div class="community-members-list">${requestsHTML}${membersHTML}</div>${spendSection}<div class="community-actions-row"><button class="btn-leave" onclick="event.stopPropagation(); leaveCommunity('${community.id}')">${isLeader ? 'Leave (transfer leadership)' : 'Leave Community'}</button>${deleteDropdown}</div></div></div>`;
 }
 
-
-
-
 function toggleCommunityDropdown(communityId) {
     closeAllDeleteDropdowns();
     const clickedCard = document.querySelector(`[data-community-id="${communityId}"]`);
@@ -280,12 +268,10 @@ function toggleCommunityDropdown(communityId) {
 
     const isCurrentlyOpen = clickedCard.classList.contains('open');
 
-    // Close ALL community cards first
     document.querySelectorAll('.community-card.open').forEach(card => {
         card.classList.remove('open');
     });
 
-    // Only open the clicked one if it wasn't already open
     if (!isCurrentlyOpen) {
         clickedCard.classList.add('open');
         setTimeout(() => {
@@ -293,8 +279,6 @@ function toggleCommunityDropdown(communityId) {
         }, 50);
     }
 }
-
-
 
 window.toggleCommunityDropdown = toggleCommunityDropdown;
 
@@ -390,10 +374,8 @@ async function leaveCommunity(communityId) {
         try {
             const { data: community } = await supabase.from('communities').select('leader_id').eq('id', communityId).single();
             const isLeader = community && community.leader_id === currentUser.id;
-            // Delete membership
             const { error } = await supabase.from('community_members').delete().eq('community_id', communityId).eq('user_id', currentUser.id);
             if (error) throw error;
-            // Also delete any join_requests for this user+community (fixes stale request bug)
             await supabase.from('join_requests').delete().eq('community_id', communityId).eq('user_id', currentUser.id);
             if (isLeader) {
                 const { error: rpcErr } = await supabase.rpc('reassign_random_leader', { community_id: communityId });
@@ -432,14 +414,12 @@ async function searchCommunityByHandle(query) {
         if (error) throw error;
         if (!communities || communities.length === 0) { resultsContainer.innerHTML = '<div class="join-empty-hint">No communities found matching that handle</div>'; return; }
 
-        // Check membership and requests
         const { data: myMemberships } = await supabase.from('community_members').select('community_id').eq('user_id', currentUser.id);
         const { data: myRequests } = await supabase.from('join_requests').select('id, community_id, status').eq('user_id', currentUser.id);
         const memberIds = new Set((myMemberships || []).map(m => m.community_id));
         const requestMap = new Map((myRequests || []).map(r => [r.community_id, r]));
         const atCap = userCommunityCount >= 10;
 
-        // Fetch members for ALL found communities (not just joined ones)
         const memberPromises = communities.map(c =>
             supabase.from('community_members').select('user_id, nickname, users(id, full_name)').eq('community_id', c.id)
         );
@@ -453,7 +433,6 @@ async function searchCommunityByHandle(query) {
             const members = memberResults[i]?.data || [];
             const memberCount = members.length;
 
-            // FIX 1: Members dropdown for ALL communities
             let memberDropdown = '';
             if (memberCount > 0) {
                 const memberRows = members.map(m => {
@@ -506,7 +485,6 @@ async function sendJoinRequest(communityId) {
     try {
         if (!currentUser) { const { data: { user } } = await supabase.auth.getUser(); if (!user) { alert('Please sign in first.'); return; } currentUser = user; }
 
-        // Check if community has 0 members — if so, delete it as bugged
         const { count, error: countErr } = await supabase.from('community_members').select('*', { count: 'exact', head: true }).eq('community_id', communityId);
         if (!countErr && count === 0) {
             const { error: delErr } = await supabase.from('communities').delete().eq('id', communityId);
@@ -516,7 +494,6 @@ async function sendJoinRequest(communityId) {
             return;
         }
 
-        // Delete any old rejected/accepted request first (allows re-requesting)
         await supabase.from('join_requests').delete().eq('community_id', communityId).eq('user_id', currentUser.id);
 
         const { error } = await supabase.from('join_requests').insert({ community_id: communityId, user_id: currentUser.id, status: 'pending' });
@@ -527,7 +504,6 @@ async function sendJoinRequest(communityId) {
 }
 window.sendJoinRequest = sendJoinRequest;
 
-// FIX 3: Cancel join request
 async function cancelJoinRequest(requestId, communityId) {
     try {
         const { error } = await supabase.from('join_requests').delete().eq('id', requestId);
@@ -568,8 +544,6 @@ document.getElementById('createModalOverlay').addEventListener('click', (e) => {
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { closeCreateModal(); closeConfirm(); } });
 window.openCreateModal = openCreateModal;
 
-
-
 window.handleSocialSignIn = handleSocialSignIn;
 window.handleSocialSignUp = handleSocialSignUp;
 
@@ -590,16 +564,86 @@ if (themeToggle) {
 }
 
 // ============================================================
-//  CART BUTTON
+//  CART BUTTON — REMOVED (community cart btn handles navigation)
 // ============================================================
-const cartBtn = document.getElementById('cartBtn');
-if (cartBtn) cartBtn.addEventListener('click', () => { window.location.href = '../index.html'; });
+
+
+// ============================================================
+//  COMMUNITY CART UI
+// ============================================================
+function setupCommunityCartUI() {
+    const btn = document.getElementById('communityCartBtn');
+    const closeBtn = document.getElementById('sharedCartClose');
+    const overlay = document.getElementById('sharedCartOverlay');
+    const panel = document.getElementById('sharedCartPanel');
+    const dropdown = document.getElementById('sharedCartCommunityDropdown');
+
+    if (!btn || !panel) return;
+
+    btn.addEventListener('click', () => {
+        panel.classList.add('open');
+        overlay.classList.add('open');
+    });
+
+    if (closeBtn) closeBtn.addEventListener('click', closeSharedCart);
+    if (overlay) overlay.addEventListener('click', closeSharedCart);
+
+    if (dropdown) {
+        dropdown.addEventListener('change', async (e) => {
+            const communityId = e.target.value;
+            if (communityId && communityCartModule) {
+                communityCartModule.unloadSharedCart();
+                communityCartModule.subscribeToSharedCart(communityId, 'sharedCartBody');
+            }
+        });
+    }
+}
+
+function closeSharedCart() {
+    document.getElementById('sharedCartPanel')?.classList.remove('open');
+    document.getElementById('sharedCartOverlay')?.classList.remove('open');
+}
+
+async function populateCommunityDropdown() {
+    const dropdown = document.getElementById('sharedCartCommunityDropdown');
+    if (!dropdown || !supabase) return;
+
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) {
+        dropdown.innerHTML = '<option value="">Sign in to see communities</option>';
+        return;
+    }
+
+    const { data, error } = await supabase
+        .from('community_members')
+        .select('communities(id, display_name)')
+        .eq('user_id', user.id);
+
+    if (error || !data || data.length === 0) {
+        dropdown.innerHTML = '<option value="">No communities yet</option>';
+        return;
+    }
+
+    dropdown.innerHTML = data.map(row =>
+        `<option value="${row.communities.id}">${row.communities.display_name}</option>`
+    ).join('');
+
+    if (data[0]?.communities?.id && communityCartModule) {
+        await communityCartModule.loadSharedCart(data[0].communities.id, 'sharedCartBody');
+    }
+}
 
 // ============================================================
 //  INIT
 // ============================================================
-(async function init() { const authed = await initAuth(); if (authed) renderCurrentCommunities(); })();
-
+(async function init() {
+    const authed = await initAuth();
+    if (authed) {
+        renderCurrentCommunities();
+        setupCommunityCartUI();
+        populateCommunityDropdown();
+    }
+})();
 // ============================================================
 //  PROFILE SIDEBAR
 // ============================================================
@@ -688,20 +732,6 @@ async function renderCommunitySummaryBox() {
         box.onclick = () => { window.location.href = 'social.html'; };
     } catch (err) { box.innerHTML = `<div class="community-summary-title">Your Communities</div><div class="community-summary-empty">Unable to load. <a href="social/social.html" style="color:#0c831f;font-weight:700;text-decoration:none;">Go to Social</a></div>`; box.onclick = () => { window.location.href = 'social/social.html'; }; }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // ============================================================
 //  SECTION: COMMUNITY MONTHLY SPEND TRACKER
