@@ -415,6 +415,8 @@ function renderProductCard(product) {
       </div>
       <div class="price-rows">${priceRowsHTML}</div>
       <div class="product-card-actions">
+        <button class="btn-add-community" type="button" data-community-add-toggle="${product.id}"
+          title="Add to community cart">Add · Community</button>
         <button class="btn-add-best${inCart ? ' added' : ''}" type="button" data-cart-toggle data-id="${product.id}">
           ${inCart ? '✓ Added' : `Add · ${getStoreName(selectedStore)} ₹${selectedPrice}`}
         </button>
@@ -877,6 +879,22 @@ document.getElementById('productGrid').addEventListener('click', event => {
     return;
   }
   const cartButton = event.target.closest('[data-cart-toggle]');
+
+
+
+
+  const communityButton = event.target.closest('[data-community-add-toggle]');
+  if (communityButton) {
+    event.stopPropagation();
+    const productId = Number(communityButton.dataset.communityAddToggle);
+    openInlineCommunityPicker(productId, communityButton);
+    return;
+  }
+
+
+
+
+
   if (cartButton) toggleCartItem(Number(cartButton.dataset.id));
 });
 
@@ -1394,12 +1412,21 @@ function setupCommunityCartUI() {
   const overlay = document.getElementById('sharedCartOverlay');
   const panel = document.getElementById('sharedCartPanel');
   const dropdown = document.getElementById('sharedCartCommunityDropdown');
+  const checkoutBtn = document.getElementById('sharedCheckoutBtn');
 
   if (!btn || !panel) return;
 
   btn.addEventListener('click', () => {
+    // Close smart cart if open
+    document.getElementById('cartPanel')?.classList.remove('open');
+    document.getElementById('cartOverlay')?.classList.remove('open');
+
     panel.classList.add('open');
     overlay.classList.add('open');
+    const communityId = dropdown?.value;
+    if (communityId && communityCartModule) {
+      communityCartModule.loadSharedCart(communityId, 'sharedCartBody');
+    }
   });
 
   if (closeBtn) closeBtn.addEventListener('click', closeSharedCart);
@@ -1409,8 +1436,21 @@ function setupCommunityCartUI() {
     dropdown.addEventListener('change', async (e) => {
       const communityId = e.target.value;
       if (communityId && communityCartModule) {
-        await communityCartModule.loadSharedCart(communityId, 'sharedCartBody');
+        communityCartModule.loadSharedCart(communityId, 'sharedCartBody');
       }
+    });
+  }
+
+  if (checkoutBtn) {
+    checkoutBtn.addEventListener('click', () => {
+      const communityId = dropdown?.value;
+      if (!communityId) {
+        alert('Please select a community first');
+        return;
+      }
+      localStorage.setItem('tokri_checkout_mode', 'shared');
+      localStorage.setItem('tokri_checkout_community', communityId);
+      window.location.href = './checkout/checkout.html';
     });
   }
 }
@@ -1456,37 +1496,144 @@ async function populateCommunityDropdown() {
 const originalRenderGrid = renderGrid;
 renderGrid = function (products) {
   originalRenderGrid(products);
-  attachCommunityCartButtons();
+
 };
 
-function attachCommunityCartButtons() {
-  if (!communityCartModule || !userCommunities.length) return;
-  document.querySelectorAll('.product-card').forEach(card => {
-    const productId = Number(card.dataset.id);
-    if (card.querySelector('.btn-add-community')) return; // already added
 
-    const actions = card.querySelector('.product-card-actions');
-    if (!actions) return;
 
-    const btn = document.createElement('button');
-    btn.className = 'btn-view-all btn-add-community';
-    btn.type = 'button';
-    btn.title = 'Add to community cart';
-    btn.innerHTML = '👥';
-    btn.addEventListener('click', async (e) => {
-      e.stopPropagation();
-      const product = PRODUCTS.find(p => p.id === productId);
-      if (!product) return;
-      const selectedStore = productSelections[productId] || getBestPrice(product.prices).store;
-      const result = await communityCartModule.addToSharedCart(productId, selectedStore, 1);
-      if (result.error) {
-        alert(result.error);
-      } else {
-        // Brief visual feedback
-        btn.innerHTML = '✓';
-        setTimeout(() => btn.innerHTML = '👥', 800);
-      }
-    });
-    actions.appendChild(btn);
-  });
+// Inline Community Picker
+function openInlineCommunityPicker(productId, anchorElement) {
+  renderInlinePicker(productId);
 }
+
+async function renderInlinePicker(productId) {
+  const overlay = document.getElementById('inlinePickerOverlay');
+  const strip = document.getElementById('inlinePickerStrip');
+
+  if (!overlay) {
+    // Create overlay if doesn't exist
+    const div = document.createElement('div');
+    div.id = 'inlinePickerOverlay';
+    div.className = 'inline-picker-overlay';
+    div.innerHTML = `
+      <div class="inline-picker-box">
+        <div class="inline-picker-title">Add to Community</div>
+        <div class="inline-picker-strip" id="inlinePickerStrip"></div>
+        <button class="btn btn-ghost inline-picker-close" onclick="closeInlinePicker()">Cancel</button>
+      </div>
+    `;
+    document.body.appendChild(div);
+  }
+
+  const overlayEl = document.getElementById('inlinePickerOverlay');
+  const stripEl = document.getElementById('inlinePickerStrip');
+
+  stripEl.innerHTML = '<div style="text-align:center;padding:20px;color:var(--text-muted);">Loading…</div>';
+  overlayEl.classList.add('open');
+
+  if (!supabase) {
+    stripEl.innerHTML = '<div style="text-align:center;padding:20px;color:var(--text-muted);">Sign in to see communities</div>';
+    return;
+  }
+
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) {
+    stripEl.innerHTML = '<div style="text-align:center;padding:20px;color:var(--text-muted);">Sign in to see communities</div>';
+    return;
+  }
+
+  const { data, error } = await supabase
+    .from('community_members')
+    .select('communities(id, display_name, handle, type)')
+    .eq('user_id', user.id);
+
+  if (error || !data || data.length === 0) {
+    stripEl.innerHTML = '<div style="text-align:center;padding:20px;color:var(--text-muted);">No communities yet</div>';
+    return;
+  }
+
+  const product = PRODUCTS.find(p => p.id === productId);
+  const selectedStore = productSelections[productId] || getBestPrice(product.prices).store;
+  stripEl.innerHTML = data.map(row => {
+    const c = row.communities;
+    const typeIcon = c.type === 'family' ? '👨‍👩‍👧‍👦' : '👥';
+    return `
+      <div class="inline-picker-card" onclick="window.addToSharedCart(${productId}, '${c.id}', '${selectedStore}'); window.closeInlinePicker();">
+        <div class="inline-picker-card-icon">${typeIcon}</div>
+        <div class="inline-picker-card-name">${c.display_name}</div>
+      </div>
+    `;
+  }).join('');
+}
+
+function closeInlinePicker() {
+  document.getElementById('inlinePickerOverlay')?.classList.remove('open');
+}
+
+async function addToSharedCart(productId, communityId, storeId) {
+  if (!supabase) return;
+
+  const product = PRODUCTS.find(p => p.id === productId);
+  if (!product) return;
+
+  const selectedStore = storeId || productSelections[productId] || getBestPrice(product.prices).store;
+  const price = product.prices[selectedStore];
+  if (price === null || price === undefined) {
+    alert('Product unavailable at selected store');
+    return;
+  }
+
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) return;
+
+  // Check existing same product+store in this community
+  const { data: existing } = await supabase
+    .from('shared_cart_items')
+    .select('id, qty')
+    .eq('community_id', communityId)
+    .eq('product_id', product.id)
+    .eq('selected_store', selectedStore)
+    .maybeSingle();
+
+  let error;
+  if (existing) {
+    const { error: updErr } = await supabase
+      .from('shared_cart_items')
+      .update({ qty: existing.qty + 1 })
+      .eq('id', existing.id);
+    error = updErr;
+  } else {
+    const { error: insErr } = await supabase
+      .from('shared_cart_items')
+      .insert({
+        community_id: communityId,
+        product_id: product.id,
+        product_name: product.name,
+        product_weight: product.weight || '',
+        product_emoji: product.emoji || '',
+        selected_store: selectedStore,
+        selected_price: price,
+        mrp: product.mrp || 0,
+        qty: 1,
+        added_by: user.id,
+        added_by_name: user.email?.split('@')[0] || 'Member'
+      });
+    error = insErr;
+  }
+
+  if (error) {
+    console.error('Failed to add to shared cart:', error);
+    alert('Failed to add: ' + error.message);
+  } else {
+    if (communityCartModule?.refreshSharedCart) {
+      communityCartModule.refreshSharedCart('sharedCartBody');
+    }
+  }
+}
+window.addToSharedCart = addToSharedCart;
+window.closeInlinePicker = closeInlinePicker;
+
+// Close picker on overlay click
+document.addEventListener('click', (e) => {
+  if (e.target.id === 'inlinePickerOverlay') closeInlinePicker();
+});

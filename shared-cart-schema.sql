@@ -89,3 +89,6 @@ DROP TRIGGER IF EXISTS update_shared_cart_timestamp ON public.shared_cart_items;
 CREATE TRIGGER update_shared_cart_timestamp
   BEFORE UPDATE ON public.shared_cart_items
   FOR EACH ROW EXECUTE FUNCTION public.update_shared_cart_timestamp();
+
+
+updated_at timestamptz NOT NULL DEFAULT now()

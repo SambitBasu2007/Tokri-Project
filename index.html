@@ -113,7 +113,6 @@
 
             <!-- Primary Navigation Links -->
             <nav class="main-nav">
-                <a href="#categories" class="nav-link active">Categories</a>
                 <a href="#compare" class="nav-link">Compare</a>
                 <a href="#how-it-works" class="nav-link">How It Works</a>
             </nav>
@@ -161,7 +160,7 @@
                         <circle cx="9" cy="7" r="4"></circle>
                         <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"></path>
                     </svg>
-                    <span class="badge-count" id="sharedCartCount">0</span>
+
                 </button>
 
 
@@ -385,6 +384,28 @@
                 <span class="cart-empty-icon">🧺</span>
                 <p>Select a community to view shared cart</p>
             </div>
+        </div>
+
+
+        <div class="shared-cart-panel-footer" id="sharedCartFooter" style="display:none;">
+            <div class="cart-summary-row">
+                <span>Items</span>
+                <span id="sharedCartItemCount">0</span>
+            </div>
+            <div class="cart-summary-row">
+                <span>MRP Total</span>
+                <span id="sharedCartMrpTotal">₹0</span>
+            </div>
+            <div class="cart-summary-row cart-savings">
+                <span>You Save</span>
+                <span id="sharedCartSavings">₹0</span>
+            </div>
+            <div class="cart-summary-row cart-total">
+                <span>Cart Total</span>
+                <span id="sharedCartTotal">₹0</span>
+            </div>
+            <button class="btn btn-primary btn-block" id="sharedCheckoutBtn">Proceed to Checkout</button>
+            <p class="cart-note">Items from your community shared cart</p>
         </div>
     </aside>
     <div class="shared-cart-overlay" id="sharedCartOverlay"></div>
