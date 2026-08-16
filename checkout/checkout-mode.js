@@ -402,7 +402,7 @@ removeItem = function (id) {
 
 
 const _originalPlaceOrder = placeOrder;
-placeOrder = function () {
+placeOrder = async function () {
     if (checkoutMode === 'shared') {
         if (sharedCartItems.length === 0) return;
 
@@ -416,7 +416,32 @@ placeOrder = function () {
             btn.disabled = true;
         }
 
-        setTimeout(() => {
+        // Record order for community monthly spend tracking
+        try {
+            const mod = await import('../shared/supabase.js');
+            const sb = mod.supabase;
+            if (sb && activeSharedCommunityId) {
+                const { data: { user } } = await sb.auth.getUser();
+                console.log('[Checkout] Auth user:', user?.id || 'NOT LOGGED IN');
+                if (user) {
+                    const { data, error } = await sb.from('order_events').insert({
+                        community_id: activeSharedCommunityId,
+                        ordered_by: user.id,
+                        amount: Math.round(grandTotal),
+                        created_at: new Date().toISOString()
+                    }).select();
+                    if (error) {
+                        console.error('[Checkout] Insert FAILED:', error);
+                    } else {
+                        console.log('[Checkout] Insert SUCCESS:', data);
+                    }
+                }
+            }
+        } catch (err) {
+            console.error('[Checkout] Exception during insert:', err);
+        }
+
+        setTimeout(async () => {
             alert(
                 `🎉 Community Order Placed Successfully!\n\n` +
                 `Community: ${communityName}\n` +
@@ -426,7 +451,9 @@ placeOrder = function () {
                 `Thank you for shopping with Tokri!`
             );
             const dbIds = sharedCartItems.map(i => i._dbId).filter(Boolean);
-            Promise.all(dbIds.map(id => removeFromSharedCart(id))).catch(err => console.warn('Clear shared cart failed:', err));
+            if (dbIds.length > 0) {
+                await Promise.all(dbIds.map(id => removeFromSharedCart(id)));
+            }
             sharedCartItems = [];
             window.location.href = '../index.html';
         }, 1400);
