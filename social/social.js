@@ -747,6 +747,18 @@ async function renderSpendHistory(communityId, containerId) {
         const { data, error } = await supabase
             .rpc('calculate_monthly_spend', { community_id: communityId });
 
+        // Filter to current month + 2 previous months
+        const now = new Date();
+        const currentYear = now.getFullYear();
+        const currentMonth = now.getMonth(); // 0-indexed
+        const allowedMonths = [];
+        for (let i = 0; i < 3; i++) {
+            const d = new Date(currentYear, currentMonth - i, 1);
+            const monthStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
+            allowedMonths.push(monthStr);
+        }
+        const filteredData = (data || []).filter(row => allowedMonths.includes(row.month));
+
         if (error) throw error;
 
         if (!data || data.length === 0) {
