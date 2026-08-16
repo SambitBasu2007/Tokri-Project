@@ -93,6 +93,29 @@ export function unloadSharedCart() {
     sharedCartItems = [];
 }
 
+export function getActiveCommunityId() { return activeCommunityId; }
+
+
+export async function refreshSharedCart(containerId = 'sharedCartBody') {
+    await refetchAndRender(containerId);
+}
+
+export function subscribeToSharedCart(communityId, containerId = 'sharedCartBody') {
+    if (!supabase || !communityId) return;
+    unloadSharedCart(); // clear any old sub
+    activeCommunityId = communityId;
+    refetchAndRender(containerId);
+    sharedCartRealtimeChannel = supabase
+        .channel('shared-cart-' + communityId)
+        .on('postgres_changes', {
+            event: '*',
+            schema: 'public',
+            table: 'shared_cart_items',
+            filter: `community_id=eq.${communityId}`,
+        }, () => refetchAndRender(containerId))
+        .subscribe();
+}
+
 export async function addToSharedCart(productId, selectedStore, qty = 1) {
     if (!supabase || !activeCommunityId) return { error: 'No active community' };
 
@@ -105,6 +128,25 @@ export async function addToSharedCart(productId, selectedStore, qty = 1) {
     const price = product.prices[selectedStore];
     if (price === null || price === undefined) return { error: 'Product unavailable at store' };
 
+    // Check if same product+store already exists for this community
+    const { data: existing } = await supabase
+        .from('shared_cart_items')
+        .select('id, qty')
+        .eq('community_id', activeCommunityId)
+        .eq('product_id', product.id)
+        .eq('selected_store', selectedStore)
+        .maybeSingle();
+
+    if (existing) {
+        // Increment qty
+        const { error } = await supabase
+            .from('shared_cart_items')
+            .update({ qty: existing.qty + qty })
+            .eq('id', existing.id);
+        return { error };
+    }
+
+    // Insert new
     const { data, error } = await supabase
         .from('shared_cart_items')
         .insert({
@@ -171,6 +213,9 @@ export function renderSharedCartItems(items, containerId = 'sharedCartBody') {
     const container = document.getElementById(containerId);
     if (!container) return;
 
+    // Update footer totals
+    updateSharedCartFooter(items);
+
     if (!items || items.length === 0) {
         container.innerHTML = `
       <div class="cart-empty">
@@ -206,7 +251,7 @@ export function renderSharedCartItems(items, containerId = 'sharedCartBody') {
                 <div class="cart-item-store">${item.product_weight || ''} · via ${store?.name || item.selected_store}</div>
                 <div class="cart-item-added-by">Added by ${item.added_by_name || 'Member'}</div>
               </div>
-              <span class="cart-item-price">${ccFormatPrice(item.selected_price * item.qty)}</span>
+              <span class="cart-item-price">${ccFormatPrice(item.selected_price)} × ${item.qty || 1}</span>
               <button class="cart-item-remove" data-shared-remove data-id="${item.id}" title="Remove" aria-label="Remove ${item.product_name}">&times;</button>
             </div>
           `).join('')}
@@ -217,9 +262,34 @@ export function renderSharedCartItems(items, containerId = 'sharedCartBody') {
     container.querySelectorAll('[data-shared-remove]').forEach(btn => {
         btn.addEventListener('click', async () => {
             const id = btn.dataset.id;
+            const row = btn.closest('.cart-item');
+            if (row) {
+                row.style.transition = 'opacity 0.15s ease';
+                row.style.opacity = '0';
+                setTimeout(() => row.remove(), 150);
+            }
             await removeFromSharedCart(id);
+            setTimeout(() => refetchAndRender(containerId), 250);
         });
     });
+}
+
+function updateSharedCartFooter(items) {
+    const footer = document.getElementById('sharedCartFooter');
+    if (!footer) return;
+    if (!items || items.length === 0) {
+        footer.style.display = 'none';
+        return;
+    }
+    const totalQty = items.reduce((s, i) => s + (i.qty || 1), 0);
+    const mrpTotal = items.reduce((s, i) => s + (i.mrp || 0) * (i.qty || 1), 0);
+    const cartTotal = items.reduce((s, i) => s + i.selected_price * (i.qty || 1), 0);
+    const savings = mrpTotal - cartTotal;
+    document.getElementById('sharedCartItemCount').textContent = totalQty;
+    document.getElementById('sharedCartMrpTotal').textContent = `₹${mrpTotal}`;
+    document.getElementById('sharedCartSavings').textContent = `– ₹${savings}`;
+    document.getElementById('sharedCartTotal').textContent = `₹${cartTotal}`;
+    footer.style.display = 'block';
 }
 
 function renderSharedCartUnavailable(containerId) {
