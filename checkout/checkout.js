@@ -539,20 +539,6 @@ function placeOrder() {
 }
 
 // ---------- Init ----------
-document.addEventListener('DOMContentLoaded', () => {
-    loadCart();
-    if (typeof initCheckoutMode === 'function') initCheckoutMode();
-    document.getElementById('placeOrderBtn').addEventListener('click', placeOrder);
-    document.getElementById('placeOrderBtn').addEventListener('click', placeOrder);
-    document.getElementById('checkoutModal').addEventListener('click', (e) => {
-        if (e.target === document.getElementById('checkoutModal')) closeModal();
-    });
-    document.addEventListener('click', handleDocumentClick);
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') closeModal();
-    });
-
-});
 
 
 
@@ -646,3 +632,20 @@ async function populateCheckoutCommunityDropdown() {
         await ccModule.loadSharedCart(data[0].communities.id, 'sharedCartBody');
     }
 }
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    loadCart();
+    const placeOrderBtn = document.getElementById('placeOrderBtn');
+    if (placeOrderBtn) placeOrderBtn.addEventListener('click', placeOrder);
+    const checkoutModal = document.getElementById('checkoutModal');
+    if (checkoutModal) {
+        checkoutModal.addEventListener('click', (e) => {
+            if (e.target === checkoutModal) closeModal();
+        });
+    }
+    document.addEventListener('click', handleDocumentClick);
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeModal();
+    });
+});

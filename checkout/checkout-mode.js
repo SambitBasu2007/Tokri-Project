@@ -3,6 +3,8 @@
 //  CHECKOUT MODE SELECTOR & SHARED CART INTEGRATION
 //  Appended to checkout.js — no existing code touched.
 // ============================================================
+import { removeFromSharedCart } from '../shared/community-cart.js';
+
 
 let checkoutMode = 'individual'; // 'individual' | 'shared'
 let sharedCartItems = [];
@@ -128,6 +130,7 @@ async function loadSharedCartForCheckout(communityId) {
 
     sharedCartItems = (data || []).map(item => ({
         id: item.product_id,
+        _dbId: item.id,  // Supabase row UUID
         name: item.product_name,
         emoji: item.product_emoji || '📦',
         weight: item.product_weight || '',
@@ -376,7 +379,12 @@ updateQty = function (id, delta) {
 const _originalRemoveItem = removeItem;
 removeItem = function (id) {
     if (checkoutMode === 'shared') {
+        const item = sharedCartItems.find(c => c.id === id);
+        const dbId = item?._dbId;
         sharedCartItems = sharedCartItems.filter(c => c.id !== id);
+        if (dbId) {
+            removeFromSharedCart(dbId).catch(err => console.warn('[Checkout] Failed to remove from shared cart:', err));
+        }
         if (sharedCartItems.length === 0) {
             renderSharedCartEmpty('No items in this community cart yet');
         } else {
@@ -393,9 +401,48 @@ removeItem = function (id) {
 
 
 
+const _originalPlaceOrder = placeOrder;
+placeOrder = function () {
+    if (checkoutMode === 'shared') {
+        if (sharedCartItems.length === 0) return;
 
+        const { grandTotal } = calculateTotalsForItems(sharedCartItems);
+        const storeNames = [...new Set(sharedCartItems.map(c => getStore(c.selectedStore)?.name).filter(Boolean))];
+        const communityName = userCommunitiesList.find(row => row.communities?.id === activeSharedCommunityId)?.communities?.display_name || 'Community';
 
+        const btn = document.getElementById('placeOrderBtn');
+        if (btn) {
+            btn.textContent = 'Placing Order…';
+            btn.disabled = true;
+        }
 
+        setTimeout(() => {
+            alert(
+                `🎉 Community Order Placed Successfully!\n\n` +
+                `Community: ${communityName}\n` +
+                `Total: ${formatPrice(grandTotal)}\n` +
+                `Payment: ${paymentMethod.toUpperCase()}\n` +
+                `Stores: ${storeNames.join(', ')}\n\n` +
+                `Thank you for shopping with Tokri!`
+            );
+            const dbIds = sharedCartItems.map(i => i._dbId).filter(Boolean);
+            Promise.all(dbIds.map(id => removeFromSharedCart(id))).catch(err => console.warn('Clear shared cart failed:', err));
+            sharedCartItems = [];
+            window.location.href = '../index.html';
+        }, 1400);
+    } else {
+        _originalPlaceOrder();
+    }
+};
+
+// Re-bind place order button to use the mode-aware override
+(function rebindPlaceOrderBtn() {
+    const btn = document.getElementById('placeOrderBtn');
+    if (!btn) return;
+    const newBtn = btn.cloneNode(true);
+    btn.parentNode.replaceChild(newBtn, btn);
+    newBtn.addEventListener('click', placeOrder);
+})();
 
 
 
@@ -430,6 +477,8 @@ function initCheckoutMode() {
         }, 800);
     }
 }
+
+initCheckoutMode();
 
 // Call init after DOM ready — add this inside the existing DOMContentLoaded
 // In checkout.js, modify the init block:
