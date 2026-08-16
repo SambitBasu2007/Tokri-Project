@@ -767,4 +767,9 @@
     #placeOrderBtn {
         display: block;
     }
+
+    .btn-primary {
+        display: block;
+        width: 100%;
+    }
 }

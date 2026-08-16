@@ -541,6 +541,8 @@ function placeOrder() {
 // ---------- Init ----------
 document.addEventListener('DOMContentLoaded', () => {
     loadCart();
+    if (typeof initCheckoutMode === 'function') initCheckoutMode();
+    document.getElementById('placeOrderBtn').addEventListener('click', placeOrder);
     document.getElementById('placeOrderBtn').addEventListener('click', placeOrder);
     document.getElementById('checkoutModal').addEventListener('click', (e) => {
         if (e.target === document.getElementById('checkoutModal')) closeModal();
@@ -549,6 +551,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') closeModal();
     });
+
 });
 
 
@@ -592,7 +595,8 @@ function setupCheckoutCommunityCartUI() {
         dropdown.addEventListener('change', async (e) => {
             const communityId = e.target.value;
             if (communityId && ccModule) {
-                await ccModule.loadSharedCart(communityId, 'sharedCartBody');
+                ccModule.unloadSharedCart();
+                ccModule.subscribeToSharedCart(communityId, 'sharedCartBody');
             }
         });
     }

@@ -13,6 +13,7 @@
     <meta name="description" content="Review your smart cart, split across stores for the best price.">
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="./checkout.css">
+    <link rel="stylesheet" href="./checkout-mode.css">
 
 </head>
 
@@ -27,7 +28,7 @@
                     <polyline points="12 19 5 12 12 5"></polyline>
                 </svg>
             </a>
-            <h1 class="checkout-title">Checkout</h1>
+            <h1 class="checkout-title" id="checkoutmainheader">Checkout</h1>
 
 
             <button class="icon-btn community-cart-btn" id="communityCartBtn" title="View community shared cart">
@@ -46,32 +47,62 @@
     </header>
 
     <main class="checkout-main">
+
+
+
+
+
+
+
+
+
         <div class="section-container checkout-container">
             <section class="checkout-delivery-strip" id="checkoutDeliveryStrip"></section>
             <section class="checkout-card checkout-address-card" id="checkoutAddress"></section>
+
+
+            <section class="checkout-card" id="communityPickerCard" style="display:none;">
+                <h2 class="checkout-card-title">Select a Community</h2>
+                <div class="community-picker-strip" id="communityPickerStrip">
+                    <div class="community-picker-empty">Loading communities…</div>
+                </div>
+            </section>
+
             <section class="checkout-card checkout-order-summary" id="checkoutOrderSummary">
                 <h2 class="checkout-card-title">Order Summary</h2>
             </section>
             <section class="checkout-card checkout-bill-details" id="checkoutBillDetails">
                 <h2 class="checkout-card-title">Bill Details</h2>
             </section>
+
+
+
+
+
+
+
             <section class="checkout-card checkout-payment" id="checkoutPayment">
                 <h2 class="checkout-card-title">Payment Method</h2>
             </section>
+
+
         </div>
     </main>
 
     <footer class="checkout-action-bar" id="checkoutActionBar">
-        <div class="checkout-action-total">
-            <span class="checkout-action-label">To Pay</span>
-            <span class="checkout-action-amount" id="checkoutActionAmount">₹0</span>
+        <div style="width:100%;">
+            <div class="checkout-mode-split" id="checkoutModeSplit">
+                <button class="checkout-mode-btn active" id="checkoutIndividualBtn" type="button">🛒 Individual
+                    Cart</button>
+                <button class="checkout-mode-btn" id="checkoutSharedBtn" type="button">👥 Shared Cart</button>
+            </div>
+            <div class="checkout-action-total">
+                <span class="checkout-action-label">To Pay</span>
+                <span class="checkout-action-amount" id="checkoutActionAmount">₹0</span>
+            </div>
         </div>
         <button class="btn btn-primary btn-lg" id="placeOrderBtn">Place Order</button>
     </footer>
-
-    <div class="checkout-modal-overlay" id="checkoutModal">
-        <div class="checkout-modal" id="checkoutModalContent"></div>
-    </div>
 
 
 
@@ -116,6 +147,8 @@
 
 
     <script type="module" src="../shared/community-cart.js"></script>
+    <script src="./checkout-mode.js"></script>
+
 </body>
 
 </html>
