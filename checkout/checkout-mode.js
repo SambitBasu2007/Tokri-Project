@@ -352,6 +352,54 @@ function calculateTotalsForItems(items) {
     return { itemTotal, deliveryTotal, couponDiscount, grandTotal, storeSubtotals };
 }
 
+
+
+
+
+// Override updateQty for shared cart
+const _originalUpdateQty = updateQty;
+updateQty = function (id, delta) {
+    if (checkoutMode === 'shared') {
+        const item = sharedCartItems.find(c => c.id === id);
+        if (!item) return;
+        item.qty = (item.qty || 1) + delta;
+        if (item.qty < 1) item.qty = 1;
+        renderOrderSummary(sharedCartItems, 'shared');
+        renderBillDetails(sharedCartItems, 'shared');
+        attachItemListeners();
+    } else {
+        _originalUpdateQty(id, delta);
+    }
+};
+
+// Override removeItem for shared cart
+const _originalRemoveItem = removeItem;
+removeItem = function (id) {
+    if (checkoutMode === 'shared') {
+        sharedCartItems = sharedCartItems.filter(c => c.id !== id);
+        if (sharedCartItems.length === 0) {
+            renderSharedCartEmpty('No items in this community cart yet');
+        } else {
+            renderOrderSummary(sharedCartItems, 'shared');
+            renderBillDetails(sharedCartItems, 'shared');
+            attachItemListeners();
+        }
+    } else {
+        _originalRemoveItem(id);
+    }
+};
+
+
+
+
+
+
+
+
+
+
+
+
 // ---------- Wire up mode buttons on init ----------
 
 function initCheckoutMode() {
