@@ -1,0 +1,190 @@
+.lg-bar {
+    /* ---- tuning variables, scoped to this component only ---- */
+    --bounce-duration: 0.85s;
+    --bounce-easing: cubic-bezier(0.34, 1.8, 0.64, 1);
+    --bar-width: 600px;
+    --bar-height: 64px;
+    --bar-radius: 24px;
+    /* keep under half of --bar-height, or the
+                            ends fully round off into a stadium/pill
+                            instead of a rounded rectangle */
+
+    position: fixed;
+    left: 50%;
+    bottom: 28px;
+    z-index: 999;
+
+    height: var(--bar-height);
+    width: var(--bar-height);
+    /* circle: width == height */
+    border-radius: 999px;
+    /* clamps to a perfect circle at this size */
+    overflow: hidden;
+    isolation: isolate;
+    /* keeps the backdrop-filter in its own compositing layer */
+
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0.10));
+
+    /* Safari fallback: plain frosted blur (no SVG distortion support) */
+    -webkit-backdrop-filter: blur(22px) saturate(180%);
+    /* Chromium/Firefox: actual refraction via the SVG turbulence filter,
+       layered with a light blur + extra saturation/brightness for the
+       "milky" glass tint. Lower blur here on purpose — too much blur
+       washes out the distortion detail. */
+    backdrop-filter: blur(6px) url(#lg-distortion) saturate(180%) brightness(1.05);
+
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.18),
+        0 2px 10px rgba(0, 0, 0, 0.10),
+        inset 0 1px 1px rgba(255, 255, 255, 0.65),
+        /* bright top rim */
+        inset 0 -1px 1px rgba(255, 255, 255, 0.12);
+    /* faint bottom rim */
+
+    transform: translate(-50%, 30px);
+    opacity: 0;
+    pointer-events: none;
+
+    transition:
+        width var(--bounce-duration) var(--bounce-easing),
+        border-radius var(--bounce-duration) var(--bounce-easing),
+        transform var(--bounce-duration) var(--bounce-easing),
+        opacity 0.45s ease;
+}
+
+.lg-bar.is-visible {
+    width: var(--bar-width);
+    border-radius: var(--bar-radius);
+    transform: translate(-50%, 0);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Slow drifting specular highlight — the bit that makes it read as
+     "liquid" rather than static frosted plastic. A soft light patch
+     that gently shifts, like light catching a curved glass surface. */
+.lg-bar::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(160px 50px, rgba(255, 255, 255, 0.55), transparent 70%);
+    background-repeat: no-repeat;
+    background-position: 15% -10%;
+    animation: lg-shimmer 7s ease-in-out infinite alternate;
+    pointer-events: none;
+}
+
+@keyframes lg-shimmer {
+    from {
+        background-position: 15% -10%;
+    }
+
+    to {
+        background-position: 45% 20%;
+    }
+}
+
+.lg-bar__content {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 0 20px;
+    white-space: nowrap;
+}
+
+.lg-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border-radius: 14px;
+    /* smaller than --bar-radius on purpose — nesting
+                             a smaller radius inside a bigger one reads as
+                             intentional design, not a coincidence */
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+    color: #1e7e34;
+    /* green + white theme — change this to retint every chip */
+    background: rgba(255, 255, 255, 0.28);
+    border: 1.5px solid currentColor;
+
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.45s ease, transform 0.35s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+
+.lg-chip__icon {
+    font-size: 1.05em;
+    line-height: 1;
+}
+
+.lg-chip:hover {
+    background: rgba(255, 255, 255, 0.65);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    transform: translateY(-3px);
+}
+
+/* stagger the chips in slightly after the bar itself opens */
+.lg-bar.is-visible .lg-chip {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.lg-bar.is-visible .lg-chip:nth-child(1) {
+    transition-delay: 0.32s;
+}
+
+.lg-bar.is-visible .lg-chip:nth-child(2) {
+    transition-delay: 0.40s;
+}
+
+.lg-bar.is-visible .lg-chip:nth-child(3) {
+    transition-delay: 0.48s;
+}
+
+@media (max-width: 680px) {
+    .lg-bar {
+        --bar-width: 81vw;
+        --bar-height: 60px;
+        --bar-radius: 20px;
+    }
+
+    .lg-bar__content {
+        gap: 10px;
+        padding: 0 12px;
+    }
+
+    .lg-chip {
+        padding: 8px 12px;
+        font-size: 0.82rem;
+        border-radius: 12px;
+        gap: 6px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .lg-bar {
+        transition: opacity 0.3s ease;
+        width: var(--bar-width);
+        border-radius: var(--bar-radius);
+        transform: translate(-50%, 0);
+    }
+
+    .lg-bar::before {
+        animation: none;
+    }
+
+    .lg-chip {
+        transition: opacity 0.3s ease;
+        transition-delay: 0s !important;
+    }
+}
