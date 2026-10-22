@@ -1,0 +1,470 @@
+{
+  "1": {
+    "blinkit": {
+      "price": 32,
+      "inStock": true
+    },
+    "zepto": {
+      "price": 31,
+      "inStock": true
+    },
+    "swiggy": {
+      "price": 33,
+      "inStock": true
+    },
+    "bigbasket": {
+      "price": 30,
+      "inStock": true
+    },
+    "jiomart": {
+      "price": 29,
+      "inStock": true
+    },
+    "flipkart": {
+      "price": 33,
+      "inStock": true
+    }
+  },
+  "2": {
+    "blinkit": {
+      "price": 265,
+      "inStock": true
+    },
+    "zepto": {
+      "price": 272,
+      "inStock": true
+    },
+    "swiggy": {
+      "price": 269,
+      "inStock": true
+    },
+    "bigbasket": {
+      "price": 259,
+      "inStock": true
+    },
+    "jiomart": {
+      "price": 255,
+      "inStock": true
+    },
+    "flipkart": {
+      "price": 255,
+      "inStock": false
+    }
+  },
+  "3": {
+    "blinkit": {
+      "price": 139,
+      "inStock": true
+    },
+    "zepto": {
+      "price": 142,
+      "inStock": true
+    },
+    "swiggy": {
+      "price": 135,
+      "inStock": true
+    },
+    "bigbasket": {
+      "price": 138,
+      "inStock": true
+    },
+    "jiomart": {
+      "price": 140,
+      "inStock": true
+    },
+    "flipkart": {
+      "price": 145,
+      "inStock": true
+    }
+  },
+  "4": {
+    "blinkit": {
+      "price": 165,
+      "inStock": true
+    },
+    "zepto": {
+      "price": 159,
+      "inStock": true
+    },
+    "swiggy": {
+      "price": 170,
+      "inStock": true
+    },
+    "bigbasket": {
+      "price": 155,
+      "inStock": true
+    },
+    "jiomart": {
+      "price": 162,
+      "inStock": true
+    },
+    "flipkart": {
+      "price": 168,
+      "inStock": true
+    }
+  },
+  "5": {
+    "blinkit": {
+      "price": 55,
+      "inStock": true
+    },
+    "zepto": {
+      "price": 50,
+      "inStock": true
+    },
+    "swiggy": {
+      "price": 56,
+      "inStock": true
+    },
+    "bigbasket": {
+      "price": 52,
+      "inStock": true
+    },
+    "jiomart": {
+      "price": 53,
+      "inStock": true
+    },
+    "flipkart": {
+      "price": 54,
+      "inStock": true
+    }
+  },
+  "6": {
+    "blinkit": {
+      "price": 38,
+      "inStock": true
+    },
+    "zepto": {
+      "price": 40,
+      "inStock": true
+    },
+    "swiggy": {
+      "price": 38,
+      "inStock": true
+    },
+    "bigbasket": {
+      "price": 35,
+      "inStock": true
+    },
+    "jiomart": {
+      "price": 36,
+      "inStock": true
+    },
+    "flipkart": {
+      "price": 39,
+      "inStock": true
+    }
+  },
+  "7": {
+    "blinkit": {
+      "price": 18,
+      "inStock": true
+    },
+    "zepto": {
+      "price": 20,
+      "inStock": true
+    },
+    "swiggy": {
+      "price": 24,
+      "inStock": true
+    },
+    "bigbasket": {
+      "price": 22,
+      "inStock": true
+    },
+    "jiomart": {
+      "price": 25,
+      "inStock": true
+    },
+    "flipkart": {
+      "price": 22,
+      "inStock": false
+    }
+  },
+  "8": {
+    "blinkit": {
+      "price": 270,
+      "inStock": true
+    },
+    "zepto": {
+      "price": 275,
+      "inStock": true
+    },
+    "swiggy": {
+      "price": 268,
+      "inStock": true
+    },
+    "bigbasket": {
+      "price": 265,
+      "inStock": true
+    },
+    "jiomart": {
+      "price": 262,
+      "inStock": true
+    },
+    "flipkart": {
+      "price": 278,
+      "inStock": true
+    }
+  },
+  "9": {
+    "blinkit": {
+      "price": 90,
+      "inStock": true
+    },
+    "zepto": {
+      "price": 99,
+      "inStock": true
+    },
+    "swiggy": {
+      "price": 95,
+      "inStock": true
+    },
+    "bigbasket": {
+      "price": 92,
+      "inStock": true
+    },
+    "jiomart": {
+      "price": 96,
+      "inStock": true
+    },
+    "flipkart": {
+      "price": 98,
+      "inStock": true
+    }
+  },
+  "10": {
+    "blinkit": {
+      "price": 95,
+      "inStock": true
+    },
+    "zepto": {
+      "price": 105,
+      "inStock": true
+    },
+    "swiggy": {
+      "price": 102,
+      "inStock": true
+    },
+    "bigbasket": {
+      "price": 99,
+      "inStock": true
+    },
+    "jiomart": {
+      "price": 97,
+      "inStock": true
+    },
+    "flipkart": {
+      "price": 97,
+      "inStock": false
+    }
+  },
+  "11": {
+    "blinkit": {
+      "price": 115,
+      "inStock": true
+    },
+    "zepto": {
+      "price": 118,
+      "inStock": true
+    },
+    "swiggy": {
+      "price": 120,
+      "inStock": true
+    },
+    "bigbasket": {
+      "price": 110,
+      "inStock": true
+    },
+    "jiomart": {
+      "price": 108,
+      "inStock": true
+    },
+    "flipkart": {
+      "price": 122,
+      "inStock": true
+    }
+  },
+  "12": {
+    "blinkit": {
+      "price": 450,
+      "inStock": true
+    },
+    "zepto": {
+      "price": 465,
+      "inStock": true
+    },
+    "swiggy": {
+      "price": 435,
+      "inStock": true
+    },
+    "bigbasket": {
+      "price": 455,
+      "inStock": true
+    },
+    "jiomart": {
+      "price": 440,
+      "inStock": true
+    },
+    "flipkart": {
+      "price": 470,
+      "inStock": true
+    }
+  },
+  "13": {
+    "blinkit": {
+      "price": 45,
+      "inStock": true
+    },
+    "zepto": {
+      "price": 42,
+      "inStock": true
+    },
+    "swiggy": {
+      "price": 48,
+      "inStock": true
+    },
+    "bigbasket": {
+      "price": 40,
+      "inStock": true
+    },
+    "jiomart": {
+      "price": 44,
+      "inStock": true
+    },
+    "flipkart": {
+      "price": 46,
+      "inStock": true
+    }
+  },
+  "14": {
+    "blinkit": {
+      "price": 90,
+      "inStock": true
+    },
+    "zepto": {
+      "price": 88,
+      "inStock": true
+    },
+    "swiggy": {
+      "price": 92,
+      "inStock": true
+    },
+    "bigbasket": {
+      "price": 85,
+      "inStock": true
+    },
+    "jiomart": {
+      "price": 87,
+      "inStock": true
+    },
+    "flipkart": {
+      "price": 95,
+      "inStock": true
+    }
+  },
+  "15": {
+    "blinkit": {
+      "price": 99,
+      "inStock": true
+    },
+    "zepto": {
+      "price": 90,
+      "inStock": true
+    },
+    "swiggy": {
+      "price": 102,
+      "inStock": true
+    },
+    "bigbasket": {
+      "price": 95,
+      "inStock": true
+    },
+    "jiomart": {
+      "price": 92,
+      "inStock": true
+    },
+    "flipkart": {
+      "price": 92,
+      "inStock": false
+    }
+  },
+  "16": {
+    "blinkit": {
+      "price": 28,
+      "inStock": true
+    },
+    "zepto": {
+      "price": 25,
+      "inStock": true
+    },
+    "swiggy": {
+      "price": 30,
+      "inStock": true
+    },
+    "bigbasket": {
+      "price": 22,
+      "inStock": true
+    },
+    "jiomart": {
+      "price": 26,
+      "inStock": true
+    },
+    "flipkart": {
+      "price": 32,
+      "inStock": true
+    }
+  },
+  "17": {
+    "blinkit": {
+      "price": 70,
+      "inStock": true
+    },
+    "zepto": {
+      "price": 72,
+      "inStock": true
+    },
+    "swiggy": {
+      "price": 78,
+      "inStock": true
+    },
+    "bigbasket": {
+      "price": 75,
+      "inStock": true
+    },
+    "jiomart": {
+      "price": 73,
+      "inStock": true
+    },
+    "flipkart": {
+      "price": 76,
+      "inStock": true
+    }
+  },
+  "18": {
+    "blinkit": {
+      "price": 165,
+      "inStock": true
+    },
+    "zepto": {
+      "price": 168,
+      "inStock": true
+    },
+    "swiggy": {
+      "price": 172,
+      "inStock": true
+    },
+    "bigbasket": {
+      "price": 158,
+      "inStock": true
+    },
+    "jiomart": {
+      "price": 152,
+      "inStock": true
+    },
+    "flipkart": {
+      "price": 175,
+      "inStock": true
+    }
+  }
+}
