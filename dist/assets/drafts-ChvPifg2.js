@@ -1,0 +1,1 @@
+import{Q as t,R as a,T as n}from"./index-cXjQRsT1.js";const o={community:"tokri:draft:community",address:"tokri:draft:address",coupon:"tokri:draft:coupon"};function i(r){return t("session",o[r])}function c(r,s){a("session",o[r],s)}function d(r){n("session",o[r])}export{d as c,i as r,c as w};
