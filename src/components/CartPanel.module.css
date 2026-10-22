@@ -1,0 +1,287 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: var(--overlay);
+  display: flex;
+  justify-content: flex-end;
+}
+
+.panel {
+  width: min(440px, 100%);
+  height: 100%;
+  background: var(--bg);
+  border-left: 1px solid var(--line-strong);
+  display: flex;
+  flex-direction: column;
+  animation: slideIn 140ms ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(16px);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px;
+  border-bottom: 1px solid var(--line);
+}
+
+.title {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.sub {
+  font-size: 12px;
+  color: var(--ink-2);
+}
+
+.close {
+  border: 1px solid transparent;
+  background: transparent;
+  padding: 4px;
+  border-radius: var(--r);
+  color: var(--ink-2);
+  display: inline-flex;
+}
+
+.close:hover {
+  border-color: var(--line);
+}
+
+.body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.notice {
+  border: 1px solid var(--line);
+  background: var(--bg-2);
+  padding: 8px 10px;
+  font-size: 12px;
+  color: var(--ink-2);
+  border-radius: var(--r);
+}
+
+.group {
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+}
+
+.groupHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--line);
+}
+
+.groupName {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.groupMeta {
+  font-size: 12px;
+  color: var(--ink-3);
+}
+
+.lines {
+  display: flex;
+  flex-direction: column;
+}
+
+.line {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 4px 12px;
+  padding: 10px;
+  border-bottom: 1px solid var(--line);
+}
+
+.line:last-child {
+  border-bottom: 0;
+}
+
+.lineMain {
+  min-width: 0;
+}
+
+.lineName {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.lineMeta {
+  font-size: 12px;
+  color: var(--ink-3);
+}
+
+.linePrice {
+  font-size: 14px;
+  font-weight: 600;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.owner {
+  font-size: 12px;
+  color: var(--ink-3);
+}
+
+.lineActions {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.lineRight {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.stepper {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r);
+  height: 28px;
+}
+
+.stepper button {
+  width: 26px;
+  height: 26px;
+  border: 0;
+  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stepper button:hover {
+  background: var(--bg-2);
+}
+
+.stepper button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  background: transparent;
+}
+
+.stepper span {
+  min-width: 26px;
+  text-align: center;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.remove {
+  border: 0;
+  background: transparent;
+  font-size: 12px;
+  color: var(--ink-3);
+  text-decoration: underline;
+}
+
+.emptyWrap {
+  padding: 24px 0;
+}
+
+.optimizer {
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.optimizerTitle {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.optimizerText {
+  font-size: 12px;
+  color: var(--ink-2);
+}
+
+.foot {
+  border-top: 1px solid var(--line);
+  padding: 14px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: var(--bg);
+}
+
+.totalRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: var(--ink-2);
+  font-variant-numeric: tabular-nums;
+}
+
+.grand {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-top: 1px solid var(--line);
+  padding-top: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-top: 4px;
+}
+
+.actions .checkout {
+  flex: 1;
+}
+
+.clear {
+  font-size: 12px;
+  color: var(--ink-3);
+  background: transparent;
+  border: 0;
+  text-decoration: underline;
+}
+
+.footNote {
+  font-size: 12px;
+  color: var(--ink-3);
+  text-align: center;
+}
+
+@media (max-width: 520px) {
+  .panel {
+    width: 100%;
+  }
+}

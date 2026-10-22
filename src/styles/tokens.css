@@ -1,0 +1,38 @@
+:root {
+  color-scheme: light;
+  --ink: #111111;
+  --ink-2: #555555;
+  --ink-3: #6f6f6f;
+  --line: #e6e6e6;
+  --line-strong: #cfcfcf;
+  --bg: #ffffff;
+  --bg-2: #f6f6f6;
+  --bg-3: #ededed;
+  --accent: #0c831f;
+  --accent-ink: #ffffff;
+  --danger: #b42318;
+  --overlay: rgba(17, 17, 17, 0.4);
+  --r: 2px;
+  --r-lg: 4px;
+  --space: 8px;
+  --header-h: 64px;
+  --font: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --max-w: 1200px;
+}
+
+/* The inline script in index.html sets data-theme before first paint. */
+[data-theme='dark'] {
+  color-scheme: dark;
+  --ink: #f0f0f0;
+  --ink-2: #b4b4b4;
+  --ink-3: #909090;
+  --line: #2b2b2b;
+  --line-strong: #414141;
+  --bg: #0d0d0d;
+  --bg-2: #171717;
+  --bg-3: #242424;
+  --accent: #3fb950;
+  --accent-ink: #06130a;
+  --danger: #ff8b7f;
+  --overlay: rgba(0, 0, 0, 0.6);
+}

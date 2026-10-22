@@ -1,0 +1,243 @@
+.trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  background: transparent;
+  color: var(--ink-2);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 0;
+  min-height: 28px;
+  text-align: left;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 2px;
+}
+
+.trigger:hover {
+  color: var(--ink);
+  text-decoration-color: currentColor;
+}
+
+.trigger:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
+.compact {
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  padding: 2px 8px;
+  text-decoration: none;
+  color: var(--ink-2);
+}
+
+.compact:hover {
+  border-color: var(--ink-3);
+  color: var(--ink);
+}
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 85;
+  background: transparent;
+}
+
+.popover {
+  position: fixed;
+  top: var(--pop-top, 0);
+  left: var(--pop-left, 8px);
+  width: 340px;
+  max-height: min(420px, calc(100vh - 24px));
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-lg);
+  box-shadow: 0 12px 32px rgb(0 0 0 / 14%);
+  overflow: hidden;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--line);
+}
+
+.title {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--ink-2);
+  border-radius: var(--r);
+  padding: 4px;
+  min-height: 28px;
+  min-width: 28px;
+}
+
+.close:hover {
+  border-color: var(--line);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 6px;
+  overflow-y: auto;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 44px;
+  padding: 6px 10px;
+  border: 1px solid transparent;
+  border-radius: var(--r);
+  background: transparent;
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+}
+
+.row:hover:not(:disabled),
+.row:focus-visible {
+  background: var(--bg-2);
+}
+
+.row:focus-visible {
+  outline: 1px solid var(--ink);
+  outline-offset: -1px;
+}
+
+.rowSelected {
+  border-color: var(--ink);
+}
+
+.radio {
+  position: relative;
+  width: 16px;
+  height: 16px;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  background: var(--bg);
+  flex-shrink: 0;
+}
+
+.rowSelected .radio {
+  border-color: var(--ink);
+}
+
+.rowSelected .radio::after {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+  background: var(--ink);
+}
+
+.rowMain {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.rowName {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.bestTag {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.eta {
+  font-size: 12px;
+  color: var(--ink-3);
+}
+
+.rowPrice {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1px;
+  font-size: 14px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.diff {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--ink-3);
+}
+
+.rowOut {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.rowOut .rowName {
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .backdrop {
+    background: var(--overlay);
+    display: flex;
+    align-items: flex-end;
+  }
+
+  .popover {
+    top: auto;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: auto;
+    max-height: 78vh;
+    border-radius: 12px 12px 0 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
+    padding-bottom: env(safe-area-inset-bottom, 0);
+    animation: sheetIn 160ms ease-out;
+  }
+
+  .list {
+    padding-bottom: 12px;
+  }
+}
+
+@keyframes sheetIn {
+  from {
+    transform: translateY(12px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
