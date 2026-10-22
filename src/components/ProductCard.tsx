@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Bell, ImageOff, Minus, Plus } from 'lucide-react';
+import { Bell, Check, ImageOff, Minus, Plus } from 'lucide-react';
 import type { Product } from '../types';
 import { bestPrice, selectedPrice, unitPrice } from '../lib/pricing';
 import { MAX_QUANTITY } from '../lib/cart';
@@ -22,7 +22,8 @@ interface ProductCardProps {
 
 export function ProductCard({ product, compact = false }: ProductCardProps) {
   const { stores } = useCatalog();
-  const { add, quantityOf, itemFor, setQty, activeLabel, active, selectedStore, storeFor } = useCart();
+  const { add, quantityOf, itemFor, setQty, activeLabel, active, selectedStore, storeFor, selectStore } =
+    useCart();
   const { watchFor } = useWatches();
   const [imageFailed, setImageFailed] = useState(false);
   const [watchOpen, setWatchOpen] = useState(false);
@@ -111,38 +112,44 @@ export function ProductCard({ product, compact = false }: ProductCardProps) {
 
       {!compact && price != null && (
         <div className={styles.storeList} aria-label={`Compare ${stores.length} stores`}>
-          <p className={styles.storeListHead}>Compare {stores.length} stores</p>
+          <p className={styles.storeListHead}>Pick a store</p>
           {storeRows.map((row) => {
             const available = row.price != null;
             const selected = available && row.store.id === storeId;
             const best = available && cheapest != null && row.price === cheapest.price;
             return (
-              <div
+              <button
                 key={row.store.id}
+                type="button"
                 className={`${styles.storeRow} ${selected ? styles.storeRowSelected : ''} ${
                   available ? '' : styles.storeRowOut
                 }`.trim()}
+                disabled={!available}
+                onClick={() => void selectStore(product.id, row.store.id)}
+                aria-pressed={selected}
+                aria-label={
+                  available
+                    ? `Choose ${row.store.name} for ${product.name} at ${inr(row.price!)}`
+                    : `${row.store.name} is out of stock`
+                }
+                title={
+                  available
+                    ? `Choose ${row.store.name} · ${inr(row.price!)}`
+                    : `${row.store.name} is out of stock`
+                }
               >
                 <span className={styles.storeName}>
                   {row.store.name}
                   {best && <span className={styles.storeBest}>Best</span>}
                 </span>
                 <span className={styles.storePrice}>{available ? inr(row.price!) : '—'}</span>
-                <button
-                  type="button"
-                  className={styles.storeAdd}
-                  disabled={!available}
-                  onClick={() => void add(product.id, row.store.id)}
-                  aria-label={`Add ${product.name} from ${row.store.name}`}
-                  title={
-                    available
-                      ? `Add from ${row.store.name} · ${inr(row.price!)}`
-                      : `${row.store.name} is out of stock`
-                  }
+                <span
+                  className={`${styles.storePick} ${selected ? styles.storePickOn : ''}`}
+                  aria-hidden
                 >
-                  <Plus size={12} aria-hidden />
-                </button>
-              </div>
+                  {selected && <Check size={12} />}
+                </span>
+              </button>
             );
           })}
         </div>

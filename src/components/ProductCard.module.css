@@ -188,10 +188,29 @@
   grid-template-columns: minmax(0, 1fr) auto 26px;
   align-items: center;
   gap: 5px;
+  width: 100%;
   min-height: 25px;
   padding: 1px 4px;
   border: 1px solid transparent;
   border-radius: var(--r);
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.storeRow:hover:not(:disabled) {
+  background: var(--bg-2);
+}
+
+.storeRow:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 1px;
+}
+
+.storeRow:disabled {
+  cursor: not-allowed;
 }
 
 .storeRowSelected {
@@ -232,29 +251,23 @@
   white-space: nowrap;
 }
 
-.storeAdd {
-  width: 24px;
+.storePick {
+  width: 22px;
   height: 22px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   flex: none;
-  border: 1px solid var(--accent);
-  border-radius: var(--r);
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
   background: transparent;
-  color: var(--accent);
+  color: var(--accent-ink);
   padding: 0;
 }
 
-.storeAdd:hover:not(:disabled) {
+.storePickOn {
+  border-color: var(--accent);
   background: var(--accent);
-  color: var(--accent-ink);
-}
-
-.storeAdd:disabled {
-  border-color: var(--line);
-  color: var(--ink-3);
-  cursor: not-allowed;
 }
 
 .storeNotice {
@@ -360,8 +373,9 @@
     font-size: 10px;
   }
 
-  .storeAdd {
-    width: 22px;
+  .storePick {
+    width: 20px;
+    height: 20px;
   }
 
   .addButton {
