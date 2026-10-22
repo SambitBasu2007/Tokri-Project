@@ -166,16 +166,37 @@ export function newestPriceUpdate(prices: PriceRow[]): string | null {
   return newest;
 }
 
+/** Display order for home rails, shop tabs and breadcrumbs. */
+export const CATEGORY_ORDER = [
+  'dairy',
+  'bakery',
+  'atta',
+  'oil',
+  'fruits',
+  'vegetables',
+  'snacks',
+  'instant',
+  'beverages',
+  'personal',
+  'cleaning',
+  'household',
+  'health',
+] as const;
+
 export const CATEGORY_LABELS: Record<string, string> = {
   dairy: 'Dairy',
-  atta: 'Staples',
-  oil: 'Oil',
+  bakery: 'Bakery & eggs',
+  atta: 'Staples & dals',
+  oil: 'Cooking oil',
   fruits: 'Fruits',
   vegetables: 'Vegetables',
-  snacks: 'Snacks',
+  snacks: 'Snacks & biscuits',
+  instant: 'Instant food',
   beverages: 'Beverages',
   personal: 'Personal care',
   cleaning: 'Cleaning',
+  household: 'Household',
+  health: 'Health & wellness',
 };
 
 export function categoryLabel(category: string): string {

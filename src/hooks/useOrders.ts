@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { supabase, isMissingRelation } from '../lib/supabase';
-import { DEMO_ORDERS_KEY } from '../lib/cart';
+import { DELETED_ORDERS_KEY, DEMO_ORDERS_KEY } from '../lib/cart';
 import { parseOrderItems } from '../lib/orders';
 import { deliveryFeeFor, selectedPrice } from '../lib/pricing';
 import type { Json } from '../lib/database.types';
@@ -17,12 +17,34 @@ export interface PlaceOrderInput {
   amount?: number;
 }
 
+function readDeletedOrderIds(): Set<string> {
+  try {
+    const raw = localStorage.getItem(DELETED_ORDERS_KEY);
+    if (!raw) return new Set();
+    const parsed: unknown = JSON.parse(raw);
+    return new Set(Array.isArray(parsed) ? parsed.filter((id): id is string => typeof id === 'string') : []);
+  } catch {
+    return new Set();
+  }
+}
+
+function writeDeletedOrderIds(ids: Set<string>): void {
+  try {
+    localStorage.setItem(DELETED_ORDERS_KEY, JSON.stringify([...ids].slice(-200)));
+  } catch {
+    // Ignore storage failures.
+  }
+}
+
 function readLocalOrders(): Order[] {
+  const hidden = readDeletedOrderIds();
   try {
     const raw = localStorage.getItem(DEMO_ORDERS_KEY);
     if (!raw) return [];
     const parsed: unknown = JSON.parse(raw);
-    return Array.isArray(parsed) ? (parsed as Order[]) : [];
+    return Array.isArray(parsed)
+      ? (parsed as Order[]).filter((order) => order && !hidden.has(order.id))
+      : [];
   } catch {
     return [];
   }
@@ -84,7 +106,8 @@ export function useOrders() {
         return;
       }
 
-      const rows = data ?? [];
+      const hidden = readDeletedOrderIds();
+      const rows = (data ?? []).filter((row) => !hidden.has(row.id));
       let shipments: {
         id: string;
         order_id: string;
@@ -218,5 +241,33 @@ export function useOrders() {
     [user, stores, nowOffset, load],
   );
 
-  return { orders, loading, placeOrder, refresh: load, nowOffset };
+  const deleteOrder = useCallback(
+    async (order: Order): Promise<{ removed: boolean; remote: boolean }> => {
+      // Remove the row from this device immediately, then try the server. A
+      // hidden-id list keeps a DB order from flashing back if RLS needs the
+      // 0005 delete policy applied first.
+      const hidden = readDeletedOrderIds();
+      hidden.add(order.id);
+      writeDeletedOrderIds(hidden);
+      const local = readLocalOrders().filter((entry) => entry.id !== order.id);
+      writeLocalOrders(local);
+      setOrders((current) => current.filter((entry) => entry.id !== order.id));
+
+      if (order.source === 'db' && user) {
+        const { error } = await supabase
+          .from('order_events')
+          .delete()
+          .eq('id', order.id)
+          .eq('ordered_by', user.id);
+        if (error) {
+          if (!isMissingRelation(error)) console.warn('[Tokri] delete order:', error.message);
+          return { removed: true, remote: false };
+        }
+      }
+      return { removed: true, remote: true };
+    },
+    [user],
+  );
+
+  return { orders, loading, placeOrder, deleteOrder, refresh: load, nowOffset };
 }

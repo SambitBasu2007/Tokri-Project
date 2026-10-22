@@ -54,7 +54,7 @@
       "unit": "ml",
       "barcode": null,
       "imageUrl": "/images/1.jpg",
-      "imageCreditUrl": "https://world.openfoodfacts.org/product/8901262150064/amul-taaza",
+      "imageCreditUrl": "https://www.bigbasket.com/pd/40114416/amul-taaza-milk-1-l-pouch/",
       "prices": {
         "blinkit": {
           "price": 32,
@@ -92,7 +92,7 @@
       "unit": "g",
       "barcode": null,
       "imageUrl": "/images/2.jpg",
-      "imageCreditUrl": "https://world.openfoodfacts.org/product/8901725121723/aashirvaad-whole-wheat-atta",
+      "imageCreditUrl": "https://www.amazon.in/Aashirvaad-11-Shudh-Chakki-Atta/dp/B007GGTLEC",
       "prices": {
         "blinkit": {
           "price": 265,
@@ -130,7 +130,7 @@
       "unit": "ml",
       "barcode": null,
       "imageUrl": "/images/3.jpg",
-      "imageCreditUrl": "https://world.openfoodfacts.org/product/8906007280280/fortune-sunlite-refined-sunflower-oil",
+      "imageCreditUrl": "https://www.amazon.in/Fortune-Sunlite-Refined-Sunflower-Oil/dp/B0140PWG0M",
       "prices": {
         "blinkit": {
           "price": 139,
@@ -168,7 +168,7 @@
       "unit": "g",
       "barcode": null,
       "imageUrl": "/images/4.jpg",
-      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Red_Apple.jpg",
+      "imageCreditUrl": "https://www.amazon.in/Fresh-Baby-Apple-Shimla-10-12/dp/B07YNV6S4Z",
       "prices": {
         "blinkit": {
           "price": 165,
@@ -206,7 +206,7 @@
       "unit": "g",
       "barcode": null,
       "imageUrl": "/images/5.jpg",
-      "imageCreditUrl": "https://world.openfoodfacts.org/product/12751112/haldirams-aloo-bhujia",
+      "imageCreditUrl": "https://www.woolworths.com.au/shop/productdetails/297036/haldiram-s-aloo-bhujia",
       "prices": {
         "blinkit": {
           "price": 55,
@@ -244,7 +244,7 @@
       "unit": "ml",
       "barcode": null,
       "imageUrl": "/images/6.jpg",
-      "imageCreditUrl": "https://world.openfoodfacts.org/product/9300675009829/coca-cola",
+      "imageCreditUrl": "https://www.bigbasket.com/pd/251023/coca-cola-soft-drink-original-taste-750-ml-pet-bottle/",
       "prices": {
         "blinkit": {
           "price": 38,
@@ -282,7 +282,7 @@
       "unit": "g",
       "barcode": null,
       "imageUrl": "/images/7.jpg",
-      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Spinach_leaves.jpg",
+      "imageCreditUrl": "https://www.vecteezy.com/photo/75057288-fresh-spinach-leaves-isolated-on-white-background-healthy-green-vegetables-top-view-photo",
       "prices": {
         "blinkit": {
           "price": 18,
@@ -320,7 +320,7 @@
       "unit": "g",
       "barcode": null,
       "imageUrl": "/images/8.jpg",
-      "imageCreditUrl": "https://world.openfoodfacts.org/product/8901262010016/amul-pasteurized-butter",
+      "imageCreditUrl": "https://fineindia.ca/products/butter-1",
       "prices": {
         "blinkit": {
           "price": 270,
@@ -352,13 +352,13 @@
       "id": 9,
       "name": "Maggi 2-Minute Noodles",
       "category": "snacks",
-      "weight": "Family Pack (8×70g)",
+      "weight": "Family Pack (8×70 g)",
       "mrp": 112,
       "unitQty": 560,
       "unit": "g",
       "barcode": null,
       "imageUrl": "/images/9.jpg",
-      "imageCreditUrl": "https://world.openfoodfacts.org/product/8901058000306/maggi-2-minute-noodles-family-pack",
+      "imageCreditUrl": "https://www.amazon.in/2-minute-Instant-Goodness-Choicest-Favourite/dp/B00U7GDTGO",
       "prices": {
         "blinkit": {
           "price": 90,
@@ -396,7 +396,7 @@
       "unit": "ml",
       "barcode": null,
       "imageUrl": "/images/10.jpg",
-      "imageCreditUrl": "https://world.openfoodfacts.org/product/8901396389675/dettol-liquid-handwash",
+      "imageCreditUrl": "https://jammubasket.com/p/buy/dettol-original-liquid-hand-wash-refill-900-ml/online/374/",
       "prices": {
         "blinkit": {
           "price": 95,
@@ -434,7 +434,7 @@
       "unit": "ml",
       "barcode": null,
       "imageUrl": "/images/11.jpg",
-      "imageCreditUrl": "https://world.openfoodfacts.org/product/8901396152804/harpic-disinfectant-bathroom-cleaner-lemon-fresh",
+      "imageCreditUrl": "https://www.amazon.in/Harpic-Toilet-Cleaner-Power-Bottle/dp/B01LXGGVLH",
       "prices": {
         "blinkit": {
           "price": 115,
@@ -472,7 +472,7 @@
       "unit": "g",
       "barcode": null,
       "imageUrl": "/images/12.jpg",
-      "imageCreditUrl": "https://world.openfoodfacts.org/product/0690225101134/india-gate-basmati-rice",
+      "imageCreditUrl": "https://www.amazon.in/India-Gate-Delight-Basmati-Broken/dp/B0CBXJF8JN",
       "prices": {
         "blinkit": {
           "price": 450,
@@ -510,7 +510,7 @@
       "unit": "pc",
       "barcode": null,
       "imageUrl": "/images/13.jpg",
-      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Bananas.jpg",
+      "imageCreditUrl": "https://www.amazon.in/Fresh-Baby-Banana-Robusta-1kg/dp/B09QCXHTBR",
       "prices": {
         "blinkit": {
           "price": 45,
@@ -548,7 +548,7 @@
       "unit": "g",
       "barcode": null,
       "imageUrl": "/images/14.jpg",
-      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Panir_Paneer_Indian_cheese_fresh.jpg",
+      "imageCreditUrl": "https://www.bigbasket.com/pd/40096747/amul-malai-fresh-paneer-200-g/",
       "prices": {
         "blinkit": {
           "price": 90,
@@ -586,7 +586,7 @@
       "unit": "ml",
       "barcode": null,
       "imageUrl": "/images/15.jpg",
-      "imageCreditUrl": "https://world.openfoodfacts.org/product/5022313000312/tropicana",
+      "imageCreditUrl": "https://www.amazon.in/Tropicana-Juicy-Orange-12-1000ml-Carton/dp/B00VV8SSEK",
       "prices": {
         "blinkit": {
           "price": 99,
@@ -624,7 +624,7 @@
       "unit": "g",
       "barcode": null,
       "imageUrl": "/images/16.jpg",
-      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Tomatoes.jpg",
+      "imageCreditUrl": "https://www.amazon.in/Fresh-Tomato-Hybrid-1kg-Pack/dp/B07BG6QWJK",
       "prices": {
         "blinkit": {
           "price": 28,
@@ -662,7 +662,7 @@
       "unit": "g",
       "barcode": null,
       "imageUrl": "/images/17.jpg",
-      "imageCreditUrl": "https://world.openfoodfacts.org/product/8844719115685/lays-classic",
+      "imageCreditUrl": "https://www.flipkart.com/lay-s-classic-salted-potato-chips/p/itm2bbfef2f76850",
       "prices": {
         "blinkit": {
           "price": 70,
@@ -692,15 +692,15 @@
     },
     {
       "id": 18,
-      "name": "Rin Liquid Detergent",
+      "name": "Surf Excel Matic Liquid",
       "category": "cleaning",
       "weight": "1 L",
-      "mrp": 190,
+      "mrp": 240,
       "unitQty": 1000,
       "unit": "ml",
       "barcode": null,
       "imageUrl": "/images/18.jpg",
-      "imageCreditUrl": "https://world.openfoodfacts.org/product/8901030770876/rin-liquid",
+      "imageCreditUrl": "https://www.amazon.in/Surf-Excel-Matic-Liquid-Detergent/dp/B071GFQ697",
       "prices": {
         "blinkit": {
           "price": 165,
@@ -724,6 +724,4490 @@
         },
         "flipkart": {
           "price": 175,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 19,
+      "name": "Amul Gold Full Cream Milk",
+      "category": "dairy",
+      "weight": "1 L Pouch",
+      "mrp": 38,
+      "unitQty": 1000,
+      "unit": "ml",
+      "barcode": null,
+      "imageUrl": "/images/19.jpg",
+      "imageCreditUrl": "https://www.bigbasket.com/pd/40175764/amul-amul-gold-1-l/",
+      "prices": {
+        "blinkit": {
+          "price": 36,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 36,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 36,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 36,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 36,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 36,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 20,
+      "name": "Mother Dairy Toned Milk",
+      "category": "dairy",
+      "weight": "1 L Pouch",
+      "mrp": 36,
+      "unitQty": 1000,
+      "unit": "ml",
+      "barcode": null,
+      "imageUrl": "/images/20.jpg",
+      "imageCreditUrl": "https://www.bigbasket.com/pd/30007665/mother-dairy-toned-milk-tm-1-l-carton/",
+      "prices": {
+        "blinkit": {
+          "price": 34,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 34,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 34,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 34,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 34,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 34,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 21,
+      "name": "Nestlé A+ Toned Milk",
+      "category": "dairy",
+      "weight": "1 L Tetra Pack",
+      "mrp": 75,
+      "unitQty": 1000,
+      "unit": "ml",
+      "barcode": null,
+      "imageUrl": "/images/21.jpg",
+      "imageCreditUrl": "https://www.amazon.in/Nestle-Toned-Milk-Tetra-Pack/dp/B01H7636XW",
+      "prices": {
+        "blinkit": {
+          "price": 71,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 71,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 71,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 71,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 71,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 71,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 22,
+      "name": "Amul Masti Dahi",
+      "category": "dairy",
+      "weight": "400 g Cup",
+      "mrp": 45,
+      "unitQty": 400,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/22.jpg",
+      "imageCreditUrl": "https://www.bigbasket.com/pd/104851/amul-masti-dahi-400-g-cup/",
+      "prices": {
+        "blinkit": {
+          "price": 43,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 43,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 43,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 43,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 43,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 43,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 23,
+      "name": "Mother Dairy Classic Curd",
+      "category": "dairy",
+      "weight": "400 g Cup",
+      "mrp": 40,
+      "unitQty": 400,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/23.jpg",
+      "imageCreditUrl": "https://www.amazon.in/Mother-Dairy-Dahi-Classic-Pouch/dp/B06XWXXNKG",
+      "prices": {
+        "blinkit": {
+          "price": 38,
+          "inStock": false
+        },
+        "zepto": {
+          "price": 38,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 38,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 38,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 38,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 38,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 24,
+      "name": "Amul Cheese Slices",
+      "category": "dairy",
+      "weight": "200 g Pack",
+      "mrp": 150,
+      "unitQty": 200,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/24.jpg",
+      "imageCreditUrl": "https://www.amazon.in/Amul-A-Cheese-Slices-200g/dp/B00NNMKV4C",
+      "prices": {
+        "blinkit": {
+          "price": 143,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 143,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 143,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 143,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 143,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 143,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 25,
+      "name": "Amul Cheese Spread",
+      "category": "dairy",
+      "weight": "200 g Jar",
+      "mrp": 135,
+      "unitQty": 200,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/25.jpg",
+      "imageCreditUrl": "https://www.amazon.in/Amul-Cheese-Spread-200g/dp/B01IBTD1SE",
+      "prices": {
+        "blinkit": {
+          "price": 128,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 128,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 128,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 128,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 128,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 128,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 26,
+      "name": "Britannia Cheese Slices",
+      "category": "dairy",
+      "weight": "200 g Pack",
+      "mrp": 145,
+      "unitQty": 200,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/26.jpg",
+      "imageCreditUrl": "https://www.bigbasket.com/pd/124870/britannia-cheese-slices-200-g-pouch/",
+      "prices": {
+        "blinkit": {
+          "price": 138,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 138,
+          "inStock": false
+        },
+        "swiggy": {
+          "price": 138,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 138,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 138,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 138,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 27,
+      "name": "Epigamia Greek Yogurt Blueberry",
+      "category": "dairy",
+      "weight": "90 g Cup",
+      "mrp": 45,
+      "unitQty": 90,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/27.jpg",
+      "imageCreditUrl": "https://www.bigbasket.com/pd/40075139/epigamia-greek-yogurt-blueberry-90-g-cup/",
+      "prices": {
+        "blinkit": {
+          "price": 43,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 43,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 43,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 43,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 43,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 43,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 28,
+      "name": "Amul Lassi",
+      "category": "dairy",
+      "weight": "200 ml Tetra",
+      "mrp": 25,
+      "unitQty": 200,
+      "unit": "ml",
+      "barcode": null,
+      "imageUrl": "/images/28.jpg",
+      "imageCreditUrl": "https://www.amazon.in/Amul-Kool-Lassee-Rose-200ml/dp/B00O8X3O9E",
+      "prices": {
+        "blinkit": {
+          "price": 24,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 24,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 24,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 24,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 24,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 24,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 29,
+      "name": "Amul Fresh Cream",
+      "category": "dairy",
+      "weight": "250 ml",
+      "mrp": 95,
+      "unitQty": 250,
+      "unit": "ml",
+      "barcode": null,
+      "imageUrl": "/images/29.jpg",
+      "imageCreditUrl": "https://www.amazon.in/Amul-Fresh-Cream-250ml/dp/B0758LVKLL",
+      "prices": {
+        "blinkit": {
+          "price": 90,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 90,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 90,
+          "inStock": false
+        },
+        "bigbasket": {
+          "price": 90,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 90,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 90,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 30,
+      "name": "Amul Ghee",
+      "category": "dairy",
+      "weight": "500 ml Jar",
+      "mrp": 350,
+      "unitQty": 500,
+      "unit": "ml",
+      "barcode": null,
+      "imageUrl": "/images/30.jpg",
+      "imageCreditUrl": "https://www.amazon.in/Amul-Pure-Ghee-Bottle-500ml/dp/B06XHK44QK",
+      "prices": {
+        "blinkit": {
+          "price": 333,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 333,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 333,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 333,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 333,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 333,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 31,
+      "name": "Mother Dairy Ghee",
+      "category": "dairy",
+      "weight": "500 ml Jar",
+      "mrp": 340,
+      "unitQty": 500,
+      "unit": "ml",
+      "barcode": null,
+      "imageUrl": "/images/31.jpg",
+      "imageCreditUrl": "https://www.bigbasket.com/pd/70001269/mother-dairy-ghee-500-ml-carton/",
+      "prices": {
+        "blinkit": {
+          "price": 323,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 323,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 323,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 323,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 323,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 323,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 32,
+      "name": "Farm Fresh Eggs",
+      "category": "bakery",
+      "weight": "6 pcs",
+      "mrp": 54,
+      "unitQty": 6,
+      "unit": "pc",
+      "barcode": null,
+      "imageUrl": "/images/32.jpg",
+      "imageCreditUrl": "https://www.bigbasket.com/pd/40038379/fresho-farm-eggs-brown-medium-antibiotic-residue-free-6-pcs/",
+      "prices": {
+        "blinkit": {
+          "price": 51,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 51,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 52,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 51,
+          "inStock": false
+        },
+        "jiomart": {
+          "price": 51,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 51,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 33,
+      "name": "Britannia Brown Bread",
+      "category": "bakery",
+      "weight": "400 g",
+      "mrp": 55,
+      "unitQty": 400,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/33.jpg",
+      "imageCreditUrl": "https://www.bigbasket.com/pd/20000006/britannia-bread-brown-400-g-pouch/",
+      "prices": {
+        "blinkit": {
+          "price": 52,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 52,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 52,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 52,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 52,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 52,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 34,
+      "name": "English Oven Multigrain Bread",
+      "category": "bakery",
+      "weight": "400 g",
+      "mrp": 60,
+      "unitQty": 400,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/34.jpg",
+      "imageCreditUrl": "https://www.amazon.in/English-Oven-Multigrain-Bread-400g/dp/B077Y832Z7",
+      "prices": {
+        "blinkit": {
+          "price": 56,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 56,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 56,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 56,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 56,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 56,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 35,
+      "name": "Pillsbury Whole Wheat Atta",
+      "category": "atta",
+      "weight": "5 kg",
+      "mrp": 300,
+      "unitQty": 5000,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/35.jpg",
+      "imageCreditUrl": "https://www.desertcart.in/products/110507433-pillsbury-chakki-fresh-atta-made-from-finest-quality-of-wheat-grains-100-atta-0-maida-upto-6-hours-of-softness-5kg",
+      "prices": {
+        "blinkit": {
+          "price": 281,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 267,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 270,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 259,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 258,
+          "inStock": false
+        },
+        "flipkart": {
+          "price": 269,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 36,
+      "name": "Aashirvaad Select Atta",
+      "category": "atta",
+      "weight": "5 kg",
+      "mrp": 360,
+      "unitQty": 5000,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/36.jpg",
+      "imageCreditUrl": "https://www.amazon.in/Aashirvaad-Select-Superior-Sharbati-Atta/dp/B00HUJQIZK",
+      "prices": {
+        "blinkit": {
+          "price": 324,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 328,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 332,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 318,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 310,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 331,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 37,
+      "name": "Tata Sampann Toor Dal",
+      "category": "atta",
+      "weight": "1 kg",
+      "mrp": 190,
+      "unitQty": 1000,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/37.jpg",
+      "imageCreditUrl": "https://www.amazon.in/Tata-Sampann-Pulses-Toor-Dal/dp/B074N7VHV4",
+      "prices": {
+        "blinkit": {
+          "price": 175,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 166,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 180,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 163,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 163,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 167,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 38,
+      "name": "Tata Sampann Moong Dal",
+      "category": "atta",
+      "weight": "1 kg",
+      "mrp": 190,
+      "unitQty": 1000,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/38.jpg",
+      "imageCreditUrl": "https://www.amazon.in/Tata-Sampann-Moong-Dal-1kg/dp/B075335G7N",
+      "prices": {
+        "blinkit": {
+          "price": 168,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 170,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 172,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 165,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 163,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 171,
+          "inStock": false
+        }
+      }
+    },
+    {
+      "id": 39,
+      "name": "Tata Sampann Chana Dal",
+      "category": "atta",
+      "weight": "1 kg",
+      "mrp": 120,
+      "unitQty": 1000,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/39.jpg",
+      "imageCreditUrl": "https://www.amazon.in/Tata-Sampann-Chana-Dal-1kg/dp/B07532J31B",
+      "prices": {
+        "blinkit": {
+          "price": 109,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 110,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 112,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 103,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 103,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 104,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 40,
+      "name": "Tata Salt",
+      "category": "atta",
+      "weight": "1 kg",
+      "mrp": 28,
+      "unitQty": 1000,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/40.jpg",
+      "imageCreditUrl": "https://www.amazon.in/Tata-Invictus_EAN_IJAEAEDJABABF-Salt-1kg-Pack/dp/B00L141L2K",
+      "prices": {
+        "blinkit": {
+          "price": 26,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 25,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 27,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 24,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 24,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 25,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 41,
+      "name": "Madhur Sugar",
+      "category": "atta",
+      "weight": "1 kg",
+      "mrp": 55,
+      "unitQty": 1000,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/41.jpg",
+      "imageCreditUrl": "https://epkmart.com/product/madhur-pure-and-hygienic-sugar-1kg/",
+      "prices": {
+        "blinkit": {
+          "price": 49,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 50,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 50,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 48,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 47,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 50,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 42,
+      "name": "India Gate Poha",
+      "category": "atta",
+      "weight": "1 kg",
+      "mrp": 60,
+      "unitQty": 1000,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/42.jpg",
+      "imageCreditUrl": "https://eu.dookan.com/products/india-gate-poha-powa-flattened-rice-medium-1kg",
+      "prices": {
+        "blinkit": {
+          "price": 55,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 52,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 56,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 52,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 52,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 52,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 43,
+      "name": "Bombay Sooji",
+      "category": "atta",
+      "weight": "500 g",
+      "mrp": 35,
+      "unitQty": 500,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/43.jpg",
+      "imageCreditUrl": "https://paimark.com/product/bombay-rava-500-gm/",
+      "prices": {
+        "blinkit": {
+          "price": 33,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 31,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 34,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 30,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 30,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 31,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 44,
+      "name": "Tata Sampann Besan",
+      "category": "atta",
+      "weight": "500 g",
+      "mrp": 65,
+      "unitQty": 500,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/44.jpg",
+      "imageCreditUrl": "https://www.tatanutrikorner.com/collections/tata-sampann",
+      "prices": {
+        "blinkit": {
+          "price": 58,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 59,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 60,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 57,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 56,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 60,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 45,
+      "name": "MDH Turmeric Powder",
+      "category": "atta",
+      "weight": "100 g",
+      "mrp": 45,
+      "unitQty": 100,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/45.jpg",
+      "imageCreditUrl": "https://www.amazon.in/MDH-Turmeric-100g/dp/B01BHTKV8I",
+      "prices": {
+        "blinkit": {
+          "price": 41,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 39,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 42,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 39,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 39,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 40,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 46,
+      "name": "Everest Red Chilli Powder",
+      "category": "atta",
+      "weight": "100 g",
+      "mrp": 60,
+      "unitQty": 100,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/46.jpg",
+      "imageCreditUrl": "https://www.amazon.in/Everest-Powder-Kashmirilal-Ground-Chilly/dp/B0152ROOE8",
+      "prices": {
+        "blinkit": {
+          "price": 53,
+          "inStock": false
+        },
+        "zepto": {
+          "price": 54,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 54,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 52,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 52,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 54,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 47,
+      "name": "MDH Garam Masala",
+      "category": "atta",
+      "weight": "100 g",
+      "mrp": 75,
+      "unitQty": 100,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/47.jpg",
+      "imageCreditUrl": "https://www.amazon.in/MDH-Garam-Masala-100g/dp/B002XH1BXI",
+      "prices": {
+        "blinkit": {
+          "price": 68,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 69,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 70,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 67,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 65,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 65,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 48,
+      "name": "Saffola Gold Blended Oil",
+      "category": "oil",
+      "weight": "1 L",
+      "mrp": 190,
+      "unitQty": 1000,
+      "unit": "ml",
+      "barcode": null,
+      "imageUrl": "/images/48.jpg",
+      "imageCreditUrl": "https://www.amazon.in/Saffola-Gold-Cooking-Oil-Vegetable/dp/B07235TJ14",
+      "prices": {
+        "blinkit": {
+          "price": 176,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 167,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 180,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 163,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 164,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 168,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 49,
+      "name": "Fortune Kachi Ghani Mustard Oil",
+      "category": "oil",
+      "weight": "1 L",
+      "mrp": 180,
+      "unitQty": 1000,
+      "unit": "ml",
+      "barcode": null,
+      "imageUrl": "/images/49.jpg",
+      "imageCreditUrl": "https://www.amazon.in/Fortune-Pehli-Dhaar-Pressed-Mustard/dp/B0D45H471Q",
+      "prices": {
+        "blinkit": {
+          "price": 160,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 162,
+          "inStock": false
+        },
+        "swiggy": {
+          "price": 164,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 157,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 155,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 163,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 50,
+      "name": "Dhara Groundnut Oil",
+      "category": "oil",
+      "weight": "1 L",
+      "mrp": 220,
+      "unitQty": 1000,
+      "unit": "ml",
+      "barcode": null,
+      "imageUrl": "/images/50.jpg",
+      "imageCreditUrl": "https://www.bigbasket.com/pd/200061/dhara-oil-groundnut-1-l-pouch/",
+      "prices": {
+        "blinkit": {
+          "price": 200,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 190,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 205,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 189,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 189,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 191,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 51,
+      "name": "Sundrop Refined Sunflower Oil",
+      "category": "oil",
+      "weight": "1 L",
+      "mrp": 160,
+      "unitQty": 1000,
+      "unit": "ml",
+      "barcode": null,
+      "imageUrl": "/images/51.jpg",
+      "imageCreditUrl": "https://www.bigbasket.com/pd/255499/sundrop-super-lite-advanced-sunflower-oil-1-l-pouch/",
+      "prices": {
+        "blinkit": {
+          "price": 149,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 141,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 153,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 138,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 139,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 143,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 52,
+      "name": "Nagpur Oranges",
+      "category": "fruits",
+      "weight": "1 kg",
+      "mrp": 100,
+      "unitQty": 1000,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/52.jpg",
+      "imageCreditUrl": "https://www.amazon.in/Fresh-Orange-Nagpur-Small-1kg/dp/B09SJJ5BDB",
+      "prices": {
+        "blinkit": {
+          "price": 89,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 91,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 92,
+          "inStock": false
+        },
+        "bigbasket": {
+          "price": 88,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 85,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 91,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 53,
+      "name": "Green Grapes",
+      "category": "fruits",
+      "weight": "500 g",
+      "mrp": 70,
+      "unitQty": 500,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/53.jpg",
+      "imageCreditUrl": "https://www.bigbasket.com/pd/40122797/fresho-grapes-green-seedless-premium-500-g/",
+      "prices": {
+        "blinkit": {
+          "price": 64,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 61,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 66,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 60,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 60,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 61,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 54,
+      "name": "Pomegranate",
+      "category": "fruits",
+      "weight": "1 kg",
+      "mrp": 180,
+      "unitQty": 1000,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/54.jpg",
+      "imageCreditUrl": "https://rawabihypermarket.com/pomegranate-yemen-1kg/287",
+      "prices": {
+        "blinkit": {
+          "price": 169,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 160,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 162,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 156,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 153,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 162,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 55,
+      "name": "Alphonso Mangoes",
+      "category": "fruits",
+      "weight": "1 kg",
+      "mrp": 350,
+      "unitQty": 1000,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/55.jpg",
+      "imageCreditUrl": "https://www.sharjahcoop.ae/en/mango-alphonso-indonesia-1kg/p/2020559000000",
+      "prices": {
+        "blinkit": {
+          "price": 315,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 319,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 324,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 310,
+          "inStock": false
+        },
+        "jiomart": {
+          "price": 298,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 301,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 56,
+      "name": "Watermelon",
+      "category": "fruits",
+      "weight": "1 kg",
+      "mrp": 35,
+      "unitQty": 1000,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/56.jpg",
+      "imageCreditUrl": "https://helloomarket.com/index.php?route=product/product&product_id=5734",
+      "prices": {
+        "blinkit": {
+          "price": 32,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 31,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 33,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 30,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 30,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 31,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 57,
+      "name": "Kiwi",
+      "category": "fruits",
+      "weight": "3 pcs",
+      "mrp": 150,
+      "unitQty": 3,
+      "unit": "pc",
+      "barcode": null,
+      "imageUrl": "/images/57.jpg",
+      "imageCreditUrl": "https://www.amazon.in/Fresh-Kiwi-Indian-Pcs-Pack/dp/B09771S7QL",
+      "prices": {
+        "blinkit": {
+          "price": 133,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 135,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 136,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 131,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 128,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 136,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 58,
+      "name": "Dragon Fruit",
+      "category": "fruits",
+      "weight": "1 pc",
+      "mrp": 90,
+      "unitQty": 1,
+      "unit": "pc",
+      "barcode": null,
+      "imageUrl": "/images/58.jpg",
+      "imageCreditUrl": "https://www.vecteezy.com/photo/43284641-fresh-dragon-fruit-whole-dragon-fruit-isolated-healthy-diet-vegetarian-food",
+      "prices": {
+        "blinkit": {
+          "price": 82,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 83,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 84,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 77,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 77,
+          "inStock": false
+        },
+        "flipkart": {
+          "price": 78,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 59,
+      "name": "Onions",
+      "category": "vegetables",
+      "weight": "1 kg",
+      "mrp": 40,
+      "unitQty": 1000,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/59.jpg",
+      "imageCreditUrl": "https://www.amazon.in/Fresh-Onions-Sambar-1kg-Pack/dp/B07HNCCKNB",
+      "prices": {
+        "blinkit": {
+          "price": 37,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 35,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 38,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 34,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 35,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 36,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 60,
+      "name": "Potatoes",
+      "category": "vegetables",
+      "weight": "1 kg",
+      "mrp": 35,
+      "unitQty": 1000,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/60.jpg",
+      "imageCreditUrl": "https://www.amazon.in/Fresh-Baby-Potato-1kg-Pack/dp/B07BG6QL9K",
+      "prices": {
+        "blinkit": {
+          "price": 31,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 32,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 32,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 31,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 29,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 32,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 61,
+      "name": "Coriander",
+      "category": "vegetables",
+      "weight": "100 g",
+      "mrp": 20,
+      "unitQty": 100,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/61.jpg",
+      "imageCreditUrl": "https://www.amazon.in/Fresh-Coriander-100g-Pack/dp/B07BG5GJJW",
+      "prices": {
+        "blinkit": {
+          "price": 18,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 17,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 19,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 17,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 17,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 17,
+          "inStock": false
+        }
+      }
+    },
+    {
+      "id": 62,
+      "name": "Green Chillies",
+      "category": "vegetables",
+      "weight": "100 g",
+      "mrp": 15,
+      "unitQty": 100,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/62.jpg",
+      "imageCreditUrl": "https://globalfoodhub.com/products/fresh-green-chillies-birds-eye-100g",
+      "prices": {
+        "blinkit": {
+          "price": 14,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 13,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 14,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 13,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 12,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 13,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 63,
+      "name": "Ginger",
+      "category": "vegetables",
+      "weight": "250 g",
+      "mrp": 60,
+      "unitQty": 250,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/63.jpg",
+      "imageCreditUrl": "https://www.naheed.pk/fresh-basket-ginger-250g",
+      "prices": {
+        "blinkit": {
+          "price": 54,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 55,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 55,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 53,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 50,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 55,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 64,
+      "name": "Garlic",
+      "category": "vegetables",
+      "weight": "250 g",
+      "mrp": 50,
+      "unitQty": 250,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/64.jpg",
+      "imageCreditUrl": "https://www.amazon.in/Fresh-Garlic-250-g/dp/B07L8GXQT1",
+      "prices": {
+        "blinkit": {
+          "price": 46,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 44,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 47,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 42,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 43,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 44,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 65,
+      "name": "Lemons",
+      "category": "vegetables",
+      "weight": "4 pcs",
+      "mrp": 30,
+      "unitQty": 4,
+      "unit": "pc",
+      "barcode": null,
+      "imageUrl": "/images/65.jpg",
+      "imageCreditUrl": "https://www.amazon.co.uk/Morrisons-Unwaxed-Lemon-4-Pack/dp/B07K68YMB2",
+      "prices": {
+        "blinkit": {
+          "price": 26,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 27,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 27,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 26,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 25,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 27,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 66,
+      "name": "Cucumber",
+      "category": "vegetables",
+      "weight": "500 g",
+      "mrp": 25,
+      "unitQty": 500,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/66.jpg",
+      "imageCreditUrl": "https://www.amazon.in/Fresh-Cucumber-500g-Pack/dp/B07HMZV34D",
+      "prices": {
+        "blinkit": {
+          "price": 23,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 23,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 23,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 21,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 21,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 22,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 67,
+      "name": "Carrots",
+      "category": "vegetables",
+      "weight": "500 g",
+      "mrp": 40,
+      "unitQty": 500,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/67.jpg",
+      "imageCreditUrl": "https://www.amazon.ae/Carrots-Australia-500-g-Approx/dp/B0BB7XKBXZ",
+      "prices": {
+        "blinkit": {
+          "price": 37,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 35,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 38,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 34,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 35,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 35,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 68,
+      "name": "Capsicum",
+      "category": "vegetables",
+      "weight": "500 g",
+      "mrp": 45,
+      "unitQty": 500,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/68.jpg",
+      "imageCreditUrl": "https://www.sharjahcoop.ae/en/capsicum-green---500g-3-4-pieces/p/D000000000046",
+      "prices": {
+        "blinkit": {
+          "price": 40,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 41,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 41,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 39,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 37,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 41,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 69,
+      "name": "Cauliflower",
+      "category": "vegetables",
+      "weight": "1 pc",
+      "mrp": 40,
+      "unitQty": 1,
+      "unit": "pc",
+      "barcode": null,
+      "imageUrl": "/images/69.jpg",
+      "imageCreditUrl": "https://www.amazon.in/Fresh-Cauliflower-small-Approx-250-400gm/dp/B09H3CZ5KL",
+      "prices": {
+        "blinkit": {
+          "price": 36,
+          "inStock": false
+        },
+        "zepto": {
+          "price": 35,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 37,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 33,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 34,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 35,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 70,
+      "name": "Broccoli",
+      "category": "vegetables",
+      "weight": "1 pc",
+      "mrp": 80,
+      "unitQty": 1,
+      "unit": "pc",
+      "barcode": null,
+      "imageUrl": "/images/70.jpg",
+      "imageCreditUrl": "https://www.vecteezy.com/photo/74237781-fresh-piece-of-raw-broccoli-against-a-white-background",
+      "prices": {
+        "blinkit": {
+          "price": 75,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 71,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 77,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 69,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 66,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 71,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 71,
+      "name": "Pebbles Frozen Green Peas",
+      "category": "vegetables",
+      "weight": "500 g",
+      "mrp": 70,
+      "unitQty": 500,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/71.jpg",
+      "imageCreditUrl": "https://www.amazon.in/Pebbles-Fresh-Frozen-Green-Peas/dp/B0BXWTBTLN",
+      "prices": {
+        "blinkit": {
+          "price": 63,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 64,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 64,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 62,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 58,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 64,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 72,
+      "name": "Lay's Magic Masala",
+      "category": "snacks",
+      "weight": "190 g",
+      "mrp": 85,
+      "unitQty": 190,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/72.jpg",
+      "imageCreditUrl": "https://www.desertcart.in/products/293368623-lays-potato-chips-indias-masala-magic-flavour-crunchy-chips-snacks",
+      "prices": {
+        "blinkit": {
+          "price": 78,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 74,
+          "inStock": false
+        },
+        "swiggy": {
+          "price": 80,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 72,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 73,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 75,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 73,
+      "name": "Lay's Cream & Onion",
+      "category": "snacks",
+      "weight": "190 g",
+      "mrp": 85,
+      "unitQty": 190,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/73.jpg",
+      "imageCreditUrl": "https://pricehistory.app/p/lays-potato-chips-157g-190g-american-style-RvdZCpSj",
+      "prices": {
+        "blinkit": {
+          "price": 75,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 76,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 77,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 74,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 70,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 76,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 74,
+      "name": "Kurkure Masala Munch",
+      "category": "snacks",
+      "weight": "180 g",
+      "mrp": 80,
+      "unitQty": 180,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/74.jpg",
+      "imageCreditUrl": "https://www.gosupps.com/kurkure-masala-munch.html",
+      "prices": {
+        "blinkit": {
+          "price": 72,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 73,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 74,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 71,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 67,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 69,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 75,
+      "name": "Haldiram's Moong Dal",
+      "category": "snacks",
+      "weight": "200 g",
+      "mrp": 60,
+      "unitQty": 200,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/75.jpg",
+      "imageCreditUrl": "https://www.amazon.ae/Haldirams-Fried-Moong-Dal-200g/dp/B0BB2VJHB8",
+      "prices": {
+        "blinkit": {
+          "price": 56,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 53,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 57,
+          "inStock": false
+        },
+        "bigbasket": {
+          "price": 51,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 52,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 53,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 76,
+      "name": "Parle-G Original",
+      "category": "snacks",
+      "weight": "800 g",
+      "mrp": 90,
+      "unitQty": 800,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/76.jpg",
+      "imageCreditUrl": "https://www.amazon.in/Parle-g-Original-Glucose-Biscuit-800g/dp/B0118L9WXK",
+      "prices": {
+        "blinkit": {
+          "price": 80,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 81,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 82,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 79,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 74,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 82,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 77,
+      "name": "Britannia Good Day Cashew",
+      "category": "snacks",
+      "weight": "600 g",
+      "mrp": 120,
+      "unitQty": 600,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/77.jpg",
+      "imageCreditUrl": "https://www.amazon.in/Britannia-Good-Cashew-Combi-600g/dp/B01M1RKTRK",
+      "prices": {
+        "blinkit": {
+          "price": 109,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 103,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 112,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 100,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 102,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 104,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 78,
+      "name": "Oreo Original",
+      "category": "snacks",
+      "weight": "300 g",
+      "mrp": 60,
+      "unitQty": 300,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/78.jpg",
+      "imageCreditUrl": "https://www.amazon.in/Oreo-Cream-Biscuit-Vanilla-300g/dp/B08C2R7R52",
+      "prices": {
+        "blinkit": {
+          "price": 56,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 53,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 57,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 51,
+          "inStock": false
+        },
+        "jiomart": {
+          "price": 52,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 53,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 79,
+      "name": "Cadbury Dairy Milk",
+      "category": "snacks",
+      "weight": "110 g",
+      "mrp": 100,
+      "unitQty": 110,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/79.jpg",
+      "imageCreditUrl": "https://www.op-dealer.co.uk/IWCatProductPage.process?Merchant_Id=128&Product_Id=765741",
+      "prices": {
+        "blinkit": {
+          "price": 89,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 91,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 92,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 88,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 83,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 91,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 80,
+      "name": "Nestlé KitKat 4 Finger",
+      "category": "snacks",
+      "weight": "37.3 g",
+      "mrp": 30,
+      "unitQty": 37.3,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/80.jpg",
+      "imageCreditUrl": "https://nutseller.com.bd/index.php?route=product/product&product_id=338",
+      "prices": {
+        "blinkit": {
+          "price": 27,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 26,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 28,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 25,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 26,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 26,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 81,
+      "name": "Act II Butter Popcorn",
+      "category": "snacks",
+      "weight": "150 g",
+      "mrp": 60,
+      "unitQty": 150,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/81.jpg",
+      "imageCreditUrl": "https://www.amazon.in/Act-II-Instant-Golden-Popcorn/dp/B01H5KSNA6",
+      "prices": {
+        "blinkit": {
+          "price": 56,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 53,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 54,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 52,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 49,
+          "inStock": false
+        },
+        "flipkart": {
+          "price": 54,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 82,
+      "name": "Too Yumm Multigrain Chips",
+      "category": "snacks",
+      "weight": "70 g",
+      "mrp": 30,
+      "unitQty": 70,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/82.jpg",
+      "imageCreditUrl": "https://blinkit.com/prn/too-yumm-dahi-papdi-chaat-multigrain-chips/prid/397963",
+      "prices": {
+        "blinkit": {
+          "price": 27,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 27,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 28,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 27,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 25,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 28,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 83,
+      "name": "Pintola All Natural Peanut Butter",
+      "category": "snacks",
+      "weight": "1 kg",
+      "mrp": 550,
+      "unitQty": 1000,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/83.jpg",
+      "imageCreditUrl": "https://www.amazon.in/Pintola-Natural-Crunchy-Unsweetened-Non-GMO/dp/B06XFSSDNH",
+      "prices": {
+        "blinkit": {
+          "price": 507,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 481,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 520,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 466,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 473,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 485,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 84,
+      "name": "Nutella Hazelnut Spread",
+      "category": "snacks",
+      "weight": "290 g",
+      "mrp": 450,
+      "unitQty": 290,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/84.jpg",
+      "imageCreditUrl": "https://www.amazon.in/nutella-hazelnut-spread-cocoa-290g/dp/b015z5i4gg",
+      "prices": {
+        "blinkit": {
+          "price": 398,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 403,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 409,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 392,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 370,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 407,
+          "inStock": false
+        }
+      }
+    },
+    {
+      "id": 85,
+      "name": "Kellogg's Corn Flakes",
+      "category": "snacks",
+      "weight": "475 g",
+      "mrp": 220,
+      "unitQty": 475,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/85.jpg",
+      "imageCreditUrl": "https://www.amazon.in/Kelloggs-Corn-Flakes-475g/dp/B00TIMOXFO",
+      "prices": {
+        "blinkit": {
+          "price": 200,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 202,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 205,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 183,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 186,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 191,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 86,
+      "name": "Thums Up",
+      "category": "beverages",
+      "weight": "750 ml Bottle",
+      "mrp": 42,
+      "unitQty": 750,
+      "unit": "ml",
+      "barcode": null,
+      "imageUrl": "/images/86.jpg",
+      "imageCreditUrl": "https://www.amazon.com/Thums-Soft-Drink-PET-Bottle/dp/B07BFNG2XM",
+      "prices": {
+        "blinkit": {
+          "price": 39,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 37,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 40,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 36,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 36,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 37,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 87,
+      "name": "Sprite",
+      "category": "beverages",
+      "weight": "750 ml Bottle",
+      "mrp": 42,
+      "unitQty": 750,
+      "unit": "ml",
+      "barcode": null,
+      "imageUrl": "/images/87.jpg",
+      "imageCreditUrl": "https://www.amazon.in/Sprite-750ml/dp/B07533TMV9",
+      "prices": {
+        "blinkit": {
+          "price": 37,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 38,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 38,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 37,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 35,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 38,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 88,
+      "name": "Pepsi",
+      "category": "beverages",
+      "weight": "750 ml Bottle",
+      "mrp": 42,
+      "unitQty": 750,
+      "unit": "ml",
+      "barcode": null,
+      "imageUrl": "/images/88.jpg",
+      "imageCreditUrl": "https://www.amazon.in/Pepsi-Soft-Drink-750ml-Bottle/dp/B07H398V3X",
+      "prices": {
+        "blinkit": {
+          "price": 38,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 36,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 39,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 35,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 36,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 37,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 89,
+      "name": "Mountain Dew",
+      "category": "beverages",
+      "weight": "750 ml Bottle",
+      "mrp": 42,
+      "unitQty": 750,
+      "unit": "ml",
+      "barcode": null,
+      "imageUrl": "/images/89.jpg",
+      "imageCreditUrl": "https://www.amazon.in/Mountain-Dew-Soft-Drinks-750Ml/dp/B07Z5VHHFQ",
+      "prices": {
+        "blinkit": {
+          "price": 39,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 37,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 40,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 36,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 34,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 38,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 90,
+      "name": "Real Mixed Fruit Juice",
+      "category": "beverages",
+      "weight": "1 L",
+      "mrp": 120,
+      "unitQty": 1000,
+      "unit": "ml",
+      "barcode": null,
+      "imageUrl": "/images/90.jpg",
+      "imageCreditUrl": "https://www.amazon.in/Real-Fruit-Power-Mixed-1L/dp/B013P5X7XI",
+      "prices": {
+        "blinkit": {
+          "price": 108,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 109,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 111,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 106,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 100,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 110,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 91,
+      "name": "Frooti Mango",
+      "category": "beverages",
+      "weight": "600 ml",
+      "mrp": 45,
+      "unitQty": 600,
+      "unit": "ml",
+      "barcode": null,
+      "imageUrl": "/images/91.jpg",
+      "imageCreditUrl": "https://www.amazon.in/Frooti-Fruit-Drink-Mango-Bottle/dp/B00XBS4DWO",
+      "prices": {
+        "blinkit": {
+          "price": 41,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 39,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 42,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 38,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 39,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 40,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 92,
+      "name": "Red Bull Energy Drink",
+      "category": "beverages",
+      "weight": "250 ml",
+      "mrp": 125,
+      "unitQty": 250,
+      "unit": "ml",
+      "barcode": null,
+      "imageUrl": "/images/92.jpg",
+      "imageCreditUrl": "https://www.woolworths.com.au/Shop/ProductDetails/114632/red-bull-energy-drink",
+      "prices": {
+        "blinkit": {
+          "price": 110,
+          "inStock": false
+        },
+        "zepto": {
+          "price": 112,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 113,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 108,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 103,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 113,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 93,
+      "name": "Monster Energy Original",
+      "category": "beverages",
+      "weight": "500 ml",
+      "mrp": 140,
+      "unitQty": 500,
+      "unit": "ml",
+      "barcode": null,
+      "imageUrl": "/images/93.jpg",
+      "imageCreditUrl": "https://www.asiamarket.ie/monster-energy-original-500ml.html",
+      "prices": {
+        "blinkit": {
+          "price": 127,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 128,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 130,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 116,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 118,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 121,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 94,
+      "name": "Monster Energy Ultra White",
+      "category": "beverages",
+      "weight": "500 ml",
+      "mrp": 140,
+      "unitQty": 500,
+      "unit": "ml",
+      "barcode": null,
+      "imageUrl": "/images/94.jpg",
+      "imageCreditUrl": "https://www.wiseskies.co.uk/monster-energy-ultra-white-can-500ml.htm",
+      "prices": {
+        "blinkit": {
+          "price": 130,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 123,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 133,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 119,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 121,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 124,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 95,
+      "name": "Monster Energy Ultra Paradise",
+      "category": "beverages",
+      "weight": "500 ml",
+      "mrp": 140,
+      "unitQty": 500,
+      "unit": "ml",
+      "barcode": null,
+      "imageUrl": "/images/95.jpg",
+      "imageCreditUrl": "https://www.woolworths.com.au/shop/productdetails/62911/monster-energy-ultra-paradise-can",
+      "prices": {
+        "blinkit": {
+          "price": 124,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 126,
+          "inStock": false
+        },
+        "swiggy": {
+          "price": 128,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 122,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 116,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 127,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 96,
+      "name": "Monster Energy Mango Loco",
+      "category": "beverages",
+      "weight": "500 ml",
+      "mrp": 140,
+      "unitQty": 500,
+      "unit": "ml",
+      "barcode": null,
+      "imageUrl": "/images/96.jpg",
+      "imageCreditUrl": "https://www.flipkart.com/monster-energy-mango-loco-500ml-can-imported-drink/p/itm53b6040f19b36",
+      "prices": {
+        "blinkit": {
+          "price": 128,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 121,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 131,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 117,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 119,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 122,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 97,
+      "name": "Monster Energy Pipeline Punch",
+      "category": "beverages",
+      "weight": "500 ml",
+      "mrp": 140,
+      "unitQty": 500,
+      "unit": "ml",
+      "barcode": null,
+      "imageUrl": "/images/97.jpg",
+      "imageCreditUrl": "https://www.asiamarket.ie/monster-pipeline-punch-energy-drink-can-500ml.html",
+      "prices": {
+        "blinkit": {
+          "price": 131,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 124,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 133,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 120,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 115,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 125,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 98,
+      "name": "Sting Energy Drink",
+      "category": "beverages",
+      "weight": "250 ml",
+      "mrp": 25,
+      "unitQty": 250,
+      "unit": "ml",
+      "barcode": null,
+      "imageUrl": "/images/98.jpg",
+      "imageCreditUrl": "https://www.amazon.in/Sting-Energy-Drink-250ml-Bottle/dp/B0BFWCLJJN",
+      "prices": {
+        "blinkit": {
+          "price": 22,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 23,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 23,
+          "inStock": false
+        },
+        "bigbasket": {
+          "price": 22,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 21,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 23,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 99,
+      "name": "Gatorade Blue Bolt",
+      "category": "beverages",
+      "weight": "500 ml",
+      "mrp": 60,
+      "unitQty": 500,
+      "unit": "ml",
+      "barcode": null,
+      "imageUrl": "/images/99.jpg",
+      "imageCreditUrl": "https://www.bigbasket.com/pd/40314318/gatorade-sports-drink-blue-bolt-flavour-500-ml-pet-bottle/",
+      "prices": {
+        "blinkit": {
+          "price": 55,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 52,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 56,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 51,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 51,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 53,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 100,
+      "name": "Bisleri Mineral Water",
+      "category": "beverages",
+      "weight": "1 L",
+      "mrp": 20,
+      "unitQty": 1000,
+      "unit": "ml",
+      "barcode": null,
+      "imageUrl": "/images/100.jpg",
+      "imageCreditUrl": "https://www.tradeindia.com/products/1-liter-bisleri-mineral-water-7996233.html",
+      "prices": {
+        "blinkit": {
+          "price": 18,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 18,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 18,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 17,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 16,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 18,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 101,
+      "name": "Nescafé Cold Coffee",
+      "category": "beverages",
+      "weight": "180 ml",
+      "mrp": 45,
+      "unitQty": 180,
+      "unit": "ml",
+      "barcode": null,
+      "imageUrl": "/images/101.jpg",
+      "imageCreditUrl": "https://www.amazon.in/Nescafe-Ready-Drink-Latte-180ml/dp/B07GCJ23CM",
+      "prices": {
+        "blinkit": {
+          "price": 41,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 41,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 42,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 40,
+          "inStock": false
+        },
+        "jiomart": {
+          "price": 38,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 39,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 102,
+      "name": "Amul Kool Kesar",
+      "category": "beverages",
+      "weight": "180 ml",
+      "mrp": 25,
+      "unitQty": 180,
+      "unit": "ml",
+      "barcode": null,
+      "imageUrl": "/images/102.jpg",
+      "imageCreditUrl": "https://www.ubuy.co.in/product/4WIG8KXWI-amul-kool-flavoured-milk-kesar-180ml",
+      "prices": {
+        "blinkit": {
+          "price": 23,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 22,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 24,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 21,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 22,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 22,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 103,
+      "name": "Sunfeast Yippee Magic Masala",
+      "category": "instant",
+      "weight": "4-pack (280 g)",
+      "mrp": 60,
+      "unitQty": 280,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/103.jpg",
+      "imageCreditUrl": "https://www.amazon.in/Sunfeast-Yipee-Noodles-Magic-Masala/dp/B0140Q9PYG",
+      "prices": {
+        "blinkit": {
+          "price": 53,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 54,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 55,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 52,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 52,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 54,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 104,
+      "name": "Knorr Classic Thick Tomato Soup",
+      "category": "instant",
+      "weight": "53 g",
+      "mrp": 60,
+      "unitQty": 53,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/104.jpg",
+      "imageCreditUrl": "https://www.amazon.in/Knorr-Classic-Tomato-Soup-53g/dp/B00Q2OR94I",
+      "prices": {
+        "blinkit": {
+          "price": 55,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 52,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 56,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 52,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 52,
+          "inStock": false
+        },
+        "flipkart": {
+          "price": 52,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 105,
+      "name": "MTR Rava Idli Mix",
+      "category": "instant",
+      "weight": "500 g",
+      "mrp": 120,
+      "unitQty": 500,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/105.jpg",
+      "imageCreditUrl": "https://www.amazon.in/MTR-Instant-Mix-Rava-Idli/dp/B01NCM7JUO",
+      "prices": {
+        "blinkit": {
+          "price": 112,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 106,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 115,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 103,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 104,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 107,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 106,
+      "name": "Kissan Tomato Ketchup",
+      "category": "instant",
+      "weight": "950 g",
+      "mrp": 215,
+      "unitQty": 950,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/106.jpg",
+      "imageCreditUrl": "https://www.amazon.in/Kissan-Fresh-Tomato-Ketchup-950g/dp/B00W7IPNRI",
+      "prices": {
+        "blinkit": {
+          "price": 192,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 195,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 197,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 189,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 185,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 196,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 107,
+      "name": "Lifebuoy Total 10 Handwash",
+      "category": "personal",
+      "weight": "750 ml",
+      "mrp": 150,
+      "unitQty": 750,
+      "unit": "ml",
+      "barcode": null,
+      "imageUrl": "/images/107.jpg",
+      "imageCreditUrl": "https://www.amazon.in/Lifebuoy-Total-Naturol-Protection-Handwash/dp/B08GKHQD3S",
+      "prices": {
+        "blinkit": {
+          "price": 137,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 130,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 138,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 126,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 128,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 131,
+          "inStock": false
+        }
+      }
+    },
+    {
+      "id": 108,
+      "name": "Dove Beauty Bar",
+      "category": "personal",
+      "weight": "100 g",
+      "mrp": 65,
+      "unitQty": 100,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/108.jpg",
+      "imageCreditUrl": "https://www.woolworths.com.au/shop/productdetails/373998/dove-original-beauty-cream-bar-white",
+      "prices": {
+        "blinkit": {
+          "price": 60,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 58,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 59,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 56,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 53,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 58,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 109,
+      "name": "Colgate Strong Teeth Toothpaste",
+      "category": "personal",
+      "weight": "200 g",
+      "mrp": 120,
+      "unitQty": 200,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/109.jpg",
+      "imageCreditUrl": "https://www.amazon.in/Colgate-Toothpaste-Strong-Teeth-Dental/dp/B00DRDZLJW",
+      "prices": {
+        "blinkit": {
+          "price": 108,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 109,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 110,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 106,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 100,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 110,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 110,
+      "name": "Pepsodent Germicheck Toothpaste",
+      "category": "personal",
+      "weight": "200 g",
+      "mrp": 110,
+      "unitQty": 200,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/110.jpg",
+      "imageCreditUrl": "https://www.amazon.in/Pepsodent-Expert-Protection-Care-Toothpaste/dp/B07GYRWTDZ",
+      "prices": {
+        "blinkit": {
+          "price": 101,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 96,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 101,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 93,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 95,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 97,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 111,
+      "name": "Head & Shoulders Anti-Dandruff Shampoo",
+      "category": "personal",
+      "weight": "340 ml",
+      "mrp": 375,
+      "unitQty": 340,
+      "unit": "ml",
+      "barcode": null,
+      "imageUrl": "/images/111.jpg",
+      "imageCreditUrl": "https://www.amazon.com/Shoulders-Dandruff-Menthol-Shampoo-340ml/dp/B00NXNR41E",
+      "prices": {
+        "blinkit": {
+          "price": 332,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 336,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 340,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 326,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 308,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 339,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 112,
+      "name": "Dove Intense Repair Shampoo",
+      "category": "personal",
+      "weight": "340 ml",
+      "mrp": 360,
+      "unitQty": 340,
+      "unit": "ml",
+      "barcode": null,
+      "imageUrl": "/images/112.jpg",
+      "imageCreditUrl": "https://www.amazon.in/Dove-Intense-Repair-Shampoo-340ml/dp/B07HB2L7QD",
+      "prices": {
+        "blinkit": {
+          "price": 326,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 331,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 331,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 299,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 304,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 312,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 113,
+      "name": "Clinic Plus Strong & Long Shampoo",
+      "category": "personal",
+      "weight": "340 ml",
+      "mrp": 180,
+      "unitQty": 340,
+      "unit": "ml",
+      "barcode": null,
+      "imageUrl": "/images/113.jpg",
+      "imageCreditUrl": "https://www.bigbasket.com/pd/215578/clinic-plus-strong-and-long-naturals-shampoo-340-ml/",
+      "prices": {
+        "blinkit": {
+          "price": 166,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 158,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 166,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 154,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 156,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 160,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 114,
+      "name": "Nivea Soft Moisturising Cream",
+      "category": "personal",
+      "weight": "100 ml",
+      "mrp": 200,
+      "unitQty": 100,
+      "unit": "ml",
+      "barcode": null,
+      "imageUrl": "/images/114.jpg",
+      "imageCreditUrl": "https://www.amazon.eg/-/en/NIVEA-Moisturising-Cream-Refreshing-100ml/dp/B0042PY9VU",
+      "prices": {
+        "blinkit": {
+          "price": 178,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 181,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 183,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 175,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 166,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 182,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 115,
+      "name": "Vaseline Intensive Care Body Lotion",
+      "category": "personal",
+      "weight": "400 ml",
+      "mrp": 350,
+      "unitQty": 400,
+      "unit": "ml",
+      "barcode": null,
+      "imageUrl": "/images/115.jpg",
+      "imageCreditUrl": "https://www.amazon.co.uk/Vaseline-Intensive-Advanced-Repair-Lotion/dp/B00C7PQ212",
+      "prices": {
+        "blinkit": {
+          "price": 320,
+          "inStock": false
+        },
+        "zepto": {
+          "price": 303,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 322,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 293,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 298,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 305,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 116,
+      "name": "Gillette Mach3 Razor",
+      "category": "personal",
+      "weight": "1 pc",
+      "mrp": 320,
+      "unitQty": 1,
+      "unit": "pc",
+      "barcode": null,
+      "imageUrl": "/images/116.jpg",
+      "imageCreditUrl": "https://www.amazon.com/Gillette-Mach3-Handle-Refills-Packaging/dp/B06X9V77XY",
+      "prices": {
+        "blinkit": {
+          "price": 294,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 284,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 294,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 275,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 260,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 286,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 117,
+      "name": "Whisper Ultra Clean Sanitary Pads",
+      "category": "personal",
+      "weight": "15 pcs",
+      "mrp": 180,
+      "unitQty": 15,
+      "unit": "pc",
+      "barcode": null,
+      "imageUrl": "/images/117.jpg",
+      "imageCreditUrl": "https://www.amazon.in/Whisper-Ultra-Clean-Sanitary-wings/dp/B00HYAU4X2",
+      "prices": {
+        "blinkit": {
+          "price": 162,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 164,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 166,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 159,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 150,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 165,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 118,
+      "name": "Himalaya Purifying Neem Face Wash",
+      "category": "personal",
+      "weight": "150 ml",
+      "mrp": 200,
+      "unitQty": 150,
+      "unit": "ml",
+      "barcode": null,
+      "imageUrl": "/images/118.jpg",
+      "imageCreditUrl": "https://www.amazon.in/Himalaya-Herbals-Purifying-Neem-150ml/dp/B010Z0LH8I",
+      "prices": {
+        "blinkit": {
+          "price": 184,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 174,
+          "inStock": false
+        },
+        "swiggy": {
+          "price": 184,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 169,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 171,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 176,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 119,
+      "name": "Ariel Matic Liquid Detergent",
+      "category": "cleaning",
+      "weight": "1 L",
+      "mrp": 230,
+      "unitQty": 1000,
+      "unit": "ml",
+      "barcode": null,
+      "imageUrl": "/images/119.jpg",
+      "imageCreditUrl": "https://www.amazon.in/Ariel-Matic-Liquid-Detergent-Front/dp/B089DVH4Y7",
+      "prices": {
+        "blinkit": {
+          "price": 203,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 206,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 208,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 199,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 188,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 207,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 120,
+      "name": "Tide Plus Detergent Powder",
+      "category": "cleaning",
+      "weight": "1 kg",
+      "mrp": 120,
+      "unitQty": 1000,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/120.jpg",
+      "imageCreditUrl": "https://www.amazon.in/Tide-Detergent-Washing-Powder-Extra/dp/B079QKXP84",
+      "prices": {
+        "blinkit": {
+          "price": 108,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 110,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 110,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 107,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 101,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 104,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 121,
+      "name": "Vim Dishwash Liquid",
+      "category": "cleaning",
+      "weight": "750 ml",
+      "mrp": 110,
+      "unitQty": 750,
+      "unit": "ml",
+      "barcode": null,
+      "imageUrl": "/images/121.jpg",
+      "imageCreditUrl": "https://www.amazon.in/Vim-Dishwash-Liquid-Lemon-Rupees/dp/B01N0OKCXN",
+      "prices": {
+        "blinkit": {
+          "price": 101,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 97,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 101,
+          "inStock": false
+        },
+        "bigbasket": {
+          "price": 94,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 95,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 97,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 122,
+      "name": "Lizol Disinfectant Surface Cleaner",
+      "category": "cleaning",
+      "weight": "1 L",
+      "mrp": 190,
+      "unitQty": 1000,
+      "unit": "ml",
+      "barcode": null,
+      "imageUrl": "/images/122.jpg",
+      "imageCreditUrl": "https://www.amazon.in/Lizol-Disinfectant-Floor-Cleaner-Lavender/dp/B00NWFYSTY",
+      "prices": {
+        "blinkit": {
+          "price": 169,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 171,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 173,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 166,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 157,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 172,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 123,
+      "name": "Colin Glass Cleaner",
+      "category": "cleaning",
+      "weight": "500 ml",
+      "mrp": 100,
+      "unitQty": 500,
+      "unit": "ml",
+      "barcode": null,
+      "imageUrl": "/images/123.jpg",
+      "imageCreditUrl": "https://www.amazon.in/Colin-Glass-Cleaner-Citrus-Bottle/dp/B01IOYA116",
+      "prices": {
+        "blinkit": {
+          "price": 91,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 86,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 92,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 84,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 85,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 87,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 124,
+      "name": "Scotch-Brite Scrub Pad",
+      "category": "cleaning",
+      "weight": "3 pcs",
+      "mrp": 60,
+      "unitQty": 3,
+      "unit": "pc",
+      "barcode": null,
+      "imageUrl": "/images/124.jpg",
+      "imageCreditUrl": "https://www.amazon.com/Scotch-Brite-Silver-Sparks-Scrub-Pieces/dp/B0869NKQQ4",
+      "prices": {
+        "blinkit": {
+          "price": 55,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 53,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 55,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 51,
+          "inStock": false
+        },
+        "jiomart": {
+          "price": 49,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 54,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 125,
+      "name": "Comfort Fabric Conditioner",
+      "category": "cleaning",
+      "weight": "1 L",
+      "mrp": 220,
+      "unitQty": 1000,
+      "unit": "ml",
+      "barcode": null,
+      "imageUrl": "/images/125.jpg",
+      "imageCreditUrl": "https://supermarket.kanbkam.com/ae/en/comfort-concentrated-fabric-conditioner-baby-1-liter-pouch-B08DJSD5QM",
+      "prices": {
+        "blinkit": {
+          "price": 197,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 199,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 202,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 194,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 183,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 201,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 126,
+      "name": "Good Knight Gold Flash Refill",
+      "category": "cleaning",
+      "weight": "45 ml",
+      "mrp": 90,
+      "unitQty": 45,
+      "unit": "ml",
+      "barcode": null,
+      "imageUrl": "/images/126.jpg",
+      "imageCreditUrl": "https://www.amazon.in/Good-Knight-Lavender-Mosquito-Repellent/dp/B09FDFMY8R",
+      "prices": {
+        "blinkit": {
+          "price": 83,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 78,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 83,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 76,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 77,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 79,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 127,
+      "name": "Garbage Bags Medium",
+      "category": "household",
+      "weight": "90 pcs",
+      "mrp": 180,
+      "unitQty": 90,
+      "unit": "pc",
+      "barcode": null,
+      "imageUrl": "/images/127.jpg",
+      "imageCreditUrl": "https://www.amazon.in/VijayVargiya-Store-Eco-Friendly-Biodegradable/dp/B0CW38QZ8W",
+      "prices": {
+        "blinkit": {
+          "price": 169,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 160,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 163,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 156,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 148,
+          "inStock": false
+        },
+        "flipkart": {
+          "price": 162,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 128,
+      "name": "Tissue Box",
+      "category": "household",
+      "weight": "100 pulls",
+      "mrp": 70,
+      "unitQty": 100,
+      "unit": "pc",
+      "barcode": null,
+      "imageUrl": "/images/128.jpg",
+      "imageCreditUrl": "https://www.bigbasket.com/pd/40000653/origami-so-soft-2-ply-face-tissue-box-100-pulls/",
+      "prices": {
+        "blinkit": {
+          "price": 63,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 64,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 65,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 62,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 59,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 60,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 129,
+      "name": "Toilet Paper",
+      "category": "household",
+      "weight": "4 rolls",
+      "mrp": 120,
+      "unitQty": 4,
+      "unit": "pc",
+      "barcode": null,
+      "imageUrl": "/images/129.jpg",
+      "imageCreditUrl": "https://www.amazon.in/Charmin-Ultra-Strong-Toilet-Sheets/dp/B0D85NKRP2",
+      "prices": {
+        "blinkit": {
+          "price": 111,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 105,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 114,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 102,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 103,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 106,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 130,
+      "name": "Aluminum Foil",
+      "category": "household",
+      "weight": "72 m",
+      "mrp": 300,
+      "unitQty": 72,
+      "unit": "m",
+      "barcode": null,
+      "imageUrl": "/images/130.jpg",
+      "imageCreditUrl": "https://www.amazon.in/House-Aluminium-Silver-Packing-Certified/dp/B0FT8DS2XV",
+      "prices": {
+        "blinkit": {
+          "price": 266,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 269,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 273,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 261,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 247,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 272,
+          "inStock": false
+        }
+      }
+    },
+    {
+      "id": 131,
+      "name": "India Gate Quinoa",
+      "category": "health",
+      "weight": "500 g",
+      "mrp": 250,
+      "unitQty": 500,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/131.jpg",
+      "imageCreditUrl": "https://www.amazon.in/India-Gate-Quinoa-500g/dp/B07DD53533",
+      "prices": {
+        "blinkit": {
+          "price": 227,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 215,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 233,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 210,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 211,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 217,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 132,
+      "name": "True Elements Chia Seeds",
+      "category": "health",
+      "weight": "250 g",
+      "mrp": 150,
+      "unitQty": 250,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/132.jpg",
+      "imageCreditUrl": "https://www.amazon.in/True-Elements-Chia-Seeds-250g/dp/B01M6ZAIXL",
+      "prices": {
+        "blinkit": {
+          "price": 140,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 132,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 143,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 128,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 130,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 133,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 133,
+      "name": "Almonds",
+      "category": "health",
+      "weight": "500 g",
+      "mrp": 450,
+      "unitQty": 500,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/133.jpg",
+      "imageCreditUrl": "https://www.amazon.in/Happilo-Natural-Premium-Californian-Almonds/dp/B084884GKX",
+      "prices": {
+        "blinkit": {
+          "price": 402,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 407,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 412,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 395,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 378,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 410,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 134,
+      "name": "Lipton Green Tea",
+      "category": "health",
+      "weight": "25 bags",
+      "mrp": 180,
+      "unitQty": 25,
+      "unit": "pc",
+      "barcode": null,
+      "imageUrl": "/images/134.jpg",
+      "imageCreditUrl": "https://www.amazon.in/Lipton-Honey-Lemon-Green-Pieces/dp/B01G6IWQWO",
+      "prices": {
+        "blinkit": {
+          "price": 165,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 156,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 169,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 151,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 153,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 157,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 135,
+      "name": "Nescafé Classic Instant Coffee",
+      "category": "health",
+      "weight": "100 g",
+      "mrp": 320,
+      "unitQty": 100,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/135.jpg",
+      "imageCreditUrl": "https://www.amazon.com/Nescafe-Classic-Coffee-Glass-100g/dp/B00VK0FTP0",
+      "prices": {
+        "blinkit": {
+          "price": 300,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 284,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 288,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 276,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 269,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 287,
+          "inStock": true
+        }
+      }
+    },
+    {
+      "id": 136,
+      "name": "So Good Oat Milk",
+      "category": "health",
+      "weight": "1 L",
+      "mrp": 250,
+      "unitQty": 1000,
+      "unit": "ml",
+      "barcode": null,
+      "imageUrl": "/images/136.jpg",
+      "imageCreditUrl": "https://thevegangrocer.com.ph/products/so-good-oat-unsweetened-1l",
+      "prices": {
+        "blinkit": {
+          "price": 225,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 228,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 231,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 221,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 210,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 230,
           "inStock": true
         }
       }

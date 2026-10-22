@@ -16,6 +16,14 @@ import { WatchModal } from '../components/WatchModal';
 import { EmptyState } from '../components/EmptyState';
 import styles from './Product.module.css';
 
+function creditHost(url: string): string {
+  try {
+    return new URL(url).hostname.replace(/^www\./, '');
+  } catch {
+    return 'retailer listing';
+  }
+}
+
 export default function ProductPage() {
   const { id } = useParams();
   const { productById, stores, loading } = useCatalog();
@@ -72,9 +80,9 @@ export default function ProductPage() {
     <div className="page">
       <div className="container">
         <nav className={styles.breadcrumb} aria-label="Breadcrumb">
-          <Link to="/">Catalog</Link>
+          <Link to="/shop">Catalog</Link>
           <ChevronRight size={12} aria-hidden />
-          <Link to={`/?category=${product.category}`}>{categoryLabel(product.category)}</Link>
+          <Link to={`/shop?cat=${product.category}`}>{categoryLabel(product.category)}</Link>
           <ChevronRight size={12} aria-hidden />
           <span>{product.name}</span>
         </nav>
@@ -98,16 +106,12 @@ export default function ProductPage() {
             </div>
             {product.imageCreditUrl && (
               <p className={styles.attribution}>
-                Image from{' '}
+                Packshot sourced from{' '}
                 <a href={product.imageCreditUrl} target="_blank" rel="noreferrer noopener">
-                  {product.imageCreditUrl.includes('commons.wikimedia.org')
-                    ? 'Wikimedia Commons'
-                    : 'Open Food Facts contributors'}
+                  {creditHost(product.imageCreditUrl)}
                 </a>
-                {product.imageCreditUrl.includes('commons.wikimedia.org')
-                  ? ', CC-licensed.'
-                  : ', CC BY-SA.'}{' '}
-                Packaging and trademarks may carry third-party rights.
+                . Packaging and trademarks belong to their owners and are shown here for product
+                identification in this demo.
               </p>
             )}
           </div>

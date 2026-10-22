@@ -1,3 +1,7 @@
+.home {
+  padding-top: 24px;
+}
+
 .top {
   display: flex;
   align-items: flex-end;
@@ -7,11 +11,38 @@
   border-bottom: 1px solid var(--line);
 }
 
+.heroCopy {
+  min-width: 0;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  margin-bottom: 8px;
+}
+
+.eyebrow svg {
+  color: var(--accent);
+}
+
 .lede {
   font-size: 14px;
   color: var(--ink-2);
-  max-width: 56ch;
-  margin-top: 6px;
+  max-width: 60ch;
+  margin-top: 8px;
+}
+
+.heroActions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 16px;
 }
 
 .metaCol {
@@ -33,103 +64,175 @@
   color: var(--ink-3);
 }
 
-.tabsWrap {
-  margin-top: 16px;
-  border-bottom: 1px solid var(--line);
-  overflow-x: auto;
-}
-
-.tabs {
+.communityCard {
   display: flex;
-  gap: 0;
-  min-width: max-content;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  background: var(--bg-2);
 }
 
-.tab {
-  border: 0;
-  background: transparent;
-  padding: 10px 12px;
-  font-size: 14px;
-  font-weight: 500;
+.communityIcon {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  flex: none;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  background: var(--bg);
   color: var(--ink-2);
-  border-bottom: 2px solid transparent;
-  margin-bottom: -1px;
+}
+
+.communityCopy {
+  min-width: 0;
+}
+
+.communityCopy h2 {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.communityCopy p {
+  font-size: 12px;
+  color: var(--ink-2);
+  margin-top: 1px;
+}
+
+.communityActions {
+  margin-left: auto;
+  flex: none;
+}
+
+.categoryChips {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding: 14px 0 2px;
+  scrollbar-width: thin;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  flex: none;
+  min-height: 30px;
+  padding: 0 11px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--ink-2);
+  font-size: 12px;
+  font-weight: 600;
   white-space: nowrap;
 }
 
-.tab:first-child {
-  padding-left: 0;
-}
-
-.tab:hover {
+.chip:hover {
+  border-color: var(--line-strong);
   color: var(--ink);
+  text-decoration: none;
 }
 
-.tabActive {
-  color: var(--ink);
-  border-bottom-color: var(--ink);
-  font-weight: 600;
+.section {
+  margin-top: 28px;
 }
 
-.controls {
+.sectionHead {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
   gap: 12px;
-  padding: 12px 0 16px;
-  flex-wrap: wrap;
+  margin-bottom: 12px;
 }
 
-.count {
+.sectionHead h2 {
+  font-size: 19px;
+}
+
+.sectionNote {
   font-size: 12px;
-  color: var(--ink-2);
-  font-variant-numeric: tabular-nums;
+  color: var(--ink-3);
+  margin-top: 2px;
 }
 
-.query {
-  font-weight: 600;
-  color: var(--ink);
-}
-
-.clearQuery {
-  margin-left: 6px;
-  background: transparent;
-  border: 0;
-  text-decoration: underline;
-  color: var(--ink-2);
-  font-size: 12px;
-}
-
-.selects {
-  display: flex;
-  gap: 8px;
+.viewAll {
+  display: inline-flex;
   align-items: center;
-  flex-wrap: wrap;
-}
-
-.select {
-  border: 1px solid var(--line-strong);
-  border-radius: var(--r);
-  background: var(--bg);
-  min-height: 32px;
-  padding: 4px 10px;
+  gap: 4px;
+  flex: none;
+  color: var(--ink-2);
   font-size: 12px;
+  font-weight: 700;
+}
+
+.viewAll:hover {
   color: var(--ink);
+  text-decoration: none;
 }
 
-.select:focus {
-  border-color: var(--ink);
-  outline: none;
+.rail {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding: 2px 2px 8px;
+  scroll-snap-type: x proximity;
+  scrollbar-width: thin;
 }
 
-@media (max-width: 720px) {
+.railItem {
+  flex: 0 0 224px;
+  scroll-snap-align: start;
+  min-width: 0;
+}
+
+@media (max-width: 900px) {
+  .home {
+    /* Keep the last row clear of the fixed home dock. */
+    padding-bottom: 96px;
+  }
+
   .top {
     flex-direction: column;
     align-items: flex-start;
-    gap: 10px;
+    gap: 12px;
   }
 
   .metaCol {
     text-align: left;
+  }
+}
+
+@media (max-width: 720px) {
+  .communityCard {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .communityActions {
+    margin-left: 50px;
+  }
+
+  .heroActions .btn {
+    flex: 1;
+  }
+
+  .railItem {
+    flex-basis: 186px;
+  }
+
+  .section {
+    margin-top: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .railItem {
+    flex-basis: 168px;
+  }
+
+  .sectionHead h2 {
+    font-size: 17px;
   }
 }

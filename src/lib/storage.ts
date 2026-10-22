@@ -4,6 +4,7 @@ import {
   ADDRESSES_KEY,
   CART_KEY,
   CART_OWNER_KEY,
+  DELETED_ORDERS_KEY,
   DEMO_ORDERS_KEY,
   STORE_PICKS_KEY,
   WATCHES_KEY,
@@ -97,6 +98,7 @@ export function clearDeviceUserData(): void {
     ADDRESS_CACHE_KEY,
     WATCHES_KEY,
     DEMO_ORDERS_KEY,
+    DELETED_ORDERS_KEY,
     WATCH_NOTIFIED_KEY,
   ]) {
     removeStored('local', key);

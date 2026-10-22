@@ -32,6 +32,28 @@
   align-items: center;
 }
 
+.deleteOrder {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  background: transparent;
+  color: var(--ink-3);
+}
+
+.deleteOrder:hover:not(:disabled) {
+  border-color: var(--danger);
+  color: var(--danger);
+}
+
+.deleteOrder:disabled {
+  opacity: 0.4;
+}
+
 .orderBody {
   padding: 16px;
   display: flex;

@@ -14,6 +14,23 @@
   padding-block: 10px;
 }
 
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  flex: none;
+  min-height: 32px;
+  padding: 0 6px;
+  color: var(--ink-2);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.backLink:hover {
+  color: var(--ink);
+  text-decoration: none;
+}
+
 .brand {
   display: inline-flex;
   align-items: center;
@@ -96,6 +113,11 @@
 
 .hideSmall {
   display: inline-flex;
+}
+
+.cartSwitcher {
+  display: inline-flex;
+  min-width: 0;
 }
 
 .iconLink {
@@ -218,6 +240,21 @@
 
   .accountName {
     display: none;
+  }
+}
+
+/* On the main page the mobile dock owns Community, Orders and Cart, so the
+   header stays quiet: brand, search, theme and profile. */
+@media (max-width: 900px) {
+  .home .watchlistLink,
+  .home .ordersLink,
+  .home .cartSwitcher,
+  .home .cartButton {
+    display: none;
+  }
+
+  .home .actions {
+    gap: 4px;
   }
 }
 

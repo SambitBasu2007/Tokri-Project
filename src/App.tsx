@@ -1,8 +1,9 @@
 import { lazy, Suspense, useState } from 'react';
-import { createBrowserRouter, Outlet, RouterProvider, ScrollRestoration } from 'react-router-dom';
+import { createBrowserRouter, Outlet, RouterProvider, ScrollRestoration, useLocation } from 'react-router-dom';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { CartPanel } from './components/CartPanel';
+import { BottomDock } from './components/BottomDock';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { AuthProvider } from './state/AuthContext';
 import { CatalogProvider } from './state/CatalogContext';
@@ -15,6 +16,7 @@ import NotFoundPage from './pages/NotFound';
 import { Skeleton } from './components/Skeleton';
 
 const ProductPage = lazy(() => import('./pages/Product'));
+const ShopPage = lazy(() => import('./pages/Shop'));
 const CheckoutPage = lazy(() => import('./pages/Checkout'));
 const OrdersPage = lazy(() => import('./pages/Orders'));
 const WatchlistPage = lazy(() => import('./pages/Watchlist'));
@@ -25,6 +27,8 @@ const LabsPage = lazy(() => import('./pages/Labs'));
 
 function Shell() {
   const [cartOpen, setCartOpen] = useState(false);
+  const location = useLocation();
+  const isHome = location.pathname === '/';
 
   return (
     <div className="app-shell">
@@ -53,6 +57,7 @@ function Shell() {
       </main>
       <CartPanel open={cartOpen} onClose={() => setCartOpen(false)} />
       <Footer />
+      {isHome && <BottomDock onOpenCart={() => setCartOpen(true)} />}
     </div>
   );
 }
@@ -63,6 +68,7 @@ const router = createBrowserRouter([
     element: <Shell />,
     children: [
       { index: true, element: <Home /> },
+      { path: 'shop', element: <ShopPage /> },
       { path: 'product/:id', element: <ProductPage /> },
       { path: 'checkout', element: <CheckoutPage /> },
       { path: 'orders', element: <OrdersPage /> },

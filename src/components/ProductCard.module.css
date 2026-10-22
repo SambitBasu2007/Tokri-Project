@@ -13,6 +13,11 @@
   border-color: var(--line-strong);
 }
 
+.compactCard {
+  padding: 10px;
+  gap: 6px;
+}
+
 .imageWrap {
   position: relative;
   aspect-ratio: 1 / 1;
@@ -29,6 +34,10 @@
   height: 100%;
   object-fit: contain;
   padding: 12px;
+}
+
+.compactCard .image {
+  padding: 8px;
 }
 
 .placeholder {
@@ -79,6 +88,11 @@
   min-height: 38px;
 }
 
+.compactCard .name {
+  font-size: 13px;
+  min-height: 36px;
+}
+
 .name a:hover {
   text-decoration: underline;
 }
@@ -89,6 +103,10 @@
   margin-top: -4px;
 }
 
+.compactCard .weight {
+  font-size: 11px;
+}
+
 .priceRow {
   display: flex;
   align-items: baseline;
@@ -96,23 +114,29 @@
   flex-wrap: wrap;
 }
 
-.best {
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--accent);
-  font-variant-numeric: tabular-nums;
-}
-
+.best,
 .price {
-  font-size: 16px;
+  font-size: 22px;
+  line-height: 1.1;
   font-weight: 700;
   color: var(--ink);
   font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+.best {
+  color: var(--accent);
+}
+
+.compactCard .best,
+.compactCard .price {
+  font-size: 18px;
 }
 
 .at {
-  font-size: 12px;
+  font-size: 11px;
   color: var(--ink-2);
+  font-variant-numeric: tabular-nums;
 }
 
 .mrp {
@@ -122,21 +146,119 @@
   font-variant-numeric: tabular-nums;
 }
 
-.unit {
-  font-size: 12px;
-  color: var(--ink-3);
-  font-variant-numeric: tabular-nums;
+.bestTag {
+  border: 1px solid var(--accent);
+  border-radius: var(--r);
+  color: var(--accent);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 1px 4px;
+  text-transform: uppercase;
 }
 
-.cheapest {
-  font-size: 12px;
+.unit {
+  font-size: 11px;
   color: var(--ink-3);
   font-variant-numeric: tabular-nums;
-  margin-top: -4px;
+  margin-top: -5px;
+}
+
+.storeList {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 4px 0;
+  margin-top: 1px;
+}
+
+.storeListHead {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  padding: 1px 4px 3px;
+}
+
+.storeRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto 26px;
+  align-items: center;
+  gap: 5px;
+  min-height: 25px;
+  padding: 1px 4px;
+  border: 1px solid transparent;
+  border-radius: var(--r);
+}
+
+.storeRowSelected {
+  background: var(--bg-2);
+  border-color: var(--line-strong);
+}
+
+.storeRowOut {
+  opacity: 0.45;
+}
+
+.storeName {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--ink-2);
+}
+
+.storeBest {
+  flex: none;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.storePrice {
+  font-size: 11px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.storeAdd {
+  width: 24px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  border: 1px solid var(--accent);
+  border-radius: var(--r);
+  background: transparent;
+  color: var(--accent);
+  padding: 0;
+}
+
+.storeAdd:hover:not(:disabled) {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.storeAdd:disabled {
+  border-color: var(--line);
+  color: var(--ink-3);
+  cursor: not-allowed;
 }
 
 .storeNotice {
-  font-size: 12px;
+  font-size: 11px;
   color: var(--ink-2);
   border-left: 2px solid var(--line-strong);
   padding-left: 6px;
@@ -152,7 +274,7 @@
 
 .addButton {
   flex: 1;
-  min-height: 34px;
+  min-height: 36px;
   padding: 0 8px;
   font-size: 12px;
   border: 1px solid var(--accent);
@@ -182,7 +304,7 @@
   justify-content: space-between;
   border: 1px solid var(--line-strong);
   border-radius: var(--r);
-  height: 34px;
+  height: 36px;
   padding: 0 2px;
 }
 
@@ -210,3 +332,40 @@
   cursor: not-allowed;
 }
 
+@media (max-width: 540px) {
+  .card {
+    padding: 8px;
+    gap: 6px;
+  }
+
+  .priceRow {
+    gap: 4px;
+  }
+
+  .best,
+  .price {
+    font-size: 19px;
+  }
+
+  .storeRow {
+    grid-template-columns: minmax(0, 1fr) auto 24px;
+    gap: 3px;
+  }
+
+  .storeName {
+    font-size: 10px;
+  }
+
+  .storePrice {
+    font-size: 10px;
+  }
+
+  .storeAdd {
+    width: 22px;
+  }
+
+  .addButton {
+    min-height: 32px;
+    font-size: 11px;
+  }
+}

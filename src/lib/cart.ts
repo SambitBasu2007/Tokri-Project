@@ -8,6 +8,8 @@ export const STORE_PICKS_KEY = 'tokri_store_picks';
 /** Which account the local mirror belongs to; absent means a guest cart. */
 export const CART_OWNER_KEY = 'tokri_cart_owner_v1';
 export const DEMO_ORDERS_KEY = 'tokri_demo_orders_v1';
+/** IDs hidden on this device, so a deleted DB order does not flash back. */
+export const DELETED_ORDERS_KEY = 'tokri_deleted_orders_v1';
 export const ADDRESSES_KEY = 'tokri_addresses_v1';
 export const WATCHES_KEY = 'tokri_watches_v1';
 export const ADDRESS_CACHE_KEY = 'tokri_geocode_cache_v1';

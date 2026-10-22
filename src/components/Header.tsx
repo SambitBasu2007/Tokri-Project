@@ -1,6 +1,6 @@
 import { useEffect, useState, type FormEvent } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Bell, Moon, Package, Search, ShoppingBasket, ShoppingCart, Sun, UserRound } from 'lucide-react';
+import { ArrowLeft, Bell, Moon, Package, Search, ShoppingBasket, ShoppingCart, Sun, UserRound } from 'lucide-react';
 import { useCart } from '../state/CartContext';
 import { useAuth } from '../state/AuthContext';
 import { useWatches } from '../state/WatchesContext';
@@ -16,26 +16,37 @@ export function Header({ onOpenCart }: { onOpenCart: () => void }) {
   const navigate = useNavigate();
   const location = useLocation();
   const [query, setQuery] = useState('');
+  const isHome = location.pathname === '/';
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
-    setQuery(location.pathname === '/' ? params.get('q') ?? '' : '');
+    setQuery(location.pathname === '/shop' ? params.get('q') ?? '' : '');
   }, [location.pathname, location.search]);
 
   const submit = (event: FormEvent) => {
     event.preventDefault();
     const trimmed = query.trim();
-    // Keep the category/sort filters when searching from the catalog page.
-    const next = new URLSearchParams(location.pathname === '/' ? location.search : '');
+    // Search always lands on the full catalog page. Keep category/store/sort
+    // filters when the shopper is already filtering there.
+    const next =
+      location.pathname === '/shop'
+        ? new URLSearchParams(location.search)
+        : new URLSearchParams();
+    next.delete('q');
     if (trimmed) next.set('q', trimmed);
-    else next.delete('q');
     const search = next.toString();
-    navigate({ pathname: '/', search: search ? `?${search}` : '' });
+    navigate({ pathname: '/shop', search: search ? `?${search}` : '' });
   };
 
   return (
-    <header className={styles.header}>
+    <header className={`${styles.header} ${isHome ? styles.home : ''}`.trim()}>
       <div className={`container ${styles.inner}`}>
+        {!isHome && (
+          <Link to="/" className={styles.backLink}>
+            <ArrowLeft size={15} aria-hidden />
+            Back
+          </Link>
+        )}
         <Link to="/" className={styles.brand} aria-label="Tokri home">
           <span className={styles.brandMark}>
             <ShoppingBasket size={22} strokeWidth={1.5} aria-hidden />
@@ -72,21 +83,32 @@ export function Header({ onOpenCart }: { onOpenCart: () => void }) {
               <Moon size={18} strokeWidth={1.5} aria-hidden />
             )}
           </button>
-          <Link to="/watchlist" className={styles.iconLink} aria-label={`Watchlist${hits.length ? `, ${hits.length} at target` : ''}`}>
+          <Link
+            to="/watchlist"
+            className={`${styles.iconLink} ${styles.watchlistLink}`}
+            aria-label={`Watchlist${hits.length ? `, ${hits.length} at target` : ''}`}
+          >
             <Bell size={18} strokeWidth={1.5} aria-hidden />
             {hits.length > 0 && <span className={styles.dot} aria-hidden />}
           </Link>
-          <Link to="/orders" className={`${styles.iconLink} ${styles.hideSmall}`} aria-label="Orders">
+          <Link to="/orders" className={`${styles.iconLink} ${styles.ordersLink}`} aria-label="Orders">
             <Package size={18} strokeWidth={1.5} aria-hidden />
           </Link>
-          <CartSwitcher />
+          <div className={styles.cartSwitcher}>
+            <CartSwitcher />
+          </div>
           <Link to="/profile" className={styles.account} aria-label="Account">
             <UserRound size={18} strokeWidth={1.5} aria-hidden />
             <span className={styles.accountName}>
               {signedIn ? profile?.fullName ?? profile?.email?.split('@')[0] ?? 'Account' : 'Sign in'}
             </span>
           </Link>
-          <button type="button" className={styles.cartButton} onClick={onOpenCart} aria-label={`Open cart, ${totals.itemCount} items`}>
+          <button
+            type="button"
+            className={styles.cartButton}
+            onClick={onOpenCart}
+            aria-label={`Open cart, ${totals.itemCount} items`}
+          >
             <ShoppingCart size={17} strokeWidth={1.5} aria-hidden />
             <span>Cart</span>
             <span className={styles.cartCount}>{totals.itemCount}</span>

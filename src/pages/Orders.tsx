@@ -1,6 +1,6 @@
-import { useEffect, useMemo, useRef } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
-import { Lock, Package, Users } from 'lucide-react';
+import { Lock, Package, Trash2, Users } from 'lucide-react';
 import { useAuth } from '../state/AuthContext';
 import { useCart } from '../state/CartContext';
 import { useCatalog } from '../state/CatalogContext';
@@ -58,12 +58,16 @@ function PersonalOrderCard({
   stores,
   nowOffset,
   onBuyAgain,
+  onDelete,
+  deleting,
 }: {
   order: Order;
   communities: CommunityWithMembers[];
   stores: Store[];
   nowOffset: number;
   onBuyAgain: (order: Order) => void;
+  onDelete: (order: Order) => void;
+  deleting: boolean;
 }) {
   const community = order.communityId
     ? communities.find((entry) => entry.id === order.communityId)
@@ -86,6 +90,16 @@ function PersonalOrderCard({
         <div className={styles.badges}>
           {order.source === 'local' && <span className={common.badgeQuiet}>Demo</span>}
           {community && <span className={common.badge}>{community.name}</span>}
+          <button
+            type="button"
+            className={styles.deleteOrder}
+            onClick={() => onDelete(order)}
+            disabled={deleting}
+            title="Delete this order"
+            aria-label={`Delete order from ${formatDateTime(order.createdAt)}`}
+          >
+            <Trash2 size={13} strokeWidth={1.6} aria-hidden />
+          </button>
         </div>
       </div>
 
@@ -190,7 +204,7 @@ function CommunityOrderCard({
 }
 
 export default function OrdersPage() {
-  const { orders, loading, refresh, nowOffset } = useOrders();
+  const { orders, loading, refresh, deleteOrder, nowOffset } = useOrders();
   const { activity, loading: communityLoading, error: communityError, refresh: refreshActivity } =
     useCommunityActivity();
   const { signedIn, communities } = useAuth();
@@ -200,6 +214,7 @@ export default function OrdersPage() {
   const [params, setParams] = useSearchParams();
   const placed = params.get('placed');
   const announced = useRef<string | null>(null);
+  const [deletingId, setDeletingId] = useState<string | null>(null);
 
   const viewParam = params.get('view');
   const view: HistoryView =
@@ -258,6 +273,23 @@ export default function OrdersPage() {
       await add(item.productId, item.storeId, item.quantity);
     }
     toast('Items added to the active cart.', 'success');
+  };
+
+  const removeOrder = async (order: Order) => {
+    if (!window.confirm('Delete this order from your history? This cannot be undone.')) return;
+    setDeletingId(order.id);
+    try {
+      const result = await deleteOrder(order);
+      if (order.source === 'local') {
+        toast('Demo order deleted from this device.', 'success');
+      } else if (result.remote) {
+        toast('Order deleted.', 'success');
+      } else {
+        toast('Removed from this device. Apply migration 0005 to delete it everywhere.', 'info');
+      }
+    } finally {
+      setDeletingId(null);
+    }
   };
 
   const refreshAll = () => {
@@ -376,6 +408,8 @@ export default function OrdersPage() {
                 stores={stores}
                 nowOffset={nowOffset}
                 onBuyAgain={(order) => void buyAgain(order)}
+                onDelete={(order) => void removeOrder(order)}
+                deleting={deletingId === entry.order.id}
               />
             ) : (
               <CommunityOrderCard

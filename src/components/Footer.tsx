@@ -24,8 +24,9 @@ export function Footer() {
             demo. They are not live store prices.
           </p>
           <p>
-            Product images: Open Food Facts contributors (CC BY-SA) and Wikimedia Commons; sources
-            and licences are linked from each product page. Geocoding © OpenStreetMap contributors.
+            Product images are retailer packshots kept locally for this demo; the source listing is
+            linked from each product page. Packaging and trademarks belong to their owners.
+            Geocoding © OpenStreetMap contributors.
           </p>
           <p>© {new Date().getFullYear()} Tokri. Built as a student field project.</p>
         </div>

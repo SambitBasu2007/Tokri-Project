@@ -8,13 +8,21 @@ import { inr, minutesLabel } from '../lib/format';
 import { useCatalog } from '../state/CatalogContext';
 import { useCart } from '../state/CartContext';
 import { useWatches } from '../state/WatchesContext';
-import { StorePicker } from './StorePicker';
 import { WatchModal } from './WatchModal';
 import styles from './ProductCard.module.css';
 
-export function ProductCard({ product }: { product: Product }) {
+interface ProductCardProps {
+  product: Product;
+  /**
+   * Rail cards sit in a horizontal scroller and keep the per-store matrix on
+   * the full grid card instead. They still add from the cheapest store.
+   */
+  compact?: boolean;
+}
+
+export function ProductCard({ product, compact = false }: ProductCardProps) {
   const { stores } = useCatalog();
-  const { add, quantityOf, itemFor, setQty, activeLabel, active, selectedStore, storeFor, selectStore } = useCart();
+  const { add, quantityOf, itemFor, setQty, activeLabel, active, selectedStore, storeFor } = useCart();
   const { watchFor } = useWatches();
   const [imageFailed, setImageFailed] = useState(false);
   const [watchOpen, setWatchOpen] = useState(false);
@@ -28,19 +36,29 @@ export function ProductCard({ product }: { product: Product }) {
   const store = stores.find((candidate) => candidate.id === storeId);
   const price = storeId ? selectedPrice(product, storeId) : null;
   const isBest = Boolean(cheapest && storeId === cheapest.storeId);
-  const over = price != null && cheapest ? price - cheapest.price : 0;
-  const cheapestStoreName = stores.find((candidate) => candidate.id === cheapest?.storeId)?.name ?? cheapest?.storeId;
   const unit = price != null ? unitPrice(product, price) : null;
+  const addTarget = active.type === 'personal' ? 'Personal cart' : activeLabel;
+
+  const storeRows = stores
+    .map((candidate) => {
+      const entry = product.prices[candidate.id];
+      return { store: candidate, price: entry?.inStock ? entry.price : null };
+    })
+    .sort((a, b) => {
+      if (a.price == null && b.price == null) return a.store.name.localeCompare(b.store.name);
+      if (a.price == null) return 1;
+      if (b.price == null) return -1;
+      return a.price - b.price || a.store.name.localeCompare(b.store.name);
+    });
 
   // The persisted pick may point at a store that has since gone out of stock;
   // storeFor() falls back, so explain the swap instead of silently changing it.
   const rawPick = selectedStore[product.id];
   const rawPickStore = rawPick ? stores.find((candidate) => candidate.id === rawPick) : undefined;
   const pickOutOfStock = Boolean(rawPickStore && selectedPrice(product, rawPickStore.id) == null);
-  const addTarget = active.type === 'personal' ? 'Personal cart' : activeLabel;
 
   return (
-    <article className={styles.card}>
+    <article className={`${styles.card} ${compact ? styles.compactCard : ''}`.trim()}>
       <div className={styles.imageWrap}>
         <Link to={`/product/${product.id}`} aria-label={product.name}>
           {product.imageUrl && !imageFailed ? (
@@ -78,23 +96,56 @@ export function ProductCard({ product }: { product: Product }) {
         <>
           <div className={styles.priceRow}>
             <span className={isBest ? styles.best : styles.price}>{inr(price)}</span>
-            <span className={styles.at}>
-              · {store.name} · {minutesLabel(store.deliveryMinutes)}
-            </span>
             {product.mrp > price && <span className={styles.mrp}>{inr(product.mrp)}</span>}
+            {isBest && <span className={styles.bestTag}>Best</span>}
           </div>
-          {cheapest && !isBest && (
-            <p className={styles.cheapest}>
-              Cheapest: {cheapestStoreName} {inr(cheapest.price)} (+{inr(over)} here)
-            </p>
-          )}
-          <p className={styles.unit}>
-            {unit ? `${inr(unit.value)} ${unit.label}` : '\u00A0'}
-            {watch ? ` · Watching ${inr(watch.targetPrice)}` : ''}
+          <p className={styles.at}>
+            {store.name} · {minutesLabel(store.deliveryMinutes)}
+            {cheapest && !isBest ? ` · best ${inr(cheapest.price)}` : ''}
           </p>
+          <p className={styles.unit}>{unit ? `${inr(unit.value)} ${unit.label}` : '\u00A0'}</p>
         </>
       ) : (
         <p className={styles.unit}>Out of stock everywhere</p>
+      )}
+
+      {!compact && price != null && (
+        <div className={styles.storeList} aria-label={`Compare ${stores.length} stores`}>
+          <p className={styles.storeListHead}>Compare {stores.length} stores</p>
+          {storeRows.map((row) => {
+            const available = row.price != null;
+            const selected = available && row.store.id === storeId;
+            const best = available && cheapest != null && row.price === cheapest.price;
+            return (
+              <div
+                key={row.store.id}
+                className={`${styles.storeRow} ${selected ? styles.storeRowSelected : ''} ${
+                  available ? '' : styles.storeRowOut
+                }`.trim()}
+              >
+                <span className={styles.storeName}>
+                  {row.store.name}
+                  {best && <span className={styles.storeBest}>Best</span>}
+                </span>
+                <span className={styles.storePrice}>{available ? inr(row.price!) : '—'}</span>
+                <button
+                  type="button"
+                  className={styles.storeAdd}
+                  disabled={!available}
+                  onClick={() => void add(product.id, row.store.id)}
+                  aria-label={`Add ${product.name} from ${row.store.name}`}
+                  title={
+                    available
+                      ? `Add from ${row.store.name} · ${inr(row.price!)}`
+                      : `${row.store.name} is out of stock`
+                  }
+                >
+                  <Plus size={12} aria-hidden />
+                </button>
+              </div>
+            );
+          })}
+        </div>
       )}
 
       <div className={styles.addRow}>
@@ -130,24 +181,16 @@ export function ProductCard({ product }: { product: Product }) {
             title={`Add to ${addTarget}`}
             aria-label={`Add ${product.name} to ${addTarget}`}
           >
-            {price == null ? 'Unavailable' : active.type === 'personal' ? 'Add' : `Add to ${activeLabel}`}
+            {price == null ? 'Unavailable' : active.type === 'personal' ? 'Add to cart' : `Add to ${activeLabel}`}
           </button>
         )}
       </div>
 
-      {pickOutOfStock && rawPickStore && store && (
+      {pickOutOfStock && rawPickStore && store && !compact && (
         <p className={styles.storeNotice}>
           {rawPickStore.name} is out of stock · showing {store.name}
         </p>
       )}
-
-      <StorePicker
-        product={product}
-        value={storeId}
-        stores={stores}
-        onChange={(next) => void selectStore(product.id, next)}
-        label={`Compare ${stores.length} stores`}
-      />
 
       <WatchModal
         open={watchOpen}
