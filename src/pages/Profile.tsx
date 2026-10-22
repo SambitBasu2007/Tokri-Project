@@ -5,6 +5,7 @@ import { useAuth } from '../state/AuthContext';
 import { useToast } from '../state/ToastContext';
 import { useAddresses } from '../hooks/useAddresses';
 import { supabase } from '../lib/supabase';
+import { AddressForm } from '../components/AddressForm';
 import { AuthForm } from '../components/AuthForm';
 import { Modal } from '../components/Modal';
 import { EmptyState } from '../components/EmptyState';
@@ -19,9 +20,6 @@ export default function ProfilePage() {
 
   const [name, setName] = useState(profile?.fullName ?? '');
   const [savingName, setSavingName] = useState(false);
-  const [label, setLabel] = useState('Home');
-  const [line, setLine] = useState('');
-  const [pincode, setPincode] = useState('');
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [deleting, setDeleting] = useState(false);
 
@@ -76,24 +74,6 @@ export default function ProfilePage() {
     } finally {
       setSavingName(false);
     }
-  };
-
-  const addAddress = async () => {
-    if (!line.trim()) {
-      toast('Enter an address line.', 'error');
-      return;
-    }
-    await save({
-      label: label || 'Home',
-      line,
-      pincode: pincode.trim() || null,
-      lat: null,
-      lng: null,
-      isDefault: addresses.length === 0,
-    });
-    setLine('');
-    setPincode('');
-    setLabel('Home');
   };
 
   const doSignOut = async () => {
@@ -210,49 +190,13 @@ export default function ProfilePage() {
                 </div>
               )}
 
-              <div className={common.formGrid} style={{ marginTop: '12px' }}>
-                <div className={styles.addressGrid}>
-                  <div className={common.formRow}>
-                    <label className={common.label} htmlFor="addr-label">
-                      Label
-                    </label>
-                    <input
-                      id="addr-label"
-                      className="field"
-                      value={label}
-                      onChange={(event) => setLabel(event.target.value)}
-                    />
-                  </div>
-                  <div className={common.formRow}>
-                    <label className={common.label} htmlFor="addr-pin">
-                      Pincode
-                    </label>
-                    <input
-                      id="addr-pin"
-                      className="field"
-                      value={pincode}
-                      onChange={(event) => setPincode(event.target.value)}
-                      inputMode="numeric"
-                    />
-                  </div>
-                </div>
-                <div className={common.formRow}>
-                  <label className={common.label} htmlFor="addr-line">
-                    Address line
-                  </label>
-                  <input
-                    id="addr-line"
-                    className="field"
-                    value={line}
-                    onChange={(event) => setLine(event.target.value)}
-                    placeholder="Flat, street, area, city"
-                  />
-                </div>
-                <div>
-                  <button type="button" className="btn btn-sm" onClick={() => void addAddress()}>
-                    Add address
-                  </button>
-                </div>
+              <div style={{ marginTop: '12px' }}>
+                <AddressForm
+                  addresses={addresses}
+                  save={save}
+                  showSaved={false}
+                  submitLabel="Add address"
+                />
               </div>
             </section>
           </div>

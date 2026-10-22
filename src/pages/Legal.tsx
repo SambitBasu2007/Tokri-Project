@@ -22,6 +22,11 @@ export default function LegalPage() {
             position and payment confirmation in Tokri is generated for the demo. No order is sent to
             Blinkit, Zepto, Swiggy Instamart, BigBasket, JioMart or Flipkart. No money is charged.
           </div>
+          <p>
+            Each product page has an external-link button beside every store. It opens that store&apos;s
+            own search for the product, where the live price for your pincode is shown. Tokri does not
+            scrape or proxy those live prices.
+          </p>
 
           <h2>Privacy policy</h2>
           <p>
@@ -89,12 +94,12 @@ export default function LegalPage() {
           <h2>Third-party attribution</h2>
           <ul>
             <li>
-              Product images, where present, come from <a href="https://world.openfoodfacts.org/" target="_blank" rel="noreferrer noopener">Open Food Facts</a>{' '}
-              contributors under <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noreferrer noopener">CC BY-SA</a>.
-              The database is under the Open Database License. Individual product pages link to their
-              source. Packaging and brand marks may carry additional third-party rights; images are
-              dropped when that is unclear. Fresh produce often has no usable image and shows a
-              neutral placeholder.
+              Product images come from <a href="https://world.openfoodfacts.org/" target="_blank" rel="noreferrer noopener">Open Food Facts</a>{' '}
+              contributors under <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noreferrer noopener">CC BY-SA</a>{' '}
+              and from <a href="https://commons.wikimedia.org/" target="_blank" rel="noreferrer noopener">Wikimedia Commons</a>{' '}
+              under the licence shown on each file page. The local copies and exact source links are
+              listed in <code>public/images/CREDITS.md</code>; each product page also links to its
+              source. Packaging and brand marks may carry additional third-party rights.
             </li>
             <li>
               Reverse geocoding and map data © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer noopener">OpenStreetMap contributors</a>.

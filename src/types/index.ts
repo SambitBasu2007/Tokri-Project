@@ -150,3 +150,16 @@ export interface Order {
   shipments: Shipment[];
   source: OrderSource;
 }
+
+/**
+ * A community order placed by someone else. This is intentionally narrower
+ * than Order: the activity view never exposes amount, address or shipments.
+ */
+export interface CommunityActivity {
+  id: string;
+  communityId: string;
+  orderedBy: string;
+  orderedByName: string;
+  items: OrderItem[];
+  createdAt: string;
+}

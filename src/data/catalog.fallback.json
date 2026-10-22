@@ -1,102 +1,732 @@
 {
   "stores": [
-    { "id": "blinkit", "name": "Blinkit", "deliveryMinutes": 10, "deliveryFee": 25, "freeAbove": 199 },
-    { "id": "zepto", "name": "Zepto", "deliveryMinutes": 10, "deliveryFee": 25, "freeAbove": 199 },
-    { "id": "swiggy", "name": "Swiggy Instamart", "deliveryMinutes": 15, "deliveryFee": 25, "freeAbove": 199 },
-    { "id": "bigbasket", "name": "BigBasket", "deliveryMinutes": 30, "deliveryFee": 35, "freeAbove": 399 },
-    { "id": "jiomart", "name": "JioMart", "deliveryMinutes": 60, "deliveryFee": 35, "freeAbove": 399 },
-    { "id": "flipkart", "name": "Flipkart Minutes", "deliveryMinutes": 20, "deliveryFee": 25, "freeAbove": 199 }
+    {
+      "id": "blinkit",
+      "name": "Blinkit",
+      "deliveryMinutes": 10,
+      "deliveryFee": 25,
+      "freeAbove": 199
+    },
+    {
+      "id": "zepto",
+      "name": "Zepto",
+      "deliveryMinutes": 10,
+      "deliveryFee": 25,
+      "freeAbove": 199
+    },
+    {
+      "id": "swiggy",
+      "name": "Swiggy Instamart",
+      "deliveryMinutes": 15,
+      "deliveryFee": 25,
+      "freeAbove": 199
+    },
+    {
+      "id": "bigbasket",
+      "name": "BigBasket",
+      "deliveryMinutes": 30,
+      "deliveryFee": 35,
+      "freeAbove": 399
+    },
+    {
+      "id": "jiomart",
+      "name": "JioMart",
+      "deliveryMinutes": 60,
+      "deliveryFee": 35,
+      "freeAbove": 399
+    },
+    {
+      "id": "flipkart",
+      "name": "Flipkart Minutes",
+      "deliveryMinutes": 20,
+      "deliveryFee": 25,
+      "freeAbove": 199
+    }
   ],
   "products": [
     {
-      "id": 1, "name": "Amul Toned Milk", "category": "dairy", "weight": "1 L Pouch", "mrp": 34,
-      "unitQty": 1000, "unit": "ml", "barcode": null, "imageUrl": null, "imageCreditUrl": null,
-      "prices": { "blinkit": { "price": 32, "inStock": true }, "zepto": { "price": 31, "inStock": true }, "swiggy": { "price": 33, "inStock": true }, "bigbasket": { "price": 30, "inStock": true }, "jiomart": { "price": 29, "inStock": true }, "flipkart": { "price": 33, "inStock": true } }
+      "id": 1,
+      "name": "Amul Toned Milk",
+      "category": "dairy",
+      "weight": "1 L Pouch",
+      "mrp": 34,
+      "unitQty": 1000,
+      "unit": "ml",
+      "barcode": null,
+      "imageUrl": "/images/1.jpg",
+      "imageCreditUrl": "https://world.openfoodfacts.org/product/8901262150064/amul-taaza",
+      "prices": {
+        "blinkit": {
+          "price": 32,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 31,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 33,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 30,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 29,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 33,
+          "inStock": true
+        }
+      }
     },
     {
-      "id": 2, "name": "Aashirvaad Whole Wheat Atta", "category": "atta", "weight": "5 kg", "mrp": 290,
-      "unitQty": 5000, "unit": "g", "barcode": null, "imageUrl": null, "imageCreditUrl": null,
-      "prices": { "blinkit": { "price": 265, "inStock": true }, "zepto": { "price": 272, "inStock": true }, "swiggy": { "price": 269, "inStock": true }, "bigbasket": { "price": 259, "inStock": true }, "jiomart": { "price": 255, "inStock": true }, "flipkart": { "price": 255, "inStock": false } }
+      "id": 2,
+      "name": "Aashirvaad Whole Wheat Atta",
+      "category": "atta",
+      "weight": "5 kg",
+      "mrp": 290,
+      "unitQty": 5000,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/2.jpg",
+      "imageCreditUrl": "https://world.openfoodfacts.org/product/8901725121723/aashirvaad-whole-wheat-atta",
+      "prices": {
+        "blinkit": {
+          "price": 265,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 272,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 269,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 259,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 255,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 255,
+          "inStock": false
+        }
+      }
     },
     {
-      "id": 3, "name": "Fortune Sunflower Oil", "category": "oil", "weight": "1 L", "mrp": 155,
-      "unitQty": 1000, "unit": "ml", "barcode": null, "imageUrl": null, "imageCreditUrl": null,
-      "prices": { "blinkit": { "price": 139, "inStock": true }, "zepto": { "price": 142, "inStock": true }, "swiggy": { "price": 135, "inStock": true }, "bigbasket": { "price": 138, "inStock": true }, "jiomart": { "price": 140, "inStock": true }, "flipkart": { "price": 145, "inStock": true } }
+      "id": 3,
+      "name": "Fortune Sunflower Oil",
+      "category": "oil",
+      "weight": "1 L",
+      "mrp": 155,
+      "unitQty": 1000,
+      "unit": "ml",
+      "barcode": null,
+      "imageUrl": "/images/3.jpg",
+      "imageCreditUrl": "https://world.openfoodfacts.org/product/8906007280280/fortune-sunlite-refined-sunflower-oil",
+      "prices": {
+        "blinkit": {
+          "price": 139,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 142,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 135,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 138,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 140,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 145,
+          "inStock": true
+        }
+      }
     },
     {
-      "id": 4, "name": "Shimla Apples", "category": "fruits", "weight": "1 kg (4-5 pcs)", "mrp": 180,
-      "unitQty": 1000, "unit": "g", "barcode": null, "imageUrl": null, "imageCreditUrl": null,
-      "prices": { "blinkit": { "price": 165, "inStock": true }, "zepto": { "price": 159, "inStock": true }, "swiggy": { "price": 170, "inStock": true }, "bigbasket": { "price": 155, "inStock": true }, "jiomart": { "price": 162, "inStock": true }, "flipkart": { "price": 168, "inStock": true } }
+      "id": 4,
+      "name": "Shimla Apples",
+      "category": "fruits",
+      "weight": "1 kg (4-5 pcs)",
+      "mrp": 180,
+      "unitQty": 1000,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/4.jpg",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Red_Apple.jpg",
+      "prices": {
+        "blinkit": {
+          "price": 165,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 159,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 170,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 155,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 162,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 168,
+          "inStock": true
+        }
+      }
     },
     {
-      "id": 5, "name": "Haldiram's Aloo Bhujia", "category": "snacks", "weight": "200 g", "mrp": 60,
-      "unitQty": 200, "unit": "g", "barcode": null, "imageUrl": null, "imageCreditUrl": null,
-      "prices": { "blinkit": { "price": 55, "inStock": true }, "zepto": { "price": 50, "inStock": true }, "swiggy": { "price": 56, "inStock": true }, "bigbasket": { "price": 52, "inStock": true }, "jiomart": { "price": 53, "inStock": true }, "flipkart": { "price": 54, "inStock": true } }
+      "id": 5,
+      "name": "Haldiram's Aloo Bhujia",
+      "category": "snacks",
+      "weight": "200 g",
+      "mrp": 60,
+      "unitQty": 200,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/5.jpg",
+      "imageCreditUrl": "https://world.openfoodfacts.org/product/12751112/haldirams-aloo-bhujia",
+      "prices": {
+        "blinkit": {
+          "price": 55,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 50,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 56,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 52,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 53,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 54,
+          "inStock": true
+        }
+      }
     },
     {
-      "id": 6, "name": "Coca-Cola", "category": "beverages", "weight": "750 ml Bottle", "mrp": 42,
-      "unitQty": 750, "unit": "ml", "barcode": null, "imageUrl": null, "imageCreditUrl": null,
-      "prices": { "blinkit": { "price": 38, "inStock": true }, "zepto": { "price": 40, "inStock": true }, "swiggy": { "price": 38, "inStock": true }, "bigbasket": { "price": 35, "inStock": true }, "jiomart": { "price": 36, "inStock": true }, "flipkart": { "price": 39, "inStock": true } }
+      "id": 6,
+      "name": "Coca-Cola",
+      "category": "beverages",
+      "weight": "750 ml Bottle",
+      "mrp": 42,
+      "unitQty": 750,
+      "unit": "ml",
+      "barcode": null,
+      "imageUrl": "/images/6.jpg",
+      "imageCreditUrl": "https://world.openfoodfacts.org/product/9300675009829/coca-cola",
+      "prices": {
+        "blinkit": {
+          "price": 38,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 40,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 38,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 35,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 36,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 39,
+          "inStock": true
+        }
+      }
     },
     {
-      "id": 7, "name": "Spinach (Palak)", "category": "vegetables", "weight": "250 g", "mrp": 30,
-      "unitQty": 250, "unit": "g", "barcode": null, "imageUrl": null, "imageCreditUrl": null,
-      "prices": { "blinkit": { "price": 18, "inStock": true }, "zepto": { "price": 20, "inStock": true }, "swiggy": { "price": 24, "inStock": true }, "bigbasket": { "price": 22, "inStock": true }, "jiomart": { "price": 25, "inStock": true }, "flipkart": { "price": 22, "inStock": false } }
+      "id": 7,
+      "name": "Spinach (Palak)",
+      "category": "vegetables",
+      "weight": "250 g",
+      "mrp": 30,
+      "unitQty": 250,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/7.jpg",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Spinach_leaves.jpg",
+      "prices": {
+        "blinkit": {
+          "price": 18,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 20,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 24,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 22,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 25,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 22,
+          "inStock": false
+        }
+      }
     },
     {
-      "id": 8, "name": "Amul Butter", "category": "dairy", "weight": "500 g Carton", "mrp": 285,
-      "unitQty": 500, "unit": "g", "barcode": null, "imageUrl": null, "imageCreditUrl": null,
-      "prices": { "blinkit": { "price": 270, "inStock": true }, "zepto": { "price": 275, "inStock": true }, "swiggy": { "price": 268, "inStock": true }, "bigbasket": { "price": 265, "inStock": true }, "jiomart": { "price": 262, "inStock": true }, "flipkart": { "price": 278, "inStock": true } }
+      "id": 8,
+      "name": "Amul Butter",
+      "category": "dairy",
+      "weight": "500 g Carton",
+      "mrp": 285,
+      "unitQty": 500,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/8.jpg",
+      "imageCreditUrl": "https://world.openfoodfacts.org/product/8901262010016/amul-pasteurized-butter",
+      "prices": {
+        "blinkit": {
+          "price": 270,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 275,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 268,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 265,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 262,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 278,
+          "inStock": true
+        }
+      }
     },
     {
-      "id": 9, "name": "Maggi 2-Minute Noodles", "category": "snacks", "weight": "Family Pack (8×70g)", "mrp": 112,
-      "unitQty": 560, "unit": "g", "barcode": null, "imageUrl": null, "imageCreditUrl": null,
-      "prices": { "blinkit": { "price": 90, "inStock": true }, "zepto": { "price": 99, "inStock": true }, "swiggy": { "price": 95, "inStock": true }, "bigbasket": { "price": 92, "inStock": true }, "jiomart": { "price": 96, "inStock": true }, "flipkart": { "price": 98, "inStock": true } }
+      "id": 9,
+      "name": "Maggi 2-Minute Noodles",
+      "category": "snacks",
+      "weight": "Family Pack (8×70g)",
+      "mrp": 112,
+      "unitQty": 560,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/9.jpg",
+      "imageCreditUrl": "https://world.openfoodfacts.org/product/8901058000306/maggi-2-minute-noodles-family-pack",
+      "prices": {
+        "blinkit": {
+          "price": 90,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 99,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 95,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 92,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 96,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 98,
+          "inStock": true
+        }
+      }
     },
     {
-      "id": 10, "name": "Dettol Liquid Handwash", "category": "personal", "weight": "900 ml Refill", "mrp": 120,
-      "unitQty": 900, "unit": "ml", "barcode": null, "imageUrl": null, "imageCreditUrl": null,
-      "prices": { "blinkit": { "price": 95, "inStock": true }, "zepto": { "price": 105, "inStock": true }, "swiggy": { "price": 102, "inStock": true }, "bigbasket": { "price": 99, "inStock": true }, "jiomart": { "price": 97, "inStock": true }, "flipkart": { "price": 97, "inStock": false } }
+      "id": 10,
+      "name": "Dettol Liquid Handwash",
+      "category": "personal",
+      "weight": "900 ml Refill",
+      "mrp": 120,
+      "unitQty": 900,
+      "unit": "ml",
+      "barcode": null,
+      "imageUrl": "/images/10.jpg",
+      "imageCreditUrl": "https://world.openfoodfacts.org/product/8901396389675/dettol-liquid-handwash",
+      "prices": {
+        "blinkit": {
+          "price": 95,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 105,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 102,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 99,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 97,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 97,
+          "inStock": false
+        }
+      }
     },
     {
-      "id": 11, "name": "Harpic Power Plus", "category": "cleaning", "weight": "1 L", "mrp": 130,
-      "unitQty": 1000, "unit": "ml", "barcode": null, "imageUrl": null, "imageCreditUrl": null,
-      "prices": { "blinkit": { "price": 115, "inStock": true }, "zepto": { "price": 118, "inStock": true }, "swiggy": { "price": 120, "inStock": true }, "bigbasket": { "price": 110, "inStock": true }, "jiomart": { "price": 108, "inStock": true }, "flipkart": { "price": 122, "inStock": true } }
+      "id": 11,
+      "name": "Harpic Power Plus",
+      "category": "cleaning",
+      "weight": "1 L",
+      "mrp": 130,
+      "unitQty": 1000,
+      "unit": "ml",
+      "barcode": null,
+      "imageUrl": "/images/11.jpg",
+      "imageCreditUrl": "https://world.openfoodfacts.org/product/8901396152804/harpic-disinfectant-bathroom-cleaner-lemon-fresh",
+      "prices": {
+        "blinkit": {
+          "price": 115,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 118,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 120,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 110,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 108,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 122,
+          "inStock": true
+        }
+      }
     },
     {
-      "id": 12, "name": "India Gate Basmati Rice", "category": "atta", "weight": "5 kg", "mrp": 499,
-      "unitQty": 5000, "unit": "g", "barcode": null, "imageUrl": null, "imageCreditUrl": null,
-      "prices": { "blinkit": { "price": 450, "inStock": true }, "zepto": { "price": 465, "inStock": true }, "swiggy": { "price": 435, "inStock": true }, "bigbasket": { "price": 455, "inStock": true }, "jiomart": { "price": 440, "inStock": true }, "flipkart": { "price": 470, "inStock": true } }
+      "id": 12,
+      "name": "India Gate Basmati Rice",
+      "category": "atta",
+      "weight": "5 kg",
+      "mrp": 499,
+      "unitQty": 5000,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/12.jpg",
+      "imageCreditUrl": "https://world.openfoodfacts.org/product/0690225101134/india-gate-basmati-rice",
+      "prices": {
+        "blinkit": {
+          "price": 450,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 465,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 435,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 455,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 440,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 470,
+          "inStock": true
+        }
+      }
     },
     {
-      "id": 13, "name": "Bananas", "category": "fruits", "weight": "1 Dozen", "mrp": 55,
-      "unitQty": 12, "unit": "pc", "barcode": null, "imageUrl": null, "imageCreditUrl": null,
-      "prices": { "blinkit": { "price": 45, "inStock": true }, "zepto": { "price": 42, "inStock": true }, "swiggy": { "price": 48, "inStock": true }, "bigbasket": { "price": 40, "inStock": true }, "jiomart": { "price": 44, "inStock": true }, "flipkart": { "price": 46, "inStock": true } }
+      "id": 13,
+      "name": "Bananas",
+      "category": "fruits",
+      "weight": "1 Dozen",
+      "mrp": 55,
+      "unitQty": 12,
+      "unit": "pc",
+      "barcode": null,
+      "imageUrl": "/images/13.jpg",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Bananas.jpg",
+      "prices": {
+        "blinkit": {
+          "price": 45,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 42,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 48,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 40,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 44,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 46,
+          "inStock": true
+        }
+      }
     },
     {
-      "id": 14, "name": "Amul Paneer", "category": "dairy", "weight": "200 g Block", "mrp": 100,
-      "unitQty": 200, "unit": "g", "barcode": null, "imageUrl": null, "imageCreditUrl": null,
-      "prices": { "blinkit": { "price": 90, "inStock": true }, "zepto": { "price": 88, "inStock": true }, "swiggy": { "price": 92, "inStock": true }, "bigbasket": { "price": 85, "inStock": true }, "jiomart": { "price": 87, "inStock": true }, "flipkart": { "price": 95, "inStock": true } }
+      "id": 14,
+      "name": "Amul Paneer",
+      "category": "dairy",
+      "weight": "200 g Block",
+      "mrp": 100,
+      "unitQty": 200,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/14.jpg",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Panir_Paneer_Indian_cheese_fresh.jpg",
+      "prices": {
+        "blinkit": {
+          "price": 90,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 88,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 92,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 85,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 87,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 95,
+          "inStock": true
+        }
+      }
     },
     {
-      "id": 15, "name": "Tropicana Orange Juice", "category": "beverages", "weight": "1 L Tetra Pack", "mrp": 110,
-      "unitQty": 1000, "unit": "ml", "barcode": null, "imageUrl": null, "imageCreditUrl": null,
-      "prices": { "blinkit": { "price": 99, "inStock": true }, "zepto": { "price": 90, "inStock": true }, "swiggy": { "price": 102, "inStock": true }, "bigbasket": { "price": 95, "inStock": true }, "jiomart": { "price": 92, "inStock": true }, "flipkart": { "price": 92, "inStock": false } }
+      "id": 15,
+      "name": "Tropicana Orange Juice",
+      "category": "beverages",
+      "weight": "1 L Tetra Pack",
+      "mrp": 110,
+      "unitQty": 1000,
+      "unit": "ml",
+      "barcode": null,
+      "imageUrl": "/images/15.jpg",
+      "imageCreditUrl": "https://world.openfoodfacts.org/product/5022313000312/tropicana",
+      "prices": {
+        "blinkit": {
+          "price": 99,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 90,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 102,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 95,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 92,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 92,
+          "inStock": false
+        }
+      }
     },
     {
-      "id": 16, "name": "Tomatoes", "category": "vegetables", "weight": "1 kg", "mrp": 40,
-      "unitQty": 1000, "unit": "g", "barcode": null, "imageUrl": null, "imageCreditUrl": null,
-      "prices": { "blinkit": { "price": 28, "inStock": true }, "zepto": { "price": 25, "inStock": true }, "swiggy": { "price": 30, "inStock": true }, "bigbasket": { "price": 22, "inStock": true }, "jiomart": { "price": 26, "inStock": true }, "flipkart": { "price": 32, "inStock": true } }
+      "id": 16,
+      "name": "Tomatoes",
+      "category": "vegetables",
+      "weight": "1 kg",
+      "mrp": 40,
+      "unitQty": 1000,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/16.jpg",
+      "imageCreditUrl": "https://commons.wikimedia.org/wiki/File:Tomatoes.jpg",
+      "prices": {
+        "blinkit": {
+          "price": 28,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 25,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 30,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 22,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 26,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 32,
+          "inStock": true
+        }
+      }
     },
     {
-      "id": 17, "name": "Lay's Classic Salted", "category": "snacks", "weight": "Party Pack 190 g", "mrp": 85,
-      "unitQty": 190, "unit": "g", "barcode": null, "imageUrl": null, "imageCreditUrl": null,
-      "prices": { "blinkit": { "price": 70, "inStock": true }, "zepto": { "price": 72, "inStock": true }, "swiggy": { "price": 78, "inStock": true }, "bigbasket": { "price": 75, "inStock": true }, "jiomart": { "price": 73, "inStock": true }, "flipkart": { "price": 76, "inStock": true } }
+      "id": 17,
+      "name": "Lay's Classic Salted",
+      "category": "snacks",
+      "weight": "Party Pack 190 g",
+      "mrp": 85,
+      "unitQty": 190,
+      "unit": "g",
+      "barcode": null,
+      "imageUrl": "/images/17.jpg",
+      "imageCreditUrl": "https://world.openfoodfacts.org/product/8844719115685/lays-classic",
+      "prices": {
+        "blinkit": {
+          "price": 70,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 72,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 78,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 75,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 73,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 76,
+          "inStock": true
+        }
+      }
     },
     {
-      "id": 18, "name": "Surf Excel Matic Liquid", "category": "cleaning", "weight": "1 L Front Load", "mrp": 240,
-      "unitQty": 1000, "unit": "ml", "barcode": null, "imageUrl": null, "imageCreditUrl": null,
-      "prices": { "blinkit": { "price": 210, "inStock": true }, "zepto": { "price": 215, "inStock": true }, "swiggy": { "price": 220, "inStock": true }, "bigbasket": { "price": 199, "inStock": true }, "jiomart": { "price": 205, "inStock": true }, "flipkart": { "price": 225, "inStock": true } }
+      "id": 18,
+      "name": "Rin Liquid Detergent",
+      "category": "cleaning",
+      "weight": "1 L",
+      "mrp": 190,
+      "unitQty": 1000,
+      "unit": "ml",
+      "barcode": null,
+      "imageUrl": "/images/18.jpg",
+      "imageCreditUrl": "https://world.openfoodfacts.org/product/8901030770876/rin-liquid",
+      "prices": {
+        "blinkit": {
+          "price": 165,
+          "inStock": true
+        },
+        "zepto": {
+          "price": 168,
+          "inStock": true
+        },
+        "swiggy": {
+          "price": 172,
+          "inStock": true
+        },
+        "bigbasket": {
+          "price": 158,
+          "inStock": true
+        },
+        "jiomart": {
+          "price": 152,
+          "inStock": true
+        },
+        "flipkart": {
+          "price": 175,
+          "inStock": true
+        }
+      }
     }
   ]
 }

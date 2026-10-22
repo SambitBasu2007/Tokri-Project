@@ -95,6 +95,8 @@ export function CatalogProvider({ children }: { children: ReactNode }) {
       hadCache.current = true;
     } catch (err) {
       const message = errorText(err);
+      // Keep database diagnostics in the console, not in the customer-facing UI.
+      console.warn('[Tokri] catalog fallback:', message);
       const cached = readCatalogCache();
       if (cached) {
         setState({

@@ -1,7 +1,1 @@
-{
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }],
-  "redirects": [
-    { "source": "/social/social.html", "destination": "/social", "permanent": true },
-    { "source": "/checkout/checkout.html", "destination": "/checkout", "permanent": true }
-  ]
-}
+{ "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }] }

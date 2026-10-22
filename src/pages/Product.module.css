@@ -241,6 +241,34 @@
   font-weight: 600;
 }
 
+.storeActions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.liveLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  color: var(--ink-2);
+  flex: none;
+}
+
+.liveLink:hover {
+  border-color: var(--ink-3);
+  color: var(--ink);
+}
+
+.liveLink:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
 .out {
   color: var(--ink-3);
   font-weight: 400;

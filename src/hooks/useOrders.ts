@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { supabase, isMissingRelation } from '../lib/supabase';
 import { DEMO_ORDERS_KEY } from '../lib/cart';
+import { parseOrderItems } from '../lib/orders';
 import { deliveryFeeFor, selectedPrice } from '../lib/pricing';
 import type { Json } from '../lib/database.types';
 import type { Address, CartItem, Order, OrderItem, Product, Shipment, Store, StoreId } from '../types';
@@ -33,29 +34,6 @@ function writeLocalOrders(orders: Order[]): void {
   } catch {
     // Ignore storage failures.
   }
-}
-
-function parseItems(value: Json): OrderItem[] {
-  if (!Array.isArray(value)) return [];
-  return value.flatMap((entry) => {
-    if (typeof entry !== 'object' || entry === null) return [];
-    const row = entry as Record<string, Json | undefined>;
-    const productId = Number(row.productId);
-    const quantity = Number(row.quantity);
-    const price = Number(row.price);
-    const storeId = String(row.storeId ?? '') as StoreId;
-    if (!productId || !quantity || !storeId) return [];
-    return [
-      {
-        productId,
-        name: String(row.name ?? `Product ${productId}`),
-        weight: row.weight ? String(row.weight) : undefined,
-        quantity,
-        storeId,
-        price: Number.isFinite(price) ? price : 0,
-      },
-    ];
-  });
 }
 
 function shipmentsFor(items: OrderItem[], stores: Store[]): Shipment[] {
@@ -127,7 +105,7 @@ export function useOrders() {
         id: row.id,
         communityId: row.community_id,
         orderedBy: row.ordered_by,
-        items: parseItems(row.items),
+        items: parseOrderItems(row.items),
         amount: Number(row.amount),
         addressText: row.address_text,
         createdAt: row.created_at,

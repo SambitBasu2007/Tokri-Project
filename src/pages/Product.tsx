@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { Bell, ChevronRight, ImageOff, Minus, Plus } from 'lucide-react';
+import { Bell, ChevronRight, ExternalLink, ImageOff, Minus, Plus } from 'lucide-react';
 import { useCatalog } from '../state/CatalogContext';
 import { useCart } from '../state/CartContext';
 import { useWatches } from '../state/WatchesContext';
@@ -8,6 +8,7 @@ import { usePriceHistory } from '../hooks/usePriceHistory';
 import { bestPrice, selectedPrice, unitPrice } from '../lib/pricing';
 import { MAX_QUANTITY } from '../lib/cart';
 import { categoryLabel } from '../lib/catalog';
+import { storeSearchUrl } from '../lib/storeLinks';
 import { inr, minutesLabel } from '../lib/format';
 import type { StoreId } from '../types';
 import { PriceChart } from '../components/PriceChart';
@@ -99,9 +100,14 @@ export default function ProductPage() {
               <p className={styles.attribution}>
                 Image from{' '}
                 <a href={product.imageCreditUrl} target="_blank" rel="noreferrer noopener">
-                  Open Food Facts contributors
+                  {product.imageCreditUrl.includes('commons.wikimedia.org')
+                    ? 'Wikimedia Commons'
+                    : 'Open Food Facts contributors'}
                 </a>
-                , CC BY-SA. Packaging and trademarks may carry third-party rights.
+                {product.imageCreditUrl.includes('commons.wikimedia.org')
+                  ? ', CC-licensed.'
+                  : ', CC BY-SA.'}{' '}
+                Packaging and trademarks may carry third-party rights.
               </p>
             )}
           </div>
@@ -182,8 +188,9 @@ export default function ProductPage() {
             </div>
 
             <div className={styles.simBanner}>
-              Prices are <strong>simulated</strong> for this demo — Tokri has no live store price API.
-              Price history is generated demo data.
+              <strong>Demo prices, not live.</strong> Quick-commerce prices change by pincode. Use the
+              ↗ link beside a store to open its current listing and verify before ordering. Price
+              history is generated demo data.
             </div>
 
             <div className={styles.stores}>
@@ -207,17 +214,29 @@ export default function ProductPage() {
                     <span className={`${styles.storePrice} ${!entry?.inStock ? styles.out : ''}`}>
                       {entry?.inStock ? inr(entry.price) : 'Out of stock'}
                     </span>
-                    <button
-                      type="button"
-                      className="btn btn-sm"
-                      disabled={!entry?.inStock || isCartStore}
-                      onClick={() => {
-                        setSelectedStore(store.id);
-                        void selectStore(product.id, store.id);
-                      }}
-                    >
-                      {isCartStore ? 'Selected' : 'Select'}
-                    </button>
+                    <div className={styles.storeActions}>
+                      <button
+                        type="button"
+                        className="btn btn-sm"
+                        disabled={!entry?.inStock || isCartStore}
+                        onClick={() => {
+                          setSelectedStore(store.id);
+                          void selectStore(product.id, store.id);
+                        }}
+                      >
+                        {isCartStore ? 'Selected' : 'Select'}
+                      </button>
+                      <a
+                        className={styles.liveLink}
+                        href={storeSearchUrl(store.id, product)}
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        aria-label={`Check ${store.name} live price for ${product.name}`}
+                        title={`Check ${store.name} live price`}
+                      >
+                        <ExternalLink size={13} aria-hidden />
+                      </a>
+                    </div>
                   </div>
                 );
               })}
@@ -281,7 +300,7 @@ export default function ProductPage() {
           )}
           <p className="small" style={{ marginTop: '8px' }}>
             {history.source === 'db' ? 'History read from stored price snapshots.' : 'History generated in the browser because no snapshots are available.'}{' '}
-            Simulated prices.
+            Demo prices; use the store links above to verify today's price.
           </p>
         </section>
       </div>

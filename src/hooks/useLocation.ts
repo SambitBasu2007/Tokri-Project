@@ -51,7 +51,10 @@ async function reverseGeocode(lat: number, lng: number): Promise<CachedAddress |
   url.searchParams.set('zoom', '18');
   url.searchParams.set('addressdetails', '1');
 
-  const response = await fetch(url, { headers: { Accept: 'application/json' } });
+  const response = await fetch(url, {
+    headers: { Accept: 'application/json' },
+    signal: AbortSignal.timeout ? AbortSignal.timeout(8000) : undefined,
+  });
   if (!response.ok) return null;
   const body = (await response.json()) as {
     display_name?: string;

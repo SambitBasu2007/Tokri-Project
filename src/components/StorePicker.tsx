@@ -1,8 +1,9 @@
 import { useCallback, useEffect, useRef, useState, type CSSProperties, type KeyboardEvent as ReactKeyboardEvent } from 'react';
 import { createPortal } from 'react-dom';
-import { X } from 'lucide-react';
+import { X, ExternalLink } from 'lucide-react';
 import type { Product, Store, StoreId } from '../types';
 import { minutesLabel, inr } from '../lib/format';
+import { storeSearchUrl } from '../lib/storeLinks';
 import styles from './StorePicker.module.css';
 
 interface StorePickerProps {
@@ -47,6 +48,7 @@ export function StorePicker({
       return a.price - b.price || a.store.name.localeCompare(b.store.name);
     });
   const cheapest = rows.find((row) => row.price != null)?.price ?? null;
+  const liveStore = rows.find((row) => row.price != null)?.store ?? null;
 
   const close = useCallback(() => setOpen(false), []);
 
@@ -212,6 +214,20 @@ export function StorePicker({
                   );
                 })}
               </div>
+
+              {liveStore && (
+                <div className={styles.foot}>
+                  <span>Prices vary by pincode.</span>
+                  <a
+                    href={storeSearchUrl(liveStore.id, product)}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                  >
+                    Check {liveStore.name} live
+                    <ExternalLink size={12} aria-hidden />
+                  </a>
+                </div>
+              )}
             </div>
           </div>,
           document.body,

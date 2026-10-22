@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { ChevronDown, Crown, Plus, Users } from 'lucide-react';
 import type { Json } from '../lib/database.types';
 import { supabase, errorMessage } from '../lib/supabase';
@@ -247,7 +247,12 @@ export default function SocialPage() {
         user_id: user.id,
         nickname: profile?.fullName ?? 'Leader',
       });
-      if (memberError) throw new Error(memberError.message);
+      if (memberError) {
+        // Do not leave a leaderless community behind if the 10-community cap
+        // or an RLS check rejects the membership row.
+        await supabase.from('communities').delete().eq('id', data.id);
+        throw new Error(memberError.message);
+      }
       toast('Community created.', 'success');
       clearDraft('community');
       setShowCreate(false);
@@ -598,6 +603,9 @@ export default function SocialPage() {
                           <p className={common.smallNote} style={{ marginTop: '6px' }}>
                             The feed deliberately omits order amounts and delivery addresses.
                           </p>
+                          <Link className={common.link} style={{ fontSize: '12px' }} to="/orders?view=community">
+                            See all community orders
+                          </Link>
                         </div>
 
                         <div className={styles.leaveRow}>

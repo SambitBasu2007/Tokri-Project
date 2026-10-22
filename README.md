@@ -44,20 +44,31 @@ service-role key in a `VITE_*` variable.
 
 ## Database setup
 
-Run these in the Supabase SQL editor (or `supabase db push`):
+Run these in the Supabase SQL editor (or `supabase db push`), in order:
 
-1. `supabase/0001_v2_schema.sql` — catalog, RLS, personal cart, orders + shipments,
+1. `supabase/0000_base_schema.sql` — only for a **fresh** project: profiles, communities,
+   members, join requests and orders, profile trigger, community cap and leader reassignment.
+   It is idempotent and backfills profiles for existing auth users.
+2. `supabase/0001_v2_schema.sql` — catalog, RLS, personal cart, orders + shipments,
    `place_order()`, safe activity view, price snapshots/watches, addresses, shared cart,
    account deletion, optional pg_cron schedule.
-2. `supabase/0002_catalog_seed.sql` — stores, 18 products and 108 prices. Generated from
+3. `supabase/0002_catalog_seed.sql` — stores, 18 products and 108 prices. Generated from
    `src/data/catalog.fallback.json` with `npm run seed:sql`.
-3. `supabase/0003_one_line_per_product.sql` — merges duplicate shared-cart rows and adds the
+4. `supabase/0003_one_line_per_product.sql` — merges duplicate shared-cart rows and adds the
    `shared_cart_one_line` unique index (plus member-wide update/delete policies). Required for
    V14's one-product-one-line rule; the app still works without it but concurrent adds can race.
+5. `supabase/0004_price_history_seed.sql` — copies the seeded prices into 30 days of demo history.
+   Run it after 0002; it does nothing if snapshots already exist.
 
-The migration assumes the existing base tables from the original app (`users`, `communities`,
-`community_members`, `join_requests`, `order_events`, `shared_cart_items`). It adds the V2
-columns and tables and is idempotent for those objects.
+If your project already has the original app's base tables (`users`, `communities`,
+`community_members`, `join_requests`, `order_events`, `shared_cart_items`), skip `0000` and start
+at `0001`. The migrations are idempotent for those objects.
+
+After the SQL, reload the PostgREST schema cache once:
+
+```sql
+notify pgrst, 'reload schema';
+```
 
 After a schema change, regenerate types:
 

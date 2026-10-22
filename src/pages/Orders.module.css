@@ -106,3 +106,109 @@
   color: var(--ink-2);
   margin-bottom: 16px;
 }
+
+.tabs {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--bg);
+  color: var(--ink-2);
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.tab:hover {
+  border-color: var(--line-strong);
+  color: var(--ink);
+}
+
+.tabActive,
+.tabActive:hover {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--bg);
+}
+
+.tabCount {
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  opacity: 0.65;
+}
+
+.tabActive .tabCount {
+  opacity: 0.8;
+}
+
+.communityOrder {
+  background: var(--bg-2);
+  border-style: dashed;
+  border-left: 3px solid var(--ink-3);
+}
+
+.communityHead {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.communityAvatar {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--bg-3);
+  border: 1px solid var(--line);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.communityTitleWrap {
+  min-width: 0;
+}
+
+.communityBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border: 1px dashed var(--line-strong);
+  border-radius: 999px;
+  padding: 3px 8px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+
+.communityQty {
+  flex: none;
+  font-size: 12px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-2);
+}
+
+.communityNote {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border-top: 1px dashed var(--line);
+  padding-top: 10px;
+  font-size: 12px;
+  color: var(--ink-3);
+}
+

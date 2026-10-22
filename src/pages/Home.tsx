@@ -3,7 +3,6 @@ import { Link, useSearchParams } from 'react-router-dom';
 import { useCatalog } from '../state/CatalogContext';
 import { bestPrice, unitPrice } from '../lib/pricing';
 import { categoryLabel } from '../lib/catalog';
-import { timeAgo } from '../lib/format';
 import { STORE_IDS, type StoreId } from '../types';
 import { ProductGrid } from '../components/ProductGrid';
 import styles from './Home.module.css';
@@ -26,7 +25,7 @@ function parseCategory(value: string | null): string {
 }
 
 export default function Home() {
-  const { products, stores, loading, source, error, cachedAt } = useCatalog();
+  const { products, stores, loading } = useCatalog();
   const [params, setParams] = useSearchParams();
   // Filters live in the URL: Back, refresh and shared links all restore them.
   const query = params.get('q') ?? '';
@@ -104,22 +103,6 @@ export default function Home() {
             <span className={styles.metaNote}>Simulated prices · updated daily</span>
           </div>
         </section>
-
-        {source === 'fallback' && !loading && (
-          <div className={styles.notice} role="status">
-            <strong>Offline catalog.</strong> Showing the bundled product list because Supabase
-            prices could not be loaded{error ? ` (${error})` : ''}. Cart and checkout still work on
-            this device. Run <code>supabase/0001_v2_schema.sql</code> to switch to live rows.
-          </div>
-        )}
-
-        {source === 'cache' && error && (
-          <div className={styles.notice} role="status">
-            <strong>Saved prices.</strong> The catalog could not be refreshed ({error}). Showing the
-            copy saved {cachedAt ? timeAgo(new Date(cachedAt).toISOString()) : 'earlier'}; the cart
-            and checkout still work.
-          </div>
-        )}
 
         <div className={styles.tabsWrap}>
           <div className={styles.tabs} role="tablist" aria-label="Product categories">
