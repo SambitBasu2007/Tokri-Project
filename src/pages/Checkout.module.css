@@ -21,7 +21,9 @@
 
 .section {
   border: 1px solid var(--line);
-  border-radius: var(--r);
+  border-radius: var(--r-lg);
+  background: var(--bg);
+  box-shadow: var(--shadow-sm);
   padding: 16px;
   margin-bottom: 12px;
 }
@@ -92,7 +94,9 @@
   position: sticky;
   top: calc(var(--header-h) + 16px);
   border: 1px solid var(--line-strong);
-  border-radius: var(--r);
+  border-radius: var(--r-lg);
+  background: var(--bg);
+  box-shadow: var(--shadow-md);
   padding: 16px;
   display: flex;
   flex-direction: column;
@@ -183,11 +187,12 @@
 }
 
 .paymentOption input {
-  accent-color: var(--ink);
+  accent-color: var(--accent);
 }
 
 .paymentSelected {
-  border-color: var(--ink);
+  border-color: var(--accent);
+  background: var(--accent-soft);
 }
 
 .note {

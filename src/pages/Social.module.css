@@ -1,7 +1,10 @@
 .community {
   border: 1px solid var(--line);
-  border-radius: var(--r);
+  border-radius: var(--r-lg);
+  background: var(--bg);
+  box-shadow: var(--shadow-sm);
   margin-bottom: 10px;
+  overflow: hidden;
 }
 
 .communityHead {
@@ -10,6 +13,7 @@
   justify-content: space-between;
   gap: 12px;
   padding: 12px;
+  background: var(--bg-2);
   flex-wrap: wrap;
 }
 
@@ -144,6 +148,7 @@
   gap: 10px;
   border: 1px solid var(--line);
   border-radius: var(--r);
+  background: var(--bg-2);
   padding: 8px 10px;
   flex-wrap: wrap;
 }

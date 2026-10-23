@@ -80,8 +80,8 @@
 }
 
 .tabActive {
-  color: var(--ink);
-  border-bottom-color: var(--ink);
+  color: var(--accent);
+  border-bottom-color: var(--accent);
   font-weight: 600;
 }
 
@@ -125,6 +125,7 @@
   border: 1px solid var(--line-strong);
   border-radius: var(--r);
   background: var(--bg);
+  box-shadow: var(--shadow-sm);
   min-height: 32px;
   padding: 4px 10px;
   font-size: 12px;
@@ -132,7 +133,8 @@
 }
 
 .select:focus {
-  border-color: var(--ink);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
   outline: none;
 }
 

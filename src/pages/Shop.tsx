@@ -4,6 +4,7 @@ import { ArrowLeft } from 'lucide-react';
 import { useCatalog } from '../state/CatalogContext';
 import { bestPrice, unitPrice } from '../lib/pricing';
 import { CATEGORY_ORDER, categoryLabel } from '../lib/catalog';
+import { searchScore } from '../lib/search';
 import { STORE_IDS, type StoreId } from '../types';
 import { ProductGrid } from '../components/ProductGrid';
 import styles from './Shop.module.css';
@@ -49,16 +50,12 @@ export default function ShopPage() {
   }, [products]);
 
   const visible = useMemo(() => {
-    const needle = query.trim().toLowerCase();
+    const needle = query.trim();
     const filtered = products.filter((product) => {
       if (category !== 'all' && product.category !== category) return false;
       if (storeFilter !== 'all' && !product.prices[storeFilter]?.inStock) return false;
       if (!needle) return true;
-      return (
-        product.name.toLowerCase().includes(needle) ||
-        categoryLabel(product.category).toLowerCase().includes(needle) ||
-        product.category.includes(needle)
-      );
+      return searchScore(product, needle) > 0;
     });
 
     const sorted = [...filtered];
@@ -75,6 +72,10 @@ export default function ShopPage() {
         const aUnit = aBest ? unitPrice(a, aBest.price)?.value ?? Number.POSITIVE_INFINITY : Number.POSITIVE_INFINITY;
         const bUnit = bBest ? unitPrice(b, bBest.price)?.value ?? Number.POSITIVE_INFINITY : Number.POSITIVE_INFINITY;
         return aUnit - bUnit;
+      }
+      if (needle) {
+        const byScore = searchScore(b, needle) - searchScore(a, needle);
+        if (byScore !== 0) return byScore;
       }
       return a.id - b.id;
     });

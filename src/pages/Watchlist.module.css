@@ -1,6 +1,9 @@
 .list {
   border: 1px solid var(--line);
-  border-radius: var(--r);
+  border-radius: var(--r-lg);
+  background: var(--bg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
 }
 
 .row {
@@ -9,6 +12,10 @@
   gap: 12px;
   padding: 10px 12px;
   border-bottom: 1px solid var(--line);
+}
+
+.row:hover {
+  background: var(--bg-2);
 }
 
 .row:last-child {

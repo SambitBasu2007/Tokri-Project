@@ -16,8 +16,10 @@
 
 .media {
   border: 1px solid var(--line);
-  border-radius: var(--r);
-  background: var(--bg-2);
+  border-radius: var(--r-lg);
+  background:
+    radial-gradient(circle at 50% 46%, var(--bg) 0%, var(--bg-2) 72%);
+  box-shadow: var(--shadow-sm);
   aspect-ratio: 1 / 1;
   display: flex;
   align-items: center;
@@ -180,13 +182,17 @@
 
 .stores {
   border: 1px solid var(--line);
-  border-radius: var(--r);
+  border-radius: var(--r-lg);
+  background: var(--bg);
+  box-shadow: var(--shadow-sm);
   margin-top: 8px;
+  overflow: hidden;
 }
 
 .storesHead {
   padding: 8px 12px;
   border-bottom: 1px solid var(--line);
+  background: var(--bg-2);
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.06em;
@@ -207,12 +213,37 @@
   border-bottom: 0;
 }
 
+.storeRow[data-store='blinkit'] {
+  --store-color: var(--store-blinkit);
+}
+
+.storeRow[data-store='zepto'] {
+  --store-color: var(--store-zepto);
+}
+
+.storeRow[data-store='swiggy'] {
+  --store-color: var(--store-swiggy);
+}
+
+.storeRow[data-store='bigbasket'] {
+  --store-color: var(--store-bigbasket);
+}
+
+.storeRow[data-store='jiomart'] {
+  --store-color: var(--store-jiomart);
+}
+
+.storeRow[data-store='flipkart'] {
+  --store-color: var(--store-flipkart);
+}
+
 .storeRowBest {
   background: var(--bg-2);
 }
 
 .storeRowSelected {
-  box-shadow: inset 2px 0 0 var(--ink);
+  background: var(--accent-soft);
+  box-shadow: inset 3px 0 0 var(--accent);
 }
 
 .storeName {
@@ -220,6 +251,15 @@
   align-items: center;
   gap: 6px;
   min-width: 0;
+}
+
+.storeName::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--store-color, var(--ink-3));
 }
 
 .bestTag {

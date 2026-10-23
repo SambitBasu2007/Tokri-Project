@@ -71,8 +71,10 @@
   margin-top: 16px;
   padding: 12px 14px;
   border: 1px solid var(--line);
-  border-radius: var(--r);
-  background: var(--bg-2);
+  border-color: color-mix(in srgb, var(--accent) 24%, var(--line));
+  border-radius: var(--r-lg);
+  background: var(--accent-soft);
+  box-shadow: var(--shadow-sm);
 }
 
 .communityIcon {
@@ -82,9 +84,10 @@
   height: 38px;
   flex: none;
   border: 1px solid var(--line-strong);
+  border-color: color-mix(in srgb, var(--accent) 28%, var(--line));
   border-radius: 50%;
   background: var(--bg);
-  color: var(--ink-2);
+  color: var(--accent);
 }
 
 .communityCopy {
@@ -123,6 +126,8 @@
   padding: 0 11px;
   border: 1px solid var(--line);
   border-radius: 999px;
+  background: var(--bg);
+  box-shadow: var(--shadow-sm);
   color: var(--ink-2);
   font-size: 12px;
   font-weight: 600;
@@ -130,8 +135,9 @@
 }
 
 .chip:hover {
-  border-color: var(--line-strong);
-  color: var(--ink);
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent);
   text-decoration: none;
 }
 
@@ -162,7 +168,7 @@
   align-items: center;
   gap: 4px;
   flex: none;
-  color: var(--ink-2);
+  color: var(--accent);
   font-size: 12px;
   font-weight: 700;
 }

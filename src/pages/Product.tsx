@@ -209,6 +209,7 @@ export default function ProductPage() {
                     className={`${styles.storeRow} ${isBest ? styles.storeRowBest : ''} ${
                       isCartStore ? styles.storeRowSelected : ''
                     }`.trim()}
+                    data-store={store.id}
                   >
                     <span className={styles.storeName}>
                       {store.name}

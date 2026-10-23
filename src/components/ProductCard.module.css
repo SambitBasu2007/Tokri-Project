@@ -1,16 +1,23 @@
 .card {
   border: 1px solid var(--line);
-  border-radius: var(--r);
+  border-radius: var(--r-lg);
   background: var(--bg);
   padding: 12px;
   display: flex;
   flex-direction: column;
   gap: 8px;
   min-width: 0;
+  box-shadow: var(--shadow-sm);
+  transition:
+    border-color 140ms ease,
+    box-shadow 140ms ease,
+    transform 140ms ease;
 }
 
 .card:hover {
   border-color: var(--line-strong);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
 }
 
 .compactCard {
@@ -21,7 +28,9 @@
 .imageWrap {
   position: relative;
   aspect-ratio: 1 / 1;
-  background: var(--bg-2);
+  background:
+    radial-gradient(circle at 50% 46%, var(--bg) 0%, var(--bg-2) 72%);
+  border: 1px solid var(--line);
   border-radius: var(--r);
   overflow: hidden;
   display: flex;
@@ -63,13 +72,15 @@
   justify-content: center;
   border: 1px solid var(--line);
   background: var(--bg);
-  border-radius: var(--r);
+  border-radius: 50%;
   color: var(--ink-2);
+  box-shadow: var(--shadow-sm);
 }
 
 .watch:hover {
   color: var(--ink);
   border-color: var(--ink-3);
+  background: var(--bg-2);
 }
 
 .watchActive {
@@ -167,11 +178,12 @@
 .storeList {
   display: flex;
   flex-direction: column;
-  gap: 1px;
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-  padding: 4px 0;
-  margin-top: 1px;
+  gap: 2px;
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  background: var(--bg-2);
+  padding: 5px 6px;
+  margin-top: 2px;
 }
 
 .storeListHead {
@@ -180,7 +192,7 @@
   letter-spacing: 0.07em;
   text-transform: uppercase;
   color: var(--ink-3);
-  padding: 1px 4px 3px;
+  padding: 0 4px 3px;
 }
 
 .storeRow {
@@ -189,8 +201,8 @@
   align-items: center;
   gap: 5px;
   width: 100%;
-  min-height: 25px;
-  padding: 1px 4px;
+  min-height: 26px;
+  padding: 1px 5px;
   border: 1px solid transparent;
   border-radius: var(--r);
   background: transparent;
@@ -200,8 +212,33 @@
   cursor: pointer;
 }
 
+.storeRow[data-store='blinkit'] {
+  --store-color: var(--store-blinkit);
+}
+
+.storeRow[data-store='zepto'] {
+  --store-color: var(--store-zepto);
+}
+
+.storeRow[data-store='swiggy'] {
+  --store-color: var(--store-swiggy);
+}
+
+.storeRow[data-store='bigbasket'] {
+  --store-color: var(--store-bigbasket);
+}
+
+.storeRow[data-store='jiomart'] {
+  --store-color: var(--store-jiomart);
+}
+
+.storeRow[data-store='flipkart'] {
+  --store-color: var(--store-flipkart);
+}
+
 .storeRow:hover:not(:disabled) {
-  background: var(--bg-2);
+  background: var(--bg);
+  border-color: var(--line);
 }
 
 .storeRow:focus-visible {
@@ -214,8 +251,9 @@
 }
 
 .storeRowSelected {
-  background: var(--bg-2);
+  background: var(--bg);
   border-color: var(--line-strong);
+  box-shadow: var(--shadow-sm);
 }
 
 .storeRowOut {
@@ -225,7 +263,7 @@
 .storeName {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 5px;
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -233,6 +271,15 @@
   font-size: 11px;
   font-weight: 500;
   color: var(--ink-2);
+}
+
+.storeName::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--store-color, var(--ink-3));
 }
 
 .storeBest {
@@ -298,10 +345,20 @@
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  box-shadow: 0 1px 2px rgba(11, 122, 36, 0.18);
+  transition:
+    filter 120ms ease,
+    box-shadow 120ms ease,
+    transform 120ms ease;
 }
 
 .addButton:hover {
-  filter: brightness(0.94);
+  filter: brightness(0.96);
+  box-shadow: 0 6px 16px rgba(11, 122, 36, 0.22);
+}
+
+.addButton:active {
+  transform: translateY(1px);
 }
 
 .addButton:disabled {

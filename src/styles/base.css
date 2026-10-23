@@ -11,7 +11,7 @@ html {
 body {
   margin: 0;
   min-width: 320px;
-  background: var(--bg);
+  background: var(--bg-page);
   color: var(--ink);
   font-family: var(--font);
   font-size: 14px;
@@ -127,12 +127,24 @@ ol {
   font-weight: 600;
   line-height: 1;
   text-decoration: none;
-  transition: background-color 120ms ease, border-color 120ms ease;
+  box-shadow: var(--shadow-sm);
+  transition:
+    background-color 120ms ease,
+    border-color 120ms ease,
+    box-shadow 120ms ease,
+    transform 120ms ease;
 }
 
 .btn:hover {
   background: var(--bg-2);
+  border-color: var(--line-strong);
+  box-shadow: var(--shadow-md);
   text-decoration: none;
+}
+
+.btn:active {
+  transform: translateY(1px);
+  box-shadow: var(--shadow-sm);
 }
 
 .btn-primary {
@@ -144,7 +156,9 @@ ol {
 .btn-primary:hover {
   background: var(--accent);
   border-color: var(--accent);
-  filter: brightness(0.94);
+  box-shadow: 0 8px 20px rgba(11, 122, 36, 0.18);
+  box-shadow: 0 8px 20px color-mix(in srgb, var(--accent) 24%, transparent);
+  filter: brightness(0.96);
 }
 
 .btn-ghost {

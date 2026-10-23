@@ -16,7 +16,9 @@
 
 .empty {
   border: 1px solid var(--line);
-  border-radius: var(--r);
+  border-radius: var(--r-lg);
+  background: var(--bg);
+  box-shadow: var(--shadow-sm);
   padding: 40px 24px;
   text-align: center;
   display: flex;
@@ -61,12 +63,13 @@
   align-items: flex-start;
   gap: 8px;
   border: 1px solid var(--line-strong);
-  border-left: 2px solid var(--ink);
+  border-left: 3px solid var(--ink);
   background: var(--bg);
   color: var(--ink);
   padding: 10px 12px;
   font-size: 14px;
-  border-radius: var(--r);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-md);
 }
 
 .toast span {
@@ -98,7 +101,7 @@
 }
 
 .toast.success {
-  border-left-color: var(--ink);
+  border-left-color: var(--accent);
 }
 
 .toast.error {
@@ -123,6 +126,7 @@
   background: var(--bg);
   border: 1px solid var(--line-strong);
   border-radius: var(--r-lg);
+  box-shadow: var(--shadow-md);
   padding: 20px;
 }
 

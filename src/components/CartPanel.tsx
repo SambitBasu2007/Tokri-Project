@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
-import { Minus, Plus, ShoppingBasket, X } from 'lucide-react';
+import { ImageOff, Minus, Plus, ShoppingBasket, X } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../state/CartContext';
 import { useCatalog } from '../state/CatalogContext';
@@ -166,15 +166,26 @@ export function CartPanel({ open, onClose }: CartPanelProps) {
               )}
 
               {totals.groups.map((group) => (
-                <section key={group.store.id} className={styles.group} aria-label={group.store.name}>
+                <section
+                  key={group.store.id}
+                  className={styles.group}
+                  data-store={group.store.id}
+                  aria-label={group.store.name}
+                >
                   <div className={styles.groupHead}>
-                    <h3 className={styles.groupName}>{group.store.name}</h3>
-                    <span className={styles.groupMeta}>
-                      {group.store.deliveryMinutes} min ·{' '}
-                      {group.deliveryFee === 0
-                        ? 'free delivery'
-                        : `${inr(group.deliveryFee)} delivery`}
-                    </span>
+                    <div className={styles.groupTitle}>
+                      <span className={styles.storeDot} aria-hidden />
+                      <div>
+                        <h3 className={styles.groupName}>{group.store.name}</h3>
+                        <span className={styles.groupMeta}>
+                          {group.store.deliveryMinutes} min ·{' '}
+                          {group.deliveryFee === 0
+                            ? 'free delivery'
+                            : `${inr(group.deliveryFee)} delivery`}
+                        </span>
+                      </div>
+                    </div>
+                    <span className={styles.groupTotal}>{inr(group.subtotal)}</span>
                   </div>
                   <div className={styles.lines}>
                     {group.lines.map((line) => {
@@ -185,6 +196,13 @@ export function CartPanel({ open, onClose }: CartPanelProps) {
                       if (!item) return null;
                       return (
                         <div key={`${line.product.id}-${item.rowId ?? group.store.id}`} className={styles.line}>
+                          <div className={styles.thumb}>
+                            {line.product.imageUrl ? (
+                              <img src={line.product.imageUrl} alt="" loading="lazy" />
+                            ) : (
+                              <ImageOff size={18} strokeWidth={1.3} aria-hidden />
+                            )}
+                          </div>
                           <div className={styles.lineMain}>
                             <p className={styles.lineName}>{line.product.name}</p>
                             <p className={styles.lineMeta}>
@@ -264,9 +282,9 @@ export function CartPanel({ open, onClose }: CartPanelProps) {
               <span>{totals.delivery === 0 ? 'Free' : inr(totals.delivery)}</span>
             </div>
             {totals.savings > 0 && (
-              <div className={styles.totalRow}>
+              <div className={`${styles.totalRow} ${styles.saved}`}>
                 <span>Saved vs MRP</span>
-                <span>{inr(totals.savings)}</span>
+                <span>−{inr(totals.savings)}</span>
               </div>
             )}
             <div className={styles.grand}>

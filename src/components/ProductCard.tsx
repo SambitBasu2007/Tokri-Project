@@ -124,6 +124,7 @@ export function ProductCard({ product, compact = false }: ProductCardProps) {
                 className={`${styles.storeRow} ${selected ? styles.storeRowSelected : ''} ${
                   available ? '' : styles.storeRowOut
                 }`.trim()}
+                data-store={row.store.id}
                 disabled={!available}
                 onClick={() => void selectStore(product.id, row.store.id)}
                 aria-pressed={selected}
