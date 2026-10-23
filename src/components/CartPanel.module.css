@@ -78,6 +78,12 @@
   scrollbar-color: var(--line-strong) transparent;
 }
 
+/* Without this, flexbox shrinks the store cards to their borders once the
+   cart is taller than the viewport (overflow: hidden makes min-height 0). */
+.body > * {
+  flex: 0 0 auto;
+}
+
 .body::-webkit-scrollbar {
   width: 8px;
 }

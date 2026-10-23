@@ -1,38 +1,55 @@
 :root {
   color-scheme: light;
-  --ink: #111111;
-  --ink-2: #555555;
-  --ink-3: #6f6f6f;
-  --line: #e6e6e6;
-  --line-strong: #cfcfcf;
+  --ink: #162018;
+  --ink-2: #4d5e52;
+  --ink-3: #728176;
+  --line: #e2e9e3;
+  --line-strong: #cad7cc;
   --bg: #ffffff;
-  --bg-2: #f6f6f6;
-  --bg-3: #ededed;
-  --accent: #0c831f;
+  --bg-page: #f5f8f5;
+  --bg-2: #f1f5f1;
+  --bg-3: #e6eee7;
+  --accent: #0b7a24;
   --accent-ink: #ffffff;
+  --accent-soft: #e8f5ea;
   --danger: #b42318;
-  --overlay: rgba(17, 17, 17, 0.4);
-  --r: 2px;
-  --r-lg: 4px;
+  --danger-soft: #fdecea;
+  --overlay: rgba(14, 28, 18, 0.42);
+  --shadow-sm: 0 1px 2px rgba(17, 38, 23, 0.06);
+  --shadow-md: 0 14px 36px rgba(17, 38, 23, 0.12);
+  --r: 6px;
+  --r-lg: 10px;
   --space: 8px;
   --header-h: 64px;
   --font: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --max-w: 1200px;
+
+  --store-blinkit: #e8b90d;
+  --store-zepto: #7c3aed;
+  --store-swiggy: #f97316;
+  --store-bigbasket: #7aab16;
+  --store-jiomart: #2563eb;
+  --store-flipkart: #2874f0;
 }
 
 /* The inline script in index.html sets data-theme before first paint. */
 [data-theme='dark'] {
   color-scheme: dark;
-  --ink: #f0f0f0;
-  --ink-2: #b4b4b4;
-  --ink-3: #909090;
-  --line: #2b2b2b;
-  --line-strong: #414141;
-  --bg: #0d0d0d;
-  --bg-2: #171717;
-  --bg-3: #242424;
-  --accent: #3fb950;
+  --ink: #edf4ee;
+  --ink-2: #b4c2b7;
+  --ink-3: #8d9e92;
+  --line: #2a382d;
+  --line-strong: #405343;
+  --bg: #111713;
+  --bg-page: #090d0a;
+  --bg-2: #18221b;
+  --bg-3: #243329;
+  --accent: #58d36a;
   --accent-ink: #06130a;
+  --accent-soft: #15351d;
   --danger: #ff8b7f;
-  --overlay: rgba(0, 0, 0, 0.6);
+  --danger-soft: #361916;
+  --overlay: rgba(0, 0, 0, 0.68);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.45);
+  --shadow-md: 0 16px 44px rgba(0, 0, 0, 0.55);
 }
