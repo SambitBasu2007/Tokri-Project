@@ -66,6 +66,12 @@ create policy "own cart" on public.personal_cart_items
 -- ------------------------------------------------------ orders + shipments --
 alter table public.order_events enable row level security;
 alter table public.order_events alter column community_id drop not null;
+-- Older Tokri projects created order_events without the JSON item payload.
+-- CREATE TABLE IF NOT EXISTS does not add missing columns to an existing table,
+-- so backfill every column the V2 order flow depends on.
+alter table public.order_events add column if not exists items jsonb not null default '[]'::jsonb;
+alter table public.order_events add column if not exists amount numeric(10,2) not null default 0;
+alter table public.order_events add column if not exists created_at timestamptz not null default now();
 alter table public.order_events add column if not exists address_text text;
 alter table public.order_events add column if not exists lat double precision;
 alter table public.order_events add column if not exists lng double precision;
