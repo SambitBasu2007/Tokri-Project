@@ -1,0 +1,94 @@
+:root {
+  color-scheme: light;
+
+  /* Neutrals */
+  --bg: #ffffff;
+  --surface: #f5f5f6;
+  --surface-2: #ececee;
+  --line: #e4e4e7;
+  --line-strong: #d4d4d8;
+  --ink: #111111;
+  --ink-2: #555555;
+  /* Tuned darker than the reference grey so 12 px text keeps 4.5:1. */
+  --ink-3: #6e6e73;
+
+  /* One accent hue. The darker fill keeps white controls legible. */
+  --accent: #0c831f;
+  --accent-fill: #0c831f;
+  --accent-ink: #ffffff;
+  --danger: #b42318;
+
+  --overlay: rgb(0 0 0 / 40%);
+
+  /* Spacing */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 20px;
+  --sp-6: 24px;
+  --sp-8: 32px;
+  --sp-12: 48px;
+
+  /* Radii */
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-lg: 14px;
+  --r-pill: 999px;
+
+  /* Legacy aliases used by older screens while they migrate. */
+  --r: var(--r-sm);
+  --bg-page: var(--bg);
+  --bg-2: var(--surface);
+  --bg-3: var(--surface-2);
+  --accent-soft: var(--surface);
+  --danger-soft: var(--surface);
+  --shadow-sm: none;
+  --shadow-md: none;
+
+  --font: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --header-h: 64px;
+  --max-w: 1280px;
+  --page-gutter: 16px;
+  --card-min: 100px;
+  --grid-col-gap: 12px;
+  --grid-row-gap: 24px;
+}
+
+[data-theme='dark'] {
+  color-scheme: dark;
+
+  --bg: #151517;
+  --surface: #222226;
+  --surface-2: #2c2c31;
+  --line: #34343a;
+  --line-strong: #43434a;
+  --ink: #f2f2f2;
+  --ink-2: #b0b0b0;
+  --ink-3: #8f8f96;
+
+  --accent: #34b24f;
+  --accent-fill: #0f7a25;
+  --accent-ink: #ffffff;
+  --danger: #ff7b72;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --header-h: 72px;
+    --page-gutter: 24px;
+    --card-min: 148px;
+    --grid-col-gap: 16px;
+    --grid-row-gap: 28px;
+  }
+}
+
+@media (min-width: 1280px) {
+  :root {
+    --header-h: 76px;
+    --page-gutter: 32px;
+    --card-min: 168px;
+    --grid-col-gap: 20px;
+    --grid-row-gap: 32px;
+  }
+}

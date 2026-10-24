@@ -1,0 +1,492 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: flex;
+  justify-content: flex-end;
+  background: var(--overlay);
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  width: min(420px, 100%);
+  height: 100%;
+  background: var(--bg);
+  animation: slide-in 160ms ease-out;
+}
+
+.head {
+  flex: none;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  padding: var(--sp-4) var(--sp-4) var(--sp-2);
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.sub {
+  margin-top: 1px;
+  color: var(--ink-3);
+  font-size: 12px;
+}
+
+.close {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--r-pill);
+  background: transparent;
+  color: var(--ink-2);
+}
+
+.switcherRow {
+  flex: none;
+  padding: 0 var(--sp-4) var(--sp-2);
+}
+
+.body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+  overflow-y: auto;
+  padding: var(--sp-2) var(--sp-4) var(--sp-6);
+  scrollbar-width: thin;
+}
+
+/* Without this, flexbox shrinks the store cards to their borders once the
+   cart is taller than the viewport. */
+.body > * {
+  flex: 0 0 auto;
+}
+
+.notice {
+  padding: var(--sp-3);
+  border-radius: var(--r-sm);
+  background: var(--surface);
+  color: var(--ink-2);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  padding: var(--sp-3);
+  border-radius: var(--r-md);
+  background: var(--surface);
+}
+
+.groupHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-2);
+}
+
+.storeBadge {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: var(--r-pill);
+  background: var(--surface-2);
+  color: var(--ink-2);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.groupTitle {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+.groupName {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+
+.groupMeta {
+  margin-top: 1px;
+  color: var(--ink-3);
+  font-size: 11px;
+}
+
+.groupTotal {
+  flex: none;
+  font-size: 14px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.lines {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.line {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr) auto;
+  gap: 4px var(--sp-3);
+}
+
+.thumb {
+  grid-row: 1 / 3;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: #fff;
+  color: #6e6e73;
+}
+
+.thumb img {
+  width: 100%;
+  height: 100%;
+  padding: 6px;
+  object-fit: contain;
+}
+
+.lineMain {
+  grid-column: 2;
+  min-width: 0;
+}
+
+.lineName {
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.lineMeta {
+  margin-top: 1px;
+  color: var(--ink-3);
+  font-size: 11px;
+}
+
+.linePrice {
+  grid-column: 3;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.owner {
+  color: var(--ink-3);
+  font-size: 11px;
+}
+
+.lineActions {
+  grid-column: 2 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-2);
+  margin-top: 2px;
+}
+
+.lineRight {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+.stepper {
+  display: inline-flex;
+  align-items: stretch;
+  min-height: 32px;
+  border-radius: var(--r-sm);
+  background: var(--accent-fill);
+  color: var(--accent-ink);
+}
+
+.stepper button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  min-height: 32px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+}
+
+.stepper button::after {
+  content: '';
+  position: absolute;
+  inset: -6px -2px;
+}
+
+.stepper button:disabled {
+  opacity: 0.45;
+}
+
+.stepper span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.remove {
+  min-height: 44px;
+  padding: 0 var(--sp-1);
+  border: 0;
+  background: transparent;
+  color: var(--ink-3);
+  font-size: 11px;
+}
+
+.emptyWrap {
+  padding: var(--sp-6) 0;
+}
+
+.optimizer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  padding: var(--sp-3);
+  border-radius: var(--r-md);
+  background: var(--surface);
+  background: color-mix(in srgb, var(--accent) 8%, var(--surface));
+  animation: optimizer-in 220ms ease-out both;
+}
+
+.optimizerHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-2);
+}
+
+.optimizerTitle {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.optimizerSave {
+  flex: none;
+  padding: 2px 8px;
+  border-radius: var(--r-pill);
+  background: var(--surface-2);
+  color: var(--ink);
+  font-size: 11px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.optimizerText {
+  color: var(--ink-2);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.optimizerCompare {
+  margin-top: -4px;
+  color: var(--ink-2);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.optimizerCta {
+  position: relative;
+  width: 100%;
+  min-height: 44px;
+  margin-top: 2px;
+  overflow: hidden;
+  border: 0;
+  border-radius: 8px;
+  background: var(--accent-fill);
+  color: var(--accent-ink);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  transition: background-color 140ms ease-out;
+}
+
+.optimizerCta::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #fff;
+  opacity: 0;
+  pointer-events: none;
+  animation: optimizer-flash 900ms ease-out 260ms 1;
+}
+
+@media (hover: hover) {
+  .optimizerCta:hover {
+    background: var(--accent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .optimizer,
+  .optimizerCta::after {
+    animation: none;
+  }
+}
+
+@keyframes optimizer-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+}
+
+@keyframes optimizer-flash {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  14% {
+    opacity: 0.28;
+  }
+  32% {
+    opacity: 0;
+  }
+  46% {
+    opacity: 0.14;
+  }
+  64% {
+    opacity: 0;
+  }
+}
+
+.foot {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+  margin: 0 var(--sp-4) calc(var(--sp-3) + env(safe-area-inset-bottom, 0px));
+  padding: var(--sp-4);
+  border-radius: var(--r-lg);
+  background: var(--surface);
+}
+
+.totalRow {
+  display: flex;
+  justify-content: space-between;
+  color: var(--ink-2);
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+
+.saved {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.grand {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-top: var(--sp-1);
+  padding-top: var(--sp-2);
+  border-top: 1px solid var(--line);
+  font-size: 16px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.grand span:last-child {
+  font-size: 20px;
+  letter-spacing: -0.02em;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  margin-top: var(--sp-2);
+}
+
+.actions .checkout {
+  flex: 1;
+}
+
+.clear {
+  min-height: 44px;
+  padding: 0 var(--sp-2);
+  border: 0;
+  background: transparent;
+  color: var(--ink-3);
+  font-size: 12px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.footNote {
+  color: var(--ink-3);
+  font-size: 11px;
+  text-align: center;
+}
+
+@media (hover: hover) {
+  .close:hover {
+    background: var(--surface);
+    color: var(--ink);
+  }
+
+  .stepper button:hover:not(:disabled) {
+    background: rgb(255 255 255 / 12%);
+  }
+
+  .remove:hover,
+  .clear:hover {
+    color: var(--ink);
+  }
+}
+
+@media (min-width: 768px) {
+  .panel {
+    border-radius: var(--r-lg) 0 0 var(--r-lg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .panel {
+    animation: none;
+  }
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateX(16px);
+    opacity: 0;
+  }
+}

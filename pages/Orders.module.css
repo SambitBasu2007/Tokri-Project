@@ -1,0 +1,258 @@
+.order {
+  border: 0;
+  border-radius: var(--r-lg);
+  background: var(--surface);
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+
+.orderHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 16px;
+  border-bottom: 0;
+  background: transparent;
+  flex-wrap: wrap;
+}
+
+.orderTitle {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.orderMeta {
+  font-size: 12px;
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+}
+
+.badges {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.deleteOrder {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--bg);
+  color: var(--ink-3);
+}
+
+.deleteOrder:hover:not(:disabled) {
+  border-color: var(--danger);
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+.deleteOrder:disabled {
+  opacity: 0.4;
+}
+
+.orderBody {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.items {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  background: var(--bg);
+  overflow: hidden;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 7px 10px;
+  border-bottom: 1px solid var(--line);
+  font-size: 14px;
+}
+
+.item:last-child {
+  border-bottom: 0;
+}
+
+.itemMeta {
+  font-size: 12px;
+  color: var(--ink-3);
+}
+
+.itemPrice {
+  font-variant-numeric: tabular-nums;
+  flex: none;
+}
+
+.trackers {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 10px;
+}
+
+.orderFoot {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+  border-top: 1px solid var(--line);
+  padding-top: 10px;
+}
+
+.amount {
+  font-size: 16px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.address {
+  font-size: 12px;
+  color: var(--ink-3);
+  max-width: 60ch;
+}
+
+.notice {
+  border: 1px solid var(--line);
+  background: var(--bg-2);
+  border-radius: var(--r);
+  padding: 10px 12px;
+  font-size: 12px;
+  color: var(--ink-2);
+  margin-bottom: 16px;
+}
+
+.syncButton {
+  border: 0;
+  background: none;
+  padding: 0;
+  color: var(--ink);
+  font: inherit;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.syncButton:disabled {
+  cursor: default;
+  opacity: 0.6;
+}
+
+.tabs {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--bg);
+  color: var(--ink-2);
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.tab:hover {
+  border-color: var(--line-strong);
+  color: var(--ink);
+}
+
+.tabActive,
+.tabActive:hover {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--bg);
+}
+
+.tabCount {
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  opacity: 0.65;
+}
+
+.tabActive .tabCount {
+  opacity: 0.8;
+}
+
+.communityOrder {
+  background: var(--surface-2);
+  border-color: var(--surface-2);
+}
+
+.communityHead {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.communityAvatar {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--bg-3);
+  border: 1px solid var(--line);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.communityTitleWrap {
+  min-width: 0;
+}
+
+.communityBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border: 1px dashed var(--line-strong);
+  border-radius: 999px;
+  padding: 3px 8px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+
+.communityQty {
+  flex: none;
+  font-size: 12px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-2);
+}
+
+.communityNote {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border-top: 1px dashed var(--line);
+  padding-top: 10px;
+  font-size: 12px;
+  color: var(--ink-3);
+}
+

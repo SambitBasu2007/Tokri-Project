@@ -1,0 +1,61 @@
+.wrap {
+  position: relative;
+}
+
+.scroller {
+  display: flex;
+  gap: var(--sp-3);
+  overflow-x: auto;
+  padding: 0 var(--page-gutter) var(--sp-2);
+  margin: 0 calc(var(--page-gutter) * -1);
+  scroll-padding-inline: var(--page-gutter);
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+}
+
+.scroller::-webkit-scrollbar {
+  display: none;
+}
+
+.arrows {
+  position: absolute;
+  top: calc(var(--sp-4) * -1 - 28px);
+  right: 0;
+  display: none;
+  gap: var(--sp-1);
+}
+
+.arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--r-pill);
+  background: var(--surface);
+  color: var(--ink-2);
+  transition: background-color 140ms ease-out, color 140ms ease-out;
+}
+
+@media (hover: hover) {
+  .arrow:hover {
+    background: var(--surface-2);
+    color: var(--ink);
+  }
+}
+
+@media (min-width: 1024px) and (hover: hover) {
+  .arrows {
+    display: flex;
+  }
+}
+
+@media (min-width: 768px) {
+  .scroller {
+    gap: var(--sp-4);
+  }
+}

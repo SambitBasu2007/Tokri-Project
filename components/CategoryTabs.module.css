@@ -1,0 +1,159 @@
+.wrap {
+  position: relative;
+}
+
+.tabs {
+  display: flex;
+  align-items: stretch;
+  gap: var(--sp-1);
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.tab {
+  position: relative;
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--sp-1);
+  min-width: 56px;
+  min-height: 60px;
+  padding: var(--sp-2) var(--sp-1) var(--sp-3);
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--ink-3);
+  font-size: 11px;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.tab::after {
+  content: '';
+  position: absolute;
+  left: var(--sp-2);
+  right: var(--sp-2);
+  bottom: 0;
+  height: 2px;
+  border-radius: 2px;
+  background: transparent;
+}
+
+.icon {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  color: currentcolor;
+}
+
+.label {
+  font-size: 11px;
+  line-height: 1.2;
+}
+
+.active {
+  color: var(--ink);
+}
+
+.active .label {
+  font-weight: 700;
+}
+
+.active::after {
+  background: var(--ink);
+}
+
+.arrows {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  display: none;
+  gap: var(--sp-1);
+  padding-left: var(--sp-2);
+  background: var(--bg);
+  transform: translateY(-50%);
+}
+
+.arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--r-pill);
+  background: var(--surface);
+  color: var(--ink-2);
+  transition: background-color 140ms ease-out, color 140ms ease-out;
+}
+
+@media (hover: hover) {
+  .tab:hover {
+    color: var(--ink);
+  }
+
+  .arrow:hover {
+    background: var(--surface-2);
+    color: var(--ink);
+  }
+}
+
+@media (min-width: 1024px) and (hover: hover) {
+  .tabs {
+    padding-right: 76px;
+  }
+
+  .arrows {
+    display: flex;
+  }
+}
+
+/* Round icon row used at the top of the listing page. */
+.icons {
+  gap: var(--sp-4);
+  padding-block: var(--sp-1);
+}
+
+.icons .tab {
+  gap: var(--sp-2);
+  min-width: 56px;
+  min-height: 72px;
+  padding: 0;
+  border-radius: var(--r-md);
+}
+
+.icons .tab::after {
+  display: none;
+}
+
+.icons .icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--r-pill);
+  background: var(--surface);
+  color: currentcolor;
+  transition: background-color 140ms ease-out;
+}
+
+.icons .active .icon {
+  background: var(--bg);
+  color: var(--accent);
+  outline: 1.5px solid var(--accent);
+  outline-offset: -1.5px;
+}
+
+.icons .active {
+  color: var(--ink);
+}

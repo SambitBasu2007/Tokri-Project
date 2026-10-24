@@ -1,0 +1,130 @@
+/* Raise specificity over the global .page rule so the mobile search sits
+   directly under the header instead of inheriting the 24 px page inset. */
+.page.page {
+  padding-top: var(--sp-2);
+}
+
+.mobileSearch {
+  margin-bottom: var(--sp-3);
+}
+
+.tabs {
+  margin: 0 calc(var(--page-gutter) * -1) var(--sp-2);
+  padding: 0 var(--page-gutter);
+  overflow: hidden;
+}
+
+.fees {
+  margin-top: var(--sp-2);
+}
+
+.feeCard {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 214px;
+  padding: var(--sp-3) var(--sp-4);
+  border-radius: var(--r-md);
+  background: var(--surface);
+}
+
+.feeStore {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--ink-3);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.feeStore::before {
+  content: '';
+  flex: none;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.feeText {
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.section {
+  margin-top: var(--sp-8);
+}
+
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--sp-2);
+}
+
+.railItem {
+  flex: 0 0 152px;
+  scroll-snap-align: start;
+}
+
+.seeAll {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  min-height: 44px;
+  padding: 0 var(--sp-1);
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.moreRow {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--sp-6);
+}
+
+@media (hover: hover) {
+  .seeAll:hover {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+}
+
+@media (min-width: 768px) {
+  .mobileSearch {
+    display: none;
+  }
+
+  .tabs {
+    margin-top: var(--sp-2);
+  }
+
+  .section {
+    margin-top: var(--sp-12);
+  }
+
+  .tiles {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--sp-3);
+  }
+
+  .railItem {
+    flex-basis: 168px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .tiles {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1280px) {
+  .railItem {
+    flex-basis: 184px;
+  }
+}

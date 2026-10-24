@@ -1,0 +1,99 @@
+.group {
+  padding: var(--sp-4) 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.group:first-child {
+  padding-top: 0;
+}
+
+.group:last-child {
+  border-bottom: 0;
+}
+
+.legend {
+  margin-bottom: var(--sp-3);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.options {
+  display: grid;
+  gap: var(--sp-1);
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  min-height: 44px;
+  padding: 0 var(--sp-2);
+  border-radius: var(--r-sm);
+  font-size: 14px;
+  color: var(--ink-2);
+  cursor: pointer;
+}
+
+.option input {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: var(--ink);
+}
+
+.option:has(input:checked) {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+}
+
+.pill {
+  min-height: 44px;
+  padding: 0 var(--sp-3);
+  border: 0;
+  border-radius: var(--r-pill);
+  background: var(--surface);
+  color: var(--ink-2);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.pillOn {
+  background: var(--surface-2);
+  color: var(--ink);
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-3);
+}
+
+.reset {
+  min-height: 44px;
+  padding: 0 var(--sp-2);
+  border: 0;
+  background: transparent;
+  color: var(--ink-2);
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@media (hover: hover) {
+  .option:hover {
+    background: var(--surface);
+  }
+
+  .pill:hover {
+    background: var(--surface-2);
+    color: var(--ink);
+  }
+}
