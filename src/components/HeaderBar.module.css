@@ -1,0 +1,173 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  /* Mica-style chrome: a translucent tint over the page content. The opaque
+     declaration is the fallback for browsers without color-mix/backdrop-filter. */
+  background: var(--bg);
+  background: color-mix(in srgb, var(--accent) 5%, color-mix(in srgb, var(--bg) 68%, transparent));
+  border-bottom: 1px solid color-mix(in srgb, var(--line) 60%, transparent);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  backdrop-filter: blur(24px) saturate(180%);
+}
+
+.inner {
+  min-height: var(--header-h);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding-block: var(--sp-2);
+}
+
+.brand {
+  flex: none;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+}
+
+.brand::after {
+  content: '';
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  margin-left: 3px;
+  border-radius: 50%;
+  background: var(--accent);
+  vertical-align: super;
+}
+
+.location,
+.search,
+.nav,
+.switcher {
+  display: none;
+}
+
+.locationCompact {
+  flex: 1;
+  min-width: 0;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-1);
+  margin-left: auto;
+}
+
+.iconButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: var(--r-pill);
+  background: transparent;
+  color: var(--ink-2);
+  transition: background-color 140ms ease-out, color 140ms ease-out;
+}
+
+.cartButton {
+  display: none;
+  align-items: center;
+  gap: var(--sp-2);
+  min-height: 44px;
+  padding: 0 var(--sp-3);
+  border: 0;
+  border-radius: var(--r-pill);
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.cartCount {
+  min-width: 20px;
+  padding: 2px 6px;
+  border-radius: var(--r-pill);
+  background: var(--accent-fill);
+  color: var(--accent-ink);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+
+@media (hover: hover) {
+  .iconButton:hover {
+    background: var(--surface);
+    color: var(--ink);
+  }
+
+  .cartButton:hover {
+    background: var(--surface-2);
+  }
+}
+
+@media (min-width: 768px) {
+  .locationCompact {
+    display: none;
+  }
+
+  .location {
+    display: block;
+  }
+
+  .search {
+    display: block;
+    flex: 1;
+    min-width: 0;
+    max-width: 640px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-1);
+    margin-left: var(--sp-2);
+  }
+
+  .navLink {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 var(--sp-3);
+    border-radius: var(--r-pill);
+    color: var(--ink-2);
+    font-size: 13px;
+    font-weight: 600;
+    transition: color 140ms ease-out, background-color 140ms ease-out;
+  }
+
+  .navActive {
+    position: relative;
+    color: var(--ink);
+  }
+
+  .navActive::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 5px;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--accent);
+    transform: translateX(-50%);
+  }
+
+  .switcher {
+    display: block;
+  }
+
+  .cartButton {
+    display: inline-flex;
+  }
+
+  .cartLabel {
+    display: inline;
+  }
+}

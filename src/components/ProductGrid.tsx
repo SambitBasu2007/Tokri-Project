@@ -18,10 +18,9 @@ export function ProductGrid({ products, loading = false, onReset }: ProductGridP
         {Array.from({ length: 8 }, (_, index) => (
           <div key={index} className={styles.skeletonCard}>
             <Skeleton height="0" className={styles.skeletonImage} />
-            <Skeleton height="14px" width="80%" />
-            <Skeleton height="12px" width="45%" />
-            <Skeleton height="16px" width="60%" />
-            <Skeleton height="34px" />
+            <Skeleton height="18px" width="55%" />
+            <Skeleton height="14px" width="88%" />
+            <Skeleton height="12px" width="62%" />
           </div>
         ))}
       </div>

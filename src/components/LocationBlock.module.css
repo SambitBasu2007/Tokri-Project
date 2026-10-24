@@ -1,0 +1,70 @@
+.trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  min-width: 0;
+  max-width: 260px;
+  min-height: 44px;
+  padding: 0 var(--sp-2);
+  margin-left: calc(var(--sp-2) * -1);
+  border: 0;
+  border-radius: var(--r-sm);
+  background: transparent;
+  color: var(--ink);
+  text-align: left;
+  transition: background-color 140ms ease-out;
+}
+
+@media (hover: hover) {
+  .trigger:hover {
+    background: var(--surface);
+  }
+}
+
+.pin {
+  flex: none;
+  color: var(--accent);
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  line-height: 1.2;
+}
+
+.eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ink-3);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.line {
+  font-size: 13px;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.chevron {
+  flex: none;
+  color: var(--ink-3);
+}
+
+.compact {
+  max-width: 190px;
+  padding: 0 var(--sp-1);
+}
+
+.compact .line {
+  font-size: 12px;
+}
+
+@media (min-width: 768px) {
+  .trigger {
+    max-width: 320px;
+  }
+}

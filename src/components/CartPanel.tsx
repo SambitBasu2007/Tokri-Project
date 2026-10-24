@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
-import { ImageOff, Minus, Plus, ShoppingBasket, X } from 'lucide-react';
+import { ImageOff, Minus, Plus, ShoppingBasket, Sparkles, X } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../state/CartContext';
 import { useCatalog } from '../state/CatalogContext';
@@ -8,9 +8,10 @@ import { useAuth } from '../state/AuthContext';
 import { useToast } from '../state/ToastContext';
 import { bestSplit } from '../lib/pricing';
 import { MAX_QUANTITY } from '../lib/cart';
-import { inr } from '../lib/format';
+import { inr, minutesLabel } from '../lib/format';
 import { EmptyState } from './EmptyState';
-import { StorePicker } from './StorePicker';
+import { StorePicker } from './StorePickerSheet';
+import { CartSwitcher } from './CartSwitcher';
 import styles from './CartPanel.module.css';
 
 interface CartPanelProps {
@@ -70,6 +71,14 @@ export function CartPanel({ open, onClose }: CartPanelProps) {
 
   const split = bestSplit(items, products, stores);
   const splitSaving = split ? totals.total - split.total : 0;
+  const currentEta = totals.groups.reduce(
+    (slowest, group) => Math.max(slowest, group.store.deliveryMinutes),
+    0,
+  );
+  const splitStoreName =
+    split && split.assignments.length === 1
+      ? stores.find((store) => store.id === split.assignments[0].storeId)?.name ?? 'One store'
+      : null;
   const community =
     active.type === 'community'
       ? communities.find((entry) => entry.id === active.communityId)
@@ -85,7 +94,7 @@ export function CartPanel({ open, onClose }: CartPanelProps) {
         if (item) await setStore(item, assignment.storeId, { silent: true });
       }
     }
-    toast('Switched each item to its cheapest store.', 'success');
+    toast('Applied the smart split.', 'success');
   };
 
   return createPortal(
@@ -100,11 +109,13 @@ export function CartPanel({ open, onClose }: CartPanelProps) {
         className={styles.panel}
         role="dialog"
         aria-modal="true"
-        aria-label={`${activeLabel} cart`}
+        aria-labelledby="cart-panel-title"
       >
         <div className={styles.head}>
           <div>
-            <p className={styles.title}>{activeLabel}</p>
+            <h2 className={styles.title} id="cart-panel-title">
+              {activeLabel}
+            </h2>
             <p className={styles.sub}>
               {totals.itemCount} item{totals.itemCount === 1 ? '' : 's'}
               {community ? ` · shared with ${community.members.length} members` : ''}
@@ -113,6 +124,10 @@ export function CartPanel({ open, onClose }: CartPanelProps) {
           <button type="button" className={styles.close} onClick={onClose} aria-label="Close cart">
             <X size={20} aria-hidden />
           </button>
+        </div>
+
+        <div className={styles.switcherRow}>
+          <CartSwitcher />
         </div>
 
         <div className={styles.body}>
@@ -152,15 +167,31 @@ export function CartPanel({ open, onClose }: CartPanelProps) {
           ) : (
             <>
               {split && splitSaving > 0.5 && (
-                <div className={styles.optimizer}>
-                  <p className={styles.optimizerTitle}>Cheaper basket available</p>
+                <div
+                  key={`${split.total}-${split.etaMinutes}-${split.assignments.length}`}
+                  className={styles.optimizer}
+                >
+                  <div className={styles.optimizerHead}>
+                    <p className={styles.optimizerTitle}>
+                      <Sparkles size={14} strokeWidth={1.75} aria-hidden />
+                      Smart split
+                    </p>
+                    <span className={styles.optimizerSave}>Save {inr(splitSaving)}</span>
+                  </div>
                   <p className={styles.optimizerText}>
                     {split.assignments.length === 1
-                      ? `Everything from one store costs ${inr(split.total)} including delivery — ${inr(splitSaving)} less than this basket.`
-                      : `Splitting across ${split.assignments.length} stores costs ${inr(split.total)} including delivery — ${inr(splitSaving)} less than this basket.`}
+                      ? `${splitStoreName} · ${minutesLabel(split.etaMinutes)} · ${inr(split.total)} including delivery`
+                      : `${split.assignments.length} stores · ${minutesLabel(split.etaMinutes)} · ${inr(split.total)} including delivery`}
                   </p>
-                  <button type="button" className="btn btn-sm" onClick={() => void applySplit()}>
-                    Use the cheaper split
+                  <p className={styles.optimizerCompare}>
+                    This basket takes {currentEta ? minutesLabel(currentEta) : 'longer'}.
+                  </p>
+                  <button
+                    type="button"
+                    className={styles.optimizerCta}
+                    onClick={() => void applySplit()}
+                  >
+                    Use smart split
                   </button>
                 </div>
               )}
@@ -173,17 +204,17 @@ export function CartPanel({ open, onClose }: CartPanelProps) {
                   aria-label={group.store.name}
                 >
                   <div className={styles.groupHead}>
+                    <span className={styles.storeBadge} aria-hidden>
+                      {group.store.name.slice(0, 2).toUpperCase()}
+                    </span>
                     <div className={styles.groupTitle}>
-                      <span className={styles.storeDot} aria-hidden />
-                      <div>
-                        <h3 className={styles.groupName}>{group.store.name}</h3>
-                        <span className={styles.groupMeta}>
-                          {group.store.deliveryMinutes} min ·{' '}
-                          {group.deliveryFee === 0
-                            ? 'free delivery'
-                            : `${inr(group.deliveryFee)} delivery`}
-                        </span>
-                      </div>
+                      <h3 className={styles.groupName}>{group.store.name}</h3>
+                      <span className={styles.groupMeta}>
+                        {group.store.deliveryMinutes} min ·{' '}
+                        {group.deliveryFee === 0
+                          ? 'free delivery'
+                          : `${inr(group.deliveryFee)} delivery`}
+                      </span>
                     </div>
                     <span className={styles.groupTotal}>{inr(group.subtotal)}</span>
                   </div>

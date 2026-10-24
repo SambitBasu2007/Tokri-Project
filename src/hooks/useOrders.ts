@@ -17,6 +17,20 @@ export interface PlaceOrderInput {
   amount?: number;
 }
 
+/**
+ * `ready`     the account database answered, so orders can sync between devices.
+ * `unavailable` the V2 tables/RPC are missing and orders stay on this device.
+ * `guest`     signed out; device-only storage is the intended mode.
+ * `unknown`   the first account read has not finished yet.
+ */
+export type AccountSyncState = 'unknown' | 'ready' | 'unavailable' | 'guest';
+
+export interface SyncLocalOrdersResult {
+  synced: number;
+  failed: number;
+  unavailable: boolean;
+}
+
 function readDeletedOrderIds(): Set<string> {
   try {
     const raw = localStorage.getItem(DELETED_ORDERS_KEY);
@@ -84,11 +98,13 @@ export function useOrders() {
   const [orders, setOrders] = useState<Order[]>(() => readLocalOrders());
   const [loading, setLoading] = useState(false);
   const [nowOffset, setNowOffset] = useState(0);
+  const [accountSync, setAccountSync] = useState<AccountSyncState>('unknown');
 
   const load = useCallback(async () => {
     const local = readLocalOrders();
     if (!user) {
       setOrders(local);
+      setAccountSync('guest');
       return;
     }
     setLoading(true);
@@ -103,8 +119,11 @@ export function useOrders() {
       if (error) {
         if (!isMissingRelation(error)) console.warn('[Tokri] orders:', error.message);
         setOrders(local);
+        setAccountSync(isMissingRelation(error) ? 'unavailable' : 'unknown');
         return;
       }
+
+      setAccountSync('ready');
 
       const hidden = readDeletedOrderIds();
       const rows = (data ?? []).filter((row) => !hidden.has(row.id));
@@ -202,6 +221,7 @@ export function useOrders() {
           p_lng: input.address?.lng ?? null,
         });
         if (!error && data) {
+          setAccountSync('ready');
           const order: Order = {
             id: data,
             communityId: input.communityId,
@@ -216,7 +236,10 @@ export function useOrders() {
           await load();
           return order;
         }
-        if (error) console.warn('[Tokri] place_order fell back to device order:', error.message);
+        if (error) {
+          console.warn('[Tokri] place_order fell back to device order:', error.message);
+          if (isMissingRelation(error)) setAccountSync('unavailable');
+        }
       }
 
       const localOrder: Order = {
@@ -240,6 +263,64 @@ export function useOrders() {
     },
     [user, stores, nowOffset, load],
   );
+
+  /**
+   * Copies orders that were saved while the account database was unavailable
+   * onto the signed-in account. A direct insert is used (not `place_order`) so
+   * replaying history never touches the shopper's current cart. The stored
+   * rows keep a local mirror with `source: 'db'`, so an offline reload still
+   * paints the same list.
+   */
+  const syncLocalOrders = useCallback(async (): Promise<SyncLocalOrdersResult> => {
+    if (!user) return { synced: 0, failed: 0, unavailable: true };
+
+    const local = readLocalOrders().filter((order) => order.source === 'local');
+    if (!local.length) return { synced: 0, failed: 0, unavailable: false };
+
+    const uploaded = new Map<string, string>();
+    let failed = 0;
+    let unavailable = false;
+
+    for (const order of local) {
+      const { data, error } = await supabase
+        .from('order_events')
+        .insert({
+          community_id: order.communityId,
+          ordered_by: user.id,
+          items: order.items as unknown as Json,
+          amount: order.amount,
+          address_text: order.addressText,
+          created_at: order.createdAt,
+        })
+        .select('id')
+        .single();
+
+      if (error || !data) {
+        failed += 1;
+        if (isMissingRelation(error)) unavailable = true;
+        else if (error) console.warn('[Tokri] order sync:', error.message);
+        continue;
+      }
+      uploaded.set(order.id, data.id);
+    }
+
+    if (uploaded.size) {
+      const mirror = readLocalOrders().map((order) => {
+        const dbId = uploaded.get(order.id);
+        return dbId ? { ...order, id: dbId, source: 'db' as const } : order;
+      });
+      writeLocalOrders(mirror);
+      setOrders((current) =>
+        current.map((order) => {
+          const dbId = uploaded.get(order.id);
+          return dbId ? { ...order, id: dbId, source: 'db' as const } : order;
+        }),
+      );
+    }
+
+    setAccountSync(unavailable ? 'unavailable' : 'ready');
+    return { synced: uploaded.size, failed, unavailable };
+  }, [user]);
 
   const deleteOrder = useCallback(
     async (order: Order): Promise<{ removed: boolean; remote: boolean }> => {
@@ -269,5 +350,14 @@ export function useOrders() {
     [user],
   );
 
-  return { orders, loading, placeOrder, deleteOrder, refresh: load, nowOffset };
+  return {
+    orders,
+    loading,
+    placeOrder,
+    deleteOrder,
+    refresh: load,
+    nowOffset,
+    accountSync,
+    syncLocalOrders,
+  };
 }

@@ -1,0 +1,148 @@
+.triggerText {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 32px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--ink-2);
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.triggerCompact {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--r-pill);
+  background: var(--surface);
+  color: var(--ink-2);
+}
+
+.triggerCompact::after {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: var(--r-pill);
+}
+
+.product {
+  padding-bottom: var(--sp-3);
+}
+
+.productName {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.productMeta {
+  margin-top: 2px;
+  color: var(--ink-3);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.rows {
+  display: grid;
+  gap: var(--sp-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  width: 100%;
+  min-height: 58px;
+  padding: var(--sp-2) var(--sp-3);
+  border: 0;
+  border-radius: var(--r-md);
+  background: var(--surface);
+  color: var(--ink);
+  text-align: left;
+}
+
+.rowSelected {
+  background: var(--surface-2);
+}
+
+.rowOut {
+  opacity: 0.5;
+}
+
+.storeCopy {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.storeName {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.best {
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: var(--bg);
+  color: var(--ink-2);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.storeMeta {
+  color: var(--ink-3);
+  font-size: 11px;
+}
+
+.price {
+  flex: none;
+  font-size: 14px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.check {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  color: var(--ink);
+}
+
+.note {
+  padding-top: var(--sp-4);
+  color: var(--ink-3);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+@media (hover: hover) {
+  .triggerCompact:hover,
+  .row:hover:not(:disabled) {
+    background: var(--surface-2);
+  }
+
+  .triggerText:hover {
+    color: var(--ink);
+  }
+}

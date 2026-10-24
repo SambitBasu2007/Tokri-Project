@@ -115,7 +115,7 @@ export function PriceChart({ product, stores, points, selectedStore, onSelectSto
               key={store.id}
               d={path}
               fill="none"
-              stroke={isCheapest ? 'var(--accent)' : isSelected ? 'var(--ink)' : 'var(--ink-3)'}
+              stroke={isCheapest ? 'var(--ink)' : isSelected ? 'var(--ink-2)' : 'var(--ink-3)'}
               strokeWidth={isCheapest || isSelected ? 1.75 : 1}
               strokeDasharray={isCheapest || isSelected ? undefined : DASHES[index % DASHES.length]}
               vectorEffect="non-scaling-stroke"
@@ -142,9 +142,9 @@ export function PriceChart({ product, stores, points, selectedStore, onSelectSto
               style={{
                 borderTopColor:
                   store.id === cheapest
-                    ? 'var(--accent)'
+                    ? 'var(--ink)'
                     : store.id === selectedStore
-                      ? 'var(--ink)'
+                      ? 'var(--ink-2)'
                       : 'var(--ink-3)',
                 borderTopStyle: store.id === cheapest || store.id === selectedStore ? 'solid' : 'dashed',
               }}
