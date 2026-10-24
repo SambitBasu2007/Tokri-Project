@@ -1,55 +1,94 @@
 :root {
   color-scheme: light;
-  --ink: #162018;
-  --ink-2: #4d5e52;
-  --ink-3: #728176;
-  --line: #e2e9e3;
-  --line-strong: #cad7cc;
-  --bg: #ffffff;
-  --bg-page: #f5f8f5;
-  --bg-2: #f1f5f1;
-  --bg-3: #e6eee7;
-  --accent: #0b7a24;
-  --accent-ink: #ffffff;
-  --accent-soft: #e8f5ea;
-  --danger: #b42318;
-  --danger-soft: #fdecea;
-  --overlay: rgba(14, 28, 18, 0.42);
-  --shadow-sm: 0 1px 2px rgba(17, 38, 23, 0.06);
-  --shadow-md: 0 14px 36px rgba(17, 38, 23, 0.12);
-  --r: 6px;
-  --r-lg: 10px;
-  --space: 8px;
-  --header-h: 64px;
-  --font: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --max-w: 1200px;
 
-  --store-blinkit: #e8b90d;
-  --store-zepto: #7c3aed;
-  --store-swiggy: #f97316;
-  --store-bigbasket: #7aab16;
-  --store-jiomart: #2563eb;
-  --store-flipkart: #2874f0;
+  /* Neutrals */
+  --bg: #ffffff;
+  --surface: #f5f5f6;
+  --surface-2: #ececee;
+  --line: #e4e4e7;
+  --line-strong: #d4d4d8;
+  --ink: #111111;
+  --ink-2: #555555;
+  /* Tuned darker than the reference grey so 12 px text keeps 4.5:1. */
+  --ink-3: #6e6e73;
+
+  /* One accent hue. The darker fill keeps white controls legible. */
+  --accent: #0c831f;
+  --accent-fill: #0c831f;
+  --accent-ink: #ffffff;
+  --danger: #b42318;
+
+  --overlay: rgb(0 0 0 / 40%);
+
+  /* Spacing */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 20px;
+  --sp-6: 24px;
+  --sp-8: 32px;
+  --sp-12: 48px;
+
+  /* Radii */
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-lg: 14px;
+  --r-pill: 999px;
+
+  /* Legacy aliases used by older screens while they migrate. */
+  --r: var(--r-sm);
+  --bg-page: var(--bg);
+  --bg-2: var(--surface);
+  --bg-3: var(--surface-2);
+  --accent-soft: var(--surface);
+  --danger-soft: var(--surface);
+  --shadow-sm: none;
+  --shadow-md: none;
+
+  --font: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --header-h: 64px;
+  --max-w: 1280px;
+  --page-gutter: 16px;
+  --card-min: 100px;
+  --grid-col-gap: 12px;
+  --grid-row-gap: 24px;
 }
 
-/* The inline script in index.html sets data-theme before first paint. */
 [data-theme='dark'] {
   color-scheme: dark;
-  --ink: #edf4ee;
-  --ink-2: #b4c2b7;
-  --ink-3: #8d9e92;
-  --line: #2a382d;
-  --line-strong: #405343;
-  --bg: #111713;
-  --bg-page: #090d0a;
-  --bg-2: #18221b;
-  --bg-3: #243329;
-  --accent: #58d36a;
-  --accent-ink: #06130a;
-  --accent-soft: #15351d;
-  --danger: #ff8b7f;
-  --danger-soft: #361916;
-  --overlay: rgba(0, 0, 0, 0.68);
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.45);
-  --shadow-md: 0 16px 44px rgba(0, 0, 0, 0.55);
+
+  --bg: #151517;
+  --surface: #222226;
+  --surface-2: #2c2c31;
+  --line: #34343a;
+  --line-strong: #43434a;
+  --ink: #f2f2f2;
+  --ink-2: #b0b0b0;
+  --ink-3: #8f8f96;
+
+  --accent: #34b24f;
+  --accent-fill: #0f7a25;
+  --accent-ink: #ffffff;
+  --danger: #ff7b72;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --header-h: 72px;
+    --page-gutter: 24px;
+    --card-min: 148px;
+    --grid-col-gap: 16px;
+    --grid-row-gap: 28px;
+  }
+}
+
+@media (min-width: 1280px) {
+  :root {
+    --header-h: 76px;
+    --page-gutter: 32px;
+    --card-min: 168px;
+    --grid-col-gap: 20px;
+    --grid-row-gap: 32px;
+  }
 }

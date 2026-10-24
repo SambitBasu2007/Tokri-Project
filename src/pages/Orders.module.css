@@ -1,8 +1,7 @@
 .order {
-  border: 1px solid var(--line);
+  border: 0;
   border-radius: var(--r-lg);
-  background: var(--bg);
-  box-shadow: var(--shadow-sm);
+  background: var(--surface);
   margin-bottom: 16px;
   overflow: hidden;
 }
@@ -13,8 +12,8 @@
   justify-content: space-between;
   gap: 12px;
   padding: 12px 16px;
-  border-bottom: 1px solid var(--line);
-  background: var(--bg-2);
+  border-bottom: 0;
+  background: transparent;
   flex-wrap: wrap;
 }
 
@@ -136,6 +135,23 @@
   margin-bottom: 16px;
 }
 
+.syncButton {
+  border: 0;
+  background: none;
+  padding: 0;
+  color: var(--ink);
+  font: inherit;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.syncButton:disabled {
+  cursor: default;
+  opacity: 0.6;
+}
+
 .tabs {
   display: flex;
   gap: 6px;
@@ -164,9 +180,9 @@
 
 .tabActive,
 .tabActive:hover {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: var(--accent-ink);
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--bg);
 }
 
 .tabCount {
@@ -180,9 +196,8 @@
 }
 
 .communityOrder {
-  background: var(--accent-soft);
-  border-style: dashed;
-  border-left: 3px solid var(--accent);
+  background: var(--surface-2);
+  border-color: var(--surface-2);
 }
 
 .communityHead {

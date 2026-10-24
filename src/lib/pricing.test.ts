@@ -111,6 +111,90 @@ describe('bestSplit', () => {
     expect(plan?.total).toBe(250);
   });
 
+  it('does not send the basket to a 60-minute store for a small saving', () => {
+    const slowStores: Store[] = [
+      { id: 'blinkit', name: 'Blinkit', deliveryMinutes: 10, deliveryFee: 25, freeAbove: 199 },
+      { id: 'jiomart', name: 'JioMart', deliveryMinutes: 60, deliveryFee: 25, freeAbove: 199 },
+    ];
+    const timeProducts: Product[] = [
+      product(1, {
+        blinkit: { price: 100, inStock: true },
+        jiomart: { price: 70, inStock: true },
+      }),
+      product(2, {
+        blinkit: { price: 100, inStock: true },
+        jiomart: { price: 70, inStock: true },
+      }),
+    ];
+    const plan = bestSplit(
+      [
+        { productId: 1, storeId: 'blinkit', quantity: 1 },
+        { productId: 2, storeId: 'blinkit', quantity: 1 },
+      ],
+      timeProducts,
+      slowStores,
+    );
+    expect(plan?.assignments).toHaveLength(1);
+    expect(plan?.assignments[0].storeId).toBe('blinkit');
+    expect(plan?.etaMinutes).toBe(10);
+    expect(plan?.total).toBe(200);
+  });
+
+  it('still chooses a slow store when the saving is large enough', () => {
+    const slowStores: Store[] = [
+      { id: 'blinkit', name: 'Blinkit', deliveryMinutes: 10, deliveryFee: 25, freeAbove: 199 },
+      { id: 'jiomart', name: 'JioMart', deliveryMinutes: 60, deliveryFee: 25, freeAbove: 199 },
+    ];
+    const timeProducts: Product[] = [
+      product(1, {
+        blinkit: { price: 200, inStock: true },
+        jiomart: { price: 10, inStock: true },
+      }),
+      product(2, {
+        blinkit: { price: 200, inStock: true },
+        jiomart: { price: 10, inStock: true },
+      }),
+    ];
+    const plan = bestSplit(
+      [
+        { productId: 1, storeId: 'blinkit', quantity: 1 },
+        { productId: 2, storeId: 'blinkit', quantity: 1 },
+      ],
+      timeProducts,
+      slowStores,
+    );
+    expect(plan?.assignments).toHaveLength(1);
+    expect(plan?.assignments[0].storeId).toBe('jiomart');
+    expect(plan?.etaMinutes).toBe(60);
+  });
+
+  it('prefers one store when price and time are equal', () => {
+    const twinStores: Store[] = [
+      { id: 'blinkit', name: 'Blinkit', deliveryMinutes: 10, deliveryFee: 25, freeAbove: 199 },
+      { id: 'zepto', name: 'Zepto', deliveryMinutes: 10, deliveryFee: 25, freeAbove: 199 },
+    ];
+    const twinProducts: Product[] = [
+      product(1, {
+        blinkit: { price: 100, inStock: true },
+        zepto: { price: 100, inStock: true },
+      }),
+      product(2, {
+        blinkit: { price: 100, inStock: true },
+        zepto: { price: 100, inStock: true },
+      }),
+    ];
+    const plan = bestSplit(
+      [
+        { productId: 1, storeId: 'blinkit', quantity: 1 },
+        { productId: 2, storeId: 'blinkit', quantity: 1 },
+      ],
+      twinProducts,
+      twinStores,
+    );
+    expect(plan?.storeCount).toBe(1);
+    expect(plan?.etaMinutes).toBe(10);
+  });
+
   it('returns null for an empty basket', () => {
     expect(bestSplit([], products, stores)).toBeNull();
   });

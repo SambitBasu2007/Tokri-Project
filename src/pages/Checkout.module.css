@@ -20,10 +20,9 @@
 }
 
 .section {
-  border: 1px solid var(--line);
+  border: 0;
   border-radius: var(--r-lg);
-  background: var(--bg);
-  box-shadow: var(--shadow-sm);
+  background: var(--surface);
   padding: 16px;
   margin-bottom: 12px;
 }
@@ -93,10 +92,9 @@
 .summary {
   position: sticky;
   top: calc(var(--header-h) + 16px);
-  border: 1px solid var(--line-strong);
+  border: 0;
   border-radius: var(--r-lg);
-  background: var(--bg);
-  box-shadow: var(--shadow-md);
+  background: var(--surface);
   padding: 16px;
   display: flex;
   flex-direction: column;
@@ -187,12 +185,12 @@
 }
 
 .paymentOption input {
-  accent-color: var(--accent);
+  accent-color: var(--ink);
 }
 
 .paymentSelected {
-  border-color: var(--accent);
-  background: var(--accent-soft);
+  border-color: var(--ink);
+  background: var(--surface-2);
 }
 
 .note {

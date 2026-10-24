@@ -1,9 +1,17 @@
 import { lazy, Suspense, useState } from 'react';
-import { createBrowserRouter, Outlet, RouterProvider, ScrollRestoration, useLocation } from 'react-router-dom';
-import { Header } from './components/Header';
+import {
+  createBrowserRouter,
+  Navigate,
+  Outlet,
+  RouterProvider,
+  ScrollRestoration,
+  useLocation,
+} from 'react-router-dom';
+import { HeaderBar } from './components/HeaderBar';
 import { Footer } from './components/Footer';
 import { CartPanel } from './components/CartPanel';
-import { BottomDock } from './components/BottomDock';
+import { BottomNav } from './components/BottomNav';
+import { ViewCartPill } from './components/ViewCartPill';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { AuthProvider } from './state/AuthContext';
 import { CatalogProvider } from './state/CatalogContext';
@@ -16,7 +24,8 @@ import NotFoundPage from './pages/NotFound';
 import { Skeleton } from './components/Skeleton';
 
 const ProductPage = lazy(() => import('./pages/Product'));
-const ShopPage = lazy(() => import('./pages/Shop'));
+const ListingPage = lazy(() => import('./pages/Listing'));
+const CategoriesPage = lazy(() => import('./pages/Categories'));
 const CheckoutPage = lazy(() => import('./pages/Checkout'));
 const OrdersPage = lazy(() => import('./pages/Orders'));
 const WatchlistPage = lazy(() => import('./pages/Watchlist'));
@@ -25,10 +34,15 @@ const SocialPage = lazy(() => import('./pages/Social'));
 const LegalPage = lazy(() => import('./pages/Legal'));
 const LabsPage = lazy(() => import('./pages/Labs'));
 
+function ShopRedirect() {
+  const { search } = useLocation();
+  return <Navigate to={`/search${search}`} replace />;
+}
+
 function Shell() {
   const [cartOpen, setCartOpen] = useState(false);
   const location = useLocation();
-  const isHome = location.pathname === '/';
+  const hidePill = location.pathname === '/checkout';
 
   return (
     <div className="app-shell">
@@ -41,7 +55,7 @@ function Shell() {
       <a href="#main" className="visually-hidden">
         Skip to content
       </a>
-      <Header onOpenCart={() => setCartOpen(true)} />
+      <HeaderBar onOpenCart={() => setCartOpen(true)} />
       <main id="main">
         <Suspense
           fallback={
@@ -55,9 +69,10 @@ function Shell() {
           <Outlet />
         </Suspense>
       </main>
+      {!hidePill && <ViewCartPill onOpenCart={() => setCartOpen(true)} />}
+      <BottomNav />
       <CartPanel open={cartOpen} onClose={() => setCartOpen(false)} />
       <Footer />
-      {isHome && <BottomDock onOpenCart={() => setCartOpen(true)} />}
     </div>
   );
 }
@@ -68,7 +83,10 @@ const router = createBrowserRouter([
     element: <Shell />,
     children: [
       { index: true, element: <Home /> },
-      { path: 'shop', element: <ShopPage /> },
+      { path: 'c/:category', element: <ListingPage /> },
+      { path: 'search', element: <ListingPage /> },
+      { path: 'categories', element: <CategoriesPage /> },
+      { path: 'shop', element: <ShopRedirect /> },
       { path: 'product/:id', element: <ProductPage /> },
       { path: 'checkout', element: <CheckoutPage /> },
       { path: 'orders', element: <OrdersPage /> },

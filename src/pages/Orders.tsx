@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { Lock, Package, Trash2, Users } from 'lucide-react';
 import { useAuth } from '../state/AuthContext';
@@ -204,7 +204,8 @@ function CommunityOrderCard({
 }
 
 export default function OrdersPage() {
-  const { orders, loading, refresh, deleteOrder, nowOffset } = useOrders();
+  const { orders, loading, refresh, deleteOrder, nowOffset, accountSync, syncLocalOrders } =
+    useOrders();
   const { activity, loading: communityLoading, error: communityError, refresh: refreshActivity } =
     useCommunityActivity();
   const { signedIn, communities } = useAuth();
@@ -214,7 +215,44 @@ export default function OrdersPage() {
   const [params, setParams] = useSearchParams();
   const placed = params.get('placed');
   const announced = useRef<string | null>(null);
+  const syncAttempted = useRef(false);
   const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [syncing, setSyncing] = useState(false);
+
+  const deviceOrders = useMemo(
+    () => orders.filter((order) => order.source === 'local'),
+    [orders],
+  );
+
+  const runSync = useCallback(async () => {
+    setSyncing(true);
+    try {
+      const result = await syncLocalOrders();
+      if (result.synced) {
+        // Pull the account list again so orders uploaded by another device are
+        // visible immediately, not only after a manual refresh.
+        await refresh();
+        toast(
+          `${result.synced} device order${result.synced === 1 ? '' : 's'} saved to your account.`,
+          'success',
+        );
+      } else if (result.unavailable) {
+        toast('Account sync is not configured for this project yet.', 'error');
+      } else if (result.failed) {
+        toast('No device orders could be saved right now.', 'error');
+      }
+    } finally {
+      setSyncing(false);
+    }
+  }, [syncLocalOrders, refresh, toast]);
+
+  // Once the account database answers, move device-only history onto the
+  // account automatically so both devices converge on the same list.
+  useEffect(() => {
+    if (!signedIn || accountSync !== 'ready' || !deviceOrders.length || syncAttempted.current) return;
+    syncAttempted.current = true;
+    void runSync();
+  }, [signedIn, accountSync, deviceOrders.length, runSync]);
 
   const viewParam = params.get('view');
   const view: HistoryView =
@@ -254,7 +292,7 @@ export default function OrdersPage() {
       toast(
         orders.some((order) => order.id === placed && order.source === 'db')
           ? 'Order placed.'
-          : 'Demo order saved on this device.',
+          : 'Order saved on this device only. Account sync is not set up yet.',
         'success',
       );
       setParams(
@@ -297,6 +335,23 @@ export default function OrdersPage() {
     void refreshActivity();
   };
 
+  // Coming back to this tab after checking out on another device should show
+  // the other device's uploaded orders without a full page reload.
+  useEffect(() => {
+    const onVisible = () => {
+      if (document.visibilityState === 'visible') {
+        void refresh();
+        void refreshActivity();
+      }
+    };
+    window.addEventListener('focus', onVisible);
+    document.addEventListener('visibilitychange', onVisible);
+    return () => {
+      window.removeEventListener('focus', onVisible);
+      document.removeEventListener('visibilitychange', onVisible);
+    };
+  }, [refresh, refreshActivity]);
+
   const showSkeleton = (loading || communityLoading) && visible.length === 0;
   const communityAvailable = signedIn && communities.length > 0;
 
@@ -328,6 +383,30 @@ export default function OrdersPage() {
             <Link to="/social">Sign in</Link> to sync them with your account and see community
             activity.
           </p>
+        )}
+
+        {signedIn && accountSync === 'unavailable' && deviceOrders.length > 0 && (
+          <p className={styles.notice}>
+            <strong>Account sync is off.</strong> {deviceOrders.length} order
+            {deviceOrders.length === 1 ? '' : 's'} saved in this browser will not appear on your
+            other devices yet. Run the Tokri database setup (README → Database setup) to turn sync
+            on.
+          </p>
+        )}
+
+        {signedIn && accountSync === 'ready' && deviceOrders.length > 0 && (
+          <div className={styles.notice}>
+            {deviceOrders.length} order{deviceOrders.length === 1 ? ' is' : 's are'} still saved
+            only in this browser.{' '}
+            <button
+              type="button"
+              className={styles.syncButton}
+              onClick={() => void runSync()}
+              disabled={syncing}
+            >
+              {syncing ? 'Saving…' : `Save ${deviceOrders.length === 1 ? 'it' : 'them'} to my account`}
+            </button>
+          </div>
         )}
 
         {communityAvailable && (

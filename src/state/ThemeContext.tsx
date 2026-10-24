@@ -12,10 +12,17 @@ interface ThemeContextValue {
 const ThemeContext = createContext<ThemeContextValue | null>(null);
 
 function initialTheme(): Theme {
+  if (typeof window !== 'undefined') {
+    const forced = new URLSearchParams(window.location.search).get('theme');
+    if (forced === 'dark' || forced === 'light') return forced;
+  }
   const saved = readRaw('local', THEME_KEY);
   if (saved === 'dark' || saved === 'light') return saved;
-  // index.html applies the same default before first paint, so there is no flash.
+  // index.html applies the same OS-preference default before first paint.
   if (typeof document !== 'undefined' && document.documentElement.dataset.theme === 'dark') {
+    return 'dark';
+  }
+  if (typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches) {
     return 'dark';
   }
   return 'light';
@@ -27,7 +34,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
     // Keep mobile browser chrome in step with the selected theme.
-    const color = theme === 'dark' ? '#0d0d0d' : '#ffffff';
+    const color = theme === 'dark' ? '#151517' : '#ffffff';
     document
       .querySelectorAll('meta[name="theme-color"]')
       .forEach((meta) => meta.setAttribute('content', color));
@@ -43,6 +50,17 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     };
     window.addEventListener('storage', onStorage);
     return () => window.removeEventListener('storage', onStorage);
+  }, []);
+
+  // Until the shopper makes an explicit choice, follow the OS preference.
+  useEffect(() => {
+    const media = window.matchMedia('(prefers-color-scheme: dark)');
+    const onChange = (event: MediaQueryListEvent) => {
+      if (readRaw('local', THEME_KEY)) return;
+      setThemeState(event.matches ? 'dark' : 'light');
+    };
+    media.addEventListener('change', onChange);
+    return () => media.removeEventListener('change', onChange);
   }, []);
 
   const setTheme = useCallback((next: Theme) => {

@@ -124,33 +124,60 @@ export interface SplitPlan {
   subtotal: number;
   delivery: number;
   total: number;
-  /** Difference against the naive "cheapest store for every item" plan. */
+  /** Last store to arrive when every store is ordered at the same time. */
+  etaMinutes: number;
+  storeCount: number;
+  /** Internal ranking score: total + time and store-count penalties. */
+  score: number;
+  /** Difference against the lowest-priced plan, even if that plan is slower. */
   saves: number;
 }
 
-function planTotal(assignments: { storeId: StoreId; items: CartLine[] }[], stores: Store[]): SplitPlan {
+/** Time is worth something: ₹2/min stops a 60-min basket winning for tiny savings. */
+const TIME_VALUE_PER_MINUTE = 2;
+/** A second or third store should earn its extra trip. */
+const EXTRA_STORE_PENALTY = 10;
+
+function planTotal(
+  assignments: { storeId: StoreId; items: CartLine[] }[],
+  stores: Store[],
+): SplitPlan {
+  const used = assignments.filter((assignment) => assignment.items.length > 0);
   let subtotal = 0;
   let delivery = 0;
-  for (const assignment of assignments) {
-    if (!assignment.items.length) continue;
-    const store = stores.find((s) => s.id === assignment.storeId);
+  let etaMinutes = 0;
+  for (const assignment of used) {
+    const store = stores.find((candidate) => candidate.id === assignment.storeId);
     const groupSubtotal = round2(
       assignment.items.reduce((sum, line) => sum + line.unitPrice * line.quantity, 0),
     );
     subtotal += groupSubtotal;
-    if (store) delivery += deliveryFeeFor(store, groupSubtotal);
+    if (store) {
+      delivery += deliveryFeeFor(store, groupSubtotal);
+      etaMinutes = Math.max(etaMinutes, store.deliveryMinutes);
+    }
   }
-  return { assignments, subtotal: round2(subtotal), delivery: round2(delivery), total: round2(subtotal + delivery), saves: 0 };
+  return {
+    assignments: used,
+    subtotal: round2(subtotal),
+    delivery: round2(delivery),
+    total: round2(subtotal + delivery),
+    etaMinutes,
+    storeCount: used.length,
+    score: 0,
+    saves: 0,
+  };
 }
 
 /**
- * Compares the three honest basket strategies:
- * 1. every item at its cheapest store, 2. each store that stocks everything,
- * 3. all 15 store pairs with each item at the cheaper of the two.
+ * Builds honest basket strategies: one store, every pair/triple of stores,
+ * and the absolute cheapest store per item. Each candidate is ranked by
+ * price plus a delivery-time penalty and a small extra-store penalty, so the
+ * recommendation is not allowed to buy a 60-minute basket for a few rupees.
  */
 export function bestSplit(items: CartItem[], products: Product[], stores: Store[]): SplitPlan | null {
   if (!items.length) return null;
-  const productById = new Map(products.map((p) => [p.id, p]));
+  const productById = new Map(products.map((product) => [product.id, product]));
   const lines = items
     .map((item) => {
       const product = productById.get(item.productId);
@@ -158,85 +185,104 @@ export function bestSplit(items: CartItem[], products: Product[], stores: Store[
       return { product, quantity: item.quantity };
     })
     .filter((line): line is { product: Product; quantity: number } => line !== null);
-  if (!lines.length) return null;
+  if (!lines.length || !stores.length) return null;
 
-  const plans: SplitPlan[] = [];
+  const plans = new Map<string, SplitPlan>();
   const makeAssignment = (productId: number, quantity: number, storeId: StoreId) => {
     const product = productById.get(productId);
     const price = product ? selectedPrice(product, storeId) : null;
     if (!product || price == null) return null;
     return { product, quantity, unitPrice: price, mrp: product.mrp } satisfies CartLine;
   };
+  const addPlan = (assignments: { storeId: StoreId; items: CartLine[] }[]) => {
+    const plan = planTotal(assignments, stores);
+    if (!plan.assignments.length) return;
+    const signature = plan.assignments
+      .map((assignment) => {
+        const ids = assignment.items
+          .map((line) => line.product.id)
+          .sort((a, b) => a - b)
+          .join(',');
+        return `${assignment.storeId}:${ids}`;
+      })
+      .sort()
+      .join('|');
+    if (!plans.has(signature)) plans.set(signature, plan);
+  };
 
-  // 1. Cheapest per item.
-  const cheapest = lines
-    .map(({ product, quantity }) => {
-      const best = bestPrice(product);
-      if (!best) return null;
-      return { storeId: best.storeId, line: makeAssignment(product.id, quantity, best.storeId) };
-    })
-    .filter((entry): entry is { storeId: StoreId; line: CartLine } => entry !== null && entry.line !== null);
-  if (cheapest.length === lines.length) {
-    const grouped = new Map<StoreId, CartLine[]>();
-    for (const entry of cheapest) {
-      const list = grouped.get(entry.storeId) ?? [];
-      list.push(entry.line);
-      grouped.set(entry.storeId, list);
+  // 1. Absolute cheapest store for every item. This is allowed to use many
+  // stores, but the score below makes it pay for the extra trips and time.
+  const cheapestGroups = new Map<StoreId, CartLine[]>();
+  let cheapestPossible = true;
+  for (const { product, quantity } of lines) {
+    const best = bestPrice(product);
+    const line = best ? makeAssignment(product.id, quantity, best.storeId) : null;
+    if (!best || !line) {
+      cheapestPossible = false;
+      break;
     }
-    plans.push(
-      planTotal(
-        [...grouped.entries()].map(([storeId, list]) => ({ storeId, items: list })),
-        stores,
-      ),
+    const list = cheapestGroups.get(best.storeId) ?? [];
+    list.push(line);
+    cheapestGroups.set(best.storeId, list);
+  }
+  if (cheapestPossible) {
+    addPlan([...cheapestGroups.entries()].map(([storeId, list]) => ({ storeId, items: list })));
+  }
+
+  // 2. Every one-, two-, and three-store combination. Within a combination
+  // each item goes to the cheapest store in that combination.
+  const maxSubsetSize = Math.min(3, stores.length);
+  for (let mask = 1; mask < (1 << stores.length); mask += 1) {
+    const subset = stores.filter((_, index) => mask & (1 << index));
+    if (subset.length > maxSubsetSize) continue;
+    const groups = new Map<StoreId, CartLine[]>();
+    let possible = true;
+    for (const { product, quantity } of lines) {
+      let bestStore: Store | null = null;
+      let bestStorePrice = Number.POSITIVE_INFINITY;
+      for (const store of subset) {
+        const price = selectedPrice(product, store.id);
+        if (price != null && price < bestStorePrice) {
+          bestStore = store;
+          bestStorePrice = price;
+        }
+      }
+      if (!bestStore) {
+        possible = false;
+        break;
+      }
+      const line = makeAssignment(product.id, quantity, bestStore.id);
+      if (!line) {
+        possible = false;
+        break;
+      }
+      const list = groups.get(bestStore.id) ?? [];
+      list.push(line);
+      groups.set(bestStore.id, list);
+    }
+    if (possible) {
+      addPlan([...groups.entries()].map(([storeId, list]) => ({ storeId, items: list })));
+    }
+  }
+
+  if (!plans.size) return null;
+  const candidates = [...plans.values()];
+  const fastestEta = Math.min(...candidates.map((plan) => plan.etaMinutes));
+  for (const plan of candidates) {
+    plan.score = round2(
+      plan.total +
+        Math.max(0, plan.etaMinutes - fastestEta) * TIME_VALUE_PER_MINUTE +
+        Math.max(0, plan.storeCount - 1) * EXTRA_STORE_PENALTY,
     );
   }
-
-  // 2. Single store that stocks everything.
-  for (const store of stores) {
-    const assigned = lines
-      .map(({ product, quantity }) => makeAssignment(product.id, quantity, store.id))
-      .filter((line): line is CartLine => line !== null);
-    if (assigned.length === lines.length) {
-      plans.push(planTotal([{ storeId: store.id, items: assigned }], stores));
-    }
-  }
-
-  // 3. Every pair of stores.
-  if (stores.length > 1) {
-    for (let i = 0; i < stores.length; i += 1) {
-      for (let j = i + 1; j < stores.length; j += 1) {
-        const a = stores[i];
-        const b = stores[j];
-        const groups: { storeId: StoreId; items: CartLine[] }[] = [
-          { storeId: a.id, items: [] },
-          { storeId: b.id, items: [] },
-        ];
-        let possible = true;
-        for (const { product, quantity } of lines) {
-          const priceA = selectedPrice(product, a.id);
-          const priceB = selectedPrice(product, b.id);
-          if (priceA == null && priceB == null) {
-            possible = false;
-            break;
-          }
-          const useA = priceA != null && (priceB == null || priceA < priceB);
-          const storeId = useA ? a.id : b.id;
-          const line = makeAssignment(product.id, quantity, storeId);
-          if (!line) {
-            possible = false;
-            break;
-          }
-          groups.find((g) => g.storeId === storeId)?.items.push(line);
-        }
-        if (!possible) continue;
-        plans.push(planTotal(groups.filter((g) => g.items.length > 0), stores));
-      }
-    }
-  }
-
-  if (!plans.length) return null;
-  plans.sort((x, y) => x.total - y.total);
-  const winner = plans[0];
-  const baseline = plans.find((plan) => plan.assignments.length > 1) ?? plans[0];
-  return { ...winner, saves: round2(Math.max(0, baseline.total - winner.total)) };
+  candidates.sort(
+    (a, b) =>
+      a.score - b.score ||
+      a.total - b.total ||
+      a.storeCount - b.storeCount ||
+      a.etaMinutes - b.etaMinutes,
+  );
+  const winner = candidates[0];
+  const cheapestTotal = Math.min(...candidates.map((plan) => plan.total));
+  return { ...winner, saves: round2(Math.max(0, cheapestTotal - winner.total)) };
 }

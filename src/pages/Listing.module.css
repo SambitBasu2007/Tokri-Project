@@ -1,0 +1,88 @@
+.page {
+  padding-top: var(--sp-1);
+  padding-bottom: var(--sp-12);
+}
+
+.searchRow {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding-bottom: var(--sp-2);
+}
+
+.back {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--r-pill);
+  color: var(--ink);
+}
+
+.categoryBar {
+  position: sticky;
+  top: var(--header-h);
+  z-index: 30;
+  margin: 0 calc(var(--page-gutter) * -1);
+  padding: 0 var(--page-gutter);
+  background: var(--bg);
+  overflow: hidden;
+}
+
+.filterBar {
+  position: sticky;
+  top: calc(var(--header-h) + 80px);
+  z-index: 29;
+  margin: 0 calc(var(--page-gutter) * -1);
+  padding: 0 var(--page-gutter);
+  background: var(--bg);
+}
+
+.resultHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  padding: var(--sp-2) 0 var(--sp-4);
+}
+
+.heading {
+  min-width: 0;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.count {
+  flex: none;
+  color: var(--ink-3);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (hover: hover) {
+  .back:hover {
+    background: var(--surface);
+  }
+}
+
+@media (min-width: 768px) {
+  /* The single-row header already carries search on tablet and desktop. */
+  .searchRow {
+    display: none;
+  }
+
+  .resultHead {
+    padding-top: var(--sp-3);
+    padding-bottom: var(--sp-6);
+  }
+
+  .heading {
+    font-size: 24px;
+  }
+}

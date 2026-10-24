@@ -12,7 +12,7 @@ import { useOrders } from '../hooks/useOrders';
 import type { Address, Coupon } from '../types';
 import { AddressPicker } from '../components/AddressPicker';
 import { EmptyState } from '../components/EmptyState';
-import { StorePicker } from '../components/StorePicker';
+import { StorePicker } from '../components/StorePickerSheet';
 import styles from './Checkout.module.css';
 
 type Payment = 'upi' | 'card' | 'cod';
@@ -101,7 +101,7 @@ export default function CheckoutPage() {
       toast(
         order.source === 'db'
           ? 'Order placed. Tracking starts now.'
-          : 'Demo order saved on this device only.',
+          : 'Order saved on this device only. Account sync is not set up yet.',
         'success',
       );
       navigate(`/orders?placed=${order.id}`);
