@@ -199,6 +199,38 @@ writes a half-order.
 Tracking is derived from `order_time + store ETA` (`src/lib/delivery.ts`), not stored status,
 so it survives reloads without a cron. Device clock skew is corrected with `server_now()`.
 
+**Why two devices can show different order history.** Before `0001`–`0005` are applied, the
+checkout RPC is missing, so every order is saved to `localStorage` (`tokri_demo_orders_v1`)
+instead of the account. Signing in on both devices does not help because no row ever reaches
+Supabase. The order card labels this state `device-only demo`; the Orders page also says
+"Account sync is off" when the project is signed in. After the migrations are applied,
+`syncLocalOrders()` copies device-only history onto the signed-in account with a direct
+`order_events` insert, so reopening the app on either device converges on the same list.
+
+Check the live project at any time (read-only, safe to run):
+
+```bash
+npm run db:check
+```
+
+It must print `PASS` for `stores`, `products`, `prices`, `personal_cart_items`,
+`order_shipments`, `addresses`, `community_activity_feed`, `order_events.items` and
+`server_now()`.
+
+If the check fails, open the project's **SQL Editor**, run `0001_v2_schema.sql` through
+`0005_delete_own_orders.sql` in order, then run:
+
+```sql
+notify pgrst, 'reload schema';
+```
+
+`0000_base_schema.sql` is only needed when the project has no existing base tables. The current
+`0001` also backfills `order_events.items` on older projects that already have an `order_events`
+table without it. Deploy the **current** build after applying the SQL: the old Vercel build does
+not contain `syncLocalOrders()`, so it cannot upload the existing device-only orders. On each
+device, sign in, open **Orders**, and wait for the "saved to your account" toast. Refresh once on
+the other device.
+
 ### Privacy and RLS
 
 - Personal carts, addresses, watches, own orders and shipments are owner-only.

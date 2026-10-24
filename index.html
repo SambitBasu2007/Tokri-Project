@@ -4,12 +4,19 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script>
-      // Light is the product default. Only an explicit saved choice may change it.
+      // Follow the OS by default. An explicit toggle is saved and wins next time.
       (function () {
         var theme = 'light';
         try {
+          var forced = new URLSearchParams(window.location.search).get('theme');
           var saved = localStorage.getItem('tokri_theme');
-          if (saved === 'dark' || saved === 'light') theme = saved;
+          if (forced === 'dark' || forced === 'light') {
+            theme = forced;
+          } else if (saved === 'dark' || saved === 'light') {
+            theme = saved;
+          } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            theme = 'dark';
+          }
         } catch (error) {
           theme = 'light';
         }
